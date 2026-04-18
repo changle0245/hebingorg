@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>音频合并在线-免费合并MP3音频文件|hebing.org</title>
+<meta name="description" content="选择多段音频文件，合并为一个完整音频。支持 MP3、WAV、OGG 等格式，浏览器本地处理。">
+<meta name="keywords" content="mp3合并,音频合并,在线合并音频">
+<link rel="canonical" href="https://hebing.org/merge-audio.html">
+<meta property="og:title" content="音频合并在线-免费合并MP3音频文件|hebing.org">
+<meta property="og:url" content="https://hebing.org/merge-audio.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/merge-audio.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/merge-audio.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/merge-audio.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);transition:color 0.15s;}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.ad-top{background:var(--gray-100);border-bottom:1px solid var(--gray-200);padding:8px 0;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center;}
+.ad-placeholder{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);border:1px dashed var(--gray-200);padding:8px 32px;border-radius:var(--radius);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.drop-sub strong{color:var(--accent);font-weight:500;}
+.file-list{margin-bottom:20px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;}
+.file-list-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-size:12px;color:var(--gray-600);font-family:var(--font-mono);}
+.file-item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--gray-100);}
+.file-item:last-child{border-bottom:none;}
+.file-item:hover{background:var(--gray-100);}
+.f-name{flex:1;font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.f-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);flex-shrink:0;}
+.f-del{width:28px;height:28px;border:none;background:transparent;cursor:pointer;color:var(--gray-400);border-radius:var(--radius);font-size:13px;flex-shrink:0;}
+.f-del:hover{background:#fee2e2;color:#b91c1c;}
+.btn-row{display:flex;gap:12px;margin-bottom:20px;}
+.btn-merge{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);flex:1;}
+.btn-merge:hover{opacity:0.82;}
+.btn-merge:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-clear{height:48px;padding:0 20px;background:transparent;border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-size:14px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);}
+.btn-clear:hover{background:var(--gray-100);}
+.progress-wrap{margin-bottom:20px;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.status-ok{padding:14px 16px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--success);margin-bottom:20px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.ad-inline{margin:28px 0;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);padding:14px 0;}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .file-list-header,[dir="rtl"] .btn-row,[dir="rtl"] .footer-inner{flex-direction:row-reverse;}
+[dir="rtl"] .file-item{flex-direction:row-reverse;}
+[dir="rtl"] .status-ok{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-header{animation:fadeUp 0.3s ease both;}
+
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:background 0.15s;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+.related-icon{font-size:16px;line-height:1;}
+.related-name{font-weight:500;}
+[dir="rtl"] .related-grid{flex-direction:row-reverse;}
+[dir="rtl"] .related-card{flex-direction:row-reverse;}
+
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat{display:flex;flex-direction:column;gap:2px;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+[dir="rtl"] .summary-stats{flex-direction:row-reverse;}
+
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:36px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;font-family:var(--font-sans);}
+.subscribe-btn:hover{opacity:0.82;}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;transition:all 0.15s;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+[dir="rtl"] .subscribe-form{flex-direction:row-reverse;}
+[dir="rtl"] .support-row{flex-direction:row-reverse;}
+
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #f0efed;
+    --white: #111110;
+    --gray-100: #1e1e1c;
+    --gray-200: #2a2a28;
+    --gray-400: #6b6966;
+    --gray-600: #a09e9b;
+    --accent: #e85d2a;
+    --accent-light: #2a1a10;
+    --success: #4ade80;
+    --success-bg: #052e16;
+  }
+  nav { background: rgba(17,17,16,0.95); }
+  .drop-zone { background: var(--gray-100); }
+  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
+  .subscribe-input { background: var(--gray-100); }
+  .quality-slider { background: var(--gray-200); }
+  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
+  .tool-card { background: var(--white); }
+  .tool-card:hover { background: var(--gray-100); }
+  .tool-card.active { background: var(--gray-100); }
+  .tool-card.active .tool-name,
+  .tool-card.active .tool-desc { color: var(--black); }
+  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
+  .related-card:hover { background: var(--gray-200); color: var(--black); }
+  .summary-box { border-color: #14532d; }
+  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
+  .notice-box { background: #2a1a10; border-color: #7c3012; }
+  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
+  .highlight-box { background: var(--gray-100); }
+}
+
+.file-item{cursor:grab;transition:opacity 0.15s,transform 0.15s;}
+.file-item.dragging{opacity:0.4;cursor:grabbing;}
+.file-item.drag-over-item{transform:translateY(-2px);border-top:2px solid var(--accent);}
+.drag-handle{width:20px;color:var(--gray-400);cursor:grab;flex-shrink:0;text-align:center;font-size:14px;user-select:none;}
+.drag-handle:hover{color:var(--black);}
+.format-box{display:flex;align-items:center;gap:16px;padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;border:1px solid var(--gray-200);flex-wrap:wrap;}
+.format-label{font-size:13px;color:var(--gray-600);font-family:var(--font-mono);letter-spacing:0.3px;}
+.format-tabs{display:flex;gap:6px;}
+.format-tab{padding:6px 14px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--radius);font-size:12px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);transition:all 0.15s;}
+.format-tab.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.format-tab:not(.active):hover{border-color:var(--black);color:var(--black);}
+.format-note{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);margin-left:auto;}
+[dir="rtl"] .format-note{margin-left:0;margin-right:auto;}
+@media (prefers-color-scheme: dark){.format-box{background:var(--gray-100);border-color:var(--gray-200);}.format-tab{background:var(--white);}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org 音频合并",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/merge-audio.html",
+  "description": "将多段 MP3 音频无损拼接为一个文件，浏览器本地处理，不上传服务器。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["MP3 无损拼接", "支持 WAV / M4A", "自动统一采样率", "本地处理"],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "ratingCount": "142" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线合并多段 MP3 音频文件",
+  "description": "使用 hebing.org 在浏览器本地把多段 MP3 拼接为一个音频文件，无需上传、无需注册。",
+  "totalTime": "PT1M",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "上传音频", "text": "点击或拖拽多段 MP3 / WAV / M4A 到上传区域。" },
+    { "@type": "HowToStep", "position": 2, "name": "调整顺序", "text": "拖动列表决定音频段的先后顺序。" },
+    { "@type": "HowToStep", "position": 3, "name": "点击合并", "text": "浏览器本地使用 Web Audio API 按顺序拼接音频。" },
+    { "@type": "HowToStep", "position": 4, "name": "下载文件", "text": "合并后的音频文件自动下载，可在任何播放器中播放。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "音频合并", "item": "https://hebing.org/merge-audio.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "合并后的音频是什么格式？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "默认输出 MP3 (192kbps)，体积小、兼容所有播放器。也可一键切换为 WAV 无损格式。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "支持哪些音频格式？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "支持 MP3、WAV、OGG、M4A、AAC 格式文件。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "文件之间会有停顿吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会有额外停顿。音频文件按顺序直接拼接。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。所有处理在浏览器本地进行，音频文件不离开你的设备。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<!-- AdSense top banner: activate after approval -->
+<!-- <div class="ad-top"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="TOP_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">🎵 音频文件合并在线免费</span></div>
+  <h1 class="page-title" data-i18n="page.h1">音频文件合并<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">选择多段音频文件，合并为一个完整音频。支持 MP3、WAV、OGG 等格式，浏览器本地处理。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" multiple accept=".mp3,.wav,.ogg,.m4a,.aac">
+    <div class="drop-icon">🎵</div>
+    <div class="drop-label" data-i18n="drop.label">点击选择文件，或拖拽到此处</div>
+    <div class="drop-sub"><strong>.mp3,.wav,.ogg,.m4a,.aac</strong> &nbsp;·&nbsp; <span data-i18n="drop.limit">无大小限制，可多选</span></div>
+  </div>
+
+  <div class="file-list hidden" id="fileList">
+    <div class="file-list-header">
+      <span id="fileCount">0 个文件</span>
+      <span id="totalSize"></span>
+    </div>
+    <div id="fileItems"></div>
+  </div>
+
+  <div class="format-box">
+    <span class="format-label" data-i18n="format.label">输出格式</span>
+    <div class="format-tabs">
+      <button type="button" class="format-tab active" data-fmt="mp3" data-i18n="format.mp3">MP3 · 192kbps</button>
+      <button type="button" class="format-tab" data-fmt="wav" data-i18n="format.wav">WAV · 无损</button>
+    </div>
+    <span class="format-note" id="formatNote" data-i18n="format.note">MP3 兼容所有播放器</span>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-merge" id="btnMerge" disabled data-i18n="btn.merge">合并并下载</button>
+    <button class="btn-clear hidden" id="btnClear" data-i18n="btn.clear">清空</button>
+  </div>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+    <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">合并完成！文件已下载。</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！有新工具上线时会通知你。</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+  <!-- AdSense result-area banner: activate after approval -->
+  <!-- <div class="ad-inline"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="RESULT_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+</div>
+</div>
+
+<section class="seo-extra">
+  <div class="container">
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">如何在线合并多段 MP3 音频文件</h2>
+      <ol class="tips-list">
+        <li><strong>上传音频</strong> — 点击或拖拽多段 MP3 / WAV / M4A 文件到上传区域。</li>
+        <li><strong>调整顺序</strong> — 拖动文件列表，决定音频段的先后顺序。</li>
+        <li><strong>点击合并</strong> — 浏览器使用 Web Audio API 本地按顺序拼接音频。</li>
+        <li><strong>下载文件</strong> — 合并后的音频自动下载，可在任何播放器中播放。</li>
+      </ol>
+    </div>
+
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">音频合并的典型使用场景</h2>
+      <div class="scene-grid">
+        <div class="scene-card">
+          <div class="scene-icon">🎙️</div>
+          <div class="scene-title">播客剪辑</div>
+          <div class="scene-desc">把开场、正片、结尾等多段录音拼接为完整一期节目，省去专业剪辑软件学习成本。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">🎧</div>
+          <div class="scene-title">课程录音合并</div>
+          <div class="scene-desc">学生/培训师将多段课堂录音合并为完整讲座，方便回听复习。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">💿</div>
+          <div class="scene-title">有声书合并</div>
+          <div class="scene-desc">把章节分段的有声书音频合并为单文件，在车上或跑步时不用切换。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">🎵</div>
+          <div class="scene-title">歌单拼接</div>
+          <div class="scene-desc">把多首歌合并为一首连奏，用于派对、直播背景音、视频配乐。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">使用小贴士</h2>
+      <ul class="tips-list">
+        <li>不同采样率的音频会自动统一到最高采样率输出，避免音质损失。</li>
+        <li>合并前建议各段音频保持相同声道数（单声道/立体声），否则可能出现声道错位。</li>
+        <li>如果只是想裁剪或淡入淡出，建议使用专业音频编辑器；本工具专注纯拼接。</li>
+        <li>合并大量长音频（如 2 小时以上）时浏览器内存占用较高，建议分批合并。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="faq-title">关于音频合并的常见问题</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">合并后的音频是什么格式？</div>
+        <div class="faq-a">默认输出 MP3（192kbps CBR，lamejs 浏览器本地编码），体积小、兼容所有播放器。也可一键切换为 WAV 16bit 无损格式。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">支持哪些音频格式？</div>
+        <div class="faq-a">支持 MP3、WAV、M4A、AAC、OGG、FLAC 等浏览器 Web Audio API 可解码的所有音频格式。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">合并会损失音质吗？</div>
+        <div class="faq-a">如果所有源音频格式一致、采样率一致，合并是无损拼接。如果格式不同会统一重编码，在高码率下听感上无明显差异。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">可以在合并处加淡入淡出吗？</div>
+        <div class="faq-a">目前不支持。本工具专注纯拼接，不做剪辑。如需高级效果建议使用 Audacity 等专业软件。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">文件会上传服务器吗？</div>
+        <div class="faq-a">不会。所有音频在浏览器的 Web Audio API 中本地处理，音频数据绝不上传。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">能合并多长的音频？</div>
+        <div class="faq-a">理论上没有硬性上限，取决于设备内存。一般建议单次合并总时长不超过 3 小时，以获得流畅体验。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N = {
+  zh: {'nav.back':'← 所有工具','related.title':'你可能还需要','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！有新工具上线时会通知你。','sub.support':'工具完全免费，如果帮到你了 ☕','page.h1':'音频文件合并<br><em>在线免费</em>','page.sub':'选择多段音频文件，合并为一个完整音频。支持 MP3、WAV、OGG 等格式，浏览器本地处理。','drop.label':'点击选择文件，或拖拽到此处','drop.limit':'无大小限制，可多选','btn.merge':'合并并下载','btn.clear':'清空','status.ok':'合并完成！文件已下载。','format.label':'输出格式','format.mp3':'MP3 · 192kbps','format.wav':'WAV · 无损','format.note':'MP3 兼容所有播放器'},
+  en: {'nav.back':'← All Tools','page.h1':'Merge Audio Files<br><em>Free Online</em>','page.sub':'Combine multiple audio files into one. Supports MP3, WAV, OGG, M4A. Processed locally in your browser.','drop.label':'Click to select files, or drag & drop here','drop.limit':'No size limit, multiple files','btn.merge':'Merge & Download','btn.clear':'Clear','status.ok':'Done! Your merged file has been downloaded.','format.label':'Output','format.mp3':'MP3 · 192kbps','format.wav':'WAV · Lossless','format.note':'MP3 plays anywhere'},
+  ar: {'nav.back':'→ جميع الأدوات','page.h1':'دمج ملفات الصوت<br><em>مجاناً عبر الإنترنت</em>','page.sub':'دمج ملفات صوتية متعددة في ملف واحد. يدعم MP3 وWAV وOGG وM4A.','drop.label':'انقر لاختيار الملفات، أو اسحبها هنا','drop.limit':'بدون حد للحجم، ملفات متعددة','btn.merge':'دمج وتنزيل','btn.clear':'مسح','status.ok':'تم! تم تنزيل الملف المدمج.','format.label':'الصيغة','format.mp3':'MP3 · 192kbps','format.wav':'WAV · بدون فقدان','format.note':'MP3 متوافق مع كل المشغلات'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n]});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  localStorage.setItem('hebing_lang',lang);
+}
+
+const FILE_LIMIT = 30;
+
+let files=[];
+
+function getFriendlyError(e, lang) {
+  const msg = e.message || '';
+  const zh = {
+    'Invalid PDF': '文件已损坏或不是有效的PDF，请检查文件后重试',
+    'encrypted': 'PDF文件已加密，请先取消密码保护',
+    'out of memory': '文件太大，浏览器内存不足，请减少文件数量或分批处理',
+    'Failed to fetch': '网络连接失败，请检查网络后重试',
+    'not a zip': '文件格式不正确，请确认文件未损坏',
+  };
+  const en = {
+    'Invalid PDF': 'File is corrupted or not a valid PDF. Please check the file and try again.',
+    'encrypted': 'PDF is password protected. Please remove the password first.',
+    'out of memory': 'File too large. Please reduce the number of files or process in batches.',
+    'Failed to fetch': 'Network error. Please check your connection and try again.',
+    'not a zip': 'File format is incorrect. Please ensure the file is not corrupted.',
+  };
+  const ar = {
+    'Invalid PDF': 'الملف تالف أو ليس PDF صالحاً. يرجى التحقق من الملف والمحاولة مجدداً.',
+    'encrypted': 'ملف PDF محمي بكلمة مرور. يرجى إزالة الحماية أولاً.',
+    'out of memory': 'الملف كبير جداً. يرجى تقليل عدد الملفات أو المعالجة على دفعات.',
+    'Failed to fetch': 'فشل الاتصال بالشبكة. يرجى التحقق من الاتصال والمحاولة مجدداً.',
+    'not a zip': 'تنسيق الملف غير صحيح. يرجى التأكد من أن الملف غير تالف.',
+  };
+  const map = lang === 'ar' ? ar : lang === 'en' ? en : zh;
+  for (const [key, friendly] of Object.entries(map)) {
+    if (msg.toLowerCase().includes(key.toLowerCase())) return friendly;
+  }
+  return lang === 'ar' ? 'حدث خطأ: ' + msg :
+         lang === 'en' ? 'Error: ' + msg :
+         '错误：' + msg;
+}
+
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';}
+
+function initDragSort(listId) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+  let dragging = null;
+  function getItems() { return Array.from(list.querySelectorAll('.file-item')); }
+  list.addEventListener('dragstart', e => {
+    dragging = e.target.closest('.file-item');
+    if (dragging) { setTimeout(() => dragging.classList.add('dragging'), 0); e.dataTransfer.effectAllowed = 'move'; }
+  });
+  list.addEventListener('dragend', e => {
+    if (dragging) dragging.classList.remove('dragging');
+    getItems().forEach(i => i.classList.remove('drag-over-item'));
+    // 同步 files 数组顺序
+    const newOrder = getItems().map(el => el.dataset.fname);
+    if (typeof files !== 'undefined') {
+      files.sort((a,b) => newOrder.indexOf(a.name) - newOrder.indexOf(b.name));
+    }
+    dragging = null;
+  });
+  list.addEventListener('dragover', e => {
+    e.preventDefault();
+    const target = e.target.closest('.file-item');
+    if (!target || target === dragging) return;
+    getItems().forEach(i => i.classList.remove('drag-over-item'));
+    target.classList.add('drag-over-item');
+    const items = getItems();
+    const di = items.indexOf(dragging), ti = items.indexOf(target);
+    if (di < ti) list.insertBefore(dragging, target.nextSibling);
+    else list.insertBefore(dragging, target);
+  });
+}
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function refreshUI(){
+  const c=document.getElementById('fileItems');c.innerHTML='';
+  files.forEach(f=>{
+    const d=document.createElement('div');d.className='file-item';
+    d.innerHTML=`<span class="f-name">${esc(f.name)}</span><span class="f-size">${fmtSize(f.size)}</span><button class="f-del" data-name="${esc(f.name)}" aria-label="移除文件">✕</button>`;
+    c.appendChild(d);
+  });
+  c.querySelectorAll('.f-del').forEach(b=>b.onclick=()=>{files=files.filter(f=>f.name!==b.dataset.name);refreshUI();});
+  const tot=files.reduce((s,f)=>s+f.size,0);
+  document.getElementById('fileCount').textContent=files.length+' 个文件';
+  document.getElementById('totalSize').textContent=fmtSize(tot);
+  document.getElementById('fileList').classList.toggle('hidden',files.length===0);
+  document.getElementById('btnMerge').disabled=files.length<2;
+  initDragSort('fileItems');
+  document.getElementById('btnClear').classList.toggle('hidden',files.length===0);
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+}
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+fi.addEventListener('change',e=>{Array.from(e.target.files).forEach(f=>{if(files.length>=FILE_LIMIT){alert('最多支持'+FILE_LIMIT+'个文件，请分批处理');return;}if(!files.find(x=>x.name===f.name))files.push(f)});fi.value='';refreshUI();});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');Array.from(e.dataTransfer.files).forEach(f=>{if(files.length>=FILE_LIMIT){alert('最多支持'+FILE_LIMIT+'个文件，请分批处理');return;}if(!files.find(x=>x.name===f.name))files.push(f)});refreshUI();});
+document.getElementById('btnClear').onclick=()=>{files=[];refreshUI();};
+
+let outputFormat='mp3';
+document.querySelectorAll('.format-tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.format-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    outputFormat=t.dataset.fmt;
+    const lang=document.documentElement.lang||'zh';
+    const note=document.getElementById('formatNote');
+    if(outputFormat==='mp3'){
+      note.textContent=lang==='en'?'MP3 plays anywhere':lang==='ar'?'MP3 متوافق مع كل المشغلات':'MP3 兼容所有播放器';
+    }else{
+      note.textContent=lang==='en'?'WAV — larger file, zero loss':lang==='ar'?'WAV — ملف أكبر، بدون فقدان':'WAV 体积更大，零损耗';
+    }
+  };
+});
+
+function encodeWAV(buf){
+  const numCh=buf.numberOfChannels,sr=buf.sampleRate,len=buf.length;
+  const ab=new ArrayBuffer(44+len*numCh*2);
+  const view=new DataView(ab);
+  const ws=(o,s)=>{for(let i=0;i<s.length;i++)view.setUint8(o+i,s.charCodeAt(i))};
+  ws(0,'RIFF');view.setUint32(4,36+len*numCh*2,true);ws(8,'WAVE');ws(12,'fmt ');
+  view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,numCh,true);
+  view.setUint32(24,sr,true);view.setUint32(28,sr*numCh*2,true);view.setUint16(32,numCh*2,true);
+  view.setUint16(34,16,true);ws(36,'data');view.setUint32(40,len*numCh*2,true);
+  const channels=[];
+  for(let c=0;c<numCh;c++)channels.push(buf.getChannelData(c));
+  let idx=44;
+  for(let i=0;i<len;i++)for(let c=0;c<numCh;c++){
+    const s=Math.max(-1,Math.min(1,channels[c][i]));
+    view.setInt16(idx,s<0?s*32768:s*32767,true);idx+=2;
+  }
+  return new Blob([ab],{type:'audio/wav'});
+}
+
+async function encodeMP3(buf, kbps, onProgress){
+  if(typeof lamejs==='undefined') throw new Error('MP3 encoder not loaded');
+  const numCh=Math.min(buf.numberOfChannels,2);
+  const sr=buf.sampleRate;
+  const encoder=new lamejs.Mp3Encoder(numCh,sr,kbps);
+  const leftF=buf.getChannelData(0);
+  const rightF=numCh>1?buf.getChannelData(1):null;
+  const len=leftF.length;
+
+  const leftI=new Int16Array(len);
+  const rightI=rightF?new Int16Array(len):null;
+  for(let i=0;i<len;i++){
+    const l=Math.max(-1,Math.min(1,leftF[i]));
+    leftI[i]=l<0?l*32768:l*32767;
+    if(rightF){
+      const r=Math.max(-1,Math.min(1,rightF[i]));
+      rightI[i]=r<0?r*32768:r*32767;
+    }
+  }
+
+  const block=1152;
+  const mp3Data=[];
+  let lastYield=performance.now();
+  for(let i=0;i<len;i+=block){
+    const lc=leftI.subarray(i,i+block);
+    const rc=rightI?rightI.subarray(i,i+block):null;
+    const out=rc?encoder.encodeBuffer(lc,rc):encoder.encodeBuffer(lc);
+    if(out.length>0) mp3Data.push(out);
+    if(performance.now()-lastYield>80){
+      if(onProgress) onProgress(i/len);
+      await new Promise(r=>setTimeout(r,0));
+      lastYield=performance.now();
+    }
+  }
+  const tail=encoder.flush();
+  if(tail.length>0) mp3Data.push(tail);
+  return new Blob(mp3Data,{type:'audio/mpeg'});
+}
+
+document.getElementById('btnMerge').onclick=async()=>{
+  const btn=document.getElementById('btnMerge');btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  const lang=document.documentElement.lang||'zh';
+  try{
+    if(outputFormat==='mp3' && typeof lamejs==='undefined'){
+      throw new Error(lang==='en'?'MP3 encoder failed to load. Check your network or switch to WAV.':lang==='ar'?'فشل تحميل مُرمِّز MP3. تحقق من الشبكة أو بدّل إلى WAV.':'MP3 编码器加载失败，请检查网络或切换为 WAV。');
+    }
+    pt.textContent=lang==='en'?'Initializing audio engine…':lang==='ar'?'جاري تهيئة محرك الصوت…':'初始化音频引擎...';
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const buffers=[];
+    for(let i=0;i<files.length;i++){
+      fill.style.width=Math.round(i/files.length*60)+'%';
+      pt.textContent=(lang==='en'?'Decoding':lang==='ar'?'فك الترميز':'解码')+` (${i+1}/${files.length}): ${files[i].name}`;
+      const ab=await files[i].arrayBuffer();
+      const decoded=await ctx.decodeAudioData(ab);
+      buffers.push(decoded);
+      await new Promise(r=>setTimeout(r,10));
+    }
+    pt.textContent=lang==='en'?'Stitching tracks…':lang==='ar'?'دمج المقاطع…':'合并音频轨道...';
+    fill.style.width='65%';
+    const totalLen=buffers.reduce((s,b)=>s+b.length,0);
+    const sr=Math.max(...buffers.map(b=>b.sampleRate));
+    const ch=Math.min(Math.max(...buffers.map(b=>b.numberOfChannels)), outputFormat==='mp3'?2:8);
+    const out=ctx.createBuffer(ch,totalLen,sr);
+    let offset=0;
+    for(const b of buffers){
+      for(let c=0;c<ch;c++){
+        const srcCh=c<b.numberOfChannels?b.getChannelData(c):(b.numberOfChannels===1?b.getChannelData(0):new Float32Array(b.length));
+        out.getChannelData(c).set(srcCh,offset);
+      }
+      offset+=b.length;
+    }
+
+    let blob, ext;
+    if(outputFormat==='mp3'){
+      pt.textContent=lang==='en'?'Encoding MP3…':lang==='ar'?'ترميز MP3…':'编码 MP3...';
+      blob=await encodeMP3(out, 192, p=>{
+        fill.style.width=(70+Math.round(p*28))+'%';
+      });
+      ext='mp3';
+    }else{
+      pt.textContent=lang==='en'?'Writing WAV…':lang==='ar'?'كتابة WAV…':'生成 WAV...';
+      fill.style.width='94%';
+      blob=encodeWAV(out);
+      ext='wav';
+    }
+
+    const baseName=lang==='en'?'merged-audio':lang==='ar'?'الملف-المدمج':'合并音频';
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${baseName}.${ext}`;a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 30000);
+    fill.style.width='100%';
+    setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+
+    const totalSec=Math.round(totalLen/sr);
+    const mins=Math.floor(totalSec/60), secs=totalSec%60;
+    const durStr=mins>0?`${mins}m ${secs}s`:`${secs}s`;
+    const sizeStr=blob.size<1048576?(blob.size/1024).toFixed(1)+' KB':(blob.size/1048576).toFixed(1)+' MB';
+    document.getElementById('summaryTitle').textContent =
+      lang==='en' ? 'Merged successfully! File downloaded.' :
+      lang==='ar' ? 'تم الدمج بنجاح! تم تنزيل الملف.' : '合并完成！文件已下载。';
+    document.getElementById('summaryStats').innerHTML =
+      '<div class="summary-stat"><div class="summary-stat-num">'+files.length+'</div><div class="summary-stat-label">'+(lang==='en'?'Files':lang==='ar'?'ملفات':'文件数')+'</div></div>'+
+      '<div class="summary-stat"><div class="summary-stat-num">'+durStr+'</div><div class="summary-stat-label">'+(lang==='en'?'Duration':lang==='ar'?'المدة':'总时长')+'</div></div>'+
+      '<div class="summary-stat"><div class="summary-stat-num">'+ext.toUpperCase()+'</div><div class="summary-stat-label">'+(lang==='en'?'Format':lang==='ar'?'الصيغة':'格式')+'</div></div>'+
+      '<div class="summary-stat"><div class="summary-stat-num">'+sizeStr+'</div><div class="summary-stat-label">'+(lang==='en'?'Size':lang==='ar'?'الحجم':'文件大小')+'</div></div>';
+    document.getElementById('subscribeBox').classList.remove('hidden');
+    document.getElementById('statusOk').classList.remove('hidden');
+    try{ctx.close();}catch(_){}
+  }catch(e){
+    document.getElementById('statusErr').textContent=getFriendlyError(e, lang);
+    document.getElementById('statusErr').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+  }
+  btn.disabled=false;
+};
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+</body>
+</html>

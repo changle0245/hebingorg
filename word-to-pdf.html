@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word转PDF在线 - 免费将docx转换为PDF | hebing.org</title>
+<meta name="description" content="免费在线将Word文档(.docx)转换为PDF格式。文件在浏览器本地处理，不上传服务器，安全可靠，无需安装任何软件。">
+<meta name="keywords" content="word转pdf,docx转pdf,在线word转pdf免费,word文档转换pdf">
+<link rel="canonical" href="https://hebing.org/word-to-pdf.html">
+<meta property="og:title" content="Word转PDF在线免费 | hebing.org">
+<meta property="og:description" content="免费在线将Word文档转换为PDF，浏览器本地处理，文件不上传服务器">
+<meta property="og:url" content="https://hebing.org/word-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/word-to-pdf.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/word-to-pdf.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/word-to-pdf.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Word转PDF工具","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","url":"https://hebing.org/word-to-pdf.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.ad-top{background:var(--gray-100);border-bottom:1px solid var(--gray-200);padding:8px 0;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center;}
+.ad-placeholder{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);border:1px dashed var(--gray-200);padding:8px 32px;border-radius:var(--radius);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.notice-box{padding:12px 16px;background:var(--accent-light);border-radius:var(--radius-lg);border:1px solid #fcd9c0;font-size:13px;color:#92400e;margin-bottom:20px;line-height:1.6;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.file-selected{padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.file-selected-icon{width:36px;height:36px;background:#2B579A;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;font-family:var(--font-mono);flex-shrink:0;}
+.file-selected-name{flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.file-selected-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+.file-selected-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;}
+.file-selected-del:hover{color:#b91c1c;}
+.btn-row{display:flex;gap:12px;margin-bottom:20px;}
+.btn-convert{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);flex:1;}
+.btn-convert:hover{opacity:0.82;}
+.btn-convert:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-clear{height:48px;padding:0 20px;background:transparent;border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-size:14px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);}
+.progress-wrap{margin-bottom:20px;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;transition:all 0.15s;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.ad-inline{margin:28px 0;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:background 0.15s;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .btn-row,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row{flex-direction:row-reverse;}
+[dir="rtl"] .file-selected{flex-direction:row-reverse;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-header{animation:fadeUp 0.3s ease both;}
+
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #f0efed;
+    --white: #111110;
+    --gray-100: #1e1e1c;
+    --gray-200: #2a2a28;
+    --gray-400: #6b6966;
+    --gray-600: #a09e9b;
+    --accent: #e85d2a;
+    --accent-light: #2a1a10;
+    --success: #4ade80;
+    --success-bg: #052e16;
+  }
+  nav { background: rgba(17,17,16,0.95); }
+  .drop-zone { background: var(--gray-100); }
+  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
+  .subscribe-input { background: var(--gray-100); }
+  .quality-slider { background: var(--gray-200); }
+  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
+  .tool-card { background: var(--white); }
+  .tool-card:hover { background: var(--gray-100); }
+  .tool-card.active { background: var(--gray-100); }
+  .tool-card.active .tool-name,
+  .tool-card.active .tool-desc { color: var(--black); }
+  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
+  .related-card:hover { background: var(--gray-200); color: var(--black); }
+  .summary-box { border-color: #14532d; }
+  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
+  .notice-box { background: #2a1a10; border-color: #7c3012; }
+  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
+  .highlight-box { background: var(--gray-100); }
+}
+</style>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何免费在线将 Word 转为 PDF",
+  "description": "使用 hebing.org 将 .docx 文档在浏览器本地转换为 PDF 格式，无需安装 Word 或 Adobe。",
+  "totalTime": "PT30S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "上传 Word 文件", "text": "点击上传或拖拽 .docx 文件到上传区域。" },
+    { "@type": "HowToStep", "position": 2, "name": "点击转换", "text": "点击「转换为 PDF」，浏览器本地完成转换。" },
+    { "@type": "HowToStep", "position": 3, "name": "下载 PDF", "text": "转换后的 PDF 自动下载到你的设备，可立即打开查看。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Word 转 PDF", "item": "https://hebing.org/word-to-pdf.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "转换效果准确吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用另存为PDF功能。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "支持哪些Word格式？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "仅支持 .docx 格式。如果是旧版 .doc 文件，请先另存为 .docx 再上传。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。所有处理在浏览器本地进行，文件不离开你的设备。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "转换后的PDF能编辑吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<!-- AdSense top banner: activate after approval -->
+<!-- <div class="ad-top"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="TOP_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">Word 转 PDF</span></div>
+  <h1 class="page-title" data-i18n="page.h1">Word 转 PDF<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">将 .docx 文件转换为 PDF 格式，保留排版和格式。文件在浏览器本地处理，不上传服务器。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="notice-box" data-i18n="notice">⚡ 转换说明：本工具提取Word文档的文字内容并生成PDF。复杂图文混排请使用Microsoft Word或WPS自带的"另存为PDF"功能，效果更精确。</div>
+
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" accept=".docx">
+    <div class="drop-icon">📝</div>
+    <div class="drop-label" data-i18n="drop.label">点击选择 Word 文件，或拖拽到此处</div>
+    <div class="drop-sub"><strong>.docx</strong> · <span data-i18n="drop.limit">单个文件，无大小限制</span></div>
+  </div>
+
+  <div class="file-selected hidden" id="fileSelected">
+    <div class="file-selected-icon">W</div>
+    <span class="file-selected-name" id="selectedName"></span>
+    <span class="file-selected-size" id="selectedSize"></span>
+    <span class="file-selected-del" onclick="clearFile()">✕</span>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-convert" id="btnConvert" disabled data-i18n="btn.convert">转换为 PDF</button>
+    <button class="btn-clear hidden" id="btnClear" onclick="clearFile()" data-i18n="btn.clear">清空</button>
+  </div>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+  <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">转换完成！PDF已下载。</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+
+  <!-- AdSense result-area banner: activate after approval -->
+  <!-- <div class="ad-inline"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="RESULT_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+</div>
+</div>
+
+<div class="container">
+<div class="seo-extra">
+  <h2 class="seo-extra-title" data-zh="Word转PDF的常见使用场景" data-en="Common Use Cases for Word to PDF">Word转PDF的常见使用场景</h2>
+  <div class="scene-grid">
+    <div class="scene-card"><div class="scene-icon">📤</div><div class="scene-title" data-scene-zh="发送给客户" data-scene-en="Sending to Clients">发送给客户</div><div class="scene-desc" data-scene-zh="Word文件在不同设备上排版可能错乱，转为PDF后格式固定，发给客户更专业。" data-scene-en="Word files may display differently on various devices. PDF ensures consistent formatting for professional client sharing.">Word文件在不同设备上排版可能错乱，转为PDF后格式固定，发给客户更专业。</div></div>
+    <div class="scene-card"><div class="scene-icon">🖨️</div><div class="scene-title" data-scene-zh="打印准备" data-scene-en="Print Preparation">打印准备</div><div class="scene-desc" data-scene-zh="PDF格式更适合打印，不会因为打印机设置不同而影响版面效果。" data-scene-en="PDF is ideal for printing, ensuring consistent layout regardless of printer settings.">PDF格式更适合打印，不会因为打印机设置不同而影响版面效果。</div></div>
+    <div class="scene-card"><div class="scene-icon">🔒</div><div class="scene-title" data-scene-zh="防止修改" data-scene-en="Prevent Editing">防止修改</div><div class="scene-desc" data-scene-zh="将合同、报价单转为PDF，接收方无法直接修改内容，保护文件完整性。" data-scene-en="Convert contracts and quotes to PDF so recipients cannot directly edit the content.">将合同、报价单转为PDF，接收方无法直接修改内容，保护文件完整性。</div></div>
+    <div class="scene-card"><div class="scene-icon">📋</div><div class="scene-title" data-scene-zh="档案归档" data-scene-en="Document Archiving">档案归档</div><div class="scene-desc" data-scene-zh="PDF是长期存储的标准格式，不依赖Office软件即可随时查看。" data-scene-en="PDF is the standard format for long-term storage, viewable without Office software.">PDF是长期存储的标准格式，不依赖Office软件即可随时查看。</div></div>
+  </div>
+  <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+  <ul class="tips-list zh-tips">
+    <li>本工具适合纯文字或简单格式的Word文档。如果文档包含大量图片、复杂表格或精确排版，建议直接在 Word 或 WPS 中使用"文件→另存为→PDF"。</li>
+    <li>转换前确认Word文档使用标准字体（宋体、微软雅黑、Times New Roman等），特殊字体在PDF中可能显示为默认字体。</li>
+    <li>目前支持 .docx 格式，不支持旧版 .doc 格式。</li>
+  </ul>
+  <ul class="tips-list en-tips hidden">
+    <li>This tool works best for text-heavy or simply formatted Word documents. For complex layouts with images and tables, use Word or WPS built-in "Save As PDF" for best results.</li>
+    <li>Use standard fonts (Arial, Times New Roman, etc.) to ensure proper display in the output PDF.</li>
+    <li>Only .docx format is supported, not legacy .doc files.</li>
+  </ul>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="转换效果准确吗？" data-faq-en="How accurate is the conversion?">转换效果准确吗？</div>
+        <div class="faq-a" data-faq-zh="本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。" data-faq-en="This tool extracts text content from Word documents to generate a PDF. It works well for text-heavy documents. For precise layout with images, use Word or WPS built-in Save as PDF.">本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持哪些Word格式？" data-faq-en="What Word formats are supported?">支持哪些Word格式？</div>
+        <div class="faq-a" data-faq-zh="仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。" data-faq-en="Only .docx format. For legacy .doc files, open in Word or WPS and save as .docx first.">仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="转换后的PDF能编辑吗？" data-faq-en="Can I edit the converted PDF?">转换后的PDF能编辑吗？</div>
+        <div class="faq-a" data-faq-zh="标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。" data-faq-en="Standard PDFs are not directly editable. Use Adobe Acrobat or other PDF editors if you need to edit the output.">标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?">文件会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地进行，文件不离开你的设备。" data-faq-en="No. All processing is done locally in your browser. Files never leave your device.">不会。所有处理在浏览器本地进行，文件不离开你的设备。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="merge-word.html" class="related-card"><span>📝</span><span data-i18n-related="Word合并|Word Merge|دمج Word">Word合并</span></a>
+    <a href="merge-pdf.html" class="related-card"><span>📄</span><span data-i18n-related="PDF合并|PDF Merge|دمج PDF">PDF合并</span></a>
+    <a href="pdf-split.html" class="related-card"><span>✂️</span><span data-i18n-related="PDF拆分|PDF Split|تقسيم PDF">PDF拆分</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const I18N = {
+  zh: {'nav.back':'← 所有工具','related.title':'你可能还需要','page.h1':'Word 转 PDF<br><em>在线免费</em>','page.sub':'将 .docx 文件转换为 PDF 格式，保留排版和格式。文件在浏览器本地处理，不上传服务器。','notice':'⚡ 转换说明：本工具提取Word文档的文字内容并生成PDF。复杂图文混排请使用Microsoft Word或WPS自带的"另存为PDF"功能，效果更精确。','drop.label':'点击选择 Word 文件，或拖拽到此处','drop.limit':'单个文件，无大小限制','btn.convert':'转换为 PDF','btn.clear':'清空','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en: {'nav.back':'← All Tools','related.title':'You may also need','page.h1':'Word to PDF<br><em>Free Online</em>','page.sub':'Convert .docx files to PDF format. Processed locally in your browser — files never leave your device.','notice':'⚡ Note: This tool extracts text content from Word documents and generates a PDF. For complex layouts with images, use Word or WPS built-in Save as PDF for best results.','drop.label':'Click to select a Word file, or drag & drop here','drop.limit':'Single file, no size limit','btn.convert':'Convert to PDF','btn.clear':'Clear','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first whenever a new tool goes live','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar: {'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.h1':'Word إلى PDF<br><em>مجاناً عبر الإنترنت</em>','page.sub':'تحويل ملفات .docx إلى صيغة PDF. تتم المعالجة في المتصفح — ملفاتك لا تغادر جهازك.','notice':'⚡ ملاحظة: تستخرج هذه الأداة محتوى النص من مستندات Word وتنشئ PDF. للتخطيطات المعقدة، استخدم خاصية "حفظ بصيغة PDF" في Word أو WPS.','drop.label':'انقر لاختيار ملف Word، أو اسحبه هنا','drop.limit':'ملف واحد، بدون حد للحجم','btn.convert':'تحويل إلى PDF','btn.clear':'مسح','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+
+function setLang(lang) {
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.classList.toggle('hidden',lang==='en'));
+  document.querySelectorAll('.en-tips').forEach(el=>el.classList.toggle('hidden',lang!=='en'));
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{
+    el.textContent=lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;
+  });
+
+}
+
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';}
+
+let selectedFile = null;
+
+function clearFile() {
+  selectedFile=null;
+  document.getElementById('fileSelected').classList.add('hidden');
+  document.getElementById('btnClear').classList.add('hidden');
+  document.getElementById('btnConvert').disabled=true;
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+  document.getElementById('dropZone').style.display='';
+}
+
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+function handleFile(f) {
+  if(!f||!f.name.endsWith('.docx'))return;
+  selectedFile=f;
+  document.getElementById('selectedName').textContent=f.name;
+  document.getElementById('selectedSize').textContent=fmtSize(f.size);
+  document.getElementById('fileSelected').classList.remove('hidden');
+  document.getElementById('btnConvert').disabled=false;
+  document.getElementById('btnClear').classList.remove('hidden');
+  document.getElementById('dropZone').style.display='none';
+}
+fi.addEventListener('change',e=>{handleFile(e.target.files[0]);fi.value='';});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+
+document.getElementById('btnConvert').onclick=async()=>{
+  if(!selectedFile)return;
+  const btn=document.getElementById('btnConvert');btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  const lang=document.documentElement.lang;
+  try{
+    pt.textContent=lang==='en'?'Reading file...':lang==='ar'?'قراءة الملف...':'读取文件...';
+    fill.style.width='20%';
+    const buf=await selectedFile.arrayBuffer();
+    const zip=await JSZip.loadAsync(buf);
+    const xmlStr=await zip.file('word/document.xml').async('string');
+    pt.textContent=lang==='en'?'Extracting content...':lang==='ar'?'استخراج المحتوى...':'提取内容...';
+    fill.style.width='50%';
+
+    // 提取段落
+    const bodyMatch=xmlStr.match(/<w:body>([\s\S]*?)<\/w:body>/);
+    const paras=[];
+    if(bodyMatch){
+      const paraRe=/<w:p[ >]([\s\S]*?)<\/w:p>/g;
+      let m;
+      while((m=paraRe.exec(bodyMatch[1]))!==null){
+        const texts=[];const tRe=/<w:t[^>]*>([\s\S]*?)<\/w:t>/g;let tm;
+        while((tm=tRe.exec(m[1]))!==null)texts.push(tm[1]);
+        const text=texts.join('');
+        if(text.trim())paras.push(text);
+      }
+    }
+
+    pt.textContent=lang==='en'?'Generating PDF...':lang==='ar'?'إنشاء PDF...':'生成PDF...';
+    fill.style.width='75%';
+
+    // 加载 pdf-lib
+    if(!window.PDFLib){
+      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    }
+    const {PDFDocument,rgb,StandardFonts}=PDFLib;
+    const pdfDoc=await PDFDocument.create();
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontSize=12,lineHeight=18,margin=50,pageW=595,pageH=842;
+    const maxW=pageW-margin*2;
+
+    let page=pdfDoc.addPage([pageW,pageH]);
+    let y=pageH-margin;
+
+    for(const para of paras){
+      // 简单换行处理
+      const words=para.split('');
+      let line='';
+      const lines=[];
+      for(const ch of words){
+        const testLine=line+ch;
+        const w=font.widthOfTextAtSize(testLine,fontSize);
+        if(w>maxW&&line){lines.push(line);line=ch;}
+        else line=testLine;
+      }
+      if(line)lines.push(line);
+      lines.push(''); // 段落间距
+
+      for(const l of lines){
+        if(y<margin+lineHeight){page=pdfDoc.addPage([pageW,pageH]);y=pageH-margin;}
+        if(l)page.drawText(l,{x:margin,y,font,size:fontSize,color:rgb(0,0,0)});
+        y-=lineHeight;
+      }
+    }
+
+    fill.style.width='95%';
+    const bytes=await pdfDoc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const fname=selectedFile.name.replace(/\.docx$/i,'')+'.pdf';
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fname;a.click();
+    fill.style.width='100%';
+    setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+
+    const pageCount=pdfDoc.getPageCount();
+    document.getElementById('summaryTitle').textContent=lang==='en'?'Converted! PDF downloaded.':lang==='ar'?'تم التحويل! تم تنزيل PDF.':'转换完成！PDF已下载。';
+    document.getElementById('summaryStats').innerHTML=
+      '<div class="summary-stat"><div class="summary-stat-num">'+paras.length+'</div><div class="summary-stat-label">'+(lang==='en'?'Paragraphs':'段落数')+'</div></div>'+
+      '<div class="summary-stat"><div class="summary-stat-num">'+pageCount+'</div><div class="summary-stat-label">'+(lang==='en'?'PDF Pages':'PDF页数')+'</div></div>';
+    document.getElementById('statusOk').classList.remove('hidden');
+    document.getElementById('subscribeBox').classList.remove('hidden');
+  }catch(e){
+    document.getElementById('statusErr').textContent=(lang==='en'?'Error: ':lang==='ar'?'خطأ: ':'错误：')+e.message;
+    document.getElementById('statusErr').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+  }
+  btn.disabled=false;
+};
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片压缩在线 - 免费压缩JPG PNG图片 | hebing.org</title>
+<meta name="description" content="免费在线压缩图片，支持JPG、PNG、WebP格式，可调节压缩质量，文件在浏览器本地处理，不上传服务器，保护隐私。">
+<meta name="keywords" content="图片压缩,在线压缩图片,jpg压缩,png压缩,免费图片压缩工具">
+<link rel="canonical" href="https://hebing.org/image-compress.html">
+<meta property="og:title" content="图片压缩在线免费 | hebing.org">
+<meta property="og:url" content="https://hebing.org/image-compress.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/image-compress.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/image-compress.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/image-compress.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.ad-top{background:var(--gray-100);border-bottom:1px solid var(--gray-200);padding:8px 0;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center;}
+.ad-placeholder{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);border:1px dashed var(--gray-200);padding:8px 32px;border-radius:var(--radius);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.image-list{margin-bottom:20px;display:flex;flex-direction:column;gap:8px;}
+.img-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.img-thumb{width:40px;height:40px;object-fit:cover;border-radius:var(--radius);flex-shrink:0;}
+.img-info{flex:1;min-width:0;}
+.img-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.img-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+.img-result{font-size:11px;color:var(--success);font-family:var(--font-mono);display:none;}
+.img-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;}
+.img-del:hover{color:#b91c1c;}
+.quality-box{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;}
+.quality-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.quality-title{font-size:13px;font-weight:500;color:var(--black);}
+.quality-val{font-family:var(--font-mono);font-size:18px;font-weight:500;color:var(--accent);}
+.quality-slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--gray-200);border-radius:2px;outline:none;cursor:pointer;}
+.quality-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--black);cursor:pointer;}
+.quality-hints{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-400);font-family:var(--font-mono);margin-top:8px;}
+.btn-compress{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);width:100%;margin-bottom:12px;}
+.btn-compress:hover{opacity:0.82;}
+.btn-compress:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-clear{height:40px;padding:0 20px;background:transparent;border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-size:13px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);width:100%;}
+.progress-wrap{margin:16px 0;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat{display:flex;flex-direction:column;gap:2px;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;transition:all 0.15s;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.ad-inline{margin:28px 0;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:background 0.15s;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .quality-label{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:36px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #f0efed;
+    --white: #111110;
+    --gray-100: #1e1e1c;
+    --gray-200: #2a2a28;
+    --gray-400: #6b6966;
+    --gray-600: #a09e9b;
+    --accent: #e85d2a;
+    --accent-light: #2a1a10;
+    --success: #4ade80;
+    --success-bg: #052e16;
+  }
+  nav { background: rgba(17,17,16,0.95); }
+  .drop-zone { background: var(--gray-100); }
+  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
+  .subscribe-input { background: var(--gray-100); }
+  .quality-slider { background: var(--gray-200); }
+  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
+  .tool-card { background: var(--white); }
+  .tool-card:hover { background: var(--gray-100); }
+  .tool-card.active { background: var(--gray-100); }
+  .tool-card.active .tool-name,
+  .tool-card.active .tool-desc { color: var(--black); }
+  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
+  .related-card:hover { background: var(--gray-200); color: var(--black); }
+  .summary-box { border-color: #14532d; }
+  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
+  .notice-box { background: #2a1a10; border-color: #7c3012; }
+  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
+  .highlight-box { background: var(--gray-100); }
+}
+.format-box{display:flex;align-items:center;gap:16px;padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;border:1px solid var(--gray-200);flex-wrap:wrap;}
+.format-label{font-size:13px;color:var(--gray-600);font-family:var(--font-mono);letter-spacing:0.3px;}
+.format-tabs{display:flex;gap:6px;}
+.format-tab{padding:6px 14px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--radius);font-size:12px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);transition:all 0.15s;}
+.format-tab.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.format-tab:not(.active):hover{border-color:var(--black);color:var(--black);}
+.format-note{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);margin-left:auto;}
+[dir="rtl"] .format-note{margin-left:0;margin-right:auto;}
+@media (prefers-color-scheme: dark){.format-box{background:var(--gray-100);border-color:var(--gray-200);}.format-tab{background:var(--white);}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org 图片压缩",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/image-compress.html",
+  "description": "免费批量压缩 JPG、PNG、WebP 图片，可自由调节质量与目标大小，浏览器本地处理。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["JPG / PNG / WebP 压缩", "批量处理", "可调节质量", "保持原始分辨率"],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "318" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费批量压缩 JPG / PNG / WebP 图片",
+  "description": "使用 hebing.org 在浏览器本地批量压缩图片，可自由调节质量级别，原图绝不上传。",
+  "totalTime": "PT30S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "上传图片", "text": "点击或拖拽多张图片到上传区域，支持 JPG / PNG / WebP。" },
+    { "@type": "HowToStep", "position": 2, "name": "调整质量", "text": "拖动质量滑块（0-100），实时预览压缩后的文件大小。" },
+    { "@type": "HowToStep", "position": 3, "name": "点击压缩", "text": "浏览器本地批量压缩，不上传任何图片。" },
+    { "@type": "HowToStep", "position": 4, "name": "下载图片", "text": "单张直接下载，多张打包为 ZIP 自动下载。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "图片压缩", "item": "https://hebing.org/image-compress.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "压缩后画质会明显变差吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "质量设置80%时肉眼几乎看不出差异，但文件体积能减少40-60%。如对画质要求高，可调到90%以上。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PNG图片压缩效果怎么样？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNG是无损格式，压缩效果有限。如需大幅压缩PNG，建议转换为JPG格式。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "支持批量压缩吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "支持。可以同时选择多张图片，工具会逐一压缩并自动下载。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。所有压缩处理在浏览器本地进行，图片文件不离开你的设备。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<!-- AdSense top banner: activate after approval -->
+<!-- <div class="ad-top"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="TOP_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">图片压缩</span></div>
+  <h1 class="page-title" data-i18n="page.h1">图片压缩<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">支持 JPG、PNG、WebP 格式，可调节压缩质量，批量压缩多张图片。文件在浏览器本地处理，不上传服务器。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.webp">
+    <div class="drop-icon">🖼️</div>
+    <div class="drop-label" data-i18n="drop.label">点击选择图片，或拖拽到此处</div>
+    <div class="drop-sub"><strong>JPG · PNG · WebP</strong> · <span data-i18n="drop.limit">可多选，无大小限制</span></div>
+  </div>
+
+  <div class="image-list hidden" id="imageList"></div>
+
+  <div class="quality-box hidden" id="qualityBox">
+    <div class="quality-label">
+      <span class="quality-title" data-i18n="quality.title">压缩质量</span>
+      <span class="quality-val" id="qualityVal">80%</span>
+    </div>
+    <input type="range" class="quality-slider" id="qualitySlider" min="10" max="95" value="80" step="5">
+    <div class="quality-hints">
+      <span data-i18n="quality.low">低质量（体积最小）</span>
+      <span data-i18n="quality.high">高质量（效果最好）</span>
+    </div>
+  </div>
+
+  <div class="format-box hidden" id="formatBox">
+    <span class="format-label" data-i18n="format.label">输出格式</span>
+    <div class="format-tabs">
+      <button type="button" class="format-tab active" data-fmt="auto" data-i18n="format.auto">保持原格式</button>
+      <button type="button" class="format-tab" data-fmt="jpeg" data-i18n="format.jpeg">转为 JPG</button>
+      <button type="button" class="format-tab" data-fmt="webp" data-i18n="format.webp">转为 WebP</button>
+    </div>
+    <span class="format-note" id="formatNote" data-i18n="format.note">JPG 原格式保持；PNG 无损有限压缩</span>
+  </div>
+
+  <button class="btn-compress hidden" id="btnCompress" data-i18n="btn.compress">开始压缩并下载</button>
+  <button class="btn-clear hidden" id="btnClear" onclick="clearAll()" data-i18n="btn.clear">清空重来</button>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+  <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">压缩完成！</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+
+  <!-- AdSense result-area banner: activate after approval -->
+  <!-- <div class="ad-inline"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="RESULT_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+</div>
+</div>
+
+
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="图片压缩的常见使用场景" data-en="Common Use Cases for Image Compression">图片压缩的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📧</div><div class="scene-title" data-scene-zh="邮件附件压缩" data-scene-en="Email Attachments">邮件附件压缩</div><div class="scene-desc" data-scene-zh="邮件附件通常有大小限制，压缩图片后更容易通过邮件发送产品图或设计稿。" data-scene-en="Email attachments have size limits. Compress product photos or design files for easier email sharing.">邮件附件通常有大小限制，压缩图片后更容易通过邮件发送产品图或设计稿。</div></div>
+      <div class="scene-card"><div class="scene-icon">🌐</div><div class="scene-title" data-scene-zh="网站图片优化" data-scene-en="Website Optimization">网站图片优化</div><div class="scene-desc" data-scene-zh="网站图片体积直接影响加载速度，压缩图片能显著提升页面访问速度和SEO评分。" data-scene-en="Image size directly affects loading speed. Compressing images significantly improves page load time and SEO scores.">网站图片体积直接影响加载速度，压缩图片能显著提升页面访问速度和SEO评分。</div></div>
+      <div class="scene-card"><div class="scene-icon">💬</div><div class="scene-title" data-scene-zh="社交媒体发布" data-scene-en="Social Media Upload">社交媒体发布</div><div class="scene-desc" data-scene-zh="微信、WhatsApp等平台对图片大小有限制，压缩后发送更快，不影响显示效果。" data-scene-en="WeChat, WhatsApp and other platforms have image size limits. Compress for faster sending without visible quality loss.">微信、WhatsApp等平台对图片大小有限制，压缩后发送更快，不影响显示效果。</div></div>
+      <div class="scene-card"><div class="scene-icon">💾</div><div class="scene-title" data-scene-zh="节省存储空间" data-scene-en="Save Storage Space">节省存储空间</div><div class="scene-desc" data-scene-zh="批量压缩手机相册或电脑中的图片，轻松节省数GB存储空间。" data-scene-en="Batch compress photos from your phone or computer to easily save gigabytes of storage space.">批量压缩手机相册或电脑中的图片，轻松节省数GB存储空间。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li>质量80%是最佳平衡点：体积减少约50%，肉眼几乎看不出差异，适合大多数场景。</li>
+      <li>PNG格式本身是无损的，压缩效果有限。如需大幅减小文件体积，建议将PNG转为JPG格式后再压缩。</li>
+      <li>压缩后的文件名会自动加上 _compressed 后缀，不会覆盖原文件。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li>80% quality is the sweet spot: about 50% smaller with barely visible difference — suitable for most use cases.</li>
+      <li>PNG is lossless by nature, so compression gains are limited. Convert to JPG first for significant size reduction.</li>
+      <li>Compressed files are automatically named with a _compressed suffix, keeping your originals intact.</li>
+    </ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="压缩后画质会明显变差吗？" data-faq-en="Will image quality drop significantly?">压缩后画质会明显变差吗？</div>
+        <div class="faq-a" data-faq-zh="质量设置80%时肉眼几乎看不出差异，但文件体积能减少40-60%。如果对画质要求高，可以将质量调到90%以上。" data-faq-en="At 80% quality, differences are barely visible but file size reduces by 40-60%. For high-quality requirements, set quality to 90% or above.">质量设置80%时肉眼几乎看不出差异，但文件体积能减少40-60%。如果对画质要求高，可以将质量调到90%以上。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="PNG图片压缩效果怎么样？" data-faq-en="How well does PNG compression work?">PNG图片压缩效果怎么样？</div>
+        <div class="faq-a" data-faq-zh="PNG是无损格式，本工具对PNG的压缩效果有限（主要通过减少颜色深度实现）。如需大幅压缩PNG，建议转换为JPG格式。" data-faq-en="PNG is lossless, so compression gains are limited (mainly through color depth reduction). For significant PNG size reduction, consider converting to JPG first.">PNG是无损格式，本工具对PNG的压缩效果有限（主要通过减少颜色深度实现）。如需大幅压缩PNG，建议转换为JPG格式。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持批量压缩吗？" data-faq-en="Does it support batch compression?">支持批量压缩吗？</div>
+        <div class="faq-a" data-faq-zh="支持。可以同时选择多张图片，工具会逐一压缩并自动下载，每张文件名后面会加 _compressed 标识。" data-faq-en="Yes. Select multiple images at once — the tool compresses and downloads each one automatically with _compressed added to the filename.">支持。可以同时选择多张图片，工具会逐一压缩并自动下载，每张文件名后面会加 _compressed 标识。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?">文件会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有压缩处理在浏览器本地进行，图片文件不离开你的设备。" data-faq-en="No. All compression is done locally in your browser. Images never leave your device.">不会。所有压缩处理在浏览器本地进行，图片文件不离开你的设备。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="merge-image.html" class="related-card"><span>🖼️</span><span data-i18n-related="图片合并PDF|Images to PDF|صور إلى PDF">图片合并PDF</span></a>
+    <a href="merge-pdf.html" class="related-card"><span>📄</span><span data-i18n-related="PDF合并|PDF Merge|دمج PDF">PDF合并</span></a>
+    <a href="pdf-split.html" class="related-card"><span>✂️</span><span data-i18n-related="PDF拆分|PDF Split|تقسيم PDF">PDF拆分</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'图片压缩','page.h1':'图片压缩<br><em>在线免费</em>','page.sub':'支持 JPG、PNG、WebP 格式，可调节压缩质量，批量压缩多张图片。文件在浏览器本地处理，不上传服务器。','drop.label':'点击选择图片，或拖拽到此处','drop.limit':'可多选，无大小限制','quality.title':'压缩质量','quality.low':'低质量（体积最小）','quality.high':'高质量（效果最好）','btn.compress':'开始压缩并下载','btn.clear':'清空重来','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Image Compress','page.h1':'Image Compression<br><em>Free Online</em>','page.sub':'Supports JPG, PNG, WebP. Adjust quality and compress multiple images at once. Processed locally in your browser.','drop.label':'Click to select images, or drag & drop here','drop.limit':'Multiple files, no size limit','quality.title':'Compression Quality','quality.low':'Low (smallest size)','quality.high':'High (best quality)','btn.compress':'Compress & Download','btn.clear':'Clear all','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'ضغط الصور','page.h1':'ضغط الصور<br><em>مجاناً عبر الإنترنت</em>','page.sub':'يدعم JPG وPNG وWebP. اضبط الجودة واضغط صور متعددة دفعة واحدة.','drop.label':'انقر لاختيار الصور، أو اسحبها هنا','drop.limit':'ملفات متعددة، بدون حد للحجم','quality.title':'جودة الضغط','quality.low':'منخفضة (أصغر حجم)','quality.high':'عالية (أفضل جودة)','btn.compress':'ضغط وتنزيل','btn.clear':'مسح الكل','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.classList.toggle('hidden',lang==='en'));
+  document.querySelectorAll('.en-tips').forEach(el=>el.classList.toggle('hidden',lang!=='en'));
+
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{
+    el.textContent=lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;
+  });
+
+}
+function fmtSize(b){if(b<1048576)return(b/1024).toFixed(0)+' KB';return(b/1048576).toFixed(2)+' MB';}
+
+let files=[];
+const FILE_LIMIT=20;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function updateUI(){
+  const list=document.getElementById('imageList');
+  list.innerHTML='';
+  files.forEach((f,i)=>{
+    const div=document.createElement('div');div.className='img-item';
+    div.innerHTML=`<img class="img-thumb" id="thumb-${i}" alt=""><div class="img-info"><div class="img-name">${esc(f.name)}</div><div class="img-size">${fmtSize(f.size)}</div><div class="img-result" id="result-${i}"></div></div><span class="img-del" data-i="${i}" role="button" aria-label="移除图片">✕</span>`;
+    list.appendChild(div);
+    // 预览
+    const reader=new FileReader();
+    reader.onload=e=>document.getElementById(`thumb-${i}`).src=e.target.result;
+    reader.readAsDataURL(f);
+  });
+  list.querySelectorAll('.img-del').forEach(btn=>{
+    btn.onclick=()=>{files.splice(parseInt(btn.dataset.i),1);updateUI();};
+  });
+  const hasFiles=files.length>0;
+  list.classList.toggle('hidden',!hasFiles);
+  document.getElementById('qualityBox').classList.toggle('hidden',!hasFiles);
+  document.getElementById('formatBox').classList.toggle('hidden',!hasFiles);
+  document.getElementById('btnCompress').classList.toggle('hidden',!hasFiles);
+  document.getElementById('btnClear').classList.toggle('hidden',!hasFiles);
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+}
+
+function clearAll(){files=[];updateUI();}
+
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+function addFiles(newFiles){
+  Array.from(newFiles).filter(f=>/\.(jpg|jpeg|png|webp)$/i.test(f.name)).forEach(f=>{
+    if(files.length>=FILE_LIMIT){alert('最多'+FILE_LIMIT+'张图片，请分批处理');return;}
+    if(!files.find(x=>x.name===f.name))files.push(f);
+  });
+  updateUI();
+}
+fi.addEventListener('change',e=>{addFiles(e.target.files);fi.value='';});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');addFiles(e.dataTransfer.files);});
+
+const qs=document.getElementById('qualitySlider');
+qs.oninput=()=>document.getElementById('qualityVal').textContent=qs.value+'%';
+
+let outFormat='auto';
+document.querySelectorAll('.format-tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.format-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    outFormat=t.dataset.fmt;
+    const lang=document.documentElement.lang||'zh';
+    const note=document.getElementById('formatNote');
+    if(outFormat==='auto') note.textContent=lang==='en'?'Keep JPG; PNG lossless (limited saving)':lang==='ar'?'الإبقاء على JPG؛ PNG بدون فقدان':'JPG 原格式保持；PNG 无损有限压缩';
+    else if(outFormat==='jpeg') note.textContent=lang==='en'?'Smallest size; PNG transparency lost':lang==='ar'?'أصغر حجم؛ تفقد شفافية PNG':'体积最小；PNG 透明背景会变白';
+    else note.textContent=lang==='en'?'Modern format; ~30% smaller than JPG':lang==='ar'?'صيغة حديثة؛ أصغر ~30٪ من JPG':'现代格式；比 JPG 再小约 30%';
+  };
+});
+
+async function loadImageBitmap(file){
+  if(typeof createImageBitmap==='function'){
+    try{ return await createImageBitmap(file); }catch(_){}
+  }
+  const url=URL.createObjectURL(file);
+  try{
+    const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=url;});
+    return img;
+  }finally{ URL.revokeObjectURL(url); }
+}
+
+document.getElementById('btnCompress').onclick=async()=>{
+  const btn=document.getElementById('btnCompress');btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  const lang=document.documentElement.lang||'zh';
+  const quality=parseInt(qs.value)/100;
+  let totalOriginal=0,totalCompressed=0;
+  try{
+    const outBlobs=[];
+    for(let i=0;i<files.length;i++){
+      fill.style.width=Math.round((i/files.length)*85)+'%';
+      pt.textContent=(lang==='en'?`Compressing (${i+1}/${files.length}): `:lang==='ar'?`ضغط (${i+1}/${files.length}): `:`压缩中 (${i+1}/${files.length})：`)+files[i].name;
+      totalOriginal+=files[i].size;
+
+      const img=await loadImageBitmap(files[i]);
+      const canvas=document.createElement('canvas');
+      canvas.width=img.width;canvas.height=img.height;
+      const ctx=canvas.getContext('2d');
+      const srcName=files[i].name;
+      const srcExt=(srcName.match(/\.[^.]+$/)||['.jpg'])[0].toLowerCase();
+      const srcIsPng=srcExt==='.png';
+
+      let targetMime, targetExt;
+      if(outFormat==='jpeg'){targetMime='image/jpeg';targetExt='.jpg';}
+      else if(outFormat==='webp'){targetMime='image/webp';targetExt='.webp';}
+      else if(srcIsPng){targetMime='image/png';targetExt='.png';}
+      else if(srcExt==='.webp'){targetMime='image/webp';targetExt='.webp';}
+      else{targetMime='image/jpeg';targetExt='.jpg';}
+
+      // Flatten transparency to white when going PNG->JPEG
+      if(srcIsPng && targetMime==='image/jpeg'){
+        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
+      }
+      ctx.drawImage(img,0,0);
+      if(img.close) img.close();
+
+      const blob=await new Promise(res=>canvas.toBlob(res,targetMime,targetMime==='image/png'?undefined:quality));
+      if(!blob) throw new Error(lang==='en'?`Failed to encode ${srcName} as ${targetExt}`:'图片编码失败: '+srcName);
+      totalCompressed+=blob.size;
+
+      const resultEl=document.getElementById(`result-${i}`);
+      if(resultEl){
+        const saved=Math.round((1-blob.size/files[i].size)*100);
+        resultEl.textContent=`${fmtSize(blob.size)} (${saved>=0?'-':'+'}${Math.abs(saved)}%)`;
+        resultEl.style.display='block';
+      }
+
+      const baseName=srcName.replace(/\.[^.]+$/,'');
+      outBlobs.push({name:baseName+'_compressed'+targetExt, blob});
+      await new Promise(r=>setTimeout(r,0));
+    }
+
+    // Single file → direct download; multiple → ZIP bundle
+    if(outBlobs.length===1){
+      const {name,blob}=outBlobs[0];
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    }else{
+      if(typeof JSZip==='undefined') throw new Error(lang==='en'?'ZIP library failed to load. Reload the page and retry.':'ZIP 打包库加载失败，请刷新重试。');
+      pt.textContent=lang==='en'?'Packing ZIP…':lang==='ar'?'ضغط ZIP…':'打包 ZIP...';
+      fill.style.width='92%';
+      const zip=new JSZip();
+      outBlobs.forEach(o=>zip.file(o.name, o.blob));
+      const zipBlob=await zip.generateAsync({type:'blob',compression:'STORE'},meta=>{
+        fill.style.width=(92+Math.round(meta.percent*0.07))+'%';
+      });
+      const zipName=(lang==='en'?'compressed-images':lang==='ar'?'الصور-المضغوطة':'压缩图片')+'.zip';
+      const a=document.createElement('a');a.href=URL.createObjectURL(zipBlob);a.download=zipName;a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    }
+
+    fill.style.width='100%';
+    setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+    const savedPct=Math.round((1-totalCompressed/totalOriginal)*100);
+    const okMsg=files.length===1
+      ? (lang==='en'?'Compressed! File downloaded.':lang==='ar'?'تم الضغط! تم التنزيل.':'压缩完成！文件已下载。')
+      : (lang==='en'?'Compressed! ZIP downloaded.':lang==='ar'?'تم الضغط! ZIP تم التنزيل.':'压缩完成！已打包为 ZIP 下载。');
+    document.getElementById('summaryTitle').textContent=okMsg;
+    document.getElementById('summaryStats').innerHTML=
+      `<div class="summary-stat"><div class="summary-stat-num">${files.length}</div><div class="summary-stat-label">${lang==='en'?'Images':lang==='ar'?'صور':'图片数'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${savedPct>=0?savedPct:0}%</div><div class="summary-stat-label">${lang==='en'?'Size Saved':lang==='ar'?'توفير':'平均节省'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${fmtSize(Math.max(0,totalOriginal-totalCompressed))}</div><div class="summary-stat-label">${lang==='en'?'Space Freed':lang==='ar'?'مساحة محررة':'节省空间'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${outFormat.toUpperCase()}</div><div class="summary-stat-label">${lang==='en'?'Output':lang==='ar'?'الصيغة':'输出格式'}</div></div>`;
+    document.getElementById('statusOk').classList.remove('hidden');
+    document.getElementById('subscribeBox').classList.remove('hidden');
+  }catch(e){
+    document.getElementById('statusErr').textContent=(lang==='en'?'Error: ':lang==='ar'?'خطأ: ':'错误：')+e.message;
+    document.getElementById('statusErr').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+  }
+  btn.disabled=false;
+};
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于 hebing.org ｜免费在线文件合并工具的初衷与技术</title>
+<meta name="description" content="hebing.org 是一个免费的在线文件合并工具站，提供 Word、PDF、Excel、图片、音频等 11 种工具。所有文件在浏览器本地处理，永不上传服务器，彻底保护隐私。">
+<meta name="keywords" content="关于hebing.org,免费文件合并,浏览器本地处理,文件隐私保护,在线文件工具">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://hebing.org/about.html">
+<meta property="og:title" content="关于 hebing.org">
+<meta property="og:description" content="免费在线文件合并工具站，浏览器本地处理，文件不上传服务器。">
+<meta property="og:url" content="https://hebing.org/about.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "关于 hebing.org",
+  "url": "https://hebing.org/about.html",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "hebing.org",
+    "url": "https://hebing.org",
+    "logo": "https://hebing.org/og-image.png",
+    "email": "hello@hebing.org",
+    "description": "免费在线文件合并与转换工具集合，所有处理在浏览器本地完成，文件不上传服务器。"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "关于我们", "item": "https://hebing.org/about.html" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.container{max-width:720px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-wrap{padding:56px 0 80px;}
+.page-tag{font-family:var(--font-mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;}
+.page-title{font-size:36px;font-weight:700;letter-spacing:-1px;margin-bottom:32px;}
+.content p{font-size:15px;color:var(--gray-600);margin-bottom:20px;line-height:1.8;}
+.content h2{font-size:18px;font-weight:600;color:var(--black);margin:40px 0 14px;}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+.value-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.value-icon{font-size:24px;margin-bottom:10px;}
+.value-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.value-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tool-list{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;}
+.tool-tag{padding:6px 14px;background:var(--gray-100);border-radius:var(--radius);font-size:13px;color:var(--black);text-decoration:none;border:1px solid var(--gray-200);transition:all 0.15s;}
+.tool-tag:hover{background:var(--black);color:var(--white);}
+.contact-box{padding:24px;background:var(--gray-100);border-radius:var(--radius-lg);margin-top:24px;}
+.contact-box p{margin:0;font-size:14px;color:var(--gray-600);}
+.contact-box a{color:var(--accent);text-decoration:none;}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner{flex-direction:row-reverse;}
+[dir="rtl"] .value-grid{direction:rtl;}
+.zh-content,.en-content,.ar-content{display:none;}
+.zh-content.active,.en-content.active,.ar-content.active{display:block;}
+@media(max-width:600px){.value-grid{grid-template-columns:1fr;}}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #f0efed;
+    --white: #111110;
+    --gray-100: #1e1e1c;
+    --gray-200: #2a2a28;
+    --gray-400: #6b6966;
+    --gray-600: #a09e9b;
+    --accent: #e85d2a;
+    --accent-light: #2a1a10;
+    --success: #4ade80;
+    --success-bg: #052e16;
+  }
+  nav { background: rgba(17,17,16,0.95); }
+  .drop-zone { background: var(--gray-100); }
+  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
+  .subscribe-input { background: var(--gray-100); }
+  .quality-slider { background: var(--gray-200); }
+  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
+  .tool-card { background: var(--white); }
+  .tool-card:hover { background: var(--gray-100); }
+  .tool-card.active { background: var(--gray-100); }
+  .tool-card.active .tool-name,
+  .tool-card.active .tool-desc { color: var(--black); }
+  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
+  .related-card:hover { background: var(--gray-200); color: var(--black); }
+  .summary-box { border-color: #14532d; }
+  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
+  .notice-box { background: #2a1a10; border-color: #7c3012; }
+  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
+  .highlight-box { background: var(--gray-100); }
+}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" id="navBack">← 返回首页</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container page-wrap">
+  <div class="page-tag">About</div>
+
+  <div class="zh-content active">
+    <h1 class="page-title">关于 hebing.org</h1>
+    <div class="content">
+      <p>hebing.org 是一个免费的在线文件处理工具站。我们相信，处理日常文件不应该需要安装软件、注册账号或支付费用。</p>
+      <p>我们的工具完全运行在浏览器内——文件不会上传到任何服务器，所有计算都在你的设备上完成。这不仅保护了你的隐私，也让处理速度更快。</p>
+      <h2>我们的价值观</h2>
+      <div class="value-grid">
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">隐私优先</div><div class="value-desc">文件永不离开你的设备，我们无法访问任何文件内容。</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">真正免费</div><div class="value-desc">无文件大小限制，无每日次数限制，无需注册，永久免费。</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">多语言支持</div><div class="value-desc">完整支持中文、英文、阿拉伯文，为全球用户服务。</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">持续扩展</div><div class="value-desc">每隔几周上线新工具，覆盖更多文件处理需求。</div></div>
+      </div>
+      <h2>现有工具</h2>
+      <div class="tool-list">
+        <a href="merge-word.html" class="tool-tag">📝 Word合并</a>
+        <a href="merge-pdf.html" class="tool-tag">📄 PDF合并</a>
+        <a href="merge-excel.html" class="tool-tag">📊 Excel合并</a>
+        <a href="merge-image.html" class="tool-tag">🖼️ 图片合并PDF</a>
+        <a href="merge-txt.html" class="tool-tag">📃 TXT合并</a>
+        <a href="merge-csv.html" class="tool-tag">🗂️ CSV合并</a>
+        <a href="merge-ppt.html" class="tool-tag">📋 PPT合并</a>
+        <a href="merge-audio.html" class="tool-tag">🎵 音频合并</a>
+        <a href="word-to-pdf.html" class="tool-tag">🔄 Word转PDF</a>
+        <a href="pdf-split.html" class="tool-tag">✂️ PDF拆分</a>
+        <a href="image-compress.html" class="tool-tag">🗜️ 图片压缩</a>
+      </div>
+      <h2>联系我们</h2>
+      <div class="contact-box">
+        <p>有问题、建议或合作意向？欢迎联系：<a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="en-content">
+    <h1 class="page-title">About hebing.org</h1>
+    <div class="content">
+      <p>hebing.org is a free online file processing toolkit. We believe that handling everyday files shouldn't require installing software, creating an account, or paying fees.</p>
+      <p>Our tools run entirely in your browser — files are never uploaded to any server, and all processing happens on your device. This protects your privacy and makes everything faster.</p>
+      <h2>Our Values</h2>
+      <div class="value-grid">
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">Privacy First</div><div class="value-desc">Files never leave your device. We cannot access any file content.</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">Truly Free</div><div class="value-desc">No file size limits, no daily caps, no sign-up required. Free forever.</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">Multilingual</div><div class="value-desc">Full support for Chinese, English, and Arabic to serve users worldwide.</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">Always Growing</div><div class="value-desc">New tools launch regularly to cover more file processing needs.</div></div>
+      </div>
+      <h2>Available Tools</h2>
+      <div class="tool-list">
+        <a href="merge-word.html" class="tool-tag">📝 Word Merge</a>
+        <a href="merge-pdf.html" class="tool-tag">📄 PDF Merge</a>
+        <a href="merge-excel.html" class="tool-tag">📊 Excel Merge</a>
+        <a href="merge-image.html" class="tool-tag">🖼️ Images to PDF</a>
+        <a href="merge-txt.html" class="tool-tag">📃 TXT Merge</a>
+        <a href="merge-csv.html" class="tool-tag">🗂️ CSV Merge</a>
+        <a href="merge-ppt.html" class="tool-tag">📋 PPT Merge</a>
+        <a href="merge-audio.html" class="tool-tag">🎵 Audio Merge</a>
+        <a href="word-to-pdf.html" class="tool-tag">🔄 Word to PDF</a>
+        <a href="pdf-split.html" class="tool-tag">✂️ PDF Split</a>
+        <a href="image-compress.html" class="tool-tag">🗜️ Image Compress</a>
+      </div>
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>Questions, suggestions, or collaboration? Reach us at: <a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ar-content">
+    <h1 class="page-title">حول hebing.org</h1>
+    <div class="content">
+      <p>hebing.org هي مجموعة أدوات مجانية لمعالجة الملفات عبر الإنترنت. نؤمن بأن التعامل مع الملفات اليومية لا يجب أن يتطلب تثبيت برامج أو إنشاء حسابات أو دفع رسوم.</p>
+      <p>أدواتنا تعمل بالكامل في متصفحك — لا تُرفع الملفات إلى أي خادم، وتتم جميع العمليات على جهازك. هذا يحمي خصوصيتك ويجعل كل شيء أسرع.</p>
+      <h2>قيمنا</h2>
+      <div class="value-grid">
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">الخصوصية أولاً</div><div class="value-desc">الملفات لا تغادر جهازك أبداً. لا يمكننا الوصول إلى أي محتوى.</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">مجاني حقاً</div><div class="value-desc">لا حدود للحجم، لا قيود يومية، لا تسجيل مطلوب. مجاني للأبد.</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">متعدد اللغات</div><div class="value-desc">دعم كامل للعربية والإنجليزية والصينية.</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">دائماً في نمو</div><div class="value-desc">أدوات جديدة تُطلق بانتظام لتغطية احتياجات أكثر.</div></div>
+      </div>
+      <h2>تواصل معنا</h2>
+      <div class="contact-box">
+        <p>أسئلة أو اقتراحات؟ تواصل معنا: <a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  const backs = {zh:'← 返回首页', en:'← Back to Home', ar:'→ العودة للرئيسية'};
+  document.getElementById('navBack').textContent = backs[lang];
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

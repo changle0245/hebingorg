@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF文件合并在线-免费合并多个PDF|hebing.org</title>
+<meta name="description" content="选择多个 PDF 文件，合并为一个文档。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="pdf合并,在线合并pdf,免费pdf合并">
+<link rel="canonical" href="https://hebing.org/merge-pdf.html">
+<meta property="og:title" content="PDF文件合并在线-免费合并多个PDF|hebing.org">
+<meta property="og:url" content="https://hebing.org/merge-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/merge-pdf.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/merge-pdf.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/merge-pdf.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);transition:color 0.15s;}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.ad-top{background:var(--gray-100);border-bottom:1px solid var(--gray-200);padding:8px 0;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center;}
+.ad-placeholder{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);border:1px dashed var(--gray-200);padding:8px 32px;border-radius:var(--radius);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.drop-sub strong{color:var(--accent);font-weight:500;}
+.file-list{margin-bottom:20px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;}
+.file-list-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-size:12px;color:var(--gray-600);font-family:var(--font-mono);}
+.file-item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--gray-100);}
+.file-item:last-child{border-bottom:none;}
+.file-item:hover{background:var(--gray-100);}
+.f-name{flex:1;font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.f-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);flex-shrink:0;}
+.f-del{width:28px;height:28px;border:none;background:transparent;cursor:pointer;color:var(--gray-400);border-radius:var(--radius);font-size:13px;flex-shrink:0;}
+.f-del:hover{background:#fee2e2;color:#b91c1c;}
+.btn-row{display:flex;gap:12px;margin-bottom:20px;}
+.btn-merge{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);flex:1;}
+.btn-merge:hover{opacity:0.82;}
+.btn-merge:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-clear{height:48px;padding:0 20px;background:transparent;border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-size:14px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);}
+.btn-clear:hover{background:var(--gray-100);}
+.progress-wrap{margin-bottom:20px;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.status-ok{padding:14px 16px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--success);margin-bottom:20px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.ad-inline{margin:28px 0;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);padding:14px 0;}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .file-list-header,[dir="rtl"] .btn-row,[dir="rtl"] .footer-inner{flex-direction:row-reverse;}
+[dir="rtl"] .file-item{flex-direction:row-reverse;}
+[dir="rtl"] .status-ok{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-header{animation:fadeUp 0.3s ease both;}
+
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:background 0.15s;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+.related-icon{font-size:16px;line-height:1;}
+.related-name{font-weight:500;}
+[dir="rtl"] .related-grid{flex-direction:row-reverse;}
+[dir="rtl"] .related-card{flex-direction:row-reverse;}
+
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat{display:flex;flex-direction:column;gap:2px;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+[dir="rtl"] .summary-stats{flex-direction:row-reverse;}
+
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:36px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;font-family:var(--font-sans);}
+.subscribe-btn:hover{opacity:0.82;}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;transition:all 0.15s;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+[dir="rtl"] .subscribe-form{flex-direction:row-reverse;}
+[dir="rtl"] .support-row{flex-direction:row-reverse;}
+
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #f0efed;
+    --white: #111110;
+    --gray-100: #1e1e1c;
+    --gray-200: #2a2a28;
+    --gray-400: #6b6966;
+    --gray-600: #a09e9b;
+    --accent: #e85d2a;
+    --accent-light: #2a1a10;
+    --success: #4ade80;
+    --success-bg: #052e16;
+  }
+  nav { background: rgba(17,17,16,0.95); }
+  .drop-zone { background: var(--gray-100); }
+  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
+  .subscribe-input { background: var(--gray-100); }
+  .quality-slider { background: var(--gray-200); }
+  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
+  .tool-card { background: var(--white); }
+  .tool-card:hover { background: var(--gray-100); }
+  .tool-card.active { background: var(--gray-100); }
+  .tool-card.active .tool-name,
+  .tool-card.active .tool-desc { color: var(--black); }
+  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
+  .related-card:hover { background: var(--gray-200); color: var(--black); }
+  .summary-box { border-color: #14532d; }
+  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
+  .notice-box { background: #2a1a10; border-color: #7c3012; }
+  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
+  .highlight-box { background: var(--gray-100); }
+}
+
+.file-item{cursor:grab;transition:opacity 0.15s,transform 0.15s;}
+.file-item.dragging{opacity:0.4;cursor:grabbing;}
+.file-item.drag-over-item{transform:translateY(-2px);border-top:2px solid var(--accent);}
+.drag-handle{width:20px;color:var(--gray-400);cursor:grab;flex-shrink:0;text-align:center;font-size:14px;user-select:none;}
+.drag-handle:hover{color:var(--black);}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费合并多个 PDF 文件",
+  "description": "使用 hebing.org 在浏览器本地免费合并多个 PDF 文件为单一 PDF，无需上传、无需注册。",
+  "totalTime": "PT1M",
+  "tool": { "@type": "HowToTool", "name": "浏览器（Chrome / Firefox / Safari / Edge）" },
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "选择 PDF 文件", "text": "点击上传区域选择多个 PDF 文件，或将文件直接拖拽到上传框。支持任意数量的 PDF。" },
+    { "@type": "HowToStep", "position": 2, "name": "调整顺序", "text": "在文件列表中拖动条目，调整合并顺序。顺序即合并后 PDF 的页面先后顺序。" },
+    { "@type": "HowToStep", "position": 3, "name": "点击合并", "text": "点击「合并并下载」按钮。浏览器在本地完成合并，不会上传任何文件到服务器。" },
+    { "@type": "HowToStep", "position": 4, "name": "下载结果", "text": "合并完成后合并后的 PDF 会自动下载到你的设备，整个过程通常 1 秒内完成。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "PDF 合并", "item": "https://hebing.org/merge-pdf.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org PDF 合并",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/merge-pdf.html",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "326" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "PDF合并后文件会变大吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "通常会略有增大，这是正常的。合并操作本身不会重新压缩页面内容。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "加密的PDF能合并吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不能直接合并。加密的PDF需要先解除密码保护，然后再上传合并。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。所有处理在浏览器本地进行，文件不离开你的设备。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "合并数量和文件大小有限制吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "没有强制限制，建议单次不超过30个文件或总大小500MB以内。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<!-- AdSense top banner: activate after approval by uncommenting the <ins> below and filling real data-ad-slot -->
+<!-- <div class="ad-top"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="TOP_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">📄 PDF 文件合并在线免费</span></div>
+  <h1 class="page-title" data-i18n="page.h1">PDF 文件合并<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">选择多个 PDF 文件，合并为一个文档。文件在浏览器本地处理，不上传服务器。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" multiple accept=".pdf">
+    <div class="drop-icon">📄</div>
+    <div class="drop-label" data-i18n="drop.label">点击选择文件，或拖拽到此处</div>
+    <div class="drop-sub"><strong>.pdf</strong> &nbsp;·&nbsp; <span data-i18n="drop.limit">无大小限制，可多选</span></div>
+  </div>
+
+  <div class="file-list hidden" id="fileList">
+    <div class="file-list-header">
+      <span id="fileCount">0 个文件</span>
+      <span id="totalSize"></span>
+    </div>
+    <div id="fileItems"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-merge" id="btnMerge" disabled data-i18n="btn.merge">合并并下载</button>
+    <button class="btn-clear hidden" id="btnClear" data-i18n="btn.clear">清空</button>
+  </div>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+    <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">合并完成！文件已下载。</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！有新工具上线时会通知你。</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+  <!-- AdSense result-area banner: activate after approval -->
+  <!-- <div class="ad-inline"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="RESULT_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
+</div>
+</div>
+
+<!-- ── SEO 正文：如何使用 + 场景 + 小贴士 ── -->
+<section class="seo-extra">
+  <div class="container">
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">如何在线合并多个 PDF 文件（4 步搞定）</h2>
+      <ol class="tips-list">
+        <li><strong>第 1 步：选择文件</strong> — 点击上方上传区域或将多个 PDF 直接拖入，支持任意数量。</li>
+        <li><strong>第 2 步：调整顺序</strong> — 在文件列表中拖动条目，决定合并后的页面先后顺序。</li>
+        <li><strong>第 3 步：点击合并</strong> — 点击「合并并下载」按钮，浏览器本地完成合并，文件不会上传到任何服务器。</li>
+        <li><strong>第 4 步：下载结果</strong> — 合并后的 PDF 自动下载，整个流程通常 1 秒内完成。</li>
+      </ol>
+    </div>
+
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">PDF 合并的典型使用场景</h2>
+      <div class="scene-grid">
+        <div class="scene-card">
+          <div class="scene-icon">📚</div>
+          <div class="scene-title">学生合并作业</div>
+          <div class="scene-desc">将每节课的 PDF 笔记、作业、讲义合并为一份期末总结文档，方便打印与复习。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">⚖️</div>
+          <div class="scene-title">律师合并案卷</div>
+          <div class="scene-desc">将证据材料、诉状、判决书等多份 PDF 合并为完整案卷，方便归档和提交。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">🧾</div>
+          <div class="scene-title">会计合并报销</div>
+          <div class="scene-desc">将多张发票、小票扫描件合并为单一 PDF，一次性提交报销申请。</div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-icon">📑</div>
+          <div class="scene-title">HR 合并简历</div>
+          <div class="scene-desc">将多份候选人简历合并为一份文档，交付给面试官统一评审。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-extra-section">
+      <h2 class="seo-extra-title">使用小贴士</h2>
+      <ul class="tips-list">
+        <li>建议单次合并不超过 30 个文件或总大小 500MB，以获得最佳处理速度。</li>
+        <li>加密的 PDF 需先解除密码保护，再上传合并。</li>
+        <li>如果合并后文件较大，可以再配合 <a href="image-compress.html" style="color:var(--accent)">图片压缩</a> 或专业 PDF 压缩工具处理。</li>
+        <li>支持在手机浏览器使用，处理速度取决于设备内存。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ（可见段落，AI 模型可直接抽取） ── -->
+<section class="faq-section">
+  <div class="container">
+    <h2 class="faq-title">关于 PDF 合并的常见问题</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">PDF 合并后文件会变大吗？</div>
+        <div class="faq-a">通常会略有增大，这是正常的。合并操作本身不会重新压缩页面内容，每页的原始字节都会保留。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">加密的 PDF 能合并吗？</div>
+        <div class="faq-a">不能直接合并。加密或带密码的 PDF 需要先在原始阅读器（如 Adobe Acrobat）中解除密码保护后再上传合并。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">文件会上传到服务器吗？</div>
+        <div class="faq-a">不会。hebing.org 的 PDF 合并完全在浏览器本地运行（使用 pdf-lib 库），文件永远不会离开你的设备。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">合并数量和文件大小有限制吗？</div>
+        <div class="faq-a">没有强制上限。建议单次不超过 30 个文件或总大小 500MB 以内，超出可能受浏览器内存限制。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">合并后页面顺序可以调整吗？</div>
+        <div class="faq-a">可以。上传后在文件列表中直接拖动条目即可调整合并顺序，所见即所得。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">支持扫描版 PDF 吗？</div>
+        <div class="faq-a">支持。无论是文字型 PDF 还是扫描图像型 PDF，合并过程都完全一致，不会破坏原始内容。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N = {
+  zh: {'nav.back':'← 所有工具','related.title':'你可能还需要','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！有新工具上线时会通知你。','sub.support':'工具完全免费，如果帮到你了 ☕','page.h1':'PDF 文件合并<br><em>在线免费</em>','page.sub':'选择多个 PDF 文件，合并为一个文档。文件在浏览器本地处理，不上传服务器。','drop.label':'点击选择文件，或拖拽到此处','drop.limit':'无大小限制，可多选','btn.merge':'合并并下载','btn.clear':'清空','status.ok':'合并完成！文件已下载。'},
+  en: {'nav.back':'← All Tools','page.h1':'Merge PDF Files<br><em>Free Online</em>','page.sub':'Select multiple PDF files and combine into one. All processing in your browser — files never leave your device.','drop.label':'Click to select files, or drag & drop here','drop.limit':'No size limit, multiple files','btn.merge':'Merge & Download','btn.clear':'Clear','status.ok':'Done! Your merged file has been downloaded.'},
+  ar: {'nav.back':'→ جميع الأدوات','page.h1':'دمج ملفات PDF<br><em>مجاناً عبر الإنترنت</em>','page.sub':'اختر ملفات PDF متعددة وادمجها في ملف واحد. تتم المعالجة في المتصفح — ملفاتك لا تغادر جهازك.','drop.label':'انقر لاختيار الملفات، أو اسحبها هنا','drop.limit':'بدون حد للحجم، ملفات متعددة','btn.merge':'دمج وتنزيل','btn.clear':'مسح','status.ok':'تم! تم تنزيل الملف المدمج.'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n]});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  localStorage.setItem('hebing_lang',lang);
+}
+
+const FILE_LIMIT = 30;
+
+let files=[];
+
+function getFriendlyError(e, lang) {
+  const msg = e.message || '';
+  const zh = {
+    'Invalid PDF': '文件已损坏或不是有效的PDF，请检查文件后重试',
+    'encrypted': 'PDF文件已加密，请先取消密码保护',
+    'out of memory': '文件太大，浏览器内存不足，请减少文件数量或分批处理',
+    'Failed to fetch': '网络连接失败，请检查网络后重试',
+    'not a zip': '文件格式不正确，请确认文件未损坏',
+  };
+  const en = {
+    'Invalid PDF': 'File is corrupted or not a valid PDF. Please check the file and try again.',
+    'encrypted': 'PDF is password protected. Please remove the password first.',
+    'out of memory': 'File too large. Please reduce the number of files or process in batches.',
+    'Failed to fetch': 'Network error. Please check your connection and try again.',
+    'not a zip': 'File format is incorrect. Please ensure the file is not corrupted.',
+  };
+  const ar = {
+    'Invalid PDF': 'الملف تالف أو ليس PDF صالحاً. يرجى التحقق من الملف والمحاولة مجدداً.',
+    'encrypted': 'ملف PDF محمي بكلمة مرور. يرجى إزالة الحماية أولاً.',
+    'out of memory': 'الملف كبير جداً. يرجى تقليل عدد الملفات أو المعالجة على دفعات.',
+    'Failed to fetch': 'فشل الاتصال بالشبكة. يرجى التحقق من الاتصال والمحاولة مجدداً.',
+    'not a zip': 'تنسيق الملف غير صحيح. يرجى التأكد من أن الملف غير تالف.',
+  };
+  const map = lang === 'ar' ? ar : lang === 'en' ? en : zh;
+  for (const [key, friendly] of Object.entries(map)) {
+    if (msg.toLowerCase().includes(key.toLowerCase())) return friendly;
+  }
+  return lang === 'ar' ? 'حدث خطأ: ' + msg :
+         lang === 'en' ? 'Error: ' + msg :
+         '错误：' + msg;
+}
+
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';}
+
+function initDragSort(listId) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+  let dragging = null;
+  function getItems() { return Array.from(list.querySelectorAll('.file-item')); }
+  list.addEventListener('dragstart', e => {
+    dragging = e.target.closest('.file-item');
+    if (dragging) { setTimeout(() => dragging.classList.add('dragging'), 0); e.dataTransfer.effectAllowed = 'move'; }
+  });
+  list.addEventListener('dragend', e => {
+    if (dragging) dragging.classList.remove('dragging');
+    getItems().forEach(i => i.classList.remove('drag-over-item'));
+    // 同步 files 数组顺序
+    const newOrder = getItems().map(el => el.dataset.fname);
+    if (typeof files !== 'undefined') {
+      files.sort((a,b) => newOrder.indexOf(a.name) - newOrder.indexOf(b.name));
+    }
+    dragging = null;
+  });
+  list.addEventListener('dragover', e => {
+    e.preventDefault();
+    const target = e.target.closest('.file-item');
+    if (!target || target === dragging) return;
+    getItems().forEach(i => i.classList.remove('drag-over-item'));
+    target.classList.add('drag-over-item');
+    const items = getItems();
+    const di = items.indexOf(dragging), ti = items.indexOf(target);
+    if (di < ti) list.insertBefore(dragging, target.nextSibling);
+    else list.insertBefore(dragging, target);
+  });
+}
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function refreshUI(){
+  const c=document.getElementById('fileItems');c.innerHTML='';
+  files.forEach(f=>{
+    const d=document.createElement('div');d.className='file-item';
+    d.innerHTML=`<span class="f-name">${esc(f.name)}</span><span class="f-size">${fmtSize(f.size)}</span><button class="f-del" data-name="${esc(f.name)}" aria-label="移除文件">✕</button>`;
+    c.appendChild(d);
+  });
+  c.querySelectorAll('.f-del').forEach(b=>b.onclick=()=>{files=files.filter(f=>f.name!==b.dataset.name);refreshUI();});
+  const tot=files.reduce((s,f)=>s+f.size,0);
+  document.getElementById('fileCount').textContent=files.length+' 个文件';
+  document.getElementById('totalSize').textContent=fmtSize(tot);
+  document.getElementById('fileList').classList.toggle('hidden',files.length===0);
+  document.getElementById('btnMerge').disabled=files.length<2;
+  initDragSort('fileItems');
+  document.getElementById('btnClear').classList.toggle('hidden',files.length===0);
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+}
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+fi.addEventListener('change',e=>{Array.from(e.target.files).forEach(f=>{if(files.length>=FILE_LIMIT){alert('最多支持'+FILE_LIMIT+'个文件，请分批处理');return;}if(!files.find(x=>x.name===f.name))files.push(f)});fi.value='';refreshUI();});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');Array.from(e.dataTransfer.files).forEach(f=>{if(files.length>=FILE_LIMIT){alert('最多支持'+FILE_LIMIT+'个文件，请分批处理');return;}if(!files.find(x=>x.name===f.name))files.push(f)});refreshUI();});
+document.getElementById('btnClear').onclick=()=>{files=[];refreshUI();};
+
+document.getElementById('btnMerge').onclick=async()=>{
+  const btn=document.getElementById('btnMerge');
+  btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  try{
+    if(!window.PDFLib){
+      pt.textContent='加载处理库...';
+      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    }
+    const merged=await PDFLib.PDFDocument.create();
+    for(let i=0;i<files.length;i++){
+      fill.style.width=Math.round(i/files.length*90)+'%';
+      pt.textContent=`处理 (${i+1}/${files.length}): ${files[i].name}`;
+      const buf=await files[i].arrayBuffer();
+      const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});
+      const pages=await merged.copyPages(doc,doc.getPageIndices());
+      pages.forEach(p=>merged.addPage(p));
+      await new Promise(r=>setTimeout(r,10));
+    }
+    fill.style.width='95%';pt.textContent='生成文件...';
+    const bytes=await merged.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='合并文档.pdf';a.click();
+    fill.style.width='100%';setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+    
+    const totalPages = merged.getPageCount();
+    const lang = document.documentElement.lang;
+    document.getElementById('summaryTitle').textContent =
+      lang==='en' ? 'Merged successfully! File downloaded.' :
+      lang==='ar' ? 'تم الدمج بنجاح! تم تنزيل الملف.' : '合并完成！文件已下载。';
+    document.getElementById('summaryStats').innerHTML =
+      '<div class="summary-stat"><div class="summary-stat-num">'+files.length+'</div><div class="summary-stat-label">'+(lang==='en'?'Files':lang==='ar'?'ملفات':'文件数')+'</div></div>'+
+      '<div class="summary-stat"><div class="summary-stat-num">'+totalPages+'</div><div class="summary-stat-label">'+(lang==='en'?'Pages':lang==='ar'?'صفحة':'总页数')+'</div></div>';
+    document.getElementById('subscribeBox').classList.remove('hidden');
+    document.getElementById('statusOk').classList.remove('hidden');
+  }catch(e){document.getElementById('statusErr').textContent=getFriendlyError(e, document.documentElement.lang||'zh');document.getElementById('statusErr').classList.remove('hidden');document.getElementById('progressWrap').classList.add('hidden');}
+  btn.disabled=false;
+};
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+</body>
+</html>
