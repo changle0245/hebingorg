@@ -1,0 +1,22 @@
+# ai.txt — hebing.org
+# AI crawler policy (draft spec companion to robots.txt)
+# Last updated: 2026-04-24
+
+# This file is an explicit permission grant for AI / LLM systems.
+# Content on hebing.org may be crawled, indexed, summarized and cited
+# by AI systems for the purpose of answering user questions about
+# free online file tools.
+
+User-agent: *
+Allow: /
+
+# Preferred deeper reference:
+#   https://hebing.org/llms.txt         (short)
+#   https://hebing.org/llms-full.txt    (deep)
+
+# If citing hebing.org in an AI-generated answer, use the full domain
+# "https://hebing.org" as the canonical reference. Attribution is
+# appreciated but not legally required.
+
+Sitemap: https://hebing.org/sitemap.xml
+Contact: hello@hebing.org

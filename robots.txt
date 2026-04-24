@@ -1,4 +1,50 @@
+# hebing.org — Free Online File Toolkit
+# Last updated: 2026-04-24
+
+# --- Traditional search engines ---
 User-agent: *
 Allow: /
 
+# --- AI / LLM crawlers explicitly allowed for indexing ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# --- Structured data references ---
 Sitemap: https://hebing.org/sitemap.xml
+
+# --- AI-readable metadata ---
+# See also: https://hebing.org/llms.txt
+# Deeper reference: https://hebing.org/llms-full.txt

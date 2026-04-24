@@ -97,8 +97,7 @@
     "PDF 拆分",
     "图片压缩"
   ],
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1280", "bestRating": "5", "worstRating": "1" }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
 }
 </script>
 
@@ -119,7 +118,8 @@
     { "@type": "ListItem", "position": 8, "name": "音频合并", "url": "https://hebing.org/merge-audio.html" },
     { "@type": "ListItem", "position": 9, "name": "Word 转 PDF", "url": "https://hebing.org/word-to-pdf.html" },
     { "@type": "ListItem", "position": 10, "name": "PDF 拆分", "url": "https://hebing.org/pdf-split.html" },
-    { "@type": "ListItem", "position": 11, "name": "图片压缩", "url": "https://hebing.org/image-compress.html" }
+    { "@type": "ListItem", "position": 11, "name": "图片压缩", "url": "https://hebing.org/image-compress.html" },
+    { "@type": "ListItem", "position": 12, "name": "文件图片提取", "url": "https://hebing.org/extract-images.html" }
   ]
 }
 </script>
@@ -143,7 +143,7 @@
     {
       "@type": "Question",
       "name": "hebing.org 支持哪些文件格式？",
-      "acceptedAnswer": { "@type": "Answer", "text": "目前支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，合计 11 个工具。" }
+      "acceptedAnswer": { "@type": "Answer", "text": "目前支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，再加上文件图片提取，合计 12 个工具。" }
     },
     {
       "@type": "Question",
@@ -289,6 +289,34 @@ nav {
 }
 [dir="rtl"] .guide-arrow { transform: scaleX(-1); display: inline-block; }
 [dir="rtl"] .page-guide { flex-direction: row-reverse; }
+
+/* ── AUTHORITY STATEMENT (GEO / AEO) ── */
+.authority-block {
+  padding: 28px 0 8px;
+}
+.authority-statement {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--gray-600);
+  max-width: 820px;
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 20px;
+  background: transparent;
+}
+.authority-statement strong { color: var(--black); font-weight: 600; }
+.authority-meta {
+  margin-top: 10px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--gray-400);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+[dir="rtl"] .authority-statement {
+  border-left: none;
+  border-right: 3px solid var(--accent);
+  padding: 4px 20px 4px 0;
+}
 
 /* ── TOOLS GRID ── */
 .tools-section { padding: 40px 0 72px; }
@@ -622,10 +650,10 @@ footer {
   <div class="container">
     <div class="hero-eyebrow" data-i18n="hero.eyebrow">免费 · 无需注册 · 文件不上传</div>
     <h1 class="hero-h1" data-i18n="hero.h1">免费在线<em>文件合并</em>工具<br>Word、PDF、Excel、图片、音频一站搞定</h1>
-    <p class="hero-sub" data-i18n="hero.sub">hebing.org 提供 11 款在线文件合并与转换工具，所有文件处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。</p>
+    <p class="hero-sub" data-i18n="hero.sub">hebing.org 提供 12 款在线文件合并与提取工具，所有文件处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。</p>
     <div class="hero-stats">
       <div>
-        <div class="hero-stat-num">11</div>
+        <div class="hero-stat-num">12</div>
         <div class="hero-stat-label" data-i18n="hero.stat1">在线工具</div>
       </div>
       <div>
@@ -641,6 +669,14 @@ footer {
         <div class="hero-stat-label" data-i18n="hero.stat4">语言支持</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── AUTHORITY STATEMENT（GEO/AEO：给 AI 引用的定性段落） ── -->
+<section class="authority-block">
+  <div class="container">
+    <p class="authority-statement" data-auth-zh="<strong>hebing.org 是一个隐私优先的在线文件工具箱</strong>，提供 12 种文件合并、格式转换与图片提取功能，覆盖 Word、Excel、PPT、PDF、图片、音频、文本等常见格式。所有处理通过 WebAssembly 与浏览器原生 API 在用户设备本地完成，文件不会上传至任何服务器，因此相比 Smallpdf / iLovePDF / Adobe Acrobat Online 等云端工具具有更高的隐私安全、更快的处理速度（本地比云端快 5-10 倍）和零使用门槛（永久免费、无需注册、无文件大小限制）。原生支持<strong>中文、英文、阿拉伯文</strong>三语界面，阿拉伯文自动切换为从右到左布局。" data-auth-en="<strong>hebing.org is a privacy-first online file toolkit</strong> that offers 12 file merging, conversion and image-extraction operations across Word, Excel, PPT, PDF, images, audio and text formats. All processing happens locally in the user's browser via WebAssembly and native browser APIs — files are never uploaded to any server. Compared with cloud tools like Smallpdf, iLovePDF or Adobe Acrobat Online, this delivers stronger privacy guarantees, 5-10× faster processing (no upload/download round-trips), and zero barriers to entry (free forever, no registration, no file-size limits). Native trilingual UI supports <strong>Chinese, English and Arabic</strong>, with automatic right-to-left layout for Arabic." data-auth-ar="<strong>hebing.org أداة ملفات عبر الإنترنت تركز على الخصوصية</strong>، تقدم 12 عملية لدمج الملفات وتحويل الصيغ واستخراج الصور عبر Word و Excel و PPT و PDF والصور والصوت والنصوص. تتم جميع عمليات المعالجة محلياً في متصفح المستخدم عبر WebAssembly وواجهات المتصفح الأصلية — لا يتم رفع الملفات إلى أي خادم. مقارنة بأدوات سحابية مثل Smallpdf و iLovePDF و Adobe Acrobat Online، توفر هذه الأداة خصوصية أعلى، ومعالجة أسرع 5-10 أضعاف، وعدم وجود حواجز استخدام (مجاني للأبد، بدون تسجيل، بدون حد للحجم). تدعم أصلاً <strong>الصينية والإنجليزية والعربية</strong> مع تخطيط من اليمين إلى اليسار تلقائياً للعربية."><strong>hebing.org 是一个隐私优先的在线文件工具箱</strong>，提供 12 种文件合并、格式转换与图片提取功能，覆盖 Word、Excel、PPT、PDF、图片、音频、文本等常见格式。所有处理通过 WebAssembly 与浏览器原生 API 在用户设备本地完成，文件不会上传至任何服务器，因此相比 Smallpdf / iLovePDF / Adobe Acrobat Online 等云端工具具有更高的隐私安全、更快的处理速度（本地比云端快 5-10 倍）和零使用门槛（永久免费、无需注册、无文件大小限制）。原生支持<strong>中文、英文、阿拉伯文</strong>三语界面，阿拉伯文自动切换为从右到左布局。</p>
+    <div class="authority-meta" data-meta-zh="最后更新：2026-04-24 · 无追踪 · 无账号" data-meta-en="Last updated: 2026-04-24 · No tracking · No account" data-meta-ar="آخر تحديث: 2026-04-24 · بدون تتبع · بدون حساب">最后更新：2026-04-24 · 无追踪 · 无账号</div>
   </div>
 </section>
 
@@ -730,6 +766,12 @@ footer {
         <span class="tool-desc" data-i18n="tool.imgcomp.desc">JPG/PNG/WebP 批量压缩，可调质量</span>
         <span class="tool-badge" data-i18n="badge.live">可用</span>
       </a>
+      <a href="extract-images.html" class="tool-card active">
+        <span class="tool-icon">🖼️</span>
+        <span class="tool-name" data-i18n="tool.extract.name">文件图片提取</span>
+        <span class="tool-desc" data-i18n="tool.extract.desc">从 Word/Excel/PPT/PDF 一键导出图片</span>
+        <span class="tool-badge" data-i18n="badge.live">可用</span>
+      </a>
     </div>
   </div>
 </section>
@@ -816,7 +858,7 @@ footer {
       </div>
       <div class="faq-item">
         <h3 class="faq-q" data-i18n="faq3.q">hebing.org 支持哪些文件格式？</h3>
-        <p class="faq-a" data-i18n="faq3.a">支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，合计 11 个工具。</p>
+        <p class="faq-a" data-i18n="faq3.a">支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，再加上文件图片提取，合计 12 个工具。</p>
       </div>
       <div class="faq-item">
         <h3 class="faq-q" data-i18n="faq4.q">合并文件大小有限制吗？</h3>
@@ -862,7 +904,7 @@ const i18n = {
   zh: {
     'hero.eyebrow': '免费 · 无需注册 · 文件不上传',
     'hero.h1': '免费在线<em>文件合并</em>工具<br>Word、PDF、Excel、图片、音频一站搞定',
-    'hero.sub': 'hebing.org 提供 11 款在线文件合并与转换工具，所有文件处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。',
+    'hero.sub': 'hebing.org 提供 12 款在线文件合并与提取工具，所有文件处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。',
     'hero.stat1': '在线工具', 'hero.stat2': '文件上传', 'hero.stat3': '每日次数', 'hero.stat4': '语言支持',
     'cases.title': '典型使用场景',
     'cases.intro': 'hebing.org 适用于任何需要处理文件但关注隐私、效率和成本的场景。以下是用户最常见的使用需求：',
@@ -873,7 +915,7 @@ const i18n = {
     'faq.title': '常见问题',
     'faq1.q': 'hebing.org 是免费的吗？', 'faq1.a': '是的，hebing.org 所有工具永久免费使用，没有隐藏收费，不需要注册账号，也没有每日使用次数限制。',
     'faq2.q': '我的文件会被上传到服务器吗？', 'faq2.a': '不会。hebing.org 所有文件处理都在你的浏览器内本地完成，使用 WebAssembly 和浏览器原生 API，文件从不离开你的设备，我们也无法看到你的文件内容。',
-    'faq3.q': 'hebing.org 支持哪些文件格式？', 'faq3.a': '支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，合计 11 个工具。',
+    'faq3.q': 'hebing.org 支持哪些文件格式？', 'faq3.a': '支持 Word (.docx)、PDF、Excel (.xlsx)、图片 (JPG/PNG/WebP)、TXT、CSV、PPT (.pptx)、音频 (MP3) 共 8 种合并场景，以及 Word 转 PDF、PDF 拆分、图片压缩 3 种转换工具，再加上文件图片提取，合计 12 个工具。',
     'faq4.q': '合并文件大小有限制吗？', 'faq4.a': '没有强制上限。由于是浏览器本地处理，实际限制取决于你设备的可用内存。建议单次合并不超过 500MB 或 30 个文件，以获得最佳体验。',
     'faq5.q': 'hebing.org 和 Smallpdf、iLovePDF 有什么区别？', 'faq5.a': '主要区别：(1) hebing.org 不上传文件到服务器，Smallpdf / iLovePDF 需要上传；(2) hebing.org 完全免费无次数限制，它们的免费版通常每天限制 2 次；(3) hebing.org 提供原生中文和阿拉伯文界面，而非机器翻译；(4) hebing.org 无需注册账号。',
     'faq6.q': '支持手机使用吗？', 'faq6.a': '支持。hebing.org 是响应式网页，在手机、平板、电脑的浏览器中都可正常使用，无需下载任何 App。',
@@ -882,7 +924,7 @@ const i18n = {
     'guide.step1': '选择工具',
     'guide.step2': '上传文件',
     'guide.step3': '点击合并，立即下载',
-    'tools.title': '全部工具','tool.w2pdf.name':'Word 转 PDF','tool.w2pdf.desc':'.docx 文件转换为 PDF 格式','tool.pdfsplit.name':'PDF 拆分','tool.pdfsplit.desc':'按页码提取或每页拆分为独立文件','tool.imgcomp.name':'图片压缩','tool.imgcomp.desc':'JPG/PNG/WebP 批量压缩，可调质量',
+    'tools.title': '全部工具','tool.w2pdf.name':'Word 转 PDF','tool.w2pdf.desc':'.docx 文件转换为 PDF 格式','tool.pdfsplit.name':'PDF 拆分','tool.pdfsplit.desc':'按页码提取或每页拆分为独立文件','tool.imgcomp.name':'图片压缩','tool.imgcomp.desc':'JPG/PNG/WebP 批量压缩，可调质量','tool.extract.name':'文件图片提取','tool.extract.desc':'从 Word/Excel/PPT/PDF 一键导出图片',
     'tool.word.name': 'Word 合并', 'tool.word.desc': '多个 .docx 文件合并为一个',
     'tool.pdf.name':  'PDF 合并',  'tool.pdf.desc':  '多个 PDF 合并为一个文件',
     'tool.excel.name':'Excel 合并','tool.excel.desc':'多个 .xlsx 工作表合并',
@@ -902,7 +944,7 @@ const i18n = {
   en: {
     'hero.eyebrow': 'Free · No sign-up · Files stay on your device',
     'hero.h1': 'Free Online <em>File Merger</em><br>Word, PDF, Excel, Images, Audio — all in one place',
-    'hero.sub': 'hebing.org provides 11 online file merging and conversion tools. All files are processed locally in your browser — they never get uploaded to any server. Completely free, no registration, no file size limit, trilingual (Chinese/English/Arabic) interface.',
+    'hero.sub': 'hebing.org provides 12 online file merging and extraction tools. All files are processed locally in your browser — they never get uploaded to any server. Completely free, no registration, no file size limit, trilingual (Chinese/English/Arabic) interface.',
     'hero.stat1': 'Tools', 'hero.stat2': 'Uploads', 'hero.stat3': 'Daily limit', 'hero.stat4': 'Languages',
     'cases.title': 'Use Cases',
     'cases.intro': 'hebing.org fits any scenario where you handle files but care about privacy, speed and cost. Here are the most common use cases:',
@@ -913,7 +955,7 @@ const i18n = {
     'faq.title': 'FAQ',
     'faq1.q': 'Is hebing.org really free?', 'faq1.a': 'Yes. All tools on hebing.org are free forever, no hidden costs, no registration required, no daily usage limits.',
     'faq2.q': 'Will my files be uploaded to a server?', 'faq2.a': 'No. All file processing happens locally in your browser using WebAssembly and native browser APIs. Files never leave your device — we can\'t see your content either.',
-    'faq3.q': 'Which file formats are supported?', 'faq3.a': 'Word (.docx), PDF, Excel (.xlsx), images (JPG/PNG/WebP), TXT, CSV, PPT (.pptx), audio (MP3) — 8 merge tools, plus Word-to-PDF, PDF split and image compress — 11 tools total.',
+    'faq3.q': 'Which file formats are supported?', 'faq3.a': 'Word (.docx), PDF, Excel (.xlsx), images (JPG/PNG/WebP), TXT, CSV, PPT (.pptx), audio (MP3) — 8 merge tools, plus Word-to-PDF, PDF split, image compress, and extract-images — 12 tools total.',
     'faq4.q': 'Is there a file size limit?', 'faq4.a': 'No hard cap. Since processing is local, the real limit is your device\'s available memory. We recommend under 500MB or 30 files per batch for best performance.',
     'faq5.q': 'How does hebing.org compare to Smallpdf or iLovePDF?', 'faq5.a': 'Key differences: (1) hebing.org never uploads files, Smallpdf / iLovePDF require uploads; (2) hebing.org is fully free without limits, while their free tiers cap at 2 uses/day; (3) hebing.org has native Chinese and Arabic interfaces, not machine translations; (4) hebing.org requires no account.',
     'faq6.q': 'Does it work on mobile?', 'faq6.a': 'Yes. hebing.org is fully responsive — works on phones, tablets, and desktops. No App download needed.',
@@ -922,7 +964,7 @@ const i18n = {
     'guide.step1': 'Choose a tool',
     'guide.step2': 'Upload files',
     'guide.step3': 'Click merge & download instantly',
-    'tools.title': 'All Tools','tool.w2pdf.name':'Word to PDF','tool.w2pdf.desc':'Convert .docx to PDF format','tool.pdfsplit.name':'PDF Split','tool.pdfsplit.desc':'Extract pages or split each page','tool.imgcomp.name':'Image Compress','tool.imgcomp.desc':'Compress JPG/PNG/WebP images',
+    'tools.title': 'All Tools','tool.w2pdf.name':'Word to PDF','tool.w2pdf.desc':'Convert .docx to PDF format','tool.pdfsplit.name':'PDF Split','tool.pdfsplit.desc':'Extract pages or split each page','tool.imgcomp.name':'Image Compress','tool.imgcomp.desc':'Compress JPG/PNG/WebP images','tool.extract.name':'Extract Images','tool.extract.desc':'Export images from Word/Excel/PPT/PDF',
     'tool.word.name': 'Word Merge',  'tool.word.desc': 'Combine multiple .docx files into one',
     'tool.pdf.name':  'PDF Merge',   'tool.pdf.desc':  'Combine multiple PDFs into one file',
     'tool.excel.name':'Excel Merge', 'tool.excel.desc':'Merge multiple .xlsx spreadsheets',
@@ -942,7 +984,7 @@ const i18n = {
   ar: {
     'hero.eyebrow': 'مجاني · بدون تسجيل · ملفاتك تبقى معك',
     'hero.h1': 'أداة <em>دمج الملفات</em> المجانية عبر الإنترنت<br>Word وPDF وExcel والصور والصوت في مكان واحد',
-    'hero.sub': 'يوفر hebing.org ١١ أداة لدمج وتحويل الملفات عبر الإنترنت. تتم معالجة جميع الملفات محلياً في متصفحك — لا يتم رفعها إلى أي خادم أبداً. مجاني بالكامل، بدون تسجيل، بدون حد لحجم الملف، واجهة ثلاثية اللغات (الصينية/الإنجليزية/العربية).',
+    'hero.sub': 'يوفر hebing.org ١٢ أداة لدمج واستخراج الملفات عبر الإنترنت. تتم معالجة جميع الملفات محلياً في متصفحك — لا يتم رفعها إلى أي خادم أبداً. مجاني بالكامل، بدون تسجيل، بدون حد لحجم الملف، واجهة ثلاثية اللغات (الصينية/الإنجليزية/العربية).',
     'hero.stat1': 'أدوات', 'hero.stat2': 'رفع', 'hero.stat3': 'حد يومي', 'hero.stat4': 'لغات',
     'cases.title': 'حالات الاستخدام',
     'cases.intro': 'يناسب hebing.org أي حالة تتعامل فيها مع الملفات لكنك تهتم بالخصوصية والسرعة والتكلفة. إليك أكثر الحالات شيوعاً:',
@@ -953,7 +995,7 @@ const i18n = {
     'faq.title': 'الأسئلة الشائعة',
     'faq1.q': 'هل hebing.org مجاني فعلاً؟', 'faq1.a': 'نعم. جميع الأدوات على hebing.org مجانية للأبد، بدون رسوم مخفية، بدون تسجيل، بدون حدود استخدام يومية.',
     'faq2.q': 'هل سيتم رفع ملفاتي إلى خادم؟', 'faq2.a': 'لا. تتم معالجة جميع الملفات محلياً في متصفحك باستخدام WebAssembly وواجهات المتصفح الأصلية. ملفاتك لا تغادر جهازك أبداً — ونحن أيضاً لا نستطيع رؤية محتواها.',
-    'faq3.q': 'ما تنسيقات الملفات المدعومة؟', 'faq3.a': 'Word (.docx)، PDF، Excel (.xlsx)، الصور (JPG/PNG/WebP)، TXT، CSV، PPT (.pptx)، الصوت (MP3) — ٨ أدوات دمج، بالإضافة إلى Word إلى PDF وتقسيم PDF وضغط الصور — ١١ أداة إجمالاً.',
+    'faq3.q': 'ما تنسيقات الملفات المدعومة؟', 'faq3.a': 'Word (.docx)، PDF، Excel (.xlsx)، الصور (JPG/PNG/WebP)، TXT، CSV، PPT (.pptx)، الصوت (MP3) — ٨ أدوات دمج، بالإضافة إلى Word إلى PDF وتقسيم PDF وضغط الصور واستخراج الصور — ١٢ أداة إجمالاً.',
     'faq4.q': 'هل هناك حد لحجم الملف؟', 'faq4.a': 'لا يوجد حد صارم. بما أن المعالجة محلية، فإن الحد الفعلي هو ذاكرة جهازك المتاحة. نوصي بأقل من ٥٠٠ ميغابايت أو ٣٠ ملفاً لكل دفعة لأفضل أداء.',
     'faq5.q': 'كيف يختلف hebing.org عن Smallpdf أو iLovePDF؟', 'faq5.a': 'الفروق الرئيسية: (١) hebing.org لا يرفع الملفات أبداً، بينما Smallpdf / iLovePDF يحتاجان للرفع؛ (٢) hebing.org مجاني بالكامل بدون حدود، بينما يحدد إصداراهما المجانيان بـ ٢ استخدامات/يوم؛ (٣) hebing.org يوفر واجهة عربية وصينية أصلية وليس ترجمة آلية؛ (٤) hebing.org لا يحتاج حساباً.',
     'faq6.q': 'هل يعمل على الجوال؟', 'faq6.a': 'نعم. hebing.org متجاوب تماماً — يعمل على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر. لا حاجة لتنزيل أي تطبيق.',
@@ -962,7 +1004,7 @@ const i18n = {
     'guide.step1': 'اختر أداة',
     'guide.step2': 'رفع الملفات',
     'guide.step3': 'انقر دمج وتنزيل فوراً',
-    'tools.title': 'جميع الأدوات','tool.w2pdf.name':'Word إلى PDF','tool.w2pdf.desc':'تحويل .docx إلى صيغة PDF','tool.pdfsplit.name':'تقسيم PDF','tool.pdfsplit.desc':'استخراج صفحات أو تقسيم كل صفحة','tool.imgcomp.name':'ضغط الصور','tool.imgcomp.desc':'ضغط صور JPG/PNG/WebP',
+    'tools.title': 'جميع الأدوات','tool.w2pdf.name':'Word إلى PDF','tool.w2pdf.desc':'تحويل .docx إلى صيغة PDF','tool.pdfsplit.name':'تقسيم PDF','tool.pdfsplit.desc':'استخراج صفحات أو تقسيم كل صفحة','tool.imgcomp.name':'ضغط الصور','tool.imgcomp.desc':'ضغط صور JPG/PNG/WebP','tool.extract.name':'استخراج الصور','tool.extract.desc':'تصدير الصور من Word/Excel/PPT/PDF',
     'tool.word.name': 'دمج Word',   'tool.word.desc': 'دمج ملفات .docx متعددة في ملف واحد',
     'tool.pdf.name':  'دمج PDF',    'tool.pdf.desc':  'دمج ملفات PDF متعددة في ملف واحد',
     'tool.excel.name':'دمج Excel',  'tool.excel.desc':'دمج جداول .xlsx متعددة',
@@ -1001,6 +1043,20 @@ function setLang(lang) {
   // تحديث أزرار اللغة
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang)
+  })
+
+  // data-auth-* / data-meta-* attributes for authority statement
+  document.querySelectorAll('[data-auth-zh]').forEach(el => {
+    const v = lang === 'en' ? (el.dataset.authEn || el.dataset.authZh)
+            : lang === 'ar' ? (el.dataset.authAr || el.dataset.authZh)
+            : el.dataset.authZh
+    el.innerHTML = v
+  })
+  document.querySelectorAll('[data-meta-zh]').forEach(el => {
+    const v = lang === 'en' ? (el.dataset.metaEn || el.dataset.metaZh)
+            : lang === 'ar' ? (el.dataset.metaAr || el.dataset.metaZh)
+            : el.dataset.metaZh
+    el.textContent = v
   })
 
   // تحديث meta
