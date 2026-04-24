@@ -318,6 +318,86 @@ nav {
   padding: 4px 20px 4px 0;
 }
 
+/* ── FEATURED LAUNCH BANNER (new tool highlight) ── */
+.featured-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  margin: 8px 0 32px;
+  background: linear-gradient(135deg, var(--accent-light) 0%, rgba(212,68,10,0.02) 100%);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s, box-shadow 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.featured-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212,68,10,0.15);
+}
+.featured-banner::before {
+  content: 'NEW';
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: var(--white);
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--accent);
+}
+.featured-icon {
+  font-size: 40px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.featured-body {
+  flex: 1;
+  min-width: 0;
+}
+.featured-eyebrow {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.featured-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+.featured-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+.featured-arrow {
+  font-size: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.18s;
+}
+.featured-banner:hover .featured-arrow { transform: translateX(4px); }
+[dir="rtl"] .featured-banner::before { right: auto; left: 10px; }
+[dir="rtl"] .featured-arrow { transform: scaleX(-1); }
+[dir="rtl"] .featured-banner:hover .featured-arrow { transform: scaleX(-1) translateX(4px); }
+@media (max-width: 560px) {
+  .featured-banner { flex-wrap: wrap; padding: 16px 18px; }
+  .featured-icon { font-size: 32px; }
+}
+
 /* ── TOOLS GRID ── */
 .tools-section { padding: 40px 0 72px; }
 .section-header {
@@ -693,6 +773,18 @@ footer {
       <span class="guide-step">③</span>
       <span class="guide-text" data-i18n="guide.step3">点击合并，立即下载</span>
     </div>
+
+    <!-- ── 新功能置顶横幅（让用户一眼看到） ── -->
+    <a href="extract-images.html" class="featured-banner">
+      <span class="featured-icon">🖼️</span>
+      <div class="featured-body">
+        <div class="featured-eyebrow" data-feat-zh="最新上线 · 2026-04" data-feat-en="Just launched · 2026-04" data-feat-ar="أُطلق للتو · 2026-04">最新上线 · 2026-04</div>
+        <div class="featured-title" data-feat-title-zh="文件图片提取：从 Word / Excel / PPT / PDF 一键导出所有图片" data-feat-title-en="Extract Images: pull every embedded image from Word / Excel / PPT / PDF" data-feat-title-ar="استخراج الصور: استخرج كل صورة من Word / Excel / PPT / PDF">文件图片提取：从 Word / Excel / PPT / PDF 一键导出所有图片</div>
+        <div class="featured-desc" data-feat-desc-zh="支持 17 种格式，JPEG 零损失直通，加密 PDF 可输入密码 · 文件不上传服务器" data-feat-desc-en="17 formats supported. JPEG extracted byte-identical. Encrypted PDF password input · Files never uploaded" data-feat-desc-ar="17 تنسيقاً مدعوماً. JPEG مستخرج بالبايت. إدخال كلمة مرور PDF · لا يتم رفع الملفات">支持 17 种格式，JPEG 零损失直通，加密 PDF 可输入密码 · 文件不上传服务器</div>
+      </div>
+      <span class="featured-arrow" aria-hidden="true">→</span>
+    </a>
+
     <div class="section-header">
       <span class="section-title" data-i18n="tools.title">全部工具</span>
       <div class="section-line"></div>
@@ -1058,6 +1150,16 @@ function setLang(lang) {
             : el.dataset.metaZh
     el.textContent = v
   })
+  // featured banner (new-tool highlight)
+  const featPick = (el, base) => {
+    const zh = el.dataset[base + 'Zh']
+    const en = el.dataset[base + 'En']
+    const ar = el.dataset[base + 'Ar']
+    return lang === 'en' ? (en || zh) : lang === 'ar' ? (ar || zh) : zh
+  }
+  document.querySelectorAll('[data-feat-zh]').forEach(el => { el.textContent = featPick(el, 'feat') })
+  document.querySelectorAll('[data-feat-title-zh]').forEach(el => { el.textContent = featPick(el, 'featTitle') })
+  document.querySelectorAll('[data-feat-desc-zh]').forEach(el => { el.textContent = featPick(el, 'featDesc') })
 
   // تحديث meta
   const metaDescs = { zh: '免费在线合并文件，支持Word、PDF、Excel等多种格式。', en: 'Free online file merger. Merge Word, PDF, Excel and more formats.', ar: 'دمج الملفات مجاناً عبر الإنترنت. يدعم Word وPDF وExcel والمزيد.' }
