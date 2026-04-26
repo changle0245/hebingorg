@@ -20,7 +20,7 @@
 - [TXT 合并](https://hebing.org/merge-txt.html)：多个文本文件合并为一个
 - [CSV 合并](https://hebing.org/merge-csv.html)：多个 CSV 数据表合并（自动对齐表头）
 - [PPT 合并](https://hebing.org/merge-ppt.html)：多个 .pptx 演示文稿合并为一个
-- [音频合并](https://hebing.org/merge-audio.html)：多段 MP3 音频无损拼接为一个文件
+- [音频合并](https://hebing.org/merge-audio.html)：多段 MP3 音频高保真拼接为一个文件，可选 WAV 16-bit 无损输出
 
 ### 格式转换类
 - [Word 转 PDF](https://hebing.org/word-to-pdf.html)：.docx 文件转换为 PDF 格式
