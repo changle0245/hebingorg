@@ -4,3 +4,5 @@ Thumbs.db
 *.bak
 .vscode/
 .idea/
+.claude/
+_next-steps-snippet.html

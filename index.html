@@ -11,7 +11,7 @@
 <meta name="author" content="hebing.org">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <meta name="googlebot" content="index,follow">
-<meta name="theme-color" content="#d4440a">
+<meta name="theme-color" content="#0a0a0f">
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="content-language" content="zh-CN">
 <link rel="canonical" href="https://hebing.org/">
@@ -212,19 +212,23 @@
 
 <style>
 :root {
-  --black: #0a0a0a;
-  --white: #fafaf8;
-  --gray-100: #f0efed;
-  --gray-200: #e0dedd;
-  --gray-400: #a09e9b;
-  --gray-600: #6b6966;
-  --accent: #d4440a;
-  --accent-light: #fff0eb;
+  --black: #e8e6e3;
+  --white: #0a0a0f;
+  --gray-100: #12121a;
+  --gray-200: #1e1e2a;
+  --gray-400: #6b6b80;
+  --gray-600: #9b9bb0;
+  --accent: #6c5ce7;
+  --accent2: #00cec9;
+  --accent-warm: #e84d1a;
+  --accent-light: rgba(108,92,231,0.1);
+  --glow-purple: rgba(108,92,231,0.35);
+  --glow-cyan: rgba(0,206,201,0.25);
   --font-mono: 'DM Mono', monospace;
   --font-sans: 'Noto Sans SC', sans-serif;
   --font-ar: 'Noto Sans Arabic', sans-serif;
-  --radius: 4px;
-  --radius-lg: 8px;
+  --radius: 8px;
+  --radius-lg: 16px;
 }
 
 [lang="ar"] { font-family: var(--font-ar); }
@@ -240,6 +244,10 @@ body {
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(108,92,231,0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0,206,201,0.08), transparent);
+  min-height: 100vh;
 }
 
 /* ── LAYOUT ── */
@@ -247,10 +255,10 @@ body {
 
 /* ── NAV ── */
 nav {
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   position: sticky; top: 0;
-  background: rgba(250,250,248,0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px) saturate(1.5);
   z-index: 100;
 }
 .nav-inner {
@@ -264,11 +272,17 @@ nav {
   text-decoration: none;
   letter-spacing: -0.5px;
 }
-.nav-logo span { color: var(--accent); }
+.nav-logo span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .lang-switcher {
   display: flex; gap: 4px;
-  background: var(--gray-100);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: var(--radius);
   padding: 3px;
 }
@@ -277,21 +291,22 @@ nav {
   font-size: 11px; font-weight: 500;
   padding: 4px 10px;
   border: none; background: transparent;
-  color: var(--gray-600); cursor: pointer;
-  border-radius: var(--radius);
-  transition: all 0.15s;
+  color: var(--gray-400); cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .lang-btn.active {
-  background: var(--black);
-  color: var(--white);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 2px 12px var(--glow-purple);
 }
 
 /* ── AD BANNER TOP ── */
 .ad-top {
   background: var(--gray-100);
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   padding: 8px 0;
   text-align: center;
   min-height: 60px;
@@ -300,7 +315,7 @@ nav {
 .ad-placeholder {
   font-family: var(--font-mono);
   font-size: 11px; color: var(--gray-400);
-  border: 1px dashed var(--gray-200);
+  border: 1px dashed rgba(255,255,255,0.1);
   padding: 8px 32px; border-radius: var(--radius);
 }
 
@@ -308,7 +323,8 @@ nav {
 .page-guide {
   display: flex; align-items: center; gap: 10px;
   padding: 14px 20px;
-  background: var(--gray-100);
+  background: rgba(108,92,231,0.08);
+  border: 1px solid rgba(108,92,231,0.15);
   border-radius: var(--radius-lg);
   margin-bottom: 32px;
   flex-wrap: wrap;
@@ -316,7 +332,7 @@ nav {
 .guide-step {
   font-family: var(--font-mono);
   font-size: 13px; font-weight: 500;
-  color: var(--accent);
+  color: var(--accent2);
 }
 .guide-text {
   font-size: 13px; color: var(--gray-600);
@@ -337,9 +353,10 @@ nav {
   line-height: 1.75;
   color: var(--gray-600);
   max-width: 820px;
-  border-left: 3px solid var(--accent);
-  padding: 4px 0 4px 20px;
-  background: transparent;
+  border-left: 2px solid var(--accent);
+  padding: 12px 0 12px 20px;
+  background: rgba(108,92,231,0.05);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 .authority-statement strong { color: var(--black); font-weight: 600; }
 .authority-meta {
@@ -352,8 +369,9 @@ nav {
 }
 [dir="rtl"] .authority-statement {
   border-left: none;
-  border-right: 3px solid var(--accent);
-  padding: 4px 20px 4px 0;
+  border-right: 2px solid var(--accent);
+  padding: 12px 20px 12px 0;
+  border-radius: var(--radius) 0 0 var(--radius);
 }
 
 /* ── FEATURED LAUNCH BANNER (new tool highlight) ── */
@@ -363,18 +381,19 @@ nav {
   gap: 20px;
   padding: 20px 24px;
   margin: 8px 0 32px;
-  background: linear-gradient(135deg, var(--accent-light) 0%, rgba(212,68,10,0.02) 100%);
-  border: 1.5px solid var(--accent);
+  background: linear-gradient(135deg, rgba(108,92,231,0.1) 0%, rgba(0,206,201,0.05) 100%);
+  border: 1px solid rgba(108,92,231,0.25);
   border-radius: var(--radius-lg);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.18s, box-shadow 0.18s;
+  transition: transform 0.25s, box-shadow 0.25s;
   position: relative;
   overflow: hidden;
 }
 .featured-banner:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212,68,10,0.15);
+  box-shadow: 0 8px 32px var(--glow-purple);
+  border-color: rgba(108,92,231,0.5);
 }
 .featured-banner::before {
   content: 'NEW';
@@ -385,11 +404,11 @@ nav {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: var(--accent);
-  background: var(--white);
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
   padding: 2px 8px;
   border-radius: 99px;
-  border: 1px solid var(--accent);
+  border: none;
 }
 .featured-icon {
   font-size: 40px;
@@ -405,7 +424,7 @@ nav {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--accent);
+  color: var(--accent2);
   font-weight: 600;
   margin-bottom: 4px;
 }
@@ -423,9 +442,9 @@ nav {
 }
 .featured-arrow {
   font-size: 20px;
-  color: var(--accent);
+  color: var(--accent2);
   flex-shrink: 0;
-  transition: transform 0.18s;
+  transition: transform 0.25s;
 }
 .featured-banner:hover .featured-arrow { transform: translateX(4px); }
 [dir="rtl"] .featured-banner::before { right: auto; left: 10px; }
@@ -437,7 +456,7 @@ nav {
 }
 
 /* ── TOOLS GRID ── */
-.tools-section { padding: 40px 0 72px; }
+.tools-section { padding: 24px 0 72px; }
 .section-header {
   display: flex; align-items: baseline; gap: 16px;
   margin-bottom: 40px;
@@ -451,63 +470,89 @@ nav {
 }
 .section-line {
   flex: 1; height: 1px;
-  background: var(--gray-200);
+  background: linear-gradient(90deg, var(--gray-200), transparent);
 }
 
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2px;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  gap: 12px;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .tool-card {
-  background: var(--white);
-  padding: 28px 24px;
+  background: rgba(255,255,255,0.03);
+  padding: 24px 20px;
   text-decoration: none;
   color: inherit;
   display: flex; flex-direction: column; gap: 10px;
-  border-right: 1px solid var(--gray-200);
-  border-bottom: 1px solid var(--gray-200);
-  transition: background 0.15s;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border-right: none;
+  border-bottom: none;
 }
-.tool-card:hover { background: var(--gray-100); }
-.tool-card.active { background: var(--black); }
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,206,201,0.05));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tool-card:hover {
+  border-color: rgba(108,92,231,0.3);
+  box-shadow: 0 4px 24px var(--glow-purple), 0 0 0 1px rgba(108,92,231,0.15);
+  transform: translateY(-2px);
+}
+.tool-card:hover::before { opacity: 1; }
+.tool-card.active {
+  background: rgba(108,92,231,0.08);
+  border-color: rgba(108,92,231,0.2);
+}
 .tool-card.active .tool-icon,
-.tool-card.active .tool-name,
-.tool-card.active .tool-desc { color: var(--white); }
-.tool-card.active .tool-badge { background: var(--accent); color: var(--white); }
+.tool-card.active .tool-name { color: var(--black); }
+.tool-card.active .tool-desc { color: var(--gray-600); }
+.tool-card.active .tool-badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+}
 
 .tool-card.coming-soon {
-  opacity: 0.45; cursor: default; pointer-events: none;
+  opacity: 0.35; cursor: default; pointer-events: none;
 }
 
 .tool-icon {
   font-size: 28px; line-height: 1;
+  position: relative; z-index: 1;
 }
 .tool-name {
   font-size: 15px; font-weight: 500; color: var(--black);
+  position: relative; z-index: 1;
 }
 .tool-desc {
   font-size: 12px; color: var(--gray-400); line-height: 1.5;
+  position: relative; z-index: 1;
 }
 .tool-badge {
   display: inline-block;
+  position: relative; z-index: 1;
   font-family: var(--font-mono);
   font-size: 10px; font-weight: 500;
   text-transform: uppercase; letter-spacing: 0.5px;
   padding: 2px 7px;
   border-radius: 2px;
-  background: var(--accent-light);
-  color: var(--accent);
+  background: rgba(0,206,201,0.1);
+  color: var(--accent2);
   width: fit-content;
 }
 .tool-badge.soon {
-  background: var(--gray-100);
+  background: rgba(255,255,255,0.05);
   color: var(--gray-400);
 }
 
@@ -522,19 +567,34 @@ nav {
 /* ── WHY SECTION ── */
 .why-section {
   padding: 72px 0;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 .why-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 48px 32px;
+  gap: 32px;
   margin-top: 40px;
 }
-.why-item {}
+.why-item {
+  padding: 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.why-item:hover {
+  border-color: rgba(0,206,201,0.25);
+  box-shadow: 0 4px 20px var(--glow-cyan);
+}
 .why-num {
   font-family: var(--font-mono);
-  font-size: 11px; color: var(--accent);
+  font-size: 11px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 12px;
+  font-weight: 700;
 }
 .why-title {
   font-size: 15px; font-weight: 500;
@@ -546,7 +606,7 @@ nav {
 
 /* ── FOOTER ── */
 footer {
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid rgba(255,255,255,0.06);
   padding: 40px 0;
 }
 .footer-inner {
@@ -558,16 +618,21 @@ footer {
   font-size: 16px; color: var(--black);
   text-decoration: none;
 }
-.footer-logo span { color: var(--accent); }
+.footer-logo span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .footer-links {
   display: flex; gap: 24px;
 }
 .footer-links a {
   font-size: 13px; color: var(--gray-400);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--black); }
+.footer-links a:hover { color: var(--accent2); }
 .footer-copy {
   font-size: 12px; color: var(--gray-400);
   font-family: var(--font-mono);
@@ -588,42 +653,181 @@ footer {
 .tools-grid { animation: fadeUp 0.3s 0.08s ease both; }
 
 /* ── HERO ── */
+/* ── COMPACT HERO ── */
 .hero {
-  padding: 72px 0 56px;
-  border-bottom: 1px solid var(--gray-200);
+  padding: 32px 0 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.hero-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.hero-text { flex: 1 1 380px; min-width: 0; }
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray-600);
+  margin-top: 8px;
+  letter-spacing: 0.3px;
+}
+.hero-tag b {
+  color: var(--accent2);
+  font-weight: 600;
+}
+.hero-search-wrap {
+  flex: 0 1 380px;
+  position: relative;
+}
+.hero-search {
+  width: 100%;
+  padding: 14px 18px 14px 44px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--black);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s;
+}
+.hero-search::placeholder { color: var(--gray-400); }
+.hero-search:focus {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,92,231,0.18);
+}
+.hero-search-wrap::before {
+  content: '⌕';
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+[dir="rtl"] .hero-search { padding: 14px 44px 14px 18px; }
+[dir="rtl"] .hero-search-wrap::before { left: auto; right: 16px; }
+@media (max-width: 720px) {
+  .hero-row { gap: 16px; }
+  .hero-search-wrap { flex: 1 1 100%; }
+}
+
+/* ── TOOL CATEGORIES ── */
+.tool-category { margin-bottom: 36px; }
+.tool-category:last-child { margin-bottom: 0; }
+.cat-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.cat-icon {
+  font-size: 18px;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(108,92,231,0.18), rgba(0,206,201,0.12));
+  border-radius: 8px;
+  border: 1px solid rgba(108,92,231,0.25);
+}
+.cat-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.2px;
+}
+.cat-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+[dir="rtl"] .cat-count { margin-left: 0; margin-right: auto; }
+.search-empty {
+  display: none;
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--gray-400);
+  font-size: 13px;
+}
+.search-empty.show { display: block; }
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--glow-purple), transparent 70%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--glow-cyan), transparent 70%);
+  animation: heroGlow 10s 2s ease-in-out infinite alternate-reverse;
+  pointer-events: none;
+}
+@keyframes heroGlow {
+  from { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  to   { transform: translate(30px, -20px) scale(1.15); opacity: 0.8; }
 }
 .hero-eyebrow {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--accent);
+  color: var(--accent2);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
 }
 .hero-h1 {
-  font-size: clamp(30px, 4.5vw, 48px);
+  font-size: clamp(24px, 3.4vw, 36px);
   font-weight: 700;
-  letter-spacing: -1.5px;
-  line-height: 1.25;
-  margin-bottom: 22px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 14px;
   max-width: 820px;
+  position: relative;
+  z-index: 1;
 }
-.hero-h1 em { font-style: normal; color: var(--accent); }
+.hero-h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .hero-sub {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--gray-600);
   max-width: 680px;
-  line-height: 1.7;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
 }
 .hero-stats {
-  display: flex; gap: 44px;
-  margin-top: 34px;
+  display: flex; gap: 36px;
+  margin-top: 18px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 .hero-stat-num {
   font-family: var(--font-mono);
-  font-size: 22px; font-weight: 500;
-  color: var(--black);
+  font-size: 22px; font-weight: 600;
+  background: linear-gradient(135deg, #fff, var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .hero-stat-label {
   font-size: 12px; color: var(--gray-400);
@@ -631,7 +835,7 @@ footer {
 }
 
 /* ── CONTENT / USE-CASES ── */
-.content-section { padding: 64px 0; border-top: 1px solid var(--gray-200); }
+.content-section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
 .content-h2 {
   font-size: 22px; font-weight: 600;
   letter-spacing: -0.5px;
@@ -646,14 +850,19 @@ footer {
 .usecase-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  gap: 16px;
   margin-top: 28px;
 }
 .usecase-card {
   padding: 20px;
-  background: var(--gray-100);
+  background: rgba(255,255,255,0.03);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gray-200);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.usecase-card:hover {
+  border-color: rgba(108,92,231,0.25);
+  box-shadow: 0 2px 16px var(--glow-purple);
 }
 .usecase-title {
   font-size: 14px; font-weight: 500;
@@ -665,11 +874,11 @@ footer {
 }
 
 /* ── FAQ ── */
-.faq-section { padding: 72px 0; border-top: 1px solid var(--gray-200); }
+.faq-section { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.06); }
 .faq-list { max-width: 760px; margin: 28px 0 0; }
 .faq-item {
   padding: 22px 0;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .faq-q {
   font-size: 15px; font-weight: 500;
@@ -684,49 +893,20 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .hero { padding: 48px 0 40px; }
+  .hero::before, .hero::after { display: none; }
   .hero-stats { gap: 24px; }
-  .tools-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .tool-card { padding: 20px 16px; }
+  .tools-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tool-card { padding: 16px 14px; }
   .tool-name { font-size: 14px; line-height: 1.3; }
   .tool-desc { font-size: 11.5px; line-height: 1.45; }
   .featured-title { font-size: 15px; line-height: 1.35; }
   .featured-desc { font-size: 12px; line-height: 1.5; }
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
+  .why-item { padding: 18px; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --black: #f0efed;
-    --white: #111110;
-    --gray-100: #1e1e1c;
-    --gray-200: #2a2a28;
-    --gray-400: #8a8884;
-    --gray-600: #a09e9b;
-    --accent: #e85d2a;
-    --accent-light: #2a1a10;
-    --success: #4ade80;
-    --success-bg: #052e16;
-  }
-  nav { background: rgba(17,17,16,0.95); }
-  .drop-zone { background: var(--gray-100); }
-  .mode-tab.active { background: var(--gray-200); box-shadow: none; }
-  .subscribe-input { background: var(--gray-100); }
-  .quality-slider { background: var(--gray-200); }
-  .scene-card, .faq-item, .value-card, .contact-box, .options-box, .quality-box { background: var(--gray-100); border-color: var(--gray-200); }
-  .tool-card { background: var(--white); }
-  .tool-card:hover { background: var(--gray-100); }
-  .tool-card.active { background: var(--gray-100); }
-  .tool-card.active .tool-name,
-  .tool-card.active .tool-desc { color: var(--black); }
-  .related-card { background: var(--gray-100); border-color: var(--gray-200); }
-  .related-card:hover { background: var(--gray-200); color: var(--black); }
-  .summary-box { border-color: #14532d; }
-  .status-err { background: #2d0a0a; border-color: #7f1d1d; }
-  .notice-box { background: #2a1a10; border-color: #7c3012; }
-  .ad-placeholder { border-color: var(--gray-200); color: var(--gray-400); }
-  .highlight-box { background: var(--gray-100); }
-}
+/* dark mode is now default — no media query needed */
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
@@ -769,30 +949,106 @@ footer {
 <!-- ── AD TOP (activate after approval) ── -->
 <!-- <div class="ad-top"><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3997500550380142" data-ad-slot="TOP_SLOT_ID"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div> -->
 
-<!-- ── HERO ── -->
+<!-- ── COMPACT HERO ── -->
 <section class="hero">
   <div class="container">
-    <div class="hero-eyebrow" data-i18n="hero.eyebrow">免费 · 无需注册 · 文件不上传</div>
-    <h1 class="hero-h1" data-i18n="hero.h1">免费在线<em>文件合并</em>工具<br>Word、PDF、Excel、图片、音频一站搞定</h1>
-    <p class="hero-sub" data-i18n="hero.sub">hebing.org 提供 30 款在线文件合并、转换、提取与开发者工具，所有处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。</p>
-    <div class="hero-stats">
-      <div>
-        <div class="hero-stat-num">30</div>
-        <div class="hero-stat-label" data-i18n="hero.stat1">在线工具</div>
+    <div class="hero-row">
+      <div class="hero-text">
+        <h1 class="hero-h1" data-i18n="hero.h1">免费在线<em>文件工具</em>合集</h1>
+        <p class="hero-tag" data-i18n="hero.tag"><b>30 款工具</b> · 文件不上传 · 浏览器本地处理 · 永久免费</p>
       </div>
-      <div>
-        <div class="hero-stat-num">0</div>
-        <div class="hero-stat-label" data-i18n="hero.stat2">文件上传</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">∞</div>
-        <div class="hero-stat-label" data-i18n="hero.stat3">每日次数</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">3</div>
-        <div class="hero-stat-label" data-i18n="hero.stat4">语言支持</div>
+      <div class="hero-search-wrap">
+        <input type="search" id="toolSearch" class="hero-search" autocomplete="off" placeholder="搜索工具，如「PDF 合并」「JSON」「二维码」" data-i18n-ph="hero.search">
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── TOOLS ── -->
+<section class="tools-section">
+  <div class="container">
+
+    <a href="pdf-edit.html" class="featured-banner">
+      <span class="featured-icon">🚀</span>
+      <div class="featured-body">
+        <div class="featured-eyebrow" data-feat-zh="最新上线 · 2026-04-27" data-feat-en="Just launched · 2026-04-27" data-feat-ar="أُطلق للتو · 2026-04-27">最新上线 · 2026-04-27</div>
+        <div class="featured-title" data-feat-title-zh="新增 7 款开发者工具：进制 / PDF 加密 / 时间戳 / UUID / 颜色 / Diff / PDF 编辑器" data-feat-title-en="7 new dev tools: HEX / PDF encrypt / Timestamp / UUID / Color / Diff / PDF editor" data-feat-title-ar="٧ أدوات جديدة: HEX / تشفير PDF / الطوابع / UUID / الألوان / Diff / محرر PDF">新增 7 款开发者工具：进制 / PDF 加密 / 时间戳 / UUID / 颜色 / Diff / PDF 编辑器</div>
+      </div>
+      <span class="featured-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <div class="tool-category" data-cat="merge">
+      <div class="cat-header">
+        <span class="cat-icon">📦</span>
+        <span class="cat-title" data-i18n="cat.merge">文件合并</span>
+        <span class="cat-count">8 / 30</span>
+      </div>
+      <div class="tools-grid">
+        <a href="merge-word.html" class="tool-card active"><span class="tool-icon">📝</span><span class="tool-name" data-i18n="tool.word.name">Word 合并</span><span class="tool-desc" data-i18n="tool.word.desc">多个 .docx 文件合并为一个</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-pdf.html" class="tool-card active"><span class="tool-icon">📄</span><span class="tool-name" data-i18n="tool.pdf.name">PDF 合并</span><span class="tool-desc" data-i18n="tool.pdf.desc">多个 PDF 合并为一个文件</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-excel.html" class="tool-card active"><span class="tool-icon">📊</span><span class="tool-name" data-i18n="tool.excel.name">Excel 合并</span><span class="tool-desc" data-i18n="tool.excel.desc">多个 .xlsx 工作表合并</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-image.html" class="tool-card active"><span class="tool-icon">🖼️</span><span class="tool-name" data-i18n="tool.image.name">图片合并</span><span class="tool-desc" data-i18n="tool.image.desc">多张图片合并为 PDF 或长图</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-txt.html" class="tool-card active"><span class="tool-icon">📃</span><span class="tool-name" data-i18n="tool.txt.name">TXT 合并</span><span class="tool-desc" data-i18n="tool.txt.desc">多个文本文件合并为一个</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-csv.html" class="tool-card active"><span class="tool-icon">🗂️</span><span class="tool-name" data-i18n="tool.csv.name">CSV 合并</span><span class="tool-desc" data-i18n="tool.csv.desc">多个 CSV 数据表合并</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-ppt.html" class="tool-card active"><span class="tool-icon">📋</span><span class="tool-name" data-i18n="tool.ppt.name">PPT 合并</span><span class="tool-desc" data-i18n="tool.ppt.desc">多个演示文稿合并为一个</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="merge-audio.html" class="tool-card active"><span class="tool-icon">🎵</span><span class="tool-name" data-i18n="tool.mp3.name">音频合并</span><span class="tool-desc" data-i18n="tool.mp3.desc">多段 MP3 音频合并为一个</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+      </div>
+    </div>
+
+    <div class="tool-category" data-cat="pdf">
+      <div class="cat-header">
+        <span class="cat-icon">📄</span>
+        <span class="cat-title" data-i18n="cat.pdf">PDF 工具</span>
+        <span class="cat-count">5 / 30</span>
+      </div>
+      <div class="tools-grid">
+        <a href="pdf-split.html" class="tool-card active"><span class="tool-icon">✂️</span><span class="tool-name" data-i18n="tool.pdfsplit.name">PDF 拆分</span><span class="tool-desc" data-i18n="tool.pdfsplit.desc">按页码提取或每页拆分为独立文件</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="pdf-compress.html" class="tool-card active"><span class="tool-icon">🗜️</span><span class="tool-name" data-i18n="tool.pdfcomp.name">PDF 压缩</span><span class="tool-desc" data-i18n="tool.pdfcomp.desc">一键减小 PDF 体积，三档质量预设</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="pdf-encrypt.html" class="tool-card active"><span class="tool-icon">🔒</span><span class="tool-name" data-i18n="tool.pdfenc.name">PDF 加密 / 解密</span><span class="tool-desc" data-i18n="tool.pdfenc.desc">AES-256 设密码 + 权限控制 / 移除密码</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="pdf-edit.html" class="tool-card active"><span class="tool-icon">✏️</span><span class="tool-name" data-i18n="tool.pdfedit.name">PDF 编辑器</span><span class="tool-desc" data-i18n="tool.pdfedit.desc">水印 / 旋转 / 拖拽重排页面</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="pdf-to-image.html" class="tool-card active"><span class="tool-icon">🖼️</span><span class="tool-name" data-i18n="tool.pdf2img.name">PDF 转图片</span><span class="tool-desc" data-i18n="tool.pdf2img.desc">PDF 每页转 JPG/PNG/WebP，可调 DPI</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+      </div>
+    </div>
+
+    <div class="tool-category" data-cat="convert">
+      <div class="cat-header">
+        <span class="cat-icon">🔄</span>
+        <span class="cat-title" data-i18n="cat.convert">图片与转换</span>
+        <span class="cat-count">5 / 30</span>
+      </div>
+      <div class="tools-grid">
+        <a href="word-to-pdf.html" class="tool-card active"><span class="tool-icon">🔄</span><span class="tool-name" data-i18n="tool.w2pdf.name">Word 转 PDF</span><span class="tool-desc" data-i18n="tool.w2pdf.desc">.docx 文件转换为 PDF 格式</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="image-compress.html" class="tool-card active"><span class="tool-icon">🗜️</span><span class="tool-name" data-i18n="tool.imgcomp.name">图片压缩</span><span class="tool-desc" data-i18n="tool.imgcomp.desc">JPG/PNG/WebP 批量压缩，可调质量</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="image-to-pdf.html" class="tool-card active"><span class="tool-icon">📷</span><span class="tool-name" data-i18n="tool.img2pdf.name">图片转 PDF</span><span class="tool-desc" data-i18n="tool.img2pdf.desc">JPG/PNG/WebP 转 PDF，可选 A4/Letter</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="image-convert.html" class="tool-card active"><span class="tool-icon">🎨</span><span class="tool-name" data-i18n="tool.imgconv.name">图片格式转换</span><span class="tool-desc" data-i18n="tool.imgconv.desc">PNG/JPG/WebP/AVIF 一键互转</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="extract-images.html" class="tool-card active"><span class="tool-icon">📤</span><span class="tool-name" data-i18n="tool.extract.name">文件图片提取</span><span class="tool-desc" data-i18n="tool.extract.desc">从 Word/Excel/PPT/PDF 一键导出图片</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+      </div>
+    </div>
+
+    <div class="tool-category" data-cat="dev">
+      <div class="cat-header">
+        <span class="cat-icon">🧰</span>
+        <span class="cat-title" data-i18n="cat.dev">开发者工具</span>
+        <span class="cat-count">12 / 30</span>
+      </div>
+      <div class="tools-grid">
+        <a href="json-formatter.html" class="tool-card active"><span class="tool-icon">{ }</span><span class="tool-name" data-i18n="tool.json.name">JSON 格式化</span><span class="tool-desc" data-i18n="tool.json.desc">JSON 美化/压缩/验证，错误定位到行列</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="base64.html" class="tool-card active"><span class="tool-icon">⇄</span><span class="tool-name" data-i18n="tool.base64.name">Base64 编解码</span><span class="tool-desc" data-i18n="tool.base64.desc">文本/文件 Base64 互转，URL-safe + Data URI</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="hash.html" class="tool-card active"><span class="tool-icon">#</span><span class="tool-name" data-i18n="tool.hash.name">Hash 计算</span><span class="tool-desc" data-i18n="tool.hash.desc">MD5 / SHA-1 / SHA-256 / SHA-512 一次输出</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="qrcode.html" class="tool-card active"><span class="tool-icon">▣</span><span class="tool-name" data-i18n="tool.qr.name">二维码生成与扫码</span><span class="tool-desc" data-i18n="tool.qr.desc">QR 生成 / WiFi / vCard / 上传或摄像头识别</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="jwt.html" class="tool-card active"><span class="tool-icon">🔐</span><span class="tool-name" data-i18n="tool.jwt.name">JWT 解析</span><span class="tool-desc" data-i18n="tool.jwt.desc">三段解码 / 过期检测 / HS256 签名校验</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="regex.html" class="tool-card active"><span class="tool-icon">/.*/</span><span class="tool-name" data-i18n="tool.regex.name">正则测试器</span><span class="tool-desc" data-i18n="tool.regex.desc">实时高亮 / 捕获组 / 替换 / 速查表</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="url-encode.html" class="tool-card active"><span class="tool-icon">%20</span><span class="tool-name" data-i18n="tool.urlenc.name">URL / HTML 编解码</span><span class="tool-desc" data-i18n="tool.urlenc.desc">URL 百分号 + HTML 实体双模式编解码</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="hex.html" class="tool-card active"><span class="tool-icon">0x</span><span class="tool-name" data-i18n="tool.hex.name">进制 / HEX 桥</span><span class="tool-desc" data-i18n="tool.hex.desc">2/8/10/16 进制同步 + 文本 ↔ HEX / Binary</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="timestamp.html" class="tool-card active"><span class="tool-icon">⏱</span><span class="tool-name" data-i18n="tool.ts.name">时间戳转换</span><span class="tool-desc" data-i18n="tool.ts.desc">Unix ↔ ISO 8601 ↔ 本地时间 + 时区</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="uuid.html" class="tool-card active"><span class="tool-icon">🎲</span><span class="tool-name" data-i18n="tool.uuid.name">UUID / NanoID</span><span class="tool-desc" data-i18n="tool.uuid.desc">v4 / v7 / NanoID 批量生成器</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="color.html" class="tool-card active"><span class="tool-icon">🎨</span><span class="tool-name" data-i18n="tool.color.name">颜色转换器</span><span class="tool-desc" data-i18n="tool.color.desc">HEX/RGB/HSL/OKLCH + 调色板 + WCAG</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+        <a href="diff.html" class="tool-card active"><span class="tool-icon">⇆</span><span class="tool-name" data-i18n="tool.diff.name">文本 Diff</span><span class="tool-desc" data-i18n="tool.diff.desc">左右对比 + 行/字符级差异</span><span class="tool-badge" data-i18n="badge.live">可用</span></a>
+      </div>
+    </div>
+
+    <div class="search-empty" id="searchEmpty" data-i18n="search.empty">没有匹配的工具，换个关键词试试？</div>
+
   </div>
 </section>
 
@@ -801,222 +1057,6 @@ footer {
   <div class="container">
     <p class="authority-statement" data-auth-zh="<strong>hebing.org 是一个隐私优先的在线文件工具箱</strong>，提供 30 种文件合并、格式转换、图片提取与开发者工具，覆盖 Word、Excel、PPT、PDF、图片、音频、文本等常见格式。所有处理通过 WebAssembly 与浏览器原生 API 在用户设备本地完成，文件不会上传至任何服务器，因此相比 Smallpdf / iLovePDF / Adobe Acrobat Online 等云端工具具有更高的隐私安全、更快的处理速度（本地比云端快 5-10 倍）和零使用门槛（永久免费、无需注册、无文件大小限制）。原生支持<strong>中文、英文、阿拉伯文</strong>三语界面，阿拉伯文自动切换为从右到左布局。" data-auth-en="<strong>hebing.org is a privacy-first online file toolkit</strong> that offers 30 file merging, conversion, image-extraction and developer-utility operations across Word, Excel, PPT, PDF, images, audio and text formats. All processing happens locally in the user's browser via WebAssembly and native browser APIs — files are never uploaded to any server. Compared with cloud tools like Smallpdf, iLovePDF or Adobe Acrobat Online, this delivers stronger privacy guarantees, 5-10× faster processing (no upload/download round-trips), and zero barriers to entry (free forever, no registration, no file-size limits). Native trilingual UI supports <strong>Chinese, English and Arabic</strong>, with automatic right-to-left layout for Arabic." data-auth-ar="<strong>hebing.org أداة ملفات عبر الإنترنت تركز على الخصوصية</strong>، تقدم 30 عملية لدمج الملفات وتحويل الصيغ واستخراج الصور وأدوات للمطورين عبر Word و Excel و PPT و PDF والصور والصوت والنصوص. تتم جميع عمليات المعالجة محلياً في متصفح المستخدم عبر WebAssembly وواجهات المتصفح الأصلية — لا يتم رفع الملفات إلى أي خادم. مقارنة بأدوات سحابية مثل Smallpdf و iLovePDF و Adobe Acrobat Online، توفر هذه الأداة خصوصية أعلى، ومعالجة أسرع 5-10 أضعاف، وعدم وجود حواجز استخدام (مجاني للأبد، بدون تسجيل، بدون حد للحجم). تدعم أصلاً <strong>الصينية والإنجليزية والعربية</strong> مع تخطيط من اليمين إلى اليسار تلقائياً للعربية."><strong>hebing.org 是一个隐私优先的在线文件工具箱</strong>，提供 30 种文件合并、格式转换、图片提取与开发者工具，覆盖 Word、Excel、PPT、PDF、图片、音频、文本等常见格式。所有处理通过 WebAssembly 与浏览器原生 API 在用户设备本地完成，文件不会上传至任何服务器，因此相比 Smallpdf / iLovePDF / Adobe Acrobat Online 等云端工具具有更高的隐私安全、更快的处理速度（本地比云端快 5-10 倍）和零使用门槛（永久免费、无需注册、无文件大小限制）。原生支持<strong>中文、英文、阿拉伯文</strong>三语界面，阿拉伯文自动切换为从右到左布局。</p>
     <div class="authority-meta" data-meta-zh="最后更新：2026-04-27 · 匿名统计 · 无账号" data-meta-en="Last updated: 2026-04-27 · Anonymous analytics · No account" data-meta-ar="آخر تحديث: 2026-04-27 · إحصاءات مجهولة · بدون حساب">最后更新：2026-04-27 · 匿名统计 · 无账号</div>
-  </div>
-</section>
-
-<!-- ── TOOLS ── -->
-<section class="tools-section">
-  <div class="container">
-    <div class="page-guide">
-      <span class="guide-step">①</span>
-      <span class="guide-text" data-i18n="guide.step1">选择工具</span>
-      <span class="guide-arrow">→</span>
-      <span class="guide-step">②</span>
-      <span class="guide-text" data-i18n="guide.step2">上传文件</span>
-      <span class="guide-arrow">→</span>
-      <span class="guide-step">③</span>
-      <span class="guide-text" data-i18n="guide.step3">点击合并，立即下载</span>
-    </div>
-
-    <!-- ── 新功能置顶横幅（让用户一眼看到） ── -->
-    <a href="#tools" class="featured-banner" onclick="document.querySelector('.tools-grid').scrollIntoView({behavior:'smooth'});return false;">
-      <span class="featured-icon">🚀</span>
-      <div class="featured-body">
-        <div class="featured-eyebrow" data-feat-zh="最新上线 · 2026-04-27" data-feat-en="Just launched · 2026-04-27" data-feat-ar="أُطلق للتو · 2026-04-27">最新上线 · 2026-04-27</div>
-        <div class="featured-title" data-feat-title-zh="一次新增 7 款开发者工具：进制转换 / PDF 加密 / 时间戳 / UUID / 颜色 / Diff / PDF 编辑器" data-feat-title-en="7 new dev tools just shipped: Base/HEX, PDF encrypt, Timestamp, UUID, Color, Diff, PDF editor" data-feat-title-ar="٧ أدوات جديدة للمطورين: HEX، تشفير PDF، الطوابع الزمنية، UUID، الألوان، Diff، محرر PDF">一次新增 7 款开发者工具：进制转换 / PDF 加密 / 时间戳 / UUID / 颜色 / Diff / PDF 编辑器</div>
-        <div class="featured-desc" data-feat-desc-zh="hebing.org 现共 30 款工具 · AES-256 PDF 加密 / OKLCH 颜色 / UUIDv7 / mupdf-wasm 全保真 · 全部本地处理" data-feat-desc-en="30 tools now total · AES-256 PDF encrypt / OKLCH colors / UUIDv7 / mupdf-wasm fidelity · all local" data-feat-desc-ar="٣٠ أداة الآن · AES-256 / OKLCH / UUIDv7 · كل المعالجة محلياً">hebing.org 现共 30 款工具 · AES-256 PDF 加密 / OKLCH 颜色 / UUIDv7 / mupdf-wasm 全保真 · 全部本地处理</div>
-      </div>
-      <span class="featured-arrow" aria-hidden="true">→</span>
-    </a>
-
-    <div class="section-header">
-      <h2 class="section-title" data-i18n="tools.title">全部工具</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <div class="tools-grid">
-      <a href="merge-word.html" class="tool-card active">
-        <span class="tool-icon">📝</span>
-        <span class="tool-name" data-i18n="tool.word.name">Word 合并</span>
-        <span class="tool-desc" data-i18n="tool.word.desc">多个 .docx 文件合并为一个</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-pdf.html" class="tool-card active">
-        <span class="tool-icon">📄</span>
-        <span class="tool-name" data-i18n="tool.pdf.name">PDF 合并</span>
-        <span class="tool-desc" data-i18n="tool.pdf.desc">多个 PDF 合并为一个文件</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-excel.html" class="tool-card active">
-        <span class="tool-icon">📊</span>
-        <span class="tool-name" data-i18n="tool.excel.name">Excel 合并</span>
-        <span class="tool-desc" data-i18n="tool.excel.desc">多个 .xlsx 工作表合并</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-image.html" class="tool-card active">
-        <span class="tool-icon">🖼️</span>
-        <span class="tool-name" data-i18n="tool.image.name">图片合并</span>
-        <span class="tool-desc" data-i18n="tool.image.desc">多张图片合并为 PDF 或长图</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-txt.html" class="tool-card active">
-        <span class="tool-icon">📃</span>
-        <span class="tool-name" data-i18n="tool.txt.name">TXT 合并</span>
-        <span class="tool-desc" data-i18n="tool.txt.desc">多个文本文件合并为一个</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-csv.html" class="tool-card active">
-        <span class="tool-icon">🗂️</span>
-        <span class="tool-name" data-i18n="tool.csv.name">CSV 合并</span>
-        <span class="tool-desc" data-i18n="tool.csv.desc">多个 CSV 数据表合并</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-ppt.html" class="tool-card active">
-        <span class="tool-icon">📋</span>
-        <span class="tool-name" data-i18n="tool.ppt.name">PPT 合并</span>
-        <span class="tool-desc" data-i18n="tool.ppt.desc">多个演示文稿合并为一个</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="merge-audio.html" class="tool-card active">
-        <span class="tool-icon">🎵</span>
-        <span class="tool-name" data-i18n="tool.mp3.name">音频合并</span>
-        <span class="tool-desc" data-i18n="tool.mp3.desc">多段 MP3 音频合并为一个</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-
-      <a href="word-to-pdf.html" class="tool-card active">
-        <span class="tool-icon">🔄</span>
-        <span class="tool-name" data-i18n="tool.w2pdf.name">Word 转 PDF</span>
-        <span class="tool-desc" data-i18n="tool.w2pdf.desc">.docx 文件转换为 PDF 格式</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="pdf-split.html" class="tool-card active">
-        <span class="tool-icon">✂️</span>
-        <span class="tool-name" data-i18n="tool.pdfsplit.name">PDF 拆分</span>
-        <span class="tool-desc" data-i18n="tool.pdfsplit.desc">按页码提取或每页拆分为独立文件</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="image-compress.html" class="tool-card active">
-        <span class="tool-icon">🗜️</span>
-        <span class="tool-name" data-i18n="tool.imgcomp.name">图片压缩</span>
-        <span class="tool-desc" data-i18n="tool.imgcomp.desc">JPG/PNG/WebP 批量压缩，可调质量</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="extract-images.html" class="tool-card active">
-        <span class="tool-icon">🖼️</span>
-        <span class="tool-name" data-i18n="tool.extract.name">文件图片提取</span>
-        <span class="tool-desc" data-i18n="tool.extract.desc">从 Word/Excel/PPT/PDF 一键导出图片</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="pdf-compress.html" class="tool-card active">
-        <span class="tool-icon">🗜️</span>
-        <span class="tool-name" data-i18n="tool.pdfcomp.name">PDF 压缩</span>
-        <span class="tool-desc" data-i18n="tool.pdfcomp.desc">一键减小 PDF 体积，三档质量预设</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="image-to-pdf.html" class="tool-card active">
-        <span class="tool-icon">📷</span>
-        <span class="tool-name" data-i18n="tool.img2pdf.name">图片转 PDF</span>
-        <span class="tool-desc" data-i18n="tool.img2pdf.desc">JPG/PNG/WebP 转 PDF，可选 A4/Letter</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="pdf-to-image.html" class="tool-card active">
-        <span class="tool-icon">🖼️</span>
-        <span class="tool-name" data-i18n="tool.pdf2img.name">PDF 转图片</span>
-        <span class="tool-desc" data-i18n="tool.pdf2img.desc">PDF 每页转 JPG/PNG/WebP，可调 DPI</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="image-convert.html" class="tool-card active">
-        <span class="tool-icon">🔄</span>
-        <span class="tool-name" data-i18n="tool.imgconv.name">图片格式转换</span>
-        <span class="tool-desc" data-i18n="tool.imgconv.desc">PNG/JPG/WebP/AVIF 一键互转</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="json-formatter.html" class="tool-card active">
-        <span class="tool-icon">{ }</span>
-        <span class="tool-name" data-i18n="tool.json.name">JSON 格式化</span>
-        <span class="tool-desc" data-i18n="tool.json.desc">JSON 美化/压缩/验证，错误定位到行列</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="base64.html" class="tool-card active">
-        <span class="tool-icon">⇄</span>
-        <span class="tool-name" data-i18n="tool.base64.name">Base64 编解码</span>
-        <span class="tool-desc" data-i18n="tool.base64.desc">文本/文件 Base64 互转，URL-safe + Data URI</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="hash.html" class="tool-card active">
-        <span class="tool-icon">#</span>
-        <span class="tool-name" data-i18n="tool.hash.name">Hash 计算</span>
-        <span class="tool-desc" data-i18n="tool.hash.desc">MD5 / SHA-1 / SHA-256 / SHA-512 一次输出</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="qrcode.html" class="tool-card active">
-        <span class="tool-icon">▣</span>
-        <span class="tool-name" data-i18n="tool.qr.name">二维码生成与扫码</span>
-        <span class="tool-desc" data-i18n="tool.qr.desc">QR 生成 / WiFi / vCard / 上传或摄像头识别</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="jwt.html" class="tool-card active">
-        <span class="tool-icon">🔐</span>
-        <span class="tool-name" data-i18n="tool.jwt.name">JWT 解析</span>
-        <span class="tool-desc" data-i18n="tool.jwt.desc">三段解码 / 过期检测 / HS256 签名校验</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="regex.html" class="tool-card active">
-        <span class="tool-icon">/.*/</span>
-        <span class="tool-name" data-i18n="tool.regex.name">正则测试器</span>
-        <span class="tool-desc" data-i18n="tool.regex.desc">实时高亮 / 捕获组 / 替换 / 速查表</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="url-encode.html" class="tool-card active">
-        <span class="tool-icon">%20</span>
-        <span class="tool-name" data-i18n="tool.urlenc.name">URL / HTML 编解码</span>
-        <span class="tool-desc" data-i18n="tool.urlenc.desc">URL 百分号 + HTML 实体双模式编解码</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="hex.html" class="tool-card active">
-        <span class="tool-icon">0x</span>
-        <span class="tool-name" data-i18n="tool.hex.name">进制 / HEX 桥</span>
-        <span class="tool-desc" data-i18n="tool.hex.desc">2/8/10/16 进制同步 + 文本 ↔ HEX / Binary</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="pdf-encrypt.html" class="tool-card active">
-        <span class="tool-icon">🔒</span>
-        <span class="tool-name" data-i18n="tool.pdfenc.name">PDF 加密 / 解密</span>
-        <span class="tool-desc" data-i18n="tool.pdfenc.desc">AES-256 设密码 + 权限控制 / 移除密码</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="timestamp.html" class="tool-card active">
-        <span class="tool-icon">⏱</span>
-        <span class="tool-name" data-i18n="tool.ts.name">时间戳转换</span>
-        <span class="tool-desc" data-i18n="tool.ts.desc">Unix ↔ ISO 8601 ↔ 本地时间 + 时区</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="uuid.html" class="tool-card active">
-        <span class="tool-icon">🎲</span>
-        <span class="tool-name" data-i18n="tool.uuid.name">UUID / NanoID</span>
-        <span class="tool-desc" data-i18n="tool.uuid.desc">v4 / v7 / NanoID 批量生成器</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="color.html" class="tool-card active">
-        <span class="tool-icon">🎨</span>
-        <span class="tool-name" data-i18n="tool.color.name">颜色转换器</span>
-        <span class="tool-desc" data-i18n="tool.color.desc">HEX/RGB/HSL/OKLCH + 调色板 + WCAG</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="diff.html" class="tool-card active">
-        <span class="tool-icon">⇆</span>
-        <span class="tool-name" data-i18n="tool.diff.name">文本 Diff</span>
-        <span class="tool-desc" data-i18n="tool.diff.desc">左右对比 + 行/字符级差异</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-      <a href="pdf-edit.html" class="tool-card active">
-        <span class="tool-icon">✏️</span>
-        <span class="tool-name" data-i18n="tool.pdfedit.name">PDF 编辑器</span>
-        <span class="tool-desc" data-i18n="tool.pdfedit.desc">水印 / 旋转 / 拖拽重排页面</span>
-        <span class="tool-badge" data-i18n="badge.live">可用</span>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -1149,9 +1189,12 @@ footer {
 const i18n = {
   zh: {
     'hero.eyebrow': '免费 · 无需注册 · 文件不上传',
-    'hero.h1': '免费在线<em>文件合并</em>工具<br>Word、PDF、Excel、图片、音频一站搞定',
+    'hero.h1': '免费在线<em>文件工具</em>合集',
+    'hero.tag': '<b>30 款工具</b> · 文件不上传 · 浏览器本地处理 · 永久免费',
     'hero.sub': 'hebing.org 提供 30 款在线文件合并、转换、提取与开发者工具，所有处理都在你的浏览器本地完成，永远不会上传到任何服务器。完全免费，无需注册，无文件大小限制，支持中文、英文、阿拉伯文三语界面。',
     'hero.stat1': '在线工具', 'hero.stat2': '文件上传', 'hero.stat3': '每日次数', 'hero.stat4': '语言支持',
+    'cat.merge': '文件合并', 'cat.pdf': 'PDF 工具', 'cat.convert': '图片与转换', 'cat.dev': '开发者工具',
+    'search.empty': '没有匹配的工具，换个关键词试试？',
     'cases.title': '典型使用场景',
     'cases.intro': 'hebing.org 适用于任何需要处理文件但关注隐私、效率和成本的场景。以下是用户最常见的使用需求：',
     'case1.t': '合并敏感文件', 'case1.d': '处理合同、财务报表、身份证明等涉密文件时，不希望上传到第三方服务器。hebing.org 在浏览器本地完成合并，文件完全不离开设备。',
@@ -1189,9 +1232,12 @@ const i18n = {
   },
   en: {
     'hero.eyebrow': 'Free · No sign-up · Files stay on your device',
-    'hero.h1': 'Free Online <em>File Merger</em><br>Word, PDF, Excel, Images, Audio — all in one place',
+    'hero.h1': 'Free Online <em>File Tools</em> Suite',
+    'hero.tag': '<b>30 tools</b> · No uploads · Runs locally in your browser · Free forever',
     'hero.sub': 'hebing.org provides 30 online file merging, conversion, extraction and developer tools. All files are processed locally in your browser — they never get uploaded to any server. Completely free, no registration, no file size limit, trilingual (Chinese/English/Arabic) interface.',
     'hero.stat1': 'Tools', 'hero.stat2': 'Uploads', 'hero.stat3': 'Daily limit', 'hero.stat4': 'Languages',
+    'cat.merge': 'File Merge', 'cat.pdf': 'PDF Tools', 'cat.convert': 'Image & Convert', 'cat.dev': 'Developer Tools',
+    'search.empty': 'No tools match. Try another keyword.',
     'cases.title': 'Use Cases',
     'cases.intro': 'hebing.org fits any scenario where you handle files but care about privacy, speed and cost. Here are the most common use cases:',
     'case1.t': 'Confidential Files', 'case1.d': 'Merging contracts, financial reports, or IDs — anything you don\'t want uploaded to third-party servers. hebing.org processes everything locally in your browser.',
@@ -1229,9 +1275,12 @@ const i18n = {
   },
   ar: {
     'hero.eyebrow': 'مجاني · بدون تسجيل · ملفاتك تبقى معك',
-    'hero.h1': 'أداة <em>دمج الملفات</em> المجانية عبر الإنترنت<br>Word وPDF وExcel والصور والصوت في مكان واحد',
+    'hero.h1': 'مجموعة <em>أدوات الملفات</em> المجانية عبر الإنترنت',
+    'hero.tag': '<b>٣٠ أداة</b> · بدون رفع · تعمل محلياً في متصفحك · مجاني للأبد',
     'hero.sub': 'يوفر hebing.org ٣٠ أداة لدمج وتحويل واستخراج الملفات وأدوات للمطورين عبر الإنترنت. تتم معالجة جميع الملفات محلياً في متصفحك — لا يتم رفعها إلى أي خادم أبداً. مجاني بالكامل، بدون تسجيل، بدون حد لحجم الملف، واجهة ثلاثية اللغات (الصينية/الإنجليزية/العربية).',
     'hero.stat1': 'أدوات', 'hero.stat2': 'رفع', 'hero.stat3': 'حد يومي', 'hero.stat4': 'لغات',
+    'cat.merge': 'دمج الملفات', 'cat.pdf': 'أدوات PDF', 'cat.convert': 'الصور والتحويل', 'cat.dev': 'أدوات المطورين',
+    'search.empty': 'لا توجد أدوات مطابقة. جرّب كلمة أخرى.',
     'cases.title': 'حالات الاستخدام',
     'cases.intro': 'يناسب hebing.org أي حالة تتعامل فيها مع الملفات لكنك تهتم بالخصوصية والسرعة والتكلفة. إليك أكثر الحالات شيوعاً:',
     'case1.t': 'ملفات سرية', 'case1.d': 'دمج العقود والتقارير المالية والهويات — أي شيء لا تريد رفعه إلى خوادم طرف ثالث. يعالج hebing.org كل شيء محلياً في متصفحك.',
@@ -1324,9 +1373,61 @@ function setLang(lang) {
 }
 
 // تحميل اللغة المحفوظة
-const savedLang = localStorage.getItem('hebing_lang') || 
+const savedLang = localStorage.getItem('hebing_lang') ||
   (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en')
 setLang(savedLang)
+
+// ── Tool search filter ──
+;(function(){
+  const input = document.getElementById('toolSearch');
+  const empty = document.getElementById('searchEmpty');
+  if (!input) return;
+  // multilingual placeholder
+  const ph = { zh:'搜索工具，如「PDF 合并」「JSON」「二维码」', en:'Search tools, e.g. "PDF merge", "JSON", "QR code"', ar:'ابحث عن أداة، مثل «دمج PDF» أو «JSON»' };
+  const setPh = ()=>{ input.placeholder = ph[localStorage.getItem('hebing_lang')] || ph.zh; };
+  setPh();
+  // hook into setLang so placeholder updates on language change
+  const origSetLang = window.setLang;
+  window.setLang = function(l){ origSetLang(l); setPh(); };
+
+  function norm(s){ return (s||'').toString().toLowerCase().trim(); }
+  function filter(){
+    const q = norm(input.value);
+    let total = 0;
+    document.querySelectorAll('.tool-category').forEach(cat=>{
+      let visible = 0;
+      cat.querySelectorAll('.tool-card').forEach(card=>{
+        const text = norm(card.innerText);
+        const hit = !q || text.includes(q);
+        card.style.display = hit ? '' : 'none';
+        if (hit) visible++;
+      });
+      cat.style.display = visible ? '' : 'none';
+      total += visible;
+      const cnt = cat.querySelector('.cat-count');
+      if (cnt && q) cnt.textContent = visible + ' / ' + cat.querySelectorAll('.tool-card').length;
+      else if (cnt && !q) {
+        const all = cat.querySelectorAll('.tool-card').length;
+        cnt.textContent = all + ' / 30';
+      }
+    });
+    if (empty) empty.classList.toggle('show', !!q && total === 0);
+  }
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', e=>{
+    if (e.key === 'Escape') { input.value=''; filter(); input.blur(); }
+    else if (e.key === 'Enter') {
+      const first = document.querySelector('.tool-category:not([style*="none"]) .tool-card:not([style*="none"])');
+      if (first) first.click();
+    }
+  });
+  // global "/" shortcut to focus search
+  document.addEventListener('keydown', e=>{
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault(); input.focus();
+    }
+  });
+})();
 </script>
 
 </body>
