@@ -24,5 +24,11 @@ wrangler.jsonc
 .gitignore
 .assetsignore
 
+# Dev / build scripts and i18n internals — must NOT be public.
+# Otherwise /tools/i18n-todo.json, /tools/vendor-rewrite-map.json,
+# /tools/sri-map.json etc. would all be downloadable from the live site.
+tools
+tools/**
+
 _next-steps-snippet.html
 extract-images-plan.md

@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "hebingorg",
   "compatibility_date": "2026-05-03",
-  "compatibility_flags": ["nodejs_compat"],
+  // No compatibility_flags: this is an assets-only Worker, no JS entrypoint runs.
   "observability": {
     "enabled": true
   },
