@@ -1,0 +1,545 @@
+{
+  "base64.html": [
+    {
+      "tag": "textarea",
+      "current": "hebing.org 是一个隐私优先的工具箱",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "color.html": [
+    {
+      "tag": "input",
+      "current": "#d4440a",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "rgb(212, 68, 10)",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "hsl(18, 91%, 44%)",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "oklch(58% 0.18 35)",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "diff.html": [
+    {
+      "tag": "textarea",
+      "current": "粘贴 A（左边 / 旧版本）",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "粘贴 B（右边 / 新版本）",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "extract-images.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "hash.html": [
+    {
+      "tag": "textarea",
+      "current": "hebing.org",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "paste expected hash to verify…",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "hex.html": [
+    {
+      "tag": "input",
+      "current": "0 / 1",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "0-7",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "0-9",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "0-9 a-f",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "hebing.org 是一个隐私优先的工具箱",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "68 65 62 69 6E 67 …",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "hebing.org 是一个隐私优先的工具箱",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "01101000 01100101 …",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "image-compress.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "image-convert.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "image-to-pdf.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "json-formatter.html": [
+    {
+      "tag": "textarea",
+      "current": "{\"name\":\"hebing\",\"tools\":16}",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "jwt.html": [
+    {
+      "tag": "textarea",
+      "current": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwibmFtZSI6IkphbmUgRG9lIn0.signature",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your-256-bit-secret",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-audio.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-csv.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-excel.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-image.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-pdf.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-ppt.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-txt.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "merge-word.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "pdf-compress.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "pdf-edit.html": [
+    {
+      "tag": "input",
+      "current": "例如：机密 / DRAFT / 公司内部",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "1-3, 5, 8-10",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "pdf-encrypt.html": [
+    {
+      "tag": "input",
+      "current": "至少 4 位",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "留空则使用用户密码",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "输入打开 PDF 的密码（owner-only 限制可留空）",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "pdf-split.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "pdf-to-image.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "qrcode.html": [
+    {
+      "tag": "textarea",
+      "current": "https://hebing.org",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "regex.html": [
+    {
+      "tag": "input",
+      "current": "\\b\\w+@\\w+\\.\\w+\\b",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "gi",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "$1 [$&]",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "timestamp.html": [
+    {
+      "tag": "input",
+      "current": "1767225600 / 1767225600000 / …",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "2026-01-01T00:00:00.000Z",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "2026-01-01 08:00:00",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "Wed, 01 Jan 2026 00:00:00 GMT",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "url-encode.html": [
+    {
+      "tag": "textarea",
+      "current": "hebing.org 是一个隐私优先的工具箱",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "textarea",
+      "current": "",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "uuid.html": [
+    {
+      "tag": "textarea",
+      "current": "点「生成」按钮",
+      "zh": null,
+      "en": null,
+      "ar": null
+    },
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ],
+  "word-to-pdf.html": [
+    {
+      "tag": "input",
+      "current": "your@email.com",
+      "zh": null,
+      "en": null,
+      "ar": null
+    }
+  ]
+}

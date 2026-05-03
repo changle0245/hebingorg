@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF 加密 / 解密 - 免费在线 AES-256 PDF 密码工具 | hebing.org</title>
+<meta name="description" content="免费在线 PDF 加密 / 解密工具：AES-128 / AES-256 设置用户密码 + 所有者密码，可控打印 / 复制 / 修改 / 注释权限；输入密码移除已加密 PDF 的密码保护。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="pdf加密,pdf解密,pdf密码,pdf移除密码,在线pdf加密,aes-256 pdf,pdf权限控制,pdf owner password,免费pdf密码工具">
+<link rel="canonical" href="https://hebing.org/pdf-encrypt.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="PDF 加密 / 解密 - 免费 AES-256 在线工具 | hebing.org">
+<meta property="og:url" content="https://hebing.org/pdf-encrypt.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/pdf-encrypt.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/pdf-encrypt.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/pdf-encrypt.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:580px;}
+.tool-wrap{padding:28px 0;}
+.mode-tabs-top{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;width:fit-content;margin-bottom:20px;}
+.mode-tab-top{padding:9px 22px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);font-family:var(--font-sans);font-weight:500;}
+.mode-tab-top.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.file-info-box{padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.f-icon{width:36px;height:36px;background:#e74c3c;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;font-family:var(--font-mono);flex-shrink:0;}
+.f-info{flex:1;min-width:0;}
+.f-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.f-meta{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);margin-top:2px;}
+.f-meta .f-locked{color:var(--accent);font-weight:500;}
+.f-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;background:transparent;border:none;font-family:inherit;}
+.f-del:hover{color:#b91c1c;}
+.options-box{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;border:1px solid var(--gray-200);}
+.options-title{font-size:13px;font-weight:500;color:var(--black);margin-bottom:14px;}
+.field-row{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.field-label{font-size:12px;color:var(--gray-600);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;}
+.field-label .req{color:var(--accent);}
+.field-input{height:40px;padding:0 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:14px;background:var(--white);color:var(--black);outline:none;font-family:var(--font-mono);width:100%;}
+.field-input:focus{border-color:var(--black);}
+.field-pwd-wrap{position:relative;}
+.field-pwd-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);height:30px;padding:0 10px;border:none;background:transparent;color:var(--gray-400);cursor:pointer;font-size:11px;font-family:var(--font-mono);}
+.field-pwd-toggle:hover{color:var(--black);}
+.select-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.select-group{display:flex;flex-direction:column;gap:6px;flex:1;min-width:200px;}
+.select-group select{height:40px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-family:var(--font-mono);font-size:13px;outline:none;}
+.select-group select:focus{border-color:var(--black);}
+.perm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px;}
+@media(max-width:520px){.perm-grid{grid-template-columns:1fr;}}
+.perm-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);cursor:pointer;font-size:13px;color:var(--gray-600);user-select:none;}
+.perm-item input{cursor:pointer;}
+.perm-item:hover{border-color:var(--black);}
+.perm-item.checked{background:var(--accent-light);border-color:var(--accent);color:var(--black);}
+.btn-process{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);width:100%;margin-bottom:14px;}
+.btn-process:hover{opacity:0.82;}
+.btn-process:disabled{opacity:0.3;cursor:not-allowed;}
+.progress-wrap{margin:14px 0;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.summary-box{padding:18px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:10px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+.summary-dl{height:40px;padding:0 18px;background:var(--success);color:#fff;border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;font-family:var(--font-mono);line-height:1.6;}
+.notice-box{padding:12px 16px;background:var(--accent-light);border:1px solid #fed7aa;border-radius:var(--radius-lg);font-size:12px;color:var(--gray-600);margin-bottom:14px;line-height:1.6;}
+.notice-box strong{color:var(--accent);}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .drop-zone,.field-input,.select-group select,.perm-item{background:var(--white);}
+  .perm-item.checked{background:var(--accent-light);}
+  .mode-tab-top.active{background:var(--gray-200);box-shadow:none;}
+  .subscribe-input{background:var(--gray-100);}
+  .scene-card,.faq-item,.options-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .summary-box{border-color:#14532d;}
+  .status-err{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .notice-box{background:#2a1a10;border-color:#7c3012;}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org PDF 加密 / 解密",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/pdf-encrypt.html",
+  "description": "免费在线 PDF 加密 / 解密工具：AES-128 / AES-256 设置用户密码 + 所有者密码，可控打印 / 复制 / 修改 / 注释权限；输入密码移除已加密 PDF 的密码保护。文件在浏览器本地处理，不上传服务器。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["AES-128 / AES-256 PDF 加密", "用户密码 + 所有者密码 双密钥", "可控权限：打印 / 复制 / 修改 / 注释", "PDF 解密（移除密码保护）", "本地处理，文件不上传"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "PDF 加密 / 解密", "item": "https://hebing.org/pdf-encrypt.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线给 PDF 加密码 / 移除 PDF 密码",
+  "description": "使用 hebing.org 在浏览器本地为 PDF 设置 AES-256 密码或移除已加密 PDF 的密码保护。",
+  "totalTime": "PT60S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "选择模式", "text": "顶部切换「加密」或「解密」模式。" },
+    { "@type": "HowToStep", "position": 2, "name": "上传 PDF", "text": "点击或拖拽 PDF 到上传区。" },
+    { "@type": "HowToStep", "position": 3, "name": "输入密码 / 选项", "text": "加密：输入用户密码（必填）+ 可选所有者密码 + 权限；解密：输入打开 PDF 所需的密码。" },
+    { "@type": "HowToStep", "position": 4, "name": "下载结果", "text": "点击处理，浏览器本地完成后自动下载新 PDF。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "PDF 加密用的是什么算法？强不强？",
+      "acceptedAnswer": { "@type": "Answer", "text": "默认 AES-256，与 Acrobat Pro 设置的「Encrypt with Password」同一算法，符合 PDF 2.0 (ISO 32000-2) 标准。也可下拉切换 AES-128（兼容旧版 Acrobat 7-9）或 RC4-128（更老的阅读器）。AES-256 在合理强密码（≥12 位混合字符）下，目前没有可行的破解手段。" }
+    },
+    {
+      "@type": "Question",
+      "name": "用户密码与所有者密码有什么区别？",
+      "acceptedAnswer": { "@type": "Answer", "text": "用户密码（user password）是「打开 PDF 必须输入」的密码；所有者密码（owner password）是「修改权限设置必须输入」的密码。如果只设置用户密码，所有者密码会自动设为同一个；如果两者不同，用户输入用户密码可看但受权限限制，输入所有者密码则获得完全控制。" }
+    },
+    {
+      "@type": "Question",
+      "name": "解密失败说「密码不正确」怎么办？",
+      "acceptedAnswer": { "@type": "Answer", "text": "首先确认密码大小写、首尾空格、中英文标点；如果文件是用旧版 Acrobat 设置的「所有者密码」（仅限制权限、可直接打开），不必输密码也能解密——把密码栏留空再点处理即可。如果输入正确但仍失败，可能是该 PDF 用了非标准加密方案（如 DRM 或 Adobe LiveCycle），本工具不支持此类。" }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？密码会被记录吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有处理在浏览器本地完成（mupdf.js WebAssembly + @cantoo/pdf-lib），PDF 文件和密码从不离开你的设备。我们看不到、也无法记录你的任何输入。可放心处理含合同、身份证明、医疗记录的敏感 PDF。" }
+    }
+  ]
+}
+</script>
+<link rel="modulepreload" href="/vendor/mupdf@1.27.0/mupdf.js">
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">PDF 加密 / 解密</span></div>
+  <h1 class="page-title" data-i18n="page.h1">PDF 加密 / 解密<br><em>AES-256 本地处理</em></h1>
+  <p class="page-sub" data-i18n="page.sub">为 PDF 设置打开密码 + 权限控制（打印 / 复制 / 修改 / 注释），或输入密码移除已加密 PDF 的密码保护。所有处理在浏览器本地完成，文件与密码从不离开你的设备。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="mode-tabs-top">
+    <button class="mode-tab-top active" id="tabEncrypt" onclick="setMode('encrypt')" data-i18n="mode.encrypt">🔒 加密</button>
+    <button class="mode-tab-top" id="tabDecrypt" onclick="setMode('decrypt')" data-i18n="mode.decrypt">🔓 解密</button>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel" accept="application/pdf,.pdf">
+    <div class="drop-icon">📄</div>
+    <div class="drop-label" id="dropLabel" data-i18n="drop.label">点击选择 PDF 文件，或拖拽到此处</div>
+    <div class="drop-sub"><strong>.pdf</strong> · <span data-i18n="drop.limit">单个文件，无大小限制</span></div>
+  </div>
+
+  <div class="file-info-box hidden" id="fileInfoBox">
+    <div class="f-icon">PDF</div>
+    <div class="f-info">
+      <div class="f-name" id="fName"></div>
+      <div class="f-meta" id="fMeta"></div>
+    </div>
+    <button class="f-del" type="button" onclick="clearFile()" aria-label="移除文件 / Remove file">✕</button>
+  </div>
+
+  <!-- ─── ENCRYPT options ─── -->
+  <div class="options-box hidden" id="encOpts">
+    <div class="options-title" data-i18n="enc.title">加密选项</div>
+    <div class="field-row">
+      <label class="field-label" data-i18n="enc.userpwd">用户密码（打开 PDF 时输入）<span class="req">*</span></label>
+      <div class="field-pwd-wrap">
+        <input type="password" class="field-input" id="encUserPwd" autocomplete="new-password" placeholder="至少 4 位">
+        <button type="button" class="field-pwd-toggle" data-target="encUserPwd" data-i18n="pwd.show">显示</button>
+      </div>
+    </div>
+    <div class="field-row">
+      <label class="field-label" data-i18n="enc.ownerpwd">所有者密码（修改权限时输入，可留空 = 同用户密码）</label>
+      <div class="field-pwd-wrap">
+        <input type="password" class="field-input" id="encOwnerPwd" autocomplete="new-password" placeholder="留空则使用用户密码">
+        <button type="button" class="field-pwd-toggle" data-target="encOwnerPwd" data-i18n="pwd.show">显示</button>
+      </div>
+    </div>
+    <div class="select-row">
+      <div class="select-group">
+        <label class="field-label" data-i18n="enc.algo">加密算法</label>
+        <select id="encAlgo">
+          <option value="aes-256" selected>AES-256（PDF 2.0 推荐）</option>
+          <option value="aes-128">AES-128（兼容 Acrobat 7-9）</option>
+          <option value="rc4-128">RC4-128（兼容老阅读器）</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row" style="margin-bottom:0">
+      <label class="field-label" data-i18n="enc.perm">用户权限（输入用户密码后允许的操作）</label>
+      <div class="perm-grid">
+        <label class="perm-item checked"><input type="checkbox" id="permPrint" checked><span data-i18n="perm.print">允许打印</span></label>
+        <label class="perm-item checked"><input type="checkbox" id="permCopy" checked><span data-i18n="perm.copy">允许复制文本 / 图像</span></label>
+        <label class="perm-item checked"><input type="checkbox" id="permModify" checked><span data-i18n="perm.modify">允许修改 / 装订</span></label>
+        <label class="perm-item checked"><input type="checkbox" id="permAnnotate" checked><span data-i18n="perm.annotate">允许添加注释 / 填表</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DECRYPT options ─── -->
+  <div class="options-box hidden" id="decOpts">
+    <div class="options-title" data-i18n="dec.title">解密选项</div>
+    <div class="notice-box" data-i18n="dec.notice">⚠ <strong>仅当你拥有合法权限时使用</strong>。如果 PDF 仅设置了所有者密码（即可直接打开但有权限限制），密码栏可以留空。</div>
+    <div class="field-row" style="margin-bottom:0">
+      <label class="field-label" data-i18n="dec.pwd">PDF 密码</label>
+      <div class="field-pwd-wrap">
+        <input type="password" class="field-input" id="decPwd" autocomplete="off" placeholder="输入打开 PDF 的密码（owner-only 限制可留空）">
+        <button type="button" class="field-pwd-toggle" data-target="decPwd" data-i18n="pwd.show">显示</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-process hidden" id="btnProcess" data-i18n="btn.process">开始处理</button>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+  <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle"></div>
+    <div class="summary-stats">
+      <a class="summary-dl" id="dlBtn" download>⬇ <span data-i18n="btn.download">下载结果</span></a>
+      <span style="font-size:12px;color:var(--gray-600);font-family:var(--font-mono)" id="summaryMeta"></span>
+    </div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="常见使用场景" data-en="Common use cases">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📜</div><div class="scene-title" data-scene-zh="发送合同 / 报价单" data-scene-en="Send contracts / quotes">发送合同 / 报价单</div><div class="scene-desc" data-scene-zh="给客户发送报价单 / 合同前先加密，对方需输入约定密码才能查看，避免邮件泄露。" data-scene-en="Encrypt before emailing — the recipient needs the agreed password to open, protecting against email leaks.">给客户发送报价单 / 合同前先加密，对方需输入约定密码才能查看，避免邮件泄露。</div></div>
+      <div class="scene-card"><div class="scene-icon">🏥</div><div class="scene-title" data-scene-zh="医疗 / 财务报告" data-scene-en="Medical / financial reports">医疗 / 财务报告</div><div class="scene-desc" data-scene-zh="包含个人健康信息或银行流水的 PDF，发送前先 AES-256 加密，符合 GDPR / HIPAA 隐私要求。" data-scene-en="AES-256 encrypt PDFs containing PHI or bank statements before sending — keeps you GDPR / HIPAA-aligned.">包含个人健康信息或银行流水的 PDF，发送前先 AES-256 加密，符合 GDPR / HIPAA 隐私要求。</div></div>
+      <div class="scene-card"><div class="scene-icon">🚫</div><div class="scene-title" data-scene-zh="禁止打印 / 复制" data-scene-en="Block print / copy">禁止打印 / 复制</div><div class="scene-desc" data-scene-zh="电子书、培训资料、内部手册，可设置「禁止打印」「禁止复制文本」防止二次传播。" data-scene-en="E-books, training decks, internal manuals — disable print / copy to limit redistribution.">电子书、培训资料、内部手册，可设置「禁止打印」「禁止复制文本」防止二次传播。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔓</div><div class="scene-title" data-scene-zh="移除已知密码" data-scene-en="Remove known password">移除已知密码</div><div class="scene-desc" data-scene-zh="自己设置的 PDF 密码忘了或不再需要，输入密码一键移除，导出成普通 PDF。" data-scene-en="Forgot your own PDF password? Type it in to strip encryption and export an unprotected PDF.">自己设置的 PDF 密码忘了或不再需要，输入密码一键移除，导出成普通 PDF。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>AES-256 vs AES-128</strong>：AES-256 是 PDF 2.0 标准，安全性最强，但 Acrobat 7-9 等老版本可能打不开；如果接收方使用老软件，选 AES-128 更兼容。RC4 已被 NIST 弃用，仅用于支持远古阅读器。</li>
+      <li><strong>所有者密码留空</strong>：留空时会自动等于用户密码。专业用法是设置一个长所有者密码（你保留），另一个短用户密码（发给对方），方便日后改权限。</li>
+      <li><strong>权限只对用户密码生效</strong>：用所有者密码打开 PDF 时所有权限限制都被忽略。所以「禁止打印」对持有所有者密码的人无效。</li>
+      <li><strong>解密「owner-only」加密</strong>：有些 PDF 只设置所有者密码、用户密码为空（可直接打开但禁止编辑）。这种解密时密码栏留空即可。</li>
+      <li><strong>本地处理</strong>：mupdf-wasm 加密 + @cantoo/pdf-lib 解密，全部在你的浏览器内运行，文件和密码从不上传。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>AES-256 vs AES-128</strong>: AES-256 is the PDF 2.0 standard — strongest, but old Acrobat 7-9 can't open it. AES-128 is more compatible. RC4 is NIST-deprecated, only for legacy readers.</li>
+      <li><strong>Empty owner password</strong>: defaults to user password. Pro tip: set a long owner password (keep yourself) and a short user password (share) so you can change permissions later.</li>
+      <li><strong>Permissions only restrict user password</strong>: opening with the owner password bypasses all permission limits. "Disable print" doesn't apply to owner-password holders.</li>
+      <li><strong>Decrypt "owner-only" PDFs</strong>: some PDFs have only an owner password (open freely, but editing blocked). Leave the decrypt password field empty for these.</li>
+      <li><strong>Local processing</strong>: mupdf-wasm for encrypt + @cantoo/pdf-lib for decrypt — everything runs in your browser, files and passwords never upload.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>AES-256 مقابل AES-128: AES-256 معيار PDF 2.0 — الأقوى، لكن Acrobat 7-9 القديم لا يستطيع فتحه. AES-128 أكثر توافقاً. RC4 مهجور NIST، فقط للقارئين القديمين.</li><li>كلمة مرور المالك الفارغة: تتحول افتراضياً إلى كلمة مرور المستخدم. نصيحة: عيّن كلمة مرور مالك طويلة (تحتفظ بنفسك) وكلمة مرور مستخدم قصيرة (شارك) لتغيير الأذونات لاحقاً.</li><li>الأذونات تقيّد فقط كلمة مرور المستخدم: الفتح بكلمة مرور المالك يتجاوز جميع حدود الأذونات. "تعطيل الطباعة" لا ينطبق على حاملي كلمة مرور المالك.</li><li>فك تشفير PDFs "مالك فقط": بعض PDFs لها كلمة مرور مالك فقط (تفتح بحرية، التحرير محظور). اترك حقل كلمة مرور فك التشفير فارغاً لهذه.</li><li>معالجة محلية: mupdf-wasm للتشفير + @cantoo/pdf-lib لفك التشفير — كل شيء يعمل في متصفحك، الملفات وكلمات المرور لا تُرفع أبداً.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="PDF 加密用的是什么算法？强不强？" data-faq-en="What algorithm is used? Is it strong?" data-faq-ar="ما الخوارزمية المستخدمة؟ هل قوية؟">PDF 加密用的是什么算法？强不强？</div>
+        <div class="faq-a" data-faq-zh="默认 AES-256，与 Acrobat Pro 的「Encrypt with Password」同一算法，符合 PDF 2.0 (ISO 32000-2) 标准。也可下拉切换 AES-128 或 RC4-128。AES-256 在合理强密码（≥12 位混合字符）下没有可行的破解手段。" data-faq-en="Default AES-256 — same algorithm as Acrobat Pro's 'Encrypt with Password', conformant with PDF 2.0 (ISO 32000-2). AES-128 and RC4-128 are also available. AES-256 with a strong password (≥12 mixed chars) has no practical break." data-faq-ar="AES-256 افتراضياً — نفس خوارزمية &quot;Encrypt with Password&quot; في Acrobat Pro، متوافقة مع PDF 2.0 (ISO 32000-2). تتوفر AES-128 و RC4-128 أيضاً. AES-256 مع كلمة مرور قوية (≥12 حرفاً مختلطاً) ليس له كسر عملي.">默认 AES-256，与 Acrobat Pro 的「Encrypt with Password」同一算法，符合 PDF 2.0 (ISO 32000-2) 标准。也可下拉切换 AES-128 或 RC4-128。AES-256 在合理强密码（≥12 位混合字符）下没有可行的破解手段。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="用户密码与所有者密码有什么区别？" data-faq-en="User password vs owner password?" data-faq-ar="كلمة مرور المستخدم مقابل كلمة مرور المالك؟">用户密码与所有者密码有什么区别？</div>
+        <div class="faq-a" data-faq-zh="用户密码是「打开 PDF 必须输入」的密码；所有者密码是「修改权限设置必须输入」的密码。如果只设置用户密码，所有者密码会自动设为同一个；如果两者不同，用户输入用户密码可看但受权限限制，输入所有者密码则获得完全控制。" data-faq-en="User password = required to open the PDF. Owner password = required to change permissions. If only one is set, both default to it. With distinct values: user password gives restricted view, owner password gives full control." data-faq-ar="كلمة مرور المستخدم = مطلوبة لفتح PDF. كلمة مرور المالك = مطلوبة لتغيير الأذونات. إذا تم تعيين واحدة فقط، تتحول كلتاهما إلى نفس القيمة. مع قيم مميزة: تعطي كلمة مرور المستخدم عرضاً مقيداً، وتعطي كلمة مرور المالك تحكماً كاملاً.">用户密码是「打开 PDF 必须输入」的密码；所有者密码是「修改权限设置必须输入」的密码。如果只设置用户密码，所有者密码会自动设为同一个；如果两者不同，用户输入用户密码可看但受权限限制，输入所有者密码则获得完全控制。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="解密失败说「密码不正确」怎么办？" data-faq-en="What if decrypt says wrong password?" data-faq-ar="ماذا إذا قال فك التشفير &quot;كلمة مرور خاطئة&quot;؟">解密失败说「密码不正确」怎么办？</div>
+        <div class="faq-a" data-faq-zh="确认密码大小写、首尾空格、中英文标点；如果文件只设了所有者密码（可直接打开但禁止编辑），不必输密码也能解密——把密码栏留空再点处理即可。如果输入正确仍失败，可能是该 PDF 用了非标准加密（DRM 或 Adobe LiveCycle），本工具不支持。" data-faq-en="Check case, leading/trailing spaces, and CN/EN punctuation. If the file only has an owner password (opens freely, edit blocked), leave the password empty. Persistent failure may indicate non-standard encryption (DRM or LiveCycle), which is unsupported." data-faq-ar="تحقق من الحالة والمسافات في البداية والنهاية وعلامات الترقيم الصينية/الإنجليزية. إذا كان الملف يحتوي على كلمة مرور المالك فقط (يفتح بحرية، لكن التحرير محظور)، اترك حقل كلمة المرور فارغاً. الفشل المستمر قد يشير إلى تشفير غير قياسي (DRM أو LiveCycle) وغير مدعوم.">确认密码大小写、首尾空格、中英文标点；如果文件只设了所有者密码（可直接打开但禁止编辑），不必输密码也能解密——把密码栏留空再点处理即可。如果输入正确仍失败，可能是该 PDF 用了非标准加密（DRM 或 Adobe LiveCycle），本工具不支持。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？密码会被记录吗？" data-faq-en="Are files uploaded? Are passwords logged?" data-faq-ar="هل يتم رفع الملفات؟ هل تُسجَّل كلمات المرور؟">文件会上传到服务器吗？密码会被记录吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地完成（mupdf.js WebAssembly + @cantoo/pdf-lib），PDF 文件和密码从不离开你的设备。我们看不到、也无法记录你的任何输入。可放心处理含合同、身份证明、医疗记录的敏感 PDF。" data-faq-en="No. Everything runs locally (mupdf.js WebAssembly + @cantoo/pdf-lib). Files and passwords never leave your device. Safe for contracts, IDs, medical records." data-faq-ar="لا. كل شيء يعمل محلياً (mupdf.js WebAssembly + @cantoo/pdf-lib). الملفات وكلمات المرور لا تغادر جهازك أبداً. آمن للعقود وبطاقات الهوية والسجلات الطبية.">不会。所有处理在浏览器本地完成（mupdf.js WebAssembly + @cantoo/pdf-lib），PDF 文件和密码从不离开你的设备。我们看不到、也无法记录你的任何输入。可放心处理含合同、身份证明、医疗记录的敏感 PDF。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="merge-pdf.html" class="related-card"><span>📄</span><span data-i18n-related="PDF 合并|PDF Merge|دمج PDF">PDF 合并</span></a>
+    <a href="pdf-split.html" class="related-card"><span>✂️</span><span data-i18n-related="PDF 拆分|PDF Split|تقسيم PDF">PDF 拆分</span></a>
+    <a href="pdf-compress.html" class="related-card"><span>🗜️</span><span data-i18n-related="PDF 压缩|PDF Compress|ضغط PDF">PDF 压缩</span></a>
+    <a href="hash.html" class="related-card"><span>#</span><span data-i18n-related="Hash 计算|Hash|Hash">Hash 计算</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'PDF 加密 / 解密','page.h1':'PDF 加密 / 解密<br><em>AES-256 本地处理</em>','page.sub':'为 PDF 设置打开密码 + 权限控制（打印 / 复制 / 修改 / 注释），或输入密码移除已加密 PDF 的密码保护。所有处理在浏览器本地完成，文件与密码从不离开你的设备。','mode.encrypt':'🔒 加密','mode.decrypt':'🔓 解密','drop.label':'点击选择 PDF 文件，或拖拽到此处','drop.limit':'单个文件，无大小限制','enc.title':'加密选项','enc.userpwd':'用户密码（打开 PDF 时输入）','enc.ownerpwd':'所有者密码（修改权限时输入，可留空 = 同用户密码）','enc.algo':'加密算法','enc.perm':'用户权限（输入用户密码后允许的操作）','perm.print':'允许打印','perm.copy':'允许复制文本 / 图像','perm.modify':'允许修改 / 装订','perm.annotate':'允许添加注释 / 填表','dec.title':'解密选项','dec.notice':'⚠ <strong>仅当你拥有合法权限时使用</strong>。如果 PDF 仅设置了所有者密码（即可直接打开但有权限限制），密码栏可以留空。','dec.pwd':'PDF 密码','pwd.show':'显示','pwd.hide':'隐藏','btn.process':'开始处理','btn.download':'下载结果','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'PDF Encrypt / Decrypt','page.h1':'PDF Encrypt / Decrypt<br><em>AES-256 in your browser</em>','page.sub':'Set an open-password + permission limits (print / copy / modify / annotate), or remove the password from an encrypted PDF. All processing happens in your browser — files and passwords never leave your device.','mode.encrypt':'🔒 Encrypt','mode.decrypt':'🔓 Decrypt','drop.label':'Click to select PDF, or drag here','drop.limit':'Single file, no size limit','enc.title':'Encryption options','enc.userpwd':'User password (required to open PDF)','enc.ownerpwd':'Owner password (required to change permissions, blank = same as user)','enc.algo':'Algorithm','enc.perm':'Permissions allowed with user password','perm.print':'Allow printing','perm.copy':'Allow copy text / images','perm.modify':'Allow modify / assemble','perm.annotate':'Allow annotate / fill forms','dec.title':'Decrypt options','dec.notice':'⚠ <strong>Use only if you are authorized</strong>. If the PDF has only an owner password (opens freely, edit-restricted), leave the password field empty.','dec.pwd':'PDF password','pwd.show':'Show','pwd.hide':'Hide','btn.process':'Start','btn.download':'Download','sub.title':'🔔 Get notified','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'تشفير / فك تشفير PDF','page.h1':'تشفير / فك تشفير PDF<br><em>AES-256 محلياً</em>','page.sub':'أضف كلمة مرور وصلاحيات لـ PDF أو أزل كلمة المرور. كل المعالجة محلياً في متصفحك.','mode.encrypt':'🔒 تشفير','mode.decrypt':'🔓 فك','drop.label':'اختر ملف PDF أو اسحبه هنا','drop.limit':'ملف واحد، لا حد للحجم','enc.title':'خيارات التشفير','enc.userpwd':'كلمة مرور المستخدم','enc.ownerpwd':'كلمة مرور المالك (اختياري)','enc.algo':'الخوارزمية','enc.perm':'الصلاحيات','perm.print':'السماح بالطباعة','perm.copy':'السماح بالنسخ','perm.modify':'السماح بالتعديل','perm.annotate':'السماح بالتعليق','dec.title':'خيارات فك التشفير','dec.notice':'⚠ <strong>استخدم فقط عند التفويض</strong>. إذا كان ملف PDF يحتوي على كلمة مرور مالك فقط، اترك الحقل فارغاً.','dec.pwd':'كلمة مرور PDF','pwd.show':'إظهار','pwd.hide':'إخفاء','btn.process':'بدء','btn.download':'تنزيل','sub.title':'🔔 أخبرني','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم!','sub.support':'الأدوات مجانية ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+let mode = 'encrypt';
+let currentFile = null, currentBytes = null;
+
+function setMode(m){
+  mode = m;
+  $('tabEncrypt').classList.toggle('active', m==='encrypt');
+  $('tabDecrypt').classList.toggle('active', m==='decrypt');
+  if(currentFile){
+    $('encOpts').classList.toggle('hidden', m!=='encrypt');
+    $('decOpts').classList.toggle('hidden', m!=='decrypt');
+  }
+  hideStatus();
+}
+
+// ─── file input ───
+const fileInput = $('fileInput'), dropZone = $('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('drag-over');
+  if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => { if(e.target.files[0]) handleFile(e.target.files[0]); });
+
+async function handleFile(file){
+  if(!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf'){
+    showErr('请选择 .pdf 文件 / Please choose a .pdf file'); return;
+  }
+  hideStatus();
+  currentFile = file;
+  currentBytes = new Uint8Array(await file.arrayBuffer());
+  $('fName').textContent = file.name;
+  // Probe whether the PDF is encrypted by scanning for /Encrypt in trailer
+  const isEnc = probeEncrypted(currentBytes);
+  $('fMeta').innerHTML = `${(file.size/1024).toFixed(1)} KB · ${isEnc?'<span class="f-locked">🔒 已加密</span>':'未加密'}`;
+  $('fileInfoBox').classList.remove('hidden');
+  $('encOpts').classList.toggle('hidden', mode!=='encrypt');
+  $('decOpts').classList.toggle('hidden', mode!=='decrypt');
+  $('btnProcess').classList.remove('hidden');
+  // Auto-switch to decrypt if file is encrypted and we're in encrypt mode? Don't — user might want to re-encrypt with different params.
+}
+
+function probeEncrypted(bytes){
+  // Look at the last 4KB for an /Encrypt entry in the trailer.
+  // Two forms are both legal (PDF 1.4+):
+  //   /Encrypt N N R   (indirect reference — most common)
+  //   /Encrypt<<...>>  (inline dict — emitted by mupdf when it rewrites the file)
+  const tail = bytes.slice(Math.max(0, bytes.length - 4096));
+  const txt = new TextDecoder('latin1').decode(tail);
+  return /\/Encrypt\s*(?:\d+\s+\d+\s+R|<<)/.test(txt);
+}
+
+function clearFile(){
+  currentFile = null; currentBytes = null;
+  fileInput.value = '';
+  $('fileInfoBox').classList.add('hidden');
+  $('encOpts').classList.add('hidden');
+  $('decOpts').classList.add('hidden');
+  $('btnProcess').classList.add('hidden');
+  hideStatus();
+}
+
+// ─── perm checkbox visual state ───
+['permPrint','permCopy','permModify','permAnnotate'].forEach(id => {
+  const cb = $(id);
+  cb.addEventListener('change', () => cb.closest('.perm-item').classList.toggle('checked', cb.checked));
+});
+
+// ─── show/hide password ───
+document.querySelectorAll('.field-pwd-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const t = $(btn.dataset.target);
+    const showing = t.type === 'text';
+    t.type = showing ? 'password' : 'text';
+    const lang = document.documentElement.lang;
+    btn.textContent = showing
+      ? (lang==='en'?'Show':lang==='ar'?'إظهار':'显示')
+      : (lang==='en'?'Hide':lang==='ar'?'إخفاء':'隐藏');
+  });
+});
+
+// ─── status helpers ───
+function showProgress(pct, msg){
+  $('progressWrap').classList.remove('hidden');
+  $('progressFill').style.width = pct + '%';
+  $('progressText').textContent = msg || '';
+}
+function hideProgress(){ $('progressWrap').classList.add('hidden'); }
+function showOk(title, dlBytes, fname){
+  $('statusErr').classList.add('hidden');
+  $('summaryTitle').textContent = title;
+  if(window.__hbDlUrl){ URL.revokeObjectURL(window.__hbDlUrl); }
+  const url = URL.createObjectURL(new Blob([dlBytes], { type: 'application/pdf' }));
+  window.__hbDlUrl = url;
+  $('dlBtn').href = url; $('dlBtn').download = fname;
+  $('summaryMeta').textContent = `${(dlBytes.length/1024).toFixed(1)} KB`;
+  $('statusOk').classList.remove('hidden');
+  hideProgress();
+}
+function showErr(msg){
+  $('statusErr').textContent = '错误：' + msg;
+  $('statusErr').classList.remove('hidden');
+  $('statusOk').classList.add('hidden');
+  hideProgress();
+}
+function hideStatus(){ $('statusOk').classList.add('hidden'); $('statusErr').classList.add('hidden'); hideProgress(); }
+
+// ─── lazy-load mupdf (for encrypt) ───
+let mupdfP = null;
+function loadMupdf(){
+  if(mupdfP) return mupdfP;
+  showProgress(15, '加载加密引擎 mupdf-wasm（首次约 3-4 MB）…');
+  mupdfP = import('/vendor/mupdf@1.27.0/mupdf.js');
+  return mupdfP;
+}
+// ─── lazy-load pdf-lib (for decrypt) ───
+let pdfLibP = null;
+function loadPdfLib(){
+  if(pdfLibP) return pdfLibP;
+  pdfLibP = new Promise((res, rej) => {
+    if(window.PDFLib) return res(window.PDFLib);
+    const s = document.createElement('script');
+    s.src='/vendor/cantoo-pdf-lib@2.6.5/pdf-lib.min.js';s.onload = () => res(window.PDFLib);
+    s.onerror = () => rej(new Error('pdf-lib 加载失败 / pdf-lib failed to load'));
+    document.head.appendChild(s);
+  });
+  return pdfLibP;
+}
+
+// ─── encrypt ───
+async function doEncrypt(){
+  const userPwd = $('encUserPwd').value;
+  if(userPwd.length < 4) throw new Error('用户密码至少 4 位');
+  const ownerPwd = $('encOwnerPwd').value || userPwd;
+  const algo = $('encAlgo').value;
+  // PDF permission bits — we set the bits the user wants to ALLOW
+  let perms = 0;
+  if($('permPrint').checked)    perms |= 4 | 2048;       // bit 3 + bit 12
+  if($('permCopy').checked)     perms |= 16 | 512;       // bit 5 + bit 10
+  if($('permModify').checked)   perms |= 8 | 1024;       // bit 4 + bit 11
+  if($('permAnnotate').checked) perms |= 32 | 256;       // bit 6 + bit 9
+
+  showProgress(10, '初始化加密引擎…');
+  const mupdf = await loadMupdf();
+  showProgress(40, '解析 PDF…');
+  const doc = mupdf.PDFDocument.openDocument(currentBytes, 'application/pdf');
+  if(doc.needsPassword && doc.needsPassword()){
+    throw new Error('该 PDF 已加密，请先到「解密」模式移除原密码');
+  }
+  showProgress(70, '正在加密…');
+  const opts = {
+    encrypt: algo,
+    'user-password': userPwd,
+    'owner-password': ownerPwd,
+    permissions: perms
+  };
+  const buf = doc.saveToBuffer(opts);
+  // mupdf Buffer → Uint8Array
+  const bytes = buf.asUint8Array ? buf.asUint8Array() : new Uint8Array(buf);
+  showProgress(100, '完成');
+  const fname = currentFile.name.replace(/\.pdf$/i, '') + '_encrypted.pdf';
+  showOk(`已加密 ✓ ${algo.toUpperCase()} · ${describePerms(perms)}`, bytes, fname);
+}
+
+function describePerms(p){
+  const lang = document.documentElement.lang;
+  const names = lang==='en'
+    ? { print:'print', copy:'copy', modify:'modify', annotate:'annotate' }
+    : { print:'打印', copy:'复制', modify:'修改', annotate:'注释' };
+  const allowed = [];
+  if(p & 4)  allowed.push(names.print);
+  if(p & 16) allowed.push(names.copy);
+  if(p & 8)  allowed.push(names.modify);
+  if(p & 32) allowed.push(names.annotate);
+  if(allowed.length === 4) return lang==='en'?'all permissions':'全部权限';
+  if(allowed.length === 0) return lang==='en'?'view only':'仅查看';
+  return (lang==='en'?'allowed: ':'允许：') + allowed.join(' / ');
+}
+
+// ─── decrypt ───
+async function doDecrypt(){
+  const pwd = $('decPwd').value || '';
+  showProgress(20, '加载 pdf-lib…');
+  const PDFLib = await loadPdfLib();
+  showProgress(60, '验证密码并解密…');
+  let doc;
+  try{
+    doc = await PDFLib.PDFDocument.load(currentBytes, { password: pwd, ignoreEncryption: false, updateMetadata: false });
+  }catch(e){
+    const msg = (e && e.message) || String(e);
+    if(/password/i.test(msg) || /encrypted/i.test(msg)){
+      throw new Error('密码不正确，或该 PDF 使用了不受支持的加密方案');
+    }
+    throw new Error(msg);
+  }
+  showProgress(85, '导出未加密 PDF…');
+  const bytes = await doc.save({ useObjectStreams: false });
+  showProgress(100, '完成');
+  const fname = currentFile.name.replace(/\.pdf$/i, '') + '_decrypted.pdf';
+  showOk('已解密 ✓ 已移除密码保护', bytes, fname);
+}
+
+// ─── process button ───
+$('btnProcess').onclick = async () => {
+  if(!currentFile){ showErr('请先选择 PDF 文件'); return; }
+  hideStatus();
+  $('btnProcess').disabled = true;
+  try{
+    if(mode === 'encrypt') await doEncrypt();
+    else await doDecrypt();
+  }catch(e){
+    console.error(e);
+    showErr(e.message || String(e));
+  }finally{
+    $('btnProcess').disabled = false;
+  }
+};
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

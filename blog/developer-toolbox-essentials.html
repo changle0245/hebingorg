@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开发者每天都在用的 10 个在线小工具：JSON、JWT、正则…… ｜ hebing.org 博客</title>
+<meta name="description" content="作为程序员，你大概率每天都会用至少 3 个小工具。本文整理开发者最高频的 10 类工具，分析背后原理与安全注意事项。中英阿三语版本。">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/developer-toolbox-essentials.html">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/developer-toolbox-essentials.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/developer-toolbox-essentials.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/developer-toolbox-essentials.html">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/developer-toolbox-essentials.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta property="og:title" content="10 Online Tools Developers Use Every Day">
+<meta property="og:url" content="https://hebing.org/blog/developer-toolbox-essentials.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"开发者每天都在用的 10 个在线小工具","author":{"@type":"Organization","name":"hebing.org"},"publisher":{"@type":"Organization","name":"hebing.org","logo":{"@type":"ImageObject","url":"https://hebing.org/og-image.png"}},"datePublished":"2026-03-27","dateModified":"2026-03-27","mainEntityOfPage":"https://hebing.org/blog/developer-toolbox-essentials.html","image":"https://hebing.org/og-image.png","inLanguage":["zh-CN","en","ar"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"hebing.org","item":"https://hebing.org/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://hebing.org/blog/"},{"@type":"ListItem","position":3,"name":"Developer Toolbox","item":"https://hebing.org/blog/developer-toolbox-essentials.html"}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="post.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/blog/" class="nav-back" id="navBack">← 所有文章</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<article class="container post-wrap">
+  <div class="post-tag" id="postTag">开发者工具 · 高频清单</div>
+  <h1 class="post-h1" id="postH1">开发者每天都在用的 10 个在线小工具</h1>
+  <div class="post-meta" id="postMeta"><span>2026-03-27</span><span class="dot">约 12 分钟阅读</span></div>
+
+  <div class="zh-content active"><div class="post-content">
+    <p>每个程序员的浏览器收藏夹里都躺着一堆"开发者工具"链接。本文整理 10 类高频工具，逐一讲解：解决什么问题、技术原理、坑、什么时候用浏览器/什么时候用命令行。</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ 安全提醒</div>
+      <p>开发者工具最常处理的内容里，相当一部分是<strong>敏感数据</strong>：JWT 包含用户身份、JSON 包含 API key。优先选浏览器本地处理的工具，或直接在 IDE 里用插件完成。</p>
+    </div>
+
+    <h2>1. JSON 格式化与校验</h2>
+    <p>原理：<code>JSON.parse()</code> 解析 + <code>JSON.stringify(obj,null,2)</code> 格式化。<strong>坑</strong>：JSON 不支持注释、尾随逗号、单引号；键必须双引号。</p>
+    <p>👉 <a href="/json-formatter.html">JSON 格式化工具</a></p>
+
+    <h2>2. JWT 解码</h2>
+    <p>JWT 结构：<code>header.payload.signature</code>。前两段是 Base64URL 编码的 JSON。<strong>关键</strong>：JWT payload 不是加密的，任何人都能解码。生产 JWT 不要粘到云端工具。</p>
+    <p>👉 <a href="/jwt.html">JWT 解码工具</a></p>
+
+    <h2>3. 正则测试</h2>
+    <p>用浏览器 RegExp 配合 matchAll。<strong>坑</strong>：不同语言正则方言不完全兼容；贪婪 vs 非贪婪；<code>(a+)+b</code> 嵌套量词会引发指数级回溯。</p>
+    <p>👉 <a href="/regex.html">正则测试工具</a></p>
+
+    <h2>4. Base64 编码/解码</h2>
+    <p>每 3 字节 → 4 个 6 位单元。变体：标准、URL-safe、Base64URL（无填充，JWT 用）。</p>
+    <p>👉 <a href="/base64.html">Base64 工具</a></p>
+
+    <h2>5. UUID 生成</h2>
+    <ul>
+      <li><strong>v4</strong>：纯随机，最常用；</li>
+      <li><strong>v7</strong>：2022 新版，前缀时间戳，可排序，适合数据库主键。</li>
+    </ul>
+    <p>👉 <a href="/uuid.html">UUID 工具</a></p>
+
+    <h2>6. 时间戳转换</h2>
+    <p><strong>必懂</strong>：JS Date.now() 是毫秒，PHP/Python time() 是秒；UTC vs 本地时间；2038 年问题。</p>
+    <p>👉 <a href="/timestamp.html">时间戳工具</a></p>
+
+    <h2>7. 哈希计算（MD5 / SHA）</h2>
+    <p><strong>误用</strong>：MD5/SHA-1 不能用来存密码（用 bcrypt/argon2）；MD5 已被破解碰撞，签名场景必须 SHA-256+。</p>
+    <p>👉 <a href="/hash.html">Hash 工具</a></p>
+
+    <a href="/" class="tool-cta">
+      <div class="tool-cta-icon">🛠️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">查看所有 30 个工具</div>
+        <div class="tool-cta-sub">PDF、Excel、图片、开发者工具，全部本地处理</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>8. URL 编码/解码</h2>
+    <p><strong>encodeURI vs encodeURIComponent</strong>：拼参数永远用后者。<strong>+号陷阱</strong>：URL query 里 + 表示空格。</p>
+    <p>👉 <a href="/url-encode.html">URL 编解码工具</a></p>
+
+    <h2>9. 二维码生成</h2>
+    <p>详见专文 <a href="qrcode-generation-guide.html">二维码生成完整指南</a>。</p>
+    <p>👉 <a href="/qrcode.html">二维码工具</a></p>
+
+    <h2>10. 文本对比 (Diff)</h2>
+    <p>核心算法 Myers' 或 Patience diff。<strong>建议</strong>：对比代码用 IDE diff 最方便；JSON 先格式化再对比。</p>
+    <p>👉 <a href="/diff.html">文本对比工具</a></p>
+
+    <h2>什么时候不该用在线工具？</h2>
+    <ul>
+      <li>处理生产敏感数据 → IDE 插件；</li>
+      <li>嵌入自动化流程 → 命令行；</li>
+      <li>批量大文件 → 命令行；</li>
+      <li>需要历史记录 → IDE / 专用 App。</li>
+    </ul>
+
+    <h2>结语</h2>
+    <p>这 10 个工具几乎覆盖了开发者 80% 的"小事场景"。把它们加进收藏夹的同时，建议也熟悉对应的命令行版本。</p>
+
+    <div class="related-posts">
+      <div class="related-title">相关文章</div>
+      <div class="related-list">
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>二维码生成完整指南</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>本地处理 vs 云端工具</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="en-content"><div class="post-content">
+    <p>Every developer's browser bookmarks hide a pile of "dev tool" links. This article covers the 10 most frequently used categories: what they solve, how they work, common pitfalls, and when to use a browser tool vs the command line.</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ Security Note</div>
+      <p>Developer tools often handle <strong>sensitive data</strong>: JWTs contain identity, JSON contains API keys. Prefer browser-local tools or IDE plugins.</p>
+    </div>
+
+    <h2>1. JSON Format & Validate</h2>
+    <p>Mechanism: <code>JSON.parse()</code> + <code>JSON.stringify(obj,null,2)</code>. <strong>Pitfalls</strong>: JSON has no comments, no trailing commas, no single quotes; keys must be double-quoted.</p>
+    <p>👉 <a href="/json-formatter.html">JSON Formatter</a></p>
+
+    <h2>2. JWT Decode</h2>
+    <p>JWT structure: <code>header.payload.signature</code>. First two parts are Base64URL-encoded JSON. <strong>Critical</strong>: JWT payload is NOT encrypted — anyone can decode it. Don't paste production JWTs into cloud tools.</p>
+    <p>👉 <a href="/jwt.html">JWT Decoder</a></p>
+
+    <h2>3. Regex Tester</h2>
+    <p>Uses RegExp + matchAll. <strong>Pitfalls</strong>: regex dialects differ across languages; greedy vs non-greedy; <code>(a+)+b</code> nested quantifiers cause exponential backtracking.</p>
+    <p>👉 <a href="/regex.html">Regex Tester</a></p>
+
+    <h2>4. Base64 Encode/Decode</h2>
+    <p>Every 3 bytes → 4 six-bit units. Variants: standard, URL-safe, Base64URL (no padding, used by JWT).</p>
+    <p>👉 <a href="/base64.html">Base64 Tool</a></p>
+
+    <h2>5. UUID Generator</h2>
+    <ul>
+      <li><strong>v4</strong>: pure random, most common;</li>
+      <li><strong>v7</strong>: 2022 version, timestamp prefix, sortable, ideal for DB primary keys.</li>
+    </ul>
+    <p>👉 <a href="/uuid.html">UUID Tool</a></p>
+
+    <h2>6. Timestamp Conversion</h2>
+    <p><strong>Must know</strong>: JS Date.now() returns ms, PHP/Python time() returns sec; UTC vs local; Year 2038 problem.</p>
+    <p>👉 <a href="/timestamp.html">Timestamp Tool</a></p>
+
+    <h2>7. Hash (MD5 / SHA)</h2>
+    <p><strong>Misuse</strong>: MD5/SHA-1 can't store passwords (use bcrypt/argon2); MD5 collisions are broken — use SHA-256+ for signatures.</p>
+    <p>👉 <a href="/hash.html">Hash Tool</a></p>
+
+    <a href="/" class="tool-cta">
+      <div class="tool-cta-icon">🛠️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">See all 30 tools</div>
+        <div class="tool-cta-sub">PDF, Excel, images, dev tools — all local processing</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>8. URL Encode/Decode</h2>
+    <p><strong>encodeURI vs encodeURIComponent</strong>: always use the latter for query params. <strong>+ trap</strong>: + means space in URL query strings.</p>
+    <p>👉 <a href="/url-encode.html">URL Tool</a></p>
+
+    <h2>9. QR Code Generation</h2>
+    <p>See dedicated post: <a href="qrcode-generation-guide.html">Complete QR Code Guide</a>.</p>
+    <p>👉 <a href="/qrcode.html">QR Tool</a></p>
+
+    <h2>10. Text Diff</h2>
+    <p>Core algorithm: Myers' or Patience diff. <strong>Tip</strong>: IDE diff is easiest for code; format JSON first before diffing.</p>
+    <p>👉 <a href="/diff.html">Text Diff Tool</a></p>
+
+    <h2>When NOT to Use Online Tools</h2>
+    <ul>
+      <li>Production sensitive data → IDE plugin;</li>
+      <li>Automation pipelines → CLI;</li>
+      <li>Large file batches → CLI;</li>
+      <li>Need history → IDE / dedicated app.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>These 10 tools cover ~80% of developers' "small task" scenarios. Bookmark them, but also learn the CLI equivalents.</p>
+
+    <div class="related-posts">
+      <div class="related-title">Related Posts</div>
+      <div class="related-list">
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>Complete QR Code Guide</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>Local vs Cloud Tools</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="ar-content"><div class="post-content">
+    <p>المفضلة في متصفح كل مطور تخفي كومة من روابط "أدوات المطورين". تغطي هذه المقالة 10 فئات الأكثر استخداماً: ما تحله، كيف تعمل، الأخطاء الشائعة، ومتى تستخدم أداة المتصفح مقابل سطر الأوامر.</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ ملاحظة أمنية</div>
+      <p>أدوات المطورين غالباً ما تتعامل مع <strong>بيانات حساسة</strong>: JWTs تحتوي هوية، JSON يحتوي مفاتيح API. فضّل أدوات المتصفح المحلية أو إضافات IDE.</p>
+    </div>
+
+    <h2>1. تنسيق JSON والتحقق</h2>
+    <p>الآلية: <code>JSON.parse()</code> + <code>JSON.stringify(obj,null,2)</code>. <strong>عثرات</strong>: JSON لا يدعم التعليقات أو الفواصل اللاحقة أو علامات اقتباس مفردة.</p>
+    <p>👉 <a href="/json-formatter.html">منسق JSON</a></p>
+
+    <h2>2. فك ترميز JWT</h2>
+    <p>بنية JWT: <code>header.payload.signature</code>. <strong>مهم</strong>: حمولة JWT ليست مشفرة — أي شخص يمكنه فكها. لا تلصق JWTs الإنتاجية في أدوات سحابية.</p>
+    <p>👉 <a href="/jwt.html">مفكك JWT</a></p>
+
+    <h2>3. مختبر التعبيرات النمطية</h2>
+    <p>يستخدم RegExp + matchAll. <strong>عثرات</strong>: لهجات regex تختلف عبر اللغات؛ الجشع مقابل غير الجشع؛ <code>(a+)+b</code> تسبب تراجعاً أسياً.</p>
+    <p>👉 <a href="/regex.html">مختبر Regex</a></p>
+
+    <h2>4. ترميز/فك Base64</h2>
+    <p>كل 3 بايتات → 4 وحدات 6 بت. المتغيرات: قياسي، آمن لـ URL، Base64URL (بدون حشو، يستخدمه JWT).</p>
+    <p>👉 <a href="/base64.html">أداة Base64</a></p>
+
+    <h2>5. مولد UUID</h2>
+    <ul>
+      <li><strong>v4</strong>: عشوائي بحت، الأكثر شيوعاً؛</li>
+      <li><strong>v7</strong>: إصدار 2022، بادئة طابع زمني، قابل للفرز، مثالي لمفاتيح قاعدة البيانات.</li>
+    </ul>
+    <p>👉 <a href="/uuid.html">أداة UUID</a></p>
+
+    <h2>6. تحويل الطابع الزمني</h2>
+    <p><strong>يجب معرفة</strong>: JS Date.now() يعيد ميلي ثانية، PHP/Python time() يعيد ثانية؛ UTC مقابل المحلي؛ مشكلة 2038.</p>
+    <p>👉 <a href="/timestamp.html">أداة الطابع الزمني</a></p>
+
+    <h2>7. التجزئة (MD5 / SHA)</h2>
+    <p><strong>سوء الاستخدام</strong>: MD5/SHA-1 لا يمكن أن تخزن كلمات مرور (استخدم bcrypt/argon2).</p>
+    <p>👉 <a href="/hash.html">أداة التجزئة</a></p>
+
+    <a href="/" class="tool-cta">
+      <div class="tool-cta-icon">🛠️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">عرض جميع 30 أداة</div>
+        <div class="tool-cta-sub">PDF و Excel وصور وأدوات مطورين — كلها معالجة محلية</div>
+      </div>
+      <div class="tool-cta-arrow">←</div>
+    </a>
+
+    <h2>8. ترميز/فك URL</h2>
+    <p><strong>encodeURI مقابل encodeURIComponent</strong>: استخدم الأخير دائماً لمعاملات الاستعلام.</p>
+    <p>👉 <a href="/url-encode.html">أداة URL</a></p>
+
+    <h2>9. توليد رمز QR</h2>
+    <p>راجع المقال المخصص: <a href="qrcode-generation-guide.html">الدليل الشامل لرمز QR</a>.</p>
+    <p>👉 <a href="/qrcode.html">أداة QR</a></p>
+
+    <h2>10. مقارنة النصوص (Diff)</h2>
+    <p>الخوارزمية الأساسية: Myers' أو Patience diff. <strong>نصيحة</strong>: IDE diff الأسهل للكود.</p>
+    <p>👉 <a href="/diff.html">أداة Diff</a></p>
+
+    <h2>متى لا تستخدم أدوات الإنترنت</h2>
+    <ul>
+      <li>بيانات إنتاج حساسة → إضافة IDE؛</li>
+      <li>خطوط أتمتة → سطر الأوامر؛</li>
+      <li>دفعات ملفات كبيرة → سطر الأوامر؛</li>
+      <li>تحتاج تاريخاً → IDE / تطبيق مخصص.</li>
+    </ul>
+
+    <h2>الخاتمة</h2>
+    <p>هذه الأدوات العشر تغطي ~80% من سيناريوهات "المهام الصغيرة" للمطورين.</p>
+
+    <div class="related-posts">
+      <div class="related-title">مقالات ذات صلة</div>
+      <div class="related-list">
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>الدليل الشامل لرمز QR</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>المحلي مقابل السحابي</strong></a>
+      </div>
+    </div>
+  </div></div>
+</article>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const META = {
+  zh: { tag:'开发者工具 · 高频清单', h1:'开发者每天都在用的 10 个在线小工具：JSON、JWT、正则……', meta:'<span>2026-03-27</span><span class="dot">约 12 分钟阅读</span>', back:'← 所有文章', footer:['首页','关于','博客','联系','条款','隐私'] },
+  en: { tag:'Dev Tools · Frequent List', h1:'10 Online Tools Developers Use Every Day: JSON, JWT, Regex…', meta:'<span>2026-03-27</span><span class="dot">12 min read</span>', back:'← All Posts', footer:['Home','About','Blog','Contact','Terms','Privacy'] },
+  ar: { tag:'أدوات المطورين · قائمة', h1:'10 أدوات يستخدمها المطورون يومياً: JSON، JWT، التعبيرات النمطية', meta:'<span>2026-03-27</span><span class="dot">12 دقيقة قراءة</span>', back:'→ جميع المقالات', footer:['الرئيسية','حول','المدونة','تواصل','الشروط','الخصوصية'] }
+};
+function setLang(lang){
+  const m = META[lang]; if(!m) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  document.getElementById('postTag').textContent = m.tag;
+  document.getElementById('postH1').textContent = m.h1;
+  document.getElementById('postMeta').innerHTML = m.meta;
+  document.getElementById('navBack').textContent = m.back;
+  const links = ['/','/about.html','/blog/','/contact.html','/terms.html','/privacy.html'];
+  document.getElementById('footerLinks').innerHTML = m.footer.map((t,i)=>`<a href="${links[i]}">${t}</a>`).join('');
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

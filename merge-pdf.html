@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" dir="ltr">
+<html lang="zh-CN" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +11,29 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
 <meta property="og:title" content="PDF文件合并在线-免费合并多个PDF|hebing.org">
 <meta property="og:url" content="https://hebing.org/merge-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
 <link rel="alternate" hreflang="zh" href="https://hebing.org/merge-pdf.html">
 <link rel="alternate" hreflang="en" href="https://hebing.org/merge-pdf.html">
 <link rel="alternate" hreflang="ar" href="https://hebing.org/merge-pdf.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
 <style>
 :root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
@@ -148,7 +161,7 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
     --white: #111110;
     --gray-100: #1e1e1c;
     --gray-200: #2a2a28;
-    --gray-400: #6b6966;
+    --gray-400: #8a8884;
     --gray-600: #a09e9b;
     --accent: #e85d2a;
     --accent-light: #2a1a10;
@@ -292,9 +305,9 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
 
 <div class="tool-wrap">
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" multiple accept=".pdf">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel" multiple accept=".pdf">
     <div class="drop-icon">📄</div>
-    <div class="drop-label" data-i18n="drop.label">点击选择文件，或拖拽到此处</div>
+    <div class="drop-label" id="dropLabel" data-i18n="drop.label">点击选择文件，或拖拽到此处</div>
     <div class="drop-sub"><strong>.pdf</strong> &nbsp;·&nbsp; <span data-i18n="drop.limit">无大小限制，可多选</span></div>
   </div>
 
@@ -438,7 +451,7 @@ const I18N = {
 };
 function setLang(lang){
   const d=I18N[lang];if(!d)return;
-  document.documentElement.lang=lang;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;
   document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n]});
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
@@ -550,7 +563,7 @@ document.getElementById('btnMerge').onclick=async()=>{
   try{
     if(!window.PDFLib){
       pt.textContent='加载处理库...';
-      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='/vendor/pdf-lib@1.17.1/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
     }
     const merged=await PDFLib.PDFDocument.create();
     for(let i=0;i<files.length;i++){
@@ -565,7 +578,7 @@ document.getElementById('btnMerge').onclick=async()=>{
     fill.style.width='95%';pt.textContent='生成文件...';
     const bytes=await merged.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='合并文档.pdf';a.click();
+    const a=document.createElement('a');const __dlUrl=URL.createObjectURL(blob);a.href=__dlUrl;a.download='合并文档.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(__dlUrl),60000);
     fill.style.width='100%';setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
     
     const totalPages = merged.getPageCount();
@@ -584,5 +597,150 @@ document.getElementById('btnMerge').onclick=async()=>{
 const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
 setLang(sl);
 </script>
+
+
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
 </body>
 </html>

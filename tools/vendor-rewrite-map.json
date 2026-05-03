@@ -1,0 +1,20 @@
+{
+  "https://cdn.jsdelivr.net/npm/diff@5.2.0/dist/diff.min.js": "/vendor/diff@5.2.0/diff.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js": "/vendor/jszip@3.10.1/jszip.min.js",
+  "https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js": "/vendor/pdf-lib@1.17.1/pdf-lib.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js": "/vendor/pdf.js@3.11.174/pdf.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js": "/vendor/pdf.js@3.11.174/pdf.worker.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js": "/vendor/pako@2.1.0/pako.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/upng-js/2.1.0/UPNG.js": "/vendor/upng-js@2.1.0/UPNG.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js": "/vendor/xlsx@0.18.5/xlsx.full.min.js",
+  "https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js": "/vendor/papaparse@5.4.1/papaparse.min.js",
+  "https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.min.js": "/vendor/lamejs@1.2.7/lamejs.iife.min.js",
+  "https://cdn.jsdelivr.net/npm/js-md5@0.7.3/build/md5.min.js": "/vendor/js-md5@0.7.3/md5.min.js",
+  "https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js": "/vendor/qrcode-generator@1.4.4/qrcode.min.js",
+  "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js": "/vendor/jsqr@1.4.0/jsQR.js",
+  "https://unpkg.com/docx@8.5.0/build/index.umd.js": "/vendor/docx@8.5.0/index.umd.js",
+  "https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.6.5/dist/pdf-lib.min.js": "/vendor/cantoo-pdf-lib@2.6.5/pdf-lib.min.js",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf.js": "/vendor/mupdf@1.27.0/mupdf.js",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf-wasm.js": "/vendor/mupdf@1.27.0/mupdf-wasm.js",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf-wasm.wasm": "/vendor/mupdf@1.27.0/mupdf-wasm.wasm"
+}

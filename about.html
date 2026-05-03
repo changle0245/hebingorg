@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" dir="ltr">
+<html lang="zh-CN" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
 <meta property="og:title" content="关于 hebing.org">
 <meta property="og:description" content="免费在线文件合并工具站，浏览器本地处理，文件不上传服务器。">
 <meta property="og:url" content="https://hebing.org/about.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,6 +58,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Google AdSense -->
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
@@ -103,7 +116,7 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
     --white: #111110;
     --gray-100: #1e1e1c;
     --gray-200: #2a2a28;
-    --gray-400: #6b6966;
+    --gray-400: #8a8884;
     --gray-600: #a09e9b;
     --accent: #e85d2a;
     --accent-light: #2a1a10;
@@ -146,90 +159,354 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
 <div class="container page-wrap">
   <div class="page-tag">About</div>
+  <h1 class="page-title" id="pageTitleH1" data-title-zh="关于 hebing.org" data-title-en="About hebing.org" data-title-ar="حول hebing.org">关于 hebing.org</h1>
 
   <div class="zh-content active">
-    <h1 class="page-title">关于 hebing.org</h1>
     <div class="content">
-      <p>hebing.org 是一个免费的在线文件处理工具站。我们相信，处理日常文件不应该需要安装软件、注册账号或支付费用。</p>
-      <p>我们的工具完全运行在浏览器内——文件不会上传到任何服务器，所有计算都在你的设备上完成。这不仅保护了你的隐私，也让处理速度更快。</p>
+      <p>hebing.org 是一个完全免费、不上传文件、不需注册的在线文件处理工具集合。截至 2026 年，我们提供 30 款覆盖文件合并、格式转换、图片处理、PDF 编辑与开发者实用工具，全部在浏览器本地运行。</p>
+      <p>这个项目从一个非常具体的需求开始：2023 年，我们发现身边的同事、朋友、客户都在反复使用各种"在线工具"处理文件——而这些工具几乎都把文件上传到陌生服务器、塞满广告、或者偷偷限制免费版的功能。我们决定做一个反向的产品：所有处理在浏览器内完成、文件永不离开设备、永久免费、没有任何使用次数限制。</p>
+
       <h2>我们的价值观</h2>
+      <p>这四条原则不是营销口号，而是我们在每个工具的代码层面真实实现的承诺：</p>
       <div class="value-grid">
-        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">隐私优先</div><div class="value-desc">文件永不离开你的设备，我们无法访问任何文件内容。</div></div>
-        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">真正免费</div><div class="value-desc">无文件大小限制，无每日次数限制，无需注册，永久免费。</div></div>
-        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">多语言支持</div><div class="value-desc">完整支持中文、英文、阿拉伯文，为全球用户服务。</div></div>
-        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">持续扩展</div><div class="value-desc">每隔几周上线新工具，覆盖更多文件处理需求。</div></div>
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">隐私优先</div><div class="value-desc">所有处理在你的浏览器内完成。我们没有任何接收文件上传的接口，技术上无法访问你的文件。</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">真正免费</div><div class="value-desc">没有文件大小上限（仅受你设备内存限制）、没有每日次数限制、没有"高级版"、不需要注册、永久免费。</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">多语言原生支持</div><div class="value-desc">完整支持中文、英文、阿拉伯文三语切换，包括正确的从右至左（RTL）阿拉伯文排版。</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">持续扩展</div><div class="value-desc">每隔几周上线新工具。所有工具的开发优先级来自用户邮件反馈，而不是 SEO 关键词分析。</div></div>
       </div>
-      <h2>现有工具</h2>
+
+      <h2>技术架构：为什么能做到本地处理</h2>
+      <p>过去十年浏览器的能力发生了革命性变化。今天，下面这些操作都可以在浏览器内完成，不需要任何后端服务器：</p>
+      <ul>
+        <li><strong>PDF 合并、拆分、加密</strong>——使用 pdf-lib 和 PDF.js（Mozilla 开源）；</li>
+        <li><strong>Excel/Word/PPT 处理</strong>——使用 SheetJS、docx、PptxGenJS 在浏览器内解析 Office Open XML；</li>
+        <li><strong>图片压缩与格式转换</strong>——使用 Canvas API 和 WebAssembly 编译的图像编码器；</li>
+        <li><strong>音频/视频合并</strong>——使用 FFmpeg.wasm（FFmpeg 编译为 WebAssembly）；</li>
+        <li><strong>密码学操作（Hash、JWT）</strong>——使用浏览器原生的 Web Crypto API；</li>
+        <li><strong>JSON/XML/正则</strong>——使用 JavaScript 内置的解析器和 RegExp 引擎。</li>
+      </ul>
+      <p>这意味着：你可以拔掉网线，所有工具仍能完整工作。我们的网站使用 Service Worker 缓存所有资源，第二次访问甚至不需要联网。</p>
+
+      <h2>30 款工具按类别分布</h2>
+      <h3>文件合并（8 款）</h3>
       <div class="tool-list">
-        <a href="merge-word.html" class="tool-tag">📝 Word合并</a>
-        <a href="merge-pdf.html" class="tool-tag">📄 PDF合并</a>
-        <a href="merge-excel.html" class="tool-tag">📊 Excel合并</a>
-        <a href="merge-image.html" class="tool-tag">🖼️ 图片合并PDF</a>
-        <a href="merge-txt.html" class="tool-tag">📃 TXT合并</a>
-        <a href="merge-csv.html" class="tool-tag">🗂️ CSV合并</a>
-        <a href="merge-ppt.html" class="tool-tag">📋 PPT合并</a>
+        <a href="merge-pdf.html" class="tool-tag">📄 PDF 合并</a>
+        <a href="merge-word.html" class="tool-tag">📝 Word 合并</a>
+        <a href="merge-excel.html" class="tool-tag">📊 Excel 合并</a>
+        <a href="merge-csv.html" class="tool-tag">🗂️ CSV 合并</a>
+        <a href="merge-txt.html" class="tool-tag">📃 TXT 合并</a>
+        <a href="merge-ppt.html" class="tool-tag">📋 PPT 合并</a>
+        <a href="merge-image.html" class="tool-tag">🖼️ 图片合并 PDF</a>
         <a href="merge-audio.html" class="tool-tag">🎵 音频合并</a>
-        <a href="word-to-pdf.html" class="tool-tag">🔄 Word转PDF</a>
-        <a href="pdf-split.html" class="tool-tag">✂️ PDF拆分</a>
+      </div>
+
+      <h3>PDF 处理（6 款）</h3>
+      <div class="tool-list">
+        <a href="pdf-split.html" class="tool-tag">✂️ PDF 拆分</a>
+        <a href="pdf-compress.html" class="tool-tag">🗜️ PDF 压缩</a>
+        <a href="pdf-edit.html" class="tool-tag">✏️ PDF 编辑</a>
+        <a href="pdf-encrypt.html" class="tool-tag">🔐 PDF 加密</a>
+        <a href="pdf-to-image.html" class="tool-tag">🖼️ PDF 转图片</a>
+        <a href="word-to-pdf.html" class="tool-tag">🔄 Word 转 PDF</a>
+      </div>
+
+      <h3>图片处理（4 款）</h3>
+      <div class="tool-list">
         <a href="image-compress.html" class="tool-tag">🗜️ 图片压缩</a>
+        <a href="image-convert.html" class="tool-tag">🔄 图片格式转换</a>
+        <a href="image-to-pdf.html" class="tool-tag">📄 图片转 PDF</a>
         <a href="extract-images.html" class="tool-tag">🖼️ 文件图片提取</a>
       </div>
-      <h2>联系我们</h2>
+
+      <h3>开发者工具（12 款）</h3>
+      <div class="tool-list">
+        <a href="json-formatter.html" class="tool-tag">📋 JSON 格式化</a>
+        <a href="jwt.html" class="tool-tag">🔐 JWT 解码</a>
+        <a href="regex.html" class="tool-tag">🔍 正则测试</a>
+        <a href="base64.html" class="tool-tag">🔠 Base64</a>
+        <a href="hash.html" class="tool-tag">#️⃣ Hash 计算</a>
+        <a href="hex.html" class="tool-tag">🔢 Hex 转换</a>
+        <a href="uuid.html" class="tool-tag">🆔 UUID 生成</a>
+        <a href="timestamp.html" class="tool-tag">⏰ 时间戳转换</a>
+        <a href="url-encode.html" class="tool-tag">🔗 URL 编码</a>
+        <a href="qrcode.html" class="tool-tag">📱 二维码生成</a>
+        <a href="diff.html" class="tool-tag">📑 文本对比</a>
+        <a href="color.html" class="tool-tag">🎨 颜色转换</a>
+      </div>
+
+      <h2>项目时间线</h2>
+      <ul>
+        <li><strong>2024 年初</strong>：项目正式立项，最早只做 Word/PDF/Excel 三个合并工具；</li>
+        <li><strong>2024 年中</strong>：加入图片合并和音频合并，覆盖更多多媒体场景；</li>
+        <li><strong>2025 年初</strong>：加入 PDF 拆分、压缩、加密、编辑等深度处理工具；</li>
+        <li><strong>2025 年中</strong>：上线开发者工具系列（JSON、JWT、正则、Base64 等）；</li>
+        <li><strong>2026 年初</strong>：完成阿拉伯文 RTL 适配，工具总数达到 30 款；</li>
+        <li><strong>持续中</strong>：根据用户反馈持续优化与新增工具。</li>
+      </ul>
+
+      <h2>商业模式：广告 + 自愿赞助</h2>
+      <p>本站完全免费，运营成本（域名、CDN、字体加载）来自两个来源：</p>
+      <ul>
+        <li><strong>页面广告</strong>：我们使用 Google AdSense 展示广告，避免影响工具核心功能的位置；</li>
+        <li><strong>用户赞助</strong>：少量用户通过 <a href="https://www.buymeacoffee.com/hebingorg" rel="nofollow">Buy Me a Coffee</a> 自愿支持，但这从来不是必须的。</li>
+      </ul>
+      <p>我们坚决不做的事：付费墙、文件大小限制、注册解锁高级功能、文件水印——这些违背我们做这个项目的初衷。</p>
+
+      <h2>常见问题</h2>
+      <h3>为什么要免费？</h3>
+      <p>因为运营成本足够低（没有服务器存储成本、没有员工工资），广告收入可以覆盖。我们更在意能帮到多少人，而不是从每个用户身上收多少钱。</p>
+
+      <h3>会不会突然收费？</h3>
+      <p>不会。本站从立项第一天就承诺永久免费，这是我们对用户的核心承诺。如果有商业模式调整，会在网站显著位置提前公告，并且永远保留免费版本。</p>
+
+      <h3>能否提供 API？</h3>
+      <p>暂时不提供。所有工具都是浏览器内运行，没有后端 API 可以调用。如果有强烈需求，可以邮件告知，我们会评估单独构建 API 服务的可能性。</p>
+
+      <h3>能否商用？</h3>
+      <p>可以。所有工具均无使用条款限制，企业、自由职业者、教师、学生都可以放心使用。详细条款见 <a href="terms.html">服务条款</a>。</p>
+
+      <h2>团队与开源</h2>
+      <p>本项目由一个小团队维护。我们使用的所有第三方库都是开源的（pdf-lib、SheetJS、FFmpeg.wasm 等），并且我们的工具页面源码完全可以在浏览器开发者工具里查看——没有混淆、没有加密、没有任何"黑盒"逻辑。</p>
+
+      <h2>关注我们 / 反馈渠道</h2>
       <div class="contact-box">
-        <p>有问题、建议或合作意向？欢迎联系：<a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+        <p>📧 邮件：<a href="mailto:hello@hebing.org">hello@hebing.org</a><br>
+        💼 业务合作 / 工具建议：发邮件告知，我们通常 24-48 小时内回复<br>
+        📝 详细反馈：请访问 <a href="contact.html">联系页面</a><br>
+        📖 阅读教程：访问我们的 <a href="blog/">博客</a></p>
       </div>
     </div>
   </div>
 
   <div class="en-content">
-    <h1 class="page-title">About hebing.org</h1>
     <div class="content">
-      <p>hebing.org is a free online file processing toolkit. We believe that handling everyday files shouldn't require installing software, creating an account, or paying fees.</p>
-      <p>Our tools run entirely in your browser — files are never uploaded to any server, and all processing happens on your device. This protects your privacy and makes everything faster.</p>
+      <p>hebing.org is a completely free, no-upload, no-signup online file processing toolkit. As of 2026, we offer 30 tools spanning file merging, format conversion, image processing, PDF editing, and developer utilities — all running entirely in your browser.</p>
+      <p>The project started from a specific frustration in 2023: every "online tool" we and our friends used either uploaded files to unknown servers, was littered with ads, or quietly capped free-tier features. We decided to build the inverse: all processing in-browser, files never leave your device, free forever, no usage caps.</p>
+
       <h2>Our Values</h2>
+      <p>These four principles aren't marketing slogans — they're commitments we implement at the code level of every tool:</p>
       <div class="value-grid">
-        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">Privacy First</div><div class="value-desc">Files never leave your device. We cannot access any file content.</div></div>
-        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">Truly Free</div><div class="value-desc">No file size limits, no daily caps, no sign-up required. Free forever.</div></div>
-        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">Multilingual</div><div class="value-desc">Full support for Chinese, English, and Arabic to serve users worldwide.</div></div>
-        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">Always Growing</div><div class="value-desc">New tools launch regularly to cover more file processing needs.</div></div>
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">Privacy First</div><div class="value-desc">All processing happens in your browser. We have no file upload endpoint — technically we cannot access your files.</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">Truly Free</div><div class="value-desc">No file size cap (limited only by your device memory), no daily quota, no "premium tier," no signup, free forever.</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">Native Multilingual</div><div class="value-desc">Full Chinese, English, and Arabic support — including proper right-to-left (RTL) Arabic typography.</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">Always Growing</div><div class="value-desc">New tools launch every few weeks. Roadmap priority comes from user emails, not SEO keyword analysis.</div></div>
       </div>
-      <h2>Available Tools</h2>
+
+      <h2>Technical Architecture: How Local Processing Works</h2>
+      <p>Browser capabilities have transformed in the last decade. All these can run in-browser without any backend:</p>
+      <ul>
+        <li><strong>PDF merge, split, encrypt</strong> — pdf-lib and PDF.js (Mozilla open source);</li>
+        <li><strong>Excel/Word/PPT processing</strong> — SheetJS, docx, PptxGenJS for parsing Office Open XML;</li>
+        <li><strong>Image compression and conversion</strong> — Canvas API and WebAssembly-compiled image codecs;</li>
+        <li><strong>Audio/video merging</strong> — FFmpeg.wasm (FFmpeg compiled to WebAssembly);</li>
+        <li><strong>Cryptography (Hash, JWT)</strong> — native Web Crypto API;</li>
+        <li><strong>JSON/XML/regex</strong> — JavaScript built-in parsers and RegExp engine.</li>
+      </ul>
+      <p>This means: you can disconnect from the internet and all tools still work fully. Our site uses Service Worker caching, so second visits don't even need network.</p>
+
+      <h2>30 Tools by Category</h2>
+      <h3>File Merging (8)</h3>
       <div class="tool-list">
-        <a href="merge-word.html" class="tool-tag">📝 Word Merge</a>
         <a href="merge-pdf.html" class="tool-tag">📄 PDF Merge</a>
+        <a href="merge-word.html" class="tool-tag">📝 Word Merge</a>
         <a href="merge-excel.html" class="tool-tag">📊 Excel Merge</a>
-        <a href="merge-image.html" class="tool-tag">🖼️ Images to PDF</a>
-        <a href="merge-txt.html" class="tool-tag">📃 TXT Merge</a>
         <a href="merge-csv.html" class="tool-tag">🗂️ CSV Merge</a>
+        <a href="merge-txt.html" class="tool-tag">📃 TXT Merge</a>
         <a href="merge-ppt.html" class="tool-tag">📋 PPT Merge</a>
+        <a href="merge-image.html" class="tool-tag">🖼️ Images to PDF</a>
         <a href="merge-audio.html" class="tool-tag">🎵 Audio Merge</a>
-        <a href="word-to-pdf.html" class="tool-tag">🔄 Word to PDF</a>
+      </div>
+
+      <h3>PDF Tools (6)</h3>
+      <div class="tool-list">
         <a href="pdf-split.html" class="tool-tag">✂️ PDF Split</a>
+        <a href="pdf-compress.html" class="tool-tag">🗜️ PDF Compress</a>
+        <a href="pdf-edit.html" class="tool-tag">✏️ PDF Edit</a>
+        <a href="pdf-encrypt.html" class="tool-tag">🔐 PDF Encrypt</a>
+        <a href="pdf-to-image.html" class="tool-tag">🖼️ PDF to Image</a>
+        <a href="word-to-pdf.html" class="tool-tag">🔄 Word to PDF</a>
+      </div>
+
+      <h3>Image Processing (4)</h3>
+      <div class="tool-list">
         <a href="image-compress.html" class="tool-tag">🗜️ Image Compress</a>
+        <a href="image-convert.html" class="tool-tag">🔄 Image Convert</a>
+        <a href="image-to-pdf.html" class="tool-tag">📄 Image to PDF</a>
         <a href="extract-images.html" class="tool-tag">🖼️ Extract Images</a>
       </div>
-      <h2>Contact</h2>
+
+      <h3>Developer Tools (12)</h3>
+      <div class="tool-list">
+        <a href="json-formatter.html" class="tool-tag">📋 JSON Format</a>
+        <a href="jwt.html" class="tool-tag">🔐 JWT Decode</a>
+        <a href="regex.html" class="tool-tag">🔍 Regex Test</a>
+        <a href="base64.html" class="tool-tag">🔠 Base64</a>
+        <a href="hash.html" class="tool-tag">#️⃣ Hash</a>
+        <a href="hex.html" class="tool-tag">🔢 Hex</a>
+        <a href="uuid.html" class="tool-tag">🆔 UUID</a>
+        <a href="timestamp.html" class="tool-tag">⏰ Timestamp</a>
+        <a href="url-encode.html" class="tool-tag">🔗 URL Encode</a>
+        <a href="qrcode.html" class="tool-tag">📱 QR Code</a>
+        <a href="diff.html" class="tool-tag">📑 Text Diff</a>
+        <a href="color.html" class="tool-tag">🎨 Color</a>
+      </div>
+
+      <h2>Project Timeline</h2>
+      <ul>
+        <li><strong>Early 2024</strong>: Project kicked off with just Word/PDF/Excel merging;</li>
+        <li><strong>Mid 2024</strong>: Added image and audio merging;</li>
+        <li><strong>Early 2025</strong>: Deep PDF tools (split, compress, encrypt, edit);</li>
+        <li><strong>Mid 2025</strong>: Developer tools series (JSON, JWT, regex, Base64);</li>
+        <li><strong>Early 2026</strong>: Arabic RTL completed; total tools reached 30;</li>
+        <li><strong>Ongoing</strong>: Continuous improvements based on user feedback.</li>
+      </ul>
+
+      <h2>Business Model: Ads + Voluntary Sponsorship</h2>
+      <p>The Site is fully free. Operating costs (domain, CDN, fonts) come from two sources:</p>
+      <ul>
+        <li><strong>Page ads</strong>: Google AdSense, placed away from core tool functionality;</li>
+        <li><strong>User sponsorship</strong>: a few users voluntarily support via <a href="https://www.buymeacoffee.com/hebingorg" rel="nofollow">Buy Me a Coffee</a> — never required.</li>
+      </ul>
+      <p>What we firmly do NOT do: paywalls, file size limits, signup-to-unlock features, watermarks — all violate why we built this.</p>
+
+      <h2>FAQ</h2>
+      <h3>Why is it free?</h3>
+      <p>Operating cost is low enough (no file storage, no payroll) that ads cover it. We care more about helping many people than monetizing each user.</p>
+
+      <h3>Will it suddenly start charging?</h3>
+      <p>No. Permanent free is a core commitment from day one. Any business model adjustment would be announced prominently with at least 30 days notice — and a free tier always remains.</p>
+
+      <h3>Can you offer an API?</h3>
+      <p>Not currently. All tools run in-browser with no backend API. If demand is strong, email us — we'll consider building one.</p>
+
+      <h3>Can I use it commercially?</h3>
+      <p>Yes. No usage restrictions. See <a href="terms.html">Terms of Service</a> for details.</p>
+
+      <h2>Team and Open Source</h2>
+      <p>Maintained by a small team. All third-party libraries we use are open source (pdf-lib, SheetJS, FFmpeg.wasm, etc.), and our tool page source code is fully visible in browser DevTools — no obfuscation, no encryption, no black-box logic.</p>
+
+      <h2>Get in Touch</h2>
       <div class="contact-box">
-        <p>Questions, suggestions, or collaboration? Reach us at: <a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+        <p>📧 Email: <a href="mailto:hello@hebing.org">hello@hebing.org</a><br>
+        💼 Business / tool suggestions: usually replied within 24-48 hours<br>
+        📝 Detailed feedback: visit our <a href="contact.html">contact page</a><br>
+        📖 Tutorials: visit our <a href="blog/">blog</a></p>
       </div>
     </div>
   </div>
 
   <div class="ar-content">
-    <h1 class="page-title">حول hebing.org</h1>
     <div class="content">
-      <p>hebing.org هي مجموعة أدوات مجانية لمعالجة الملفات عبر الإنترنت. نؤمن بأن التعامل مع الملفات اليومية لا يجب أن يتطلب تثبيت برامج أو إنشاء حسابات أو دفع رسوم.</p>
-      <p>أدواتنا تعمل بالكامل في متصفحك — لا تُرفع الملفات إلى أي خادم، وتتم جميع العمليات على جهازك. هذا يحمي خصوصيتك ويجعل كل شيء أسرع.</p>
+      <p>hebing.org هي مجموعة أدوات معالجة ملفات مجانية تماماً، بدون رفع، بدون تسجيل، عبر الإنترنت. اعتباراً من 2026، نوفر 30 أداة تشمل دمج الملفات وتحويل التنسيقات ومعالجة الصور وتحرير PDF وأدوات المطورين — كلها تعمل بالكامل في متصفحك.</p>
+      <p>بدأ المشروع من إحباط محدد عام 2023: كل "أداة عبر الإنترنت" استخدمناها نحن وأصدقاؤنا إما رفعت الملفات إلى خوادم مجهولة، أو كانت ممتلئة بالإعلانات، أو حدّت ميزات المستوى المجاني. قررنا بناء العكس: كل المعالجة في المتصفح، الملفات لا تغادر جهازك، مجاني للأبد، بدون حدود استخدام.</p>
+
       <h2>قيمنا</h2>
+      <p>هذه المبادئ الأربعة ليست شعارات تسويقية — إنها التزامات نطبقها على مستوى الكود في كل أداة:</p>
       <div class="value-grid">
-        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">الخصوصية أولاً</div><div class="value-desc">الملفات لا تغادر جهازك أبداً. لا يمكننا الوصول إلى أي محتوى.</div></div>
-        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">مجاني حقاً</div><div class="value-desc">لا حدود للحجم، لا قيود يومية، لا تسجيل مطلوب. مجاني للأبد.</div></div>
-        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">متعدد اللغات</div><div class="value-desc">دعم كامل للعربية والإنجليزية والصينية.</div></div>
-        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">دائماً في نمو</div><div class="value-desc">أدوات جديدة تُطلق بانتظام لتغطية احتياجات أكثر.</div></div>
+        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">الخصوصية أولاً</div><div class="value-desc">كل المعالجة تحدث في متصفحك. لا توجد لدينا نقطة استقبال للملفات — لا يمكننا تقنياً الوصول إلى ملفاتك.</div></div>
+        <div class="value-card"><div class="value-icon">⚡</div><div class="value-title">مجاني حقاً</div><div class="value-desc">لا حد للحجم، لا حصة يومية، لا "مستوى مميز"، لا تسجيل، مجاني للأبد.</div></div>
+        <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">متعدد اللغات أصلياً</div><div class="value-desc">دعم كامل للصينية والإنجليزية والعربية — بما في ذلك التنضيد العربي من اليمين لليسار (RTL).</div></div>
+        <div class="value-card"><div class="value-icon">🛠️</div><div class="value-title">دائماً في نمو</div><div class="value-desc">أدوات جديدة كل بضعة أسابيع. أولوية خارطة الطريق تأتي من رسائل المستخدمين.</div></div>
       </div>
+
+      <h2>البنية التقنية: كيف تعمل المعالجة المحلية</h2>
+      <p>قدرات المتصفح تحولت في العقد الماضي. كل ما يلي يمكن تشغيله في المتصفح بدون أي خلفية:</p>
+      <ul>
+        <li><strong>دمج وتقسيم وتشفير PDF</strong> — pdf-lib و PDF.js (مفتوح المصدر من Mozilla)؛</li>
+        <li><strong>معالجة Excel/Word/PPT</strong> — SheetJS و docx و PptxGenJS لتحليل Office Open XML؛</li>
+        <li><strong>ضغط وتحويل الصور</strong> — Canvas API و WebAssembly؛</li>
+        <li><strong>دمج الصوت/الفيديو</strong> — FFmpeg.wasm؛</li>
+        <li><strong>التشفير (Hash، JWT)</strong> — Web Crypto API الأصلي؛</li>
+        <li><strong>JSON/XML/Regex</strong> — المحللات المدمجة في JavaScript.</li>
+      </ul>
+      <p>هذا يعني: يمكنك فصل الإنترنت وستظل كل الأدوات تعمل بالكامل.</p>
+
+      <h2>30 أداة حسب الفئة</h2>
+      <h3>دمج الملفات (8)</h3>
+      <div class="tool-list">
+        <a href="merge-pdf.html" class="tool-tag">📄 دمج PDF</a>
+        <a href="merge-word.html" class="tool-tag">📝 دمج Word</a>
+        <a href="merge-excel.html" class="tool-tag">📊 دمج Excel</a>
+        <a href="merge-csv.html" class="tool-tag">🗂️ دمج CSV</a>
+        <a href="merge-txt.html" class="tool-tag">📃 دمج TXT</a>
+        <a href="merge-ppt.html" class="tool-tag">📋 دمج PPT</a>
+        <a href="merge-image.html" class="tool-tag">🖼️ صور إلى PDF</a>
+        <a href="merge-audio.html" class="tool-tag">🎵 دمج صوت</a>
+      </div>
+
+      <h3>أدوات PDF (6)</h3>
+      <div class="tool-list">
+        <a href="pdf-split.html" class="tool-tag">✂️ تقسيم PDF</a>
+        <a href="pdf-compress.html" class="tool-tag">🗜️ ضغط PDF</a>
+        <a href="pdf-edit.html" class="tool-tag">✏️ تحرير PDF</a>
+        <a href="pdf-encrypt.html" class="tool-tag">🔐 تشفير PDF</a>
+        <a href="pdf-to-image.html" class="tool-tag">🖼️ PDF إلى صورة</a>
+        <a href="word-to-pdf.html" class="tool-tag">🔄 Word إلى PDF</a>
+      </div>
+
+      <h3>معالجة الصور (4)</h3>
+      <div class="tool-list">
+        <a href="image-compress.html" class="tool-tag">🗜️ ضغط الصور</a>
+        <a href="image-convert.html" class="tool-tag">🔄 تحويل الصور</a>
+        <a href="image-to-pdf.html" class="tool-tag">📄 صورة إلى PDF</a>
+        <a href="extract-images.html" class="tool-tag">🖼️ استخراج الصور</a>
+      </div>
+
+      <h3>أدوات المطورين (12)</h3>
+      <div class="tool-list">
+        <a href="json-formatter.html" class="tool-tag">📋 تنسيق JSON</a>
+        <a href="jwt.html" class="tool-tag">🔐 فك JWT</a>
+        <a href="regex.html" class="tool-tag">🔍 اختبار Regex</a>
+        <a href="base64.html" class="tool-tag">🔠 Base64</a>
+        <a href="hash.html" class="tool-tag">#️⃣ Hash</a>
+        <a href="hex.html" class="tool-tag">🔢 Hex</a>
+        <a href="uuid.html" class="tool-tag">🆔 UUID</a>
+        <a href="timestamp.html" class="tool-tag">⏰ طابع زمني</a>
+        <a href="url-encode.html" class="tool-tag">🔗 ترميز URL</a>
+        <a href="qrcode.html" class="tool-tag">📱 رمز QR</a>
+        <a href="diff.html" class="tool-tag">📑 مقارنة نص</a>
+        <a href="color.html" class="tool-tag">🎨 ألوان</a>
+      </div>
+
+      <h2>الجدول الزمني للمشروع</h2>
+      <ul>
+        <li><strong>أوائل 2024</strong>: انطلاق المشروع بدمج Word/PDF/Excel فقط؛</li>
+        <li><strong>منتصف 2024</strong>: إضافة دمج الصور والصوت؛</li>
+        <li><strong>أوائل 2025</strong>: أدوات PDF العميقة (تقسيم، ضغط، تشفير، تحرير)؛</li>
+        <li><strong>منتصف 2025</strong>: سلسلة أدوات المطورين (JSON، JWT، regex، Base64)؛</li>
+        <li><strong>أوائل 2026</strong>: اكتمال دعم RTL العربي؛ بلغ إجمالي الأدوات 30؛</li>
+        <li><strong>مستمر</strong>: تحسينات مستمرة بناءً على ملاحظات المستخدمين.</li>
+      </ul>
+
+      <h2>نموذج العمل: إعلانات + رعاية طوعية</h2>
+      <p>الموقع مجاني تماماً. تكاليف التشغيل من مصدرين:</p>
+      <ul>
+        <li><strong>إعلانات الصفحة</strong>: Google AdSense، موضوعة بعيداً عن وظيفة الأداة الأساسية؛</li>
+        <li><strong>رعاية المستخدم</strong>: قلة من المستخدمين يدعمون طوعاً عبر <a href="https://www.buymeacoffee.com/hebingorg" rel="nofollow">Buy Me a Coffee</a> — ليس مطلوباً أبداً.</li>
+      </ul>
+
+      <h2>أسئلة شائعة</h2>
+      <h3>لماذا مجاني؟</h3>
+      <p>تكلفة التشغيل منخفضة بما يكفي (لا تخزين ملفات، لا رواتب) لتغطيها الإعلانات. نهتم بمساعدة الكثير من الناس أكثر من الربح من كل مستخدم.</p>
+
+      <h3>هل سيبدأ التحصيل فجأة؟</h3>
+      <p>لا. المجانية الدائمة التزام أساسي منذ اليوم الأول.</p>
+
+      <h3>هل يمكن تقديم API؟</h3>
+      <p>ليس حالياً. كل الأدوات تعمل في المتصفح بدون API خلفي.</p>
+
+      <h3>هل يمكنني استخدامه تجارياً؟</h3>
+      <p>نعم. بدون قيود استخدام. راجع <a href="terms.html">شروط الخدمة</a>.</p>
+
+      <h2>الفريق ومفتوح المصدر</h2>
+      <p>يديره فريق صغير. كل المكتبات الخارجية التي نستخدمها مفتوحة المصدر، وكود مصدر صفحات أدواتنا مرئي بالكامل في أدوات مطوري المتصفح.</p>
+
       <h2>تواصل معنا</h2>
       <div class="contact-box">
-        <p>أسئلة أو اقتراحات؟ تواصل معنا: <a href="mailto:hello@hebing.org">hello@hebing.org</a></p>
+        <p>📧 البريد: <a href="mailto:hello@hebing.org">hello@hebing.org</a><br>
+        💼 تعاون تجاري / اقتراحات أدوات: عادة الرد خلال 24-48 ساعة<br>
+        📝 ملاحظات تفصيلية: زر <a href="contact.html">صفحة التواصل</a><br>
+        📖 دروس: زر <a href="blog/">المدونة</a></p>
       </div>
     </div>
   </div>
@@ -237,16 +514,25 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
 <footer><div class="container footer-inner">
   <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;flex-wrap:wrap">
+    <a href="index.html" style="font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono)">首页</a>
+    <a href="blog/" style="font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono)">博客</a>
+    <a href="contact.html" style="font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono)">联系</a>
+    <a href="terms.html" style="font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono)">条款</a>
+    <a href="privacy.html" style="font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono)">隐私</a>
+  </div>
   <span class="footer-copy">© 2026 hebing.org</span>
 </div></footer>
 
 <script>
 function setLang(lang) {
-  document.documentElement.lang = lang;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang] || lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
   document.querySelector('.' + lang + '-content').classList.add('active');
+  const h1 = document.getElementById('pageTitleH1');
+  if(h1) h1.textContent = h1.dataset['title' + lang.charAt(0).toUpperCase() + lang.slice(1)] || h1.textContent;
   const backs = {zh:'← 返回首页', en:'← Back to Home', ar:'→ العودة للرئيسية'};
   document.getElementById('navBack').textContent = backs[lang];
   localStorage.setItem('hebing_lang', lang);

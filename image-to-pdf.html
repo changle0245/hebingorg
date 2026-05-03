@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片转PDF在线 - 免费将JPG PNG转为PDF | hebing.org</title>
+<meta name="description" content="免费在线将JPG、PNG、WebP图片转换为PDF文件，支持页面尺寸、方向、边距设置。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="图片转pdf,jpg转pdf,png转pdf,在线图片转pdf,免费图片转pdf">
+<link rel="canonical" href="https://hebing.org/image-to-pdf.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="图片转PDF在线免费 | hebing.org">
+<meta property="og:url" content="https://hebing.org/image-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/image-to-pdf.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/image-to-pdf.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/image-to-pdf.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.image-list{margin-bottom:20px;display:flex;flex-direction:column;gap:8px;}
+.img-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius-lg);cursor:grab;transition:opacity 0.15s,transform 0.15s;}
+.img-item.dragging{opacity:0.4;cursor:grabbing;}
+.img-item.drag-over-item{transform:translateY(-2px);border-top:2px solid var(--accent);}
+.drag-handle{color:var(--gray-400);font-size:14px;flex-shrink:0;user-select:none;}
+.img-thumb{width:40px;height:40px;object-fit:cover;border-radius:var(--radius);flex-shrink:0;background:var(--gray-200);}
+.img-info{flex:1;min-width:0;}
+.img-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.img-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+.img-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;}
+.img-del:hover{color:#b91c1c;}
+.options-box{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;}
+.options-title{font-size:13px;font-weight:500;color:var(--black);margin-bottom:14px;}
+.opt-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+.opt-row:last-child{margin-bottom:0;}
+.opt-group{flex:1;min-width:160px;}
+.opt-label{font-size:12px;color:var(--gray-600);margin-bottom:6px;display:block;font-family:var(--font-mono);}
+.opt-select{width:100%;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-size:13px;font-family:var(--font-sans);}
+.btn-convert{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);width:100%;margin-bottom:12px;}
+.btn-convert:hover{opacity:0.82;}
+.btn-convert:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-clear{height:40px;padding:0 20px;background:transparent;border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-size:13px;color:var(--gray-600);cursor:pointer;font-family:var(--font-sans);width:100%;}
+.progress-wrap{margin:16px 0;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat{display:flex;flex-direction:column;gap:2px;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .opt-row{flex-direction:row-reverse;}
+[dir="rtl"] .img-item{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:36px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .drop-zone{background:var(--gray-100);}
+  .opt-select{background:var(--gray-100);}
+  .scene-card,.faq-item,.options-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .summary-box{border-color:#14532d;}
+  .status-err{background:#2d0a0a;border-color:#7f1d1d;}
+  .subscribe-input{background:var(--gray-100);}
+}
+</style>
+<!-- Google AdSense -->
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org 图片转 PDF",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/image-to-pdf.html",
+  "description": "免费在线将 JPG / PNG / WebP 图片转换为 PDF 文件，可设置页面尺寸、方向、边距，浏览器本地处理。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["JPG / PNG / WebP 转 PDF", "可设置页面尺寸（A4 / Letter / 适配图片）", "纵向/横向", "自定义边距", "拖拽排序"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费将图片转换为 PDF 文件",
+  "description": "使用 hebing.org 在浏览器本地将多张 JPG/PNG/WebP 图片转为单个 PDF，支持页面尺寸与方向设置。",
+  "totalTime": "PT30S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "上传图片", "text": "点击上传或拖拽多张图片到上传区，支持 JPG / PNG / WebP。" },
+    { "@type": "HowToStep", "position": 2, "name": "调整顺序", "text": "拖动列表条目调整图片在 PDF 中的顺序。" },
+    { "@type": "HowToStep", "position": 3, "name": "设置页面", "text": "选择页面尺寸（A4 / Letter / 适配图片）、方向、边距。" },
+    { "@type": "HowToStep", "position": 4, "name": "生成 PDF", "text": "点击生成按钮，浏览器本地完成转换并下载 PDF。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "图片转 PDF", "item": "https://hebing.org/image-to-pdf.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "支持哪些图片格式？",
+      "acceptedAnswer": { "@type": "Answer", "text": "支持 JPG / JPEG、PNG、WebP 格式。其中 JPG 直接嵌入零损失，PNG 与 WebP 会被转换为 PNG 嵌入 PDF。" }
+    },
+    {
+      "@type": "Question",
+      "name": "「适配图片」和「A4」有什么区别？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「适配图片」让每页 PDF 大小完全等于图片尺寸（无空白边）；「A4」「Letter」则使用标准纸张大小，将图片按比例缩放居中放置。" }
+    },
+    {
+      "@type": "Question",
+      "name": "可以设置图片排序吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以。在图片列表中直接拖动条目即可调整顺序，所见即所得。" }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有处理在浏览器本地完成（pdf-lib），图片不离开你的设备。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">图片转 PDF</span></div>
+  <h1 class="page-title" data-i18n="page.h1">图片转 PDF<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">将 JPG / PNG / WebP 图片转为 PDF 文件，支持页面尺寸、方向和边距设置。文件在浏览器本地处理。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel" multiple accept=".jpg,.jpeg,.png,.webp">
+    <div class="drop-icon">🖼️</div>
+    <div class="drop-label" id="dropLabel" data-i18n="drop.label">点击选择图片，或拖拽到此处</div>
+    <div class="drop-sub"><strong>JPG · PNG · WebP</strong> · <span data-i18n="drop.limit">可多选，无大小限制</span></div>
+  </div>
+
+  <div class="image-list hidden" id="imageList"></div>
+
+  <div class="options-box hidden" id="optionsBox">
+    <div class="options-title" data-i18n="opt.title">PDF 设置</div>
+    <div class="opt-row">
+      <div class="opt-group">
+        <label class="opt-label" data-i18n="opt.size">页面尺寸</label>
+        <select class="opt-select" id="pageSize">
+          <option value="fit" data-i18n="opt.size.fit">适配图片（无边距）</option>
+          <option value="a4" selected data-i18n="opt.size.a4">A4 (210×297mm)</option>
+          <option value="letter" data-i18n="opt.size.letter">Letter (8.5×11in)</option>
+          <option value="legal" data-i18n="opt.size.legal">Legal (8.5×14in)</option>
+          <option value="a5" data-i18n="opt.size.a5">A5 (148×210mm)</option>
+        </select>
+      </div>
+      <div class="opt-group">
+        <label class="opt-label" data-i18n="opt.orient">方向</label>
+        <select class="opt-select" id="pageOrient">
+          <option value="auto" data-i18n="opt.orient.auto">自动（按图片）</option>
+          <option value="portrait" data-i18n="opt.orient.portrait">纵向</option>
+          <option value="landscape" data-i18n="opt.orient.landscape">横向</option>
+        </select>
+      </div>
+      <div class="opt-group">
+        <label class="opt-label" data-i18n="opt.margin">边距</label>
+        <select class="opt-select" id="pageMargin">
+          <option value="0" data-i18n="opt.margin.none">无边距</option>
+          <option value="20" selected data-i18n="opt.margin.small">小 (20pt)</option>
+          <option value="40" data-i18n="opt.margin.medium">中 (40pt)</option>
+          <option value="60" data-i18n="opt.margin.large">大 (60pt)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-convert hidden" id="btnConvert" data-i18n="btn.convert">生成 PDF 并下载</button>
+  <button class="btn-clear hidden" id="btnClear" onclick="clearAll()" data-i18n="btn.clear">清空重来</button>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+  <div class="summary-box hidden" id="statusOk">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">PDF 生成完成！文件已下载。</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="图片转PDF的常见使用场景" data-en="Common Use Cases">图片转PDF的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📄</div><div class="scene-title" data-scene-zh="扫描件归档" data-scene-en="Scan Archiving">扫描件归档</div><div class="scene-desc" data-scene-zh="把手机拍照或扫描得到的多张图片合并为单一 PDF，方便归档保存与打印。" data-scene-en="Combine multiple scans or phone photos into a single PDF for easy archiving and printing.">把手机拍照或扫描得到的多张图片合并为单一 PDF，方便归档保存与打印。</div></div>
+      <div class="scene-card"><div class="scene-icon">📤</div><div class="scene-title" data-scene-zh="证件提交" data-scene-en="Document Submission">证件提交</div><div class="scene-desc" data-scene-zh="许多政府或企业平台只接受 PDF 格式提交，把身份证/合同等图片转 PDF 即可上传。" data-scene-en="Many government and corporate portals only accept PDF. Convert ID/contract photos to PDF for upload.">许多政府或企业平台只接受 PDF 格式提交，把身份证/合同等图片转 PDF 即可上传。</div></div>
+      <div class="scene-card"><div class="scene-icon">🖼️</div><div class="scene-title" data-scene-zh="作品集制作" data-scene-en="Portfolio Making">作品集制作</div><div class="scene-desc" data-scene-zh="设计师/摄影师把作品图片打包为 A4 PDF，方便邮件发送和打印。" data-scene-en="Designers and photographers package work into an A4 PDF, ideal for emailing and printing.">设计师/摄影师把作品图片打包为 A4 PDF，方便邮件发送和打印。</div></div>
+      <div class="scene-card"><div class="scene-icon">🧾</div><div class="scene-title" data-scene-zh="发票合并" data-scene-en="Receipt Bundling">发票合并</div><div class="scene-desc" data-scene-zh="把拍照的发票或小票合并为单个 PDF，一次性提交报销。" data-scene-en="Bundle photographed receipts into a single PDF and submit reimbursements in one go.">把拍照的发票或小票合并为单个 PDF，一次性提交报销。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li>「适配图片」选项让每页 PDF 大小完全等于图片，没有空白边，适合屏幕展示。</li>
+      <li>「A4 + 自动方向」是打印场景的最佳选择——横向图片自动横向排版。</li>
+      <li>JPG 图片会被零损失地嵌入 PDF；PNG 会保留透明度（叠加白色背景）。</li>
+      <li>图片数量太多时建议分批转换（每批 30 张以内），避免浏览器内存不足。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li>"Fit to image" makes each page exactly match the image size with no margin — best for on-screen viewing.</li>
+      <li>"A4 + auto orientation" is ideal for print — landscape images get landscape pages automatically.</li>
+      <li>JPGs are embedded losslessly. PNGs keep transparency (composited on white).</li>
+      <li>For very large batches, split into chunks of ≤ 30 images to avoid memory pressure.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>"ملاءمة الصورة" تجعل كل صفحة تطابق حجم الصورة بالضبط بدون هامش — الأفضل للعرض على الشاشة.</li><li>"A4 + اتجاه تلقائي" مثالي للطباعة — الصور الأفقية تحصل على صفحات أفقية تلقائياً.</li><li>تُضمَّن JPGs بدون فقد. تحافظ PNGs على الشفافية (مدمجة على أبيض).</li><li>للدفعات الكبيرة جداً، قسّم إلى مجموعات ≤ 30 صورة لتجنب ضغط الذاكرة.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持哪些图片格式？" data-faq-en="Which image formats are supported?" data-faq-ar="ما صيغ الصور المدعومة؟">支持哪些图片格式？</div>
+        <div class="faq-a" data-faq-zh="支持 JPG / JPEG、PNG、WebP 三种格式。JPG 直接嵌入 PDF（零损失），PNG 与 WebP 会被转换为 PNG 嵌入。" data-faq-en="JPG / JPEG, PNG and WebP. JPG is embedded losslessly; PNG and WebP are embedded as PNG." data-faq-ar="JPG / JPEG و PNG و WebP. يُضمَّن JPG بدون فقد؛ بينما يُضمَّن PNG و WebP كـ PNG.">支持 JPG / JPEG、PNG、WebP 三种格式。JPG 直接嵌入 PDF（零损失），PNG 与 WebP 会被转换为 PNG 嵌入。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="「适配图片」和「A4」有什么区别？" data-faq-en="Difference between Fit and A4?" data-faq-ar="ما الفرق بين &quot;ملاءمة الصورة&quot; و A4؟">「适配图片」和「A4」有什么区别？</div>
+        <div class="faq-a" data-faq-zh="「适配图片」让每页 PDF 大小完全等于图片像素尺寸（无空白边），适合纯图片展示；「A4 / Letter」使用标准纸张大小，将图片按比例缩放居中放置，留出可控边距，适合打印和正式文档。" data-faq-en="Fit makes each page exactly match the image pixels (no margin), best for image-only viewing. A4 / Letter use standard paper sizes, fitting images proportionally with margins — ideal for print and formal documents." data-faq-ar="&quot;ملاءمة الصورة&quot; تجعل كل صفحة تطابق بكسلات الصورة بالضبط (بدون هوامش)، الأفضل للعرض الصوري فقط. تستخدم A4 / Letter أحجام الورق القياسية، وتلائم الصور بنسب مع هوامش — مثالية للطباعة والوثائق الرسمية.">「适配图片」让每页 PDF 大小完全等于图片像素尺寸（无空白边），适合纯图片展示；「A4 / Letter」使用标准纸张大小，将图片按比例缩放居中放置，留出可控边距，适合打印和正式文档。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="可以调整图片顺序吗？" data-faq-en="Can I reorder images?" data-faq-ar="هل يمكنني إعادة ترتيب الصور؟">可以调整图片顺序吗？</div>
+        <div class="faq-a" data-faq-zh="可以。上传后在图片列表中直接拖动条目即可调整顺序，列表顺序就是 PDF 页面顺序。" data-faq-en="Yes — drag list items to reorder. The list order is the page order in the PDF." data-faq-ar="نعم — اسحب عناصر القائمة لإعادة الترتيب. ترتيب القائمة هو ترتيب الصفحات في PDF.">可以。上传后在图片列表中直接拖动条目即可调整顺序，列表顺序就是 PDF 页面顺序。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?" data-faq-ar="هل يتم رفع الملفات إلى خادم؟">文件会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地完成（pdf-lib），图片不离开你的设备。" data-faq-en="No. Everything runs locally in your browser (pdf-lib). Images never leave your device." data-faq-ar="لا. كل شيء يعمل محلياً في متصفحك (pdf-lib). لا تغادر الصور جهازك أبداً.">不会。所有处理在浏览器本地完成（pdf-lib），图片不离开你的设备。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="merge-image.html" class="related-card"><span>🖼️</span><span data-i18n-related="图片合并|Image Merge|دمج الصور">图片合并</span></a>
+    <a href="image-compress.html" class="related-card"><span>🗜️</span><span data-i18n-related="图片压缩|Image Compress|ضغط الصور">图片压缩</span></a>
+    <a href="pdf-to-image.html" class="related-card"><span>📄</span><span data-i18n-related="PDF转图片|PDF to Image|PDF إلى صورة">PDF转图片</span></a>
+    <a href="merge-pdf.html" class="related-card"><span>📄</span><span data-i18n-related="PDF合并|PDF Merge|دمج PDF">PDF合并</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'图片转 PDF','page.h1':'图片转 PDF<br><em>在线免费</em>','page.sub':'将 JPG / PNG / WebP 图片转为 PDF 文件，支持页面尺寸、方向和边距设置。文件在浏览器本地处理。','drop.label':'点击选择图片，或拖拽到此处','drop.limit':'可多选，无大小限制','opt.title':'PDF 设置','opt.size':'页面尺寸','opt.size.fit':'适配图片（无边距）','opt.size.a4':'A4 (210×297mm)','opt.size.letter':'Letter (8.5×11in)','opt.size.legal':'Legal (8.5×14in)','opt.size.a5':'A5 (148×210mm)','opt.orient':'方向','opt.orient.auto':'自动（按图片）','opt.orient.portrait':'纵向','opt.orient.landscape':'横向','opt.margin':'边距','opt.margin.none':'无边距','opt.margin.small':'小 (20pt)','opt.margin.medium':'中 (40pt)','opt.margin.large':'大 (60pt)','btn.convert':'生成 PDF 并下载','btn.clear':'清空重来','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Image to PDF','page.h1':'Images to PDF<br><em>Free Online</em>','page.sub':'Convert JPG / PNG / WebP images into a PDF with page size, orientation and margin options. Processed locally in your browser.','drop.label':'Click to select images, or drag & drop here','drop.limit':'Multiple files, no size limit','opt.title':'PDF Settings','opt.size':'Page Size','opt.size.fit':'Fit to image (no margin)','opt.size.a4':'A4 (210×297mm)','opt.size.letter':'Letter (8.5×11in)','opt.size.legal':'Legal (8.5×14in)','opt.size.a5':'A5 (148×210mm)','opt.orient':'Orientation','opt.orient.auto':'Auto (per image)','opt.orient.portrait':'Portrait','opt.orient.landscape':'Landscape','opt.margin':'Margin','opt.margin.none':'None','opt.margin.small':'Small (20pt)','opt.margin.medium':'Medium (40pt)','opt.margin.large':'Large (60pt)','btn.convert':'Generate PDF & Download','btn.clear':'Clear all','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'صورة إلى PDF','page.h1':'الصور إلى PDF<br><em>مجاناً عبر الإنترنت</em>','page.sub':'حوّل صور JPG / PNG / WebP إلى ملف PDF مع خيارات حجم الصفحة والاتجاه والهوامش.','drop.label':'انقر لاختيار الصور، أو اسحبها هنا','drop.limit':'ملفات متعددة، بدون حد للحجم','opt.title':'إعدادات PDF','opt.size':'حجم الصفحة','opt.size.fit':'ملاءمة الصورة (بدون هامش)','opt.size.a4':'A4 (210×297mm)','opt.size.letter':'Letter (8.5×11in)','opt.size.legal':'Legal (8.5×14in)','opt.size.a5':'A5 (148×210mm)','opt.orient':'الاتجاه','opt.orient.auto':'تلقائي (حسب الصورة)','opt.orient.portrait':'عمودي','opt.orient.landscape':'أفقي','opt.margin':'الهامش','opt.margin.none':'بدون','opt.margin.small':'صغير (20pt)','opt.margin.medium':'متوسط (40pt)','opt.margin.large':'كبير (60pt)','btn.convert':'إنشاء PDF وتنزيل','btn.clear':'مسح الكل','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+let files=[];
+const FILE_LIMIT=50;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function fmtSize(b){if(b<1048576)return(b/1024).toFixed(0)+' KB';return(b/1048576).toFixed(2)+' MB';}
+
+function updateUI(){
+  const list=document.getElementById('imageList');
+  list.innerHTML='';
+  files.forEach((f,i)=>{
+    const div=document.createElement('div');div.className='img-item';div.draggable=true;div.dataset.index=i;
+    div.innerHTML=`<span class="drag-handle">⋮⋮</span><img class="img-thumb" id="thumb-${i}" alt=""><div class="img-info"><div class="img-name">${esc(f.name)}</div><div class="img-size">${fmtSize(f.size)}</div></div><span class="img-del" data-i="${i}" role="button" aria-label="移除图片">✕</span>`;
+    list.appendChild(div);
+    const reader=new FileReader();
+    reader.onload=e=>{const t=document.getElementById(`thumb-${i}`);if(t)t.src=e.target.result;};
+    reader.readAsDataURL(f);
+  });
+  list.querySelectorAll('.img-del').forEach(btn=>{btn.onclick=e=>{e.stopPropagation();files.splice(parseInt(btn.dataset.i),1);updateUI();};});
+  initDragSort('imageList');
+  const has=files.length>0;
+  list.classList.toggle('hidden',!has);
+  document.getElementById('optionsBox').classList.toggle('hidden',!has);
+  document.getElementById('btnConvert').classList.toggle('hidden',!has);
+  document.getElementById('btnClear').classList.toggle('hidden',!has);
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+}
+
+function initDragSort(listId){
+  const list=document.getElementById(listId);
+  if(!list)return;
+  let dragging=null;
+  function getItems(){return Array.from(list.querySelectorAll('.img-item'));}
+  list.addEventListener('dragstart',e=>{
+    dragging=e.target.closest('.img-item');
+    if(dragging){setTimeout(()=>dragging.classList.add('dragging'),0);e.dataTransfer.effectAllowed='move';}
+  });
+  list.addEventListener('dragend',()=>{
+    if(dragging)dragging.classList.remove('dragging');
+    getItems().forEach(i=>i.classList.remove('drag-over-item'));
+    const order=getItems().map(el=>parseInt(el.dataset.index));
+    files=order.map(i=>files[i]);
+    dragging=null;
+    updateUI();
+  });
+  list.addEventListener('dragover',e=>{
+    e.preventDefault();
+    const target=e.target.closest('.img-item');
+    if(!target||target===dragging)return;
+    getItems().forEach(i=>i.classList.remove('drag-over-item'));
+    target.classList.add('drag-over-item');
+    const items=getItems();
+    const di=items.indexOf(dragging),ti=items.indexOf(target);
+    if(di<ti)list.insertBefore(dragging,target.nextSibling);
+    else list.insertBefore(dragging,target);
+  });
+}
+
+function clearAll(){files=[];updateUI();}
+
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+function addFiles(newFiles){
+  Array.from(newFiles).filter(f=>/\.(jpg|jpeg|png|webp)$/i.test(f.name)).forEach(f=>{
+    if(files.length>=FILE_LIMIT){alert('Max '+FILE_LIMIT+' images per batch');return;}
+    if(!files.find(x=>x.name===f.name&&x.size===f.size))files.push(f);
+  });
+  updateUI();
+}
+fi.addEventListener('change',e=>{addFiles(e.target.files);fi.value='';});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');addFiles(e.dataTransfer.files);});
+
+const SIZES={a4:[595.28,841.89],letter:[612,792],legal:[612,1008],a5:[419.53,595.28]};
+
+async function loadImageEl(file){
+  const url=URL.createObjectURL(file);
+  try{
+    const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=url;});
+    return img;
+  }finally{ URL.revokeObjectURL(url); }
+}
+
+async function fileToPngBytes(file){
+  const img=await loadImageEl(file);
+  const canvas=document.createElement('canvas');
+  canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+  const ctx=canvas.getContext('2d');
+  ctx.drawImage(img,0,0);
+  const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
+  return new Uint8Array(await blob.arrayBuffer());
+}
+
+document.getElementById('btnConvert').onclick=async()=>{
+  const btn=document.getElementById('btnConvert');btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  const lang=document.documentElement.lang;
+  const sizeKey=document.getElementById('pageSize').value;
+  const orient=document.getElementById('pageOrient').value;
+  const margin=parseFloat(document.getElementById('pageMargin').value);
+  try{
+    if(!window.PDFLib){
+      pt.textContent=lang==='en'?'Loading library...':lang==='ar'?'تحميل المكتبة...':'加载处理库...';
+      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='/vendor/pdf-lib@1.17.1/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    }
+    const pdf=await PDFLib.PDFDocument.create();
+    for(let i=0;i<files.length;i++){
+      fill.style.width=Math.round((i/files.length)*90)+'%';
+      pt.textContent=(lang==='en'?`Adding (${i+1}/${files.length}): `:lang==='ar'?`إضافة (${i+1}/${files.length}): `:`处理中 (${i+1}/${files.length})：`)+files[i].name;
+      const f=files[i];
+      const isJpg=/\.(jpg|jpeg)$/i.test(f.name);
+      let img;
+      if(isJpg){
+        const arr=new Uint8Array(await f.arrayBuffer());
+        try{ img=await pdf.embedJpg(arr); }
+        catch(_){ img=await pdf.embedPng(await fileToPngBytes(f)); }
+      }else{
+        img=await pdf.embedPng(await fileToPngBytes(f));
+      }
+
+      let pw,ph;
+      if(sizeKey==='fit'){
+        pw=img.width;ph=img.height;
+      }else{
+        const [a,b]=SIZES[sizeKey];
+        let isLand=orient==='landscape'||(orient==='auto'&&img.width>img.height);
+        if(orient==='portrait')isLand=false;
+        pw=isLand?b:a;ph=isLand?a:b;
+      }
+
+      const page=pdf.addPage([pw,ph]);
+      let dw,dh,dx,dy;
+      if(sizeKey==='fit'){
+        dw=pw;dh=ph;dx=0;dy=0;
+      }else{
+        const aw=pw-margin*2,ah=ph-margin*2;
+        const r=Math.min(aw/img.width,ah/img.height);
+        dw=img.width*r;dh=img.height*r;
+        dx=(pw-dw)/2;dy=(ph-dh)/2;
+      }
+      page.drawImage(img,{x:dx,y:dy,width:dw,height:dh});
+      await new Promise(r=>setTimeout(r,0));
+    }
+    fill.style.width='95%';pt.textContent=lang==='en'?'Saving...':lang==='ar'?'حفظ...':'生成文件...';
+    const bytes=await pdf.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    const dn=lang==='en'?'images':lang==='ar'?'صور':'图片合集';
+    a.download=`${dn}.pdf`;a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    fill.style.width='100%';
+    setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+
+    document.getElementById('summaryTitle').textContent=lang==='en'?'PDF generated! File downloaded.':lang==='ar'?'تم إنشاء PDF! تم التنزيل.':'PDF 生成完成！文件已下载。';
+    document.getElementById('summaryStats').innerHTML=
+      `<div class="summary-stat"><div class="summary-stat-num">${files.length}</div><div class="summary-stat-label">${lang==='en'?'Images':lang==='ar'?'صور':'图片数'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${files.length}</div><div class="summary-stat-label">${lang==='en'?'Pages':lang==='ar'?'صفحات':'页数'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${fmtSize(blob.size)}</div><div class="summary-stat-label">${lang==='en'?'PDF Size':lang==='ar'?'حجم PDF':'PDF 大小'}</div></div>`;
+    document.getElementById('statusOk').classList.remove('hidden');
+    document.getElementById('subscribeBox').classList.remove('hidden');
+  }catch(e){
+    document.getElementById('statusErr').textContent=(lang==='en'?'Error: ':lang==='ar'?'خطأ: ':'错误：')+e.message;
+    document.getElementById('statusErr').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+  }
+  btn.disabled=false;
+};
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

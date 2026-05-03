@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博客 ｜ hebing.org - 文件处理技巧、教程与深度文章</title>
+<meta name="description" content="hebing.org 官方博客：文件合并、格式转换、图片压缩、PDF 处理、开发者工具的实用教程与深度技术分析。中文、英文、阿拉伯文三语原创内容。">
+<meta name="keywords" content="hebing.org博客,文件处理教程,PDF合并教程,Excel批量处理,Word转PDF,图片压缩,开发者工具">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta property="og:title" content="hebing.org Blog - In-Depth Tutorials on File Processing">
+<meta property="og:description" content="Tutorials and deep technical analyses on file merging, format conversion, image compression, PDF processing, and developer tools.">
+<meta property="og:url" content="https://hebing.org/blog/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "hebing.org Blog",
+  "url": "https://hebing.org/blog/",
+  "description": "Tutorials and articles on file merging, format conversion, image compression, PDF processing, and developer tools.",
+  "inLanguage": ["zh-CN", "en", "ar"],
+  "publisher": { "@type": "Organization", "name": "hebing.org", "url": "https://hebing.org" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hebing.org/blog/" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+[dir="rtl"] body{font-family:var(--font-ar);}
+.container{max-width:880px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-wrap{padding:64px 0 96px;}
+.page-tag{font-family:var(--font-mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;}
+.page-title{font-size:42px;font-weight:700;letter-spacing:-1px;margin-bottom:14px;line-height:1.2;}
+.page-intro{font-size:16px;color:var(--gray-600);max-width:680px;margin-bottom:48px;line-height:1.75;}
+.post-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--gray-200);}
+.post-item{display:block;padding:28px 0;border-bottom:1px solid var(--gray-200);text-decoration:none;color:inherit;transition:padding 0.15s;}
+.post-item:hover{padding-left:8px;}
+[dir="rtl"] .post-item:hover{padding-left:0;padding-right:8px;}
+.post-meta{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;gap:14px;align-items:center;}
+.post-cat{color:var(--accent);}
+.post-title{font-size:22px;font-weight:600;color:var(--black);margin-bottom:8px;letter-spacing:-0.3px;line-height:1.35;}
+.post-excerpt{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.intro-box{padding:24px;background:var(--gray-100);border-left:3px solid var(--accent);border-radius:0 var(--radius-lg) var(--radius-lg) 0;margin-bottom:48px;}
+[dir="rtl"] .intro-box{border-left:none;border-right:3px solid var(--accent);border-radius:var(--radius-lg) 0 0 var(--radius-lg);}
+.intro-box p{margin:0;font-size:14px;color:var(--gray-600);line-height:1.75;}
+.zh-content,.en-content,.ar-content{display:none;}
+.zh-content.active,.en-content.active,.ar-content.active{display:block;}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+[dir="rtl"] .footer-inner{flex-direction:row-reverse;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.footer-links{display:flex;gap:18px;}
+.footer-links a{font-size:12px;color:var(--gray-600);text-decoration:none;font-family:var(--font-mono);}
+.footer-links a:hover{color:var(--black);}
+@media(max-width:600px){.page-title{font-size:32px;}.post-title{font-size:18px;}}
+@media (prefers-color-scheme: dark) {
+  :root { --black: #f0efed; --white: #111110; --gray-100: #1e1e1c; --gray-200: #2a2a28; --gray-400: #8a8884; --gray-600: #a09e9b; --accent: #e85d2a; }
+  nav { background: rgba(17,17,16,0.95); }
+}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/" class="nav-back" id="navBack">← 返回首页</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<div class="container page-wrap">
+  <div class="page-tag" id="pageTag">Blog</div>
+  <h1 class="page-title" id="pageH1">hebing.org 博客</h1>
+  <p class="page-intro" id="pageIntro"></p>
+
+  <div class="intro-box"><p id="introBoxText"></p></div>
+
+  <div class="post-list" id="postList"></div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N = {
+  zh: {
+    title: 'hebing.org 博客',
+    intro: '分享文件处理领域的深度教程、技术原理分析与真实使用经验。从 PDF 合并到 Excel 批处理，从图片压缩到开发者工具，所有内容均为原创首发，源自我们日常构建工具时的实战经验。',
+    introBox: '📌 关于博客内容：我们坚持只写自己真正使用过、深入研究过的主题。每篇文章都包含可立即落地的操作步骤、踩过的坑以及可验证的技术细节，希望能为你的工作真正节省时间。',
+    navBack: '← 返回首页',
+    footer: { home:'首页', about:'关于', blog:'博客', contact:'联系', terms:'条款', privacy:'隐私' },
+    posts: [
+      ['PDF 处理','2026-04-15','约 12 分钟阅读','PDF 合并完整指南：从基础操作到企业级批量处理的 7 种场景','合并 PDF 看似简单，但当你面对 50 份扫描发票、加密文档、跨平台协作时，方法的选择会直接决定效率。本文系统梳理桌面端、命令行、在线工具三种路径，并给出每种场景下的最佳实践与踩坑提醒。'],
+      ['Excel 技巧','2026-04-12','约 14 分钟阅读','Excel 批量合并实战：从 200 个销售报表到统一数据池的完整流程','财务、运营、HR 每个月都在重复同一件事——把几十个格式相似的 Excel 文件拼成一个总表。本文用真实案例拆解列对齐、空值处理、表头去重等容易被忽略的细节，对比手动复制、Power Query、VBA、在线工具四种方案。'],
+      ['深度对比','2026-04-08','约 11 分钟阅读','浏览器本地处理 vs 云端在线工具：你的文件到底去了哪里？','"在线工具"四个字背后藏着两种完全不同的技术架构：一种文件永不离开设备，一种则上传到陌生服务器。本文从隐私、速度、文件大小、断网可用性等 6 个维度对比，并教你如何用浏览器开发者工具 30 秒内验证。'],
+      ['格式转换','2026-04-04','约 13 分钟阅读','Word 与 PDF 互转的 12 个隐藏陷阱：字体、表格、注释如何不丢失','Word 转 PDF 看似一键完成，但中文字体替换、嵌入式图表、批注、超链接、目录等元素经常在转换中悄悄变形。本文逐一拆解每种丢失现象的根本原因，并给出对应的预防方案与修复技巧。'],
+      ['图片处理','2026-04-01','约 10 分钟阅读','图片压缩到底压了什么？JPEG、PNG、WebP 的本质区别与最佳实践','把一张 5MB 的图片压到 500KB，质量能保住吗？本文从有损/无损压缩的底层原理讲起，给出网页图片、社交媒体、印刷文件、邮件附件等不同场景的具体参数建议。'],
+      ['开发者工具','2026-03-27','约 12 分钟阅读','开发者每天都在用的 10 个在线小工具：JSON 格式化、JWT 解码、正则测试……','作为程序员，你大概率每天都会用到至少 3 个小工具：格式化 JSON、解码 JWT、测试正则。本文整理开发者最高频的 10 类工具，分析每个工具背后的技术原理、安全注意事项以及如何在生产环境中正确使用。'],
+      ['隐私安全','2026-03-22','约 9 分钟阅读','处理敏感文件时，你真的安全吗？文件隐私保护的 5 层防线','合同扫描件、身份证照片、财务报表、医疗记录——这些文件一旦被截获后果不堪设想。本文从文件本地处理、传输加密、临时文件清理、浏览器缓存、共享链接 5 个层面，系统讲解如何把隐私风险降到最低。'],
+      ['实用教程','2026-03-18','约 8 分钟阅读','二维码生成完整指南：纠错等级、容量上限与扫码失败排查','二维码不只是"放一段文字进去"那么简单——纠错等级选错会导致打印后扫不出来，容量超限会变成密密麻麻的方块。本文系统讲解二维码的技术原理与生成最佳实践。']
+    ]
+  },
+  en: {
+    title: 'hebing.org Blog',
+    intro: 'In-depth tutorials, technical analyses, and real-world experience from the file processing domain. From PDF merging to Excel batch processing, from image compression to developer tools — all content is original and written from our hands-on experience building these tools.',
+    introBox: '📌 About this blog: We only write about topics we have actually used and deeply researched. Every article includes actionable steps, common pitfalls, and verifiable technical details — to genuinely save your time, not produce another piece of SEO filler.',
+    navBack: '← Back to Home',
+    footer: { home:'Home', about:'About', blog:'Blog', contact:'Contact', terms:'Terms', privacy:'Privacy' },
+    posts: [
+      ['PDF','2026-04-15','12 min read','The Complete PDF Merge Guide: 7 Scenarios from Basic Use to Enterprise Batch Processing','Merging PDFs sounds simple, but when you face 50 scanned invoices, encrypted documents, or cross-platform collaboration, your tool choice directly determines efficiency. This article systematically covers desktop, command-line, and online tool approaches with best practices for each scenario.'],
+      ['Excel','2026-04-12','14 min read','Excel Batch Merge in Practice: From 200 Sales Reports to a Unified Data Pool','Finance, operations, and HR teams repeat the same task every month — combining dozens of similarly-formatted Excel files into one master table. This article walks through column alignment, null handling, header deduplication, and compares manual copy-paste, Power Query, VBA, and online tools.'],
+      ['Deep Dive','2026-04-08','11 min read','Browser-Local vs Cloud Online Tools: Where Do Your Files Actually Go?','Behind the words "online tool" hide two completely different architectures: one where files never leave your device, another that uploads to unknown servers. This article compares both across 6 dimensions and shows how to verify in 30 seconds using browser DevTools.'],
+      ['Conversion','2026-04-04','13 min read','12 Hidden Pitfalls When Converting Between Word and PDF: Fonts, Tables, Comments','Word-to-PDF looks like a one-click operation, but Chinese font substitution, embedded charts, comments, hyperlinks, and tables of contents often quietly distort during conversion. This article breaks down each loss scenario and provides prevention solutions.'],
+      ['Images','2026-04-01','10 min read','What Does Image Compression Actually Compress? The Real Differences Between JPEG, PNG, and WebP','Can a 5MB image be compressed to 500KB without quality loss? It depends on content, target use, and algorithm choice. This article explains lossy vs lossless compression fundamentals and gives parameter recommendations for web, social media, print, and email scenarios.'],
+      ['Dev Tools','2026-03-27','12 min read','10 Online Tools Developers Use Every Day: JSON, JWT, Regex…','As a programmer, you probably use at least 3 small tools every day: format JSON, decode JWT, test regex. This article covers the 10 most commonly used developer tools, the tech behind each, security caveats, and proper production use.'],
+      ['Privacy','2026-03-22','9 min read','Are You Really Safe When Handling Sensitive Files? 5 Layers of File Privacy Defense','Contract scans, ID photos, financial reports, medical records — leakage of these files has serious consequences. This article systematically covers local processing, transport encryption, temp file cleanup, browser cache, and sharing link risks.'],
+      ['Tutorial','2026-03-18','8 min read','The Complete QR Code Generation Guide: Error Correction, Capacity, and Troubleshooting','QR codes are not just "put text in" — wrong error correction makes printed codes unscannable, exceeding capacity creates dense unreadable squares. This article explains the technical principles and best practices for generating QR codes.']
+    ]
+  },
+  ar: {
+    title: 'مدونة hebing.org',
+    intro: 'دروس متعمقة، تحليلات تقنية، وخبرات حقيقية من مجال معالجة الملفات. من دمج ملفات PDF إلى معالجة Excel المجمعة، من ضغط الصور إلى أدوات المطورين — جميع المحتويات أصلية ومستوحاة من تجربتنا الفعلية في بناء هذه الأدوات.',
+    introBox: '📌 حول هذه المدونة: نكتب فقط عن الموضوعات التي استخدمناها وبحثناها بعمق. كل مقال يتضمن خطوات قابلة للتنفيذ، الأخطاء الشائعة، وتفاصيل تقنية قابلة للتحقق — لتوفير وقتك حقاً.',
+    navBack: '→ العودة للرئيسية',
+    footer: { home:'الرئيسية', about:'حول', blog:'المدونة', contact:'تواصل', terms:'الشروط', privacy:'الخصوصية' },
+    posts: [
+      ['PDF','2026-04-15','12 دقيقة قراءة','الدليل الشامل لدمج ملفات PDF: 7 سيناريوهات من الاستخدام الأساسي إلى المعالجة المؤسسية','دمج ملفات PDF يبدو بسيطاً، لكن عند مواجهة 50 فاتورة ممسوحة، مستندات مشفرة، أو تعاون عبر منصات متعددة، فإن اختيار الأداة يحدد الكفاءة. يغطي المقال أساليب سطح المكتب، سطر الأوامر، والأدوات عبر الإنترنت.'],
+      ['Excel','2026-04-12','14 دقيقة قراءة','دمج Excel المجمع عملياً: من 200 تقرير مبيعات إلى قاعدة بيانات موحدة','تكرر فرق المالية والعمليات والموارد البشرية نفس المهمة شهرياً — دمج عشرات ملفات Excel المتشابهة في جدول رئيسي. يشرح المقال محاذاة الأعمدة، التعامل مع القيم الفارغة، وإزالة الرؤوس المكررة.'],
+      ['تحليل','2026-04-08','11 دقيقة قراءة','المعالجة المحلية في المتصفح مقابل الأدوات السحابية: أين تذهب ملفاتك فعلياً؟','وراء كلمة "أداة عبر الإنترنت" تختبئ بنيتان مختلفتان تماماً: واحدة لا تغادر فيها الملفات جهازك أبداً، وأخرى ترفعها إلى خوادم غير معروفة. يقارن المقال الاثنين عبر 6 أبعاد ويوضح كيفية التحقق في 30 ثانية.'],
+      ['تحويل','2026-04-04','13 دقيقة قراءة','12 فخاً خفياً عند التحويل بين Word و PDF: الخطوط، الجداول، التعليقات','تحويل Word إلى PDF يبدو نقرة واحدة، لكن استبدال الخطوط الصينية، الرسوم المضمنة، التعليقات، الروابط التشعبية، وجداول المحتويات غالباً ما تتشوه بهدوء أثناء التحويل. يحلل المقال كل سيناريو خسارة.'],
+      ['الصور','2026-04-01','10 دقائق قراءة','ماذا يضغط ضغط الصور فعلياً؟ الفروقات الحقيقية بين JPEG و PNG و WebP','هل يمكن ضغط صورة 5MB إلى 500KB بدون فقدان جودة؟ يعتمد على المحتوى، الاستخدام المستهدف، واختيار الخوارزمية. يشرح المقال أساسيات الضغط مع/بدون فقدان ويعطي توصيات لمعاملات لمختلف السيناريوهات.'],
+      ['أدوات المطورين','2026-03-27','12 دقيقة قراءة','10 أدوات عبر الإنترنت يستخدمها المطورون يومياً: JSON، JWT، التعبيرات النمطية','كمبرمج، تستخدم على الأرجح 3 أدوات صغيرة على الأقل يومياً: تنسيق JSON، فك JWT، اختبار regex. يغطي المقال أكثر 10 أدوات استخداماً للمطورين والاعتبارات الأمنية لكل منها.'],
+      ['الخصوصية','2026-03-22','9 دقائق قراءة','هل أنت آمن فعلاً عند التعامل مع الملفات الحساسة؟ 5 طبقات لحماية خصوصية الملفات','نسخ العقود، صور الهوية، التقارير المالية، السجلات الطبية — تسرب هذه الملفات له عواقب خطيرة. يغطي المقال المعالجة المحلية، تشفير النقل، تنظيف الملفات المؤقتة، ذاكرة المتصفح، ومخاطر روابط المشاركة.'],
+      ['دليل','2026-03-18','8 دقائق قراءة','الدليل الشامل لتوليد رمز QR: مستوى التصحيح، السعة، وحل مشاكل المسح','رموز QR ليست مجرد "ضع نصاً" — اختيار خاطئ لمستوى التصحيح يجعل الرموز المطبوعة غير قابلة للمسح. يشرح المقال المبادئ التقنية وأفضل الممارسات لتوليد رموز QR.']
+    ]
+  }
+};
+
+const POST_FILES = ['pdf-merge-complete-guide.html','excel-batch-processing.html','local-vs-cloud-tools.html','word-pdf-conversion-deep-dive.html','image-compression-best-practices.html','developer-toolbox-essentials.html','file-privacy-protection.html','qrcode-generation-guide.html'];
+
+function setLang(lang){
+  const d = I18N[lang]; if(!d) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.getElementById('navBack').textContent = d.navBack;
+  document.getElementById('pageH1').textContent = d.title;
+  document.getElementById('pageIntro').textContent = d.intro;
+  document.getElementById('introBoxText').textContent = d.introBox;
+
+  const list = document.getElementById('postList');
+  list.innerHTML = d.posts.map((p,i) => `
+    <a href="${POST_FILES[i]}" class="post-item">
+      <div class="post-meta"><span class="post-cat">${p[0]}</span><span>${p[1]}</span><span>${p[2]}</span></div>
+      <h2 class="post-title">${p[3]}</h2>
+      <p class="post-excerpt">${p[4]}</p>
+    </a>
+  `).join('');
+
+  const f = d.footer;
+  document.getElementById('footerLinks').innerHTML = `
+    <a href="/">${f.home}</a><a href="/about.html">${f.about}</a><a href="/blog/">${f.blog}</a><a href="/contact.html">${f.contact}</a><a href="/terms.html">${f.terms}</a><a href="/privacy.html">${f.privacy}</a>
+  `;
+  localStorage.setItem('hebing_lang', lang);
+}
+
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文本 Diff 在线对比 - 行级 / 字符级 左右对比 | hebing.org</title>
+<meta name="description" content="免费在线文本 diff 工具：左右对比与统一视图（unified diff）双模式，行级 / 单词级 / 字符级粒度切换，支持忽略空白、忽略大小写，长文本最多 100k 行。所有处理在浏览器本地完成。">
+<meta name="keywords" content="文本对比,diff工具,在线diff,文本差异,代码对比,git diff,unified diff,字符级diff">
+<link rel="canonical" href="https://hebing.org/diff.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="文本 Diff 在线对比 | hebing.org">
+<meta property="og:url" content="https://hebing.org/diff.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/diff.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/diff.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/diff.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;--add-bg:#dcfce7;--add-fg:#14532d;--add-strong:#86efac;--del-bg:#fee2e2;--del-fg:#7f1d1d;--del-strong:#fca5a5;--mod-bg:#fef9c3;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1280px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:640px;}
+.tool-wrap{padding:28px 0;}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:36px;padding:0 14px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-group{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);}
+.t-group select{height:30px;padding:0 8px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-family:var(--font-mono);font-size:12px;outline:none;}
+.t-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);user-select:none;cursor:pointer;}
+.t-sep{flex:1;}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:760px){.input-grid{grid-template-columns:1fr;}}
+.input-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.input-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.input-area{width:100%;min-height:200px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;tab-size:4;}
+.summary-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 18px;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);font-family:var(--font-mono);font-size:12px;margin-bottom:14px;}
+.summary-tag{display:inline-flex;align-items:center;gap:6px;}
+.summary-add{color:var(--add-fg);}
+.summary-del{color:var(--del-fg);}
+.summary-eq{color:var(--gray-400);}
+
+/* Side-by-side */
+.diff-wrap{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.diff-side{display:grid;grid-template-columns:1fr 1fr;}
+.diff-col{border-right:1px solid var(--gray-200);overflow-x:auto;}
+.diff-col:last-child{border-right:none;}
+.diff-col-head{padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;position:sticky;top:0;z-index:1;}
+.diff-line{display:grid;grid-template-columns:50px 1fr;font-family:var(--font-mono);font-size:13px;line-height:1.65;min-height:1.65em;border-bottom:1px solid rgba(0,0,0,0.02);white-space:pre-wrap;word-break:break-all;}
+.diff-ln{padding:0 8px;text-align:right;color:var(--gray-400);background:var(--gray-100);border-right:1px solid var(--gray-200);user-select:none;font-size:11px;line-height:1.65;}
+.diff-content{padding:0 14px;}
+.diff-line.add{background:var(--add-bg);}
+.diff-line.add .diff-content{color:var(--add-fg);}
+.diff-line.del{background:var(--del-bg);}
+.diff-line.del .diff-content{color:var(--del-fg);}
+.diff-line.eq{background:var(--white);}
+.diff-line.empty{background:var(--gray-100);opacity:0.5;}
+.diff-line .inline-add{background:var(--add-strong);font-weight:500;}
+.diff-line .inline-del{background:var(--del-strong);font-weight:500;text-decoration:line-through;text-decoration-color:rgba(0,0,0,0.3);}
+
+/* Unified */
+.diff-unified .diff-line{grid-template-columns:36px 36px 1fr;}
+.diff-unified .diff-ln-l,.diff-unified .diff-ln-r{padding:0 8px;text-align:right;color:var(--gray-400);background:var(--gray-100);border-right:1px solid var(--gray-200);user-select:none;font-size:11px;}
+
+.empty-hint{padding:40px 16px;text-align:center;font-family:var(--font-mono);color:var(--gray-400);font-size:13px;}
+
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);}
+.error-box.hidden{display:none!important;}
+
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+@media (prefers-color-scheme: dark){:root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;--add-bg:#0f3a1d;--add-fg:#bbf7d0;--add-strong:#166534;--del-bg:#3d1010;--del-fg:#fca5a5;--del-strong:#7f1d1d;}nav{background:rgba(17,17,16,0.95);}.input-area{background:var(--white);}.subscribe-input{background:var(--gray-100);}.scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}.related-card{background:var(--gray-100);border-color:var(--gray-200);}.related-card:hover{background:var(--gray-200);color:var(--black);}.error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}.diff-line.eq{background:transparent;}}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"hebing.org 文本 Diff","applicationCategory":"DeveloperApplication","operatingSystem":"Any (browser-based)","url":"https://hebing.org/diff.html","description":"免费在线文本 diff 对比，行/字符/单词级，左右对比与统一视图。","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["左右对比 与 统一视图","行级 / 单词级 / 字符级","忽略空白 / 大小写","支持 100k 行","本地处理"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"hebing.org","item":"https://hebing.org/"},{"@type":"ListItem","position":2,"name":"文本 Diff","item":"https://hebing.org/diff.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"如何在线对比两段文本 / 代码差异","description":"使用 hebing.org 在浏览器本地用 jsdiff (Myers + LCS 算法) 对比两段文本，输出左右对比或统一视图、行级 / 单词级 / 字符级差异。","totalTime":"PT10S","step":[
+{"@type":"HowToStep","position":1,"name":"粘贴 A 与 B","text":"左侧粘旧版本（A），右侧粘新版本（B）。"},
+{"@type":"HowToStep","position":2,"name":"选择视图与粒度","text":"视图选「左右对比」或「统一视图」；粒度选行级（含行内单词高亮）/ 单词级 / 字符级。"},
+{"@type":"HowToStep","position":3,"name":"按需忽略空白与大小写","text":"勾选「忽略空白」跳过行尾差异；勾选「忽略大小写」做大小写无关比较。"},
+{"@type":"HowToStep","position":4,"name":"读差异结果","text":"绿色为新增、红色为删除、黄色为修改；上方汇总条显示 +/− 行数。"}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Diff 算法是什么？大文件会卡吗？","acceptedAnswer":{"@type":"Answer","text":"行级用 Myers 最短编辑距离算法（与 git diff 一致）；行内变化用最长公共子序列做单词/字符级高亮。10k 行内本地秒开，超长文本（>50k 行）建议先抽取关键段落比较。所有计算在浏览器内完成。"}},
+{"@type":"Question","name":"为什么我的两段一模一样的代码还显示差异？","acceptedAnswer":{"@type":"Answer","text":"通常是行尾、Tab/空格、BOM 不一样。勾选「忽略空白」会跳过末尾空格、空行差异；勾选「忽略大小写」忽略大小写差。如果还有差异，可切到「字符级」看精确位置——往往是某行尾多了个不可见字符。"}},
+{"@type":"Question","name":"能直接读 git diff / unified diff 格式吗？","acceptedAnswer":{"@type":"Answer","text":"本工具是「双输入差异」：你贴左边旧文件、右边新文件，由工具计算 diff。如果你已经有 unified diff（@@ … @@），用 git apply 应用回去，再粘贴前后版本到本工具效果更直观。"}},
+{"@type":"Question","name":"数据会上传到服务器吗？","acceptedAnswer":{"@type":"Answer","text":"不会。所有 diff 计算都在你的浏览器内完成（jsdiff 库），输入从不离开你的设备，可放心比较敏感配置 / 私有代码。"}}
+]}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">文本 Diff</span></div>
+  <h1 class="page-title" data-i18n="page.h1">文本 Diff 对比<br><em>左右 / 统一双视图</em></h1>
+  <p class="page-sub" data-i18n="page.sub">两段文本的差异对比工具：左右对比与统一视图（unified diff）双模式，行级 / 单词级 / 字符级粒度，可忽略空白与大小写。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="toolbar">
+    <span class="t-group">
+      <span data-i18n="opt.view">视图</span>
+      <select id="viewSel">
+        <option value="side" selected data-i18n="opt.view.side">左右对比</option>
+        <option value="unified" data-i18n="opt.view.unified">统一视图</option>
+      </select>
+    </span>
+    <span class="t-group">
+      <span data-i18n="opt.gran">粒度</span>
+      <select id="granSel">
+        <option value="line" selected data-i18n="opt.gran.line">行级（含行内单词高亮）</option>
+        <option value="word" data-i18n="opt.gran.word">单词级</option>
+        <option value="char" data-i18n="opt.gran.char">字符级</option>
+      </select>
+    </span>
+    <label class="t-check"><input type="checkbox" id="optIws"><span data-i18n="opt.iws">忽略空白</span></label>
+    <label class="t-check"><input type="checkbox" id="optIcase"><span data-i18n="opt.icase">忽略大小写</span></label>
+    <span class="t-sep"></span>
+    <button class="t-btn secondary" id="btnSwap" data-i18n="btn.swap">⇅ 交换 A / B</button>
+    <button class="t-btn secondary" id="btnSample" data-i18n="btn.sample">示例</button>
+    <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+    <button class="t-btn" id="btnRun" data-i18n="btn.run">▶ 计算 Diff</button>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="input-grid">
+    <div class="input-pane">
+      <div class="input-head"><span data-i18n="pane.a">A · 旧</span><span id="metaA"></span></div>
+      <textarea class="input-area" id="textA" spellcheck="false" placeholder="粘贴 A（左边 / 旧版本）"></textarea>
+    </div>
+    <div class="input-pane">
+      <div class="input-head"><span data-i18n="pane.b">B · 新</span><span id="metaB"></span></div>
+      <textarea class="input-area" id="textB" spellcheck="false" placeholder="粘贴 B（右边 / 新版本）"></textarea>
+    </div>
+  </div>
+
+  <div class="summary-bar" id="summary">
+    <span style="color:var(--gray-400)" data-i18n="summary.empty">输入两段文本后点「计算 Diff」</span>
+  </div>
+
+  <div class="diff-wrap" id="diffOut">
+    <div class="empty-hint" data-i18n="empty.hint">— 还没有计算结果 —</div>
+  </div>
+
+  <div class="subscribe-box" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="常见使用场景" data-en="Common use cases">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📝</div><div class="scene-title" data-scene-zh="代码 review" data-scene-en="Code review">代码 review</div><div class="scene-desc" data-scene-zh="同事改了配置文件没说清，把改前 / 改后两份贴这里立刻看到全部增删，比 IDE 快。" data-scene-en="Coworker tweaked a config but the changelog is fuzzy — paste old/new for instant insertion/deletion view.">同事改了配置文件没说清，把改前 / 改后两份贴这里立刻看到全部增删，比 IDE 快。</div></div>
+      <div class="scene-card"><div class="scene-icon">📑</div><div class="scene-title" data-scene-zh="合同 / 文档比对" data-scene-en="Contract / docs">合同 / 文档比对</div><div class="scene-desc" data-scene-zh="新版本合同里改动了什么？粘进来在浏览器本地比对，敏感条款不会上传第三方。" data-scene-en="New contract version — what changed? Paste both, compare locally, sensitive clauses never leave your device.">新版本合同里改动了什么？粘进来在浏览器本地比对，敏感条款不会上传第三方。</div></div>
+      <div class="scene-card"><div class="scene-icon">🌐</div><div class="scene-title" data-scene-zh="翻译稿对照" data-scene-en="Translation review">翻译稿对照</div><div class="scene-desc" data-scene-zh="译者改了哪几句？开「单词级」模式，仅高亮变动的词，整段未动的部分一目了然。" data-scene-en="Which sentences did the translator touch? Word-level mode highlights only changed words.">译者改了哪几句？开「单词级」模式，仅高亮变动的词，整段未动的部分一目了然。</div></div>
+      <div class="scene-card"><div class="scene-icon">📝</div><div class="scene-title" data-scene-zh="找隐形字符" data-scene-en="Find invisible chars">找隐形字符</div><div class="scene-desc" data-scene-zh="两段「看上去一样」却跑出不同结果？「字符级」模式可揪出多余空格、Tab、BOM、零宽空格。" data-scene-en="Two strings look identical but behave differently — char-level diff exposes extra spaces, tabs, BOMs, zero-width chars.">两段「看上去一样」却跑出不同结果？「字符级」模式可揪出多余空格、Tab、BOM、零宽空格。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>三档粒度怎么选</strong>：行级最常见（=git diff）；翻译 / 校对用单词级；查不可见字符用字符级。</li>
+      <li><strong>左右 vs 统一</strong>：左右适合并排阅读 / 截图；统一更紧凑、适合 unified diff 风格的代码 review。</li>
+      <li><strong>忽略空白</strong>：忽略行尾空白与空行差异，常用于跨平台 CRLF/LF 不一致场景。</li>
+      <li><strong>性能</strong>：默认对超过 50k 行的两段会自动降级到行级，避免字符级算法 O(n²) 卡死。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>Granularity</strong>: line = git-diff style; word = translation / proofread; char = catch invisible chars.</li>
+      <li><strong>Side vs unified</strong>: side for screenshots / parallel reading; unified for compact code review.</li>
+      <li><strong>Ignore whitespace</strong>: skip trailing-space and empty-line diffs — useful across CRLF/LF systems.</li>
+      <li><strong>Performance</strong>: inputs &gt; 50k lines auto-downgrade to line-level to avoid char-level O(n²) hangs.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>الدقة: السطر = نمط git-diff؛ الكلمة = الترجمة / التدقيق؛ الحرف = اكتشاف الأحرف غير المرئية.</li><li>جنباً إلى جنب مقابل موحد: جنباً للقطات الشاشة / القراءة المتوازية؛ موحد للمراجعة المدمجة للكود.</li><li>تجاهل المسافات: تخطّي اختلافات المسافات اللاحقة والأسطر الفارغة — مفيد عبر أنظمة CRLF/LF.</li><li>الأداء: المدخلات &gt; 50 ألف سطر تنخفض تلقائياً إلى مستوى السطر لتجنب توقفات O(n²) لمستوى الحرف.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q" data-faq-zh="Diff 算法是什么？大文件会卡吗？" data-faq-en="What algorithm? Lag on big files?" data-faq-ar="ما الخوارزمية المستخدمة؟ وهل تتعطل على الملفات الكبيرة؟">Diff 算法是什么？大文件会卡吗？</div><div class="faq-a" data-faq-zh="行级用 Myers 最短编辑距离（与 git diff 一致）；行内变化用 LCS 做单词/字符级高亮。10k 行内本地秒开，>50k 行建议抽段比较。" data-faq-en="Line-level uses Myers (same as git diff). Word/char highlighting uses LCS. <10k lines is instant; >50k consider extracting sections." data-faq-ar="يستخدم المستوى السطري خوارزمية Myers (مثل git diff). يستخدم تمييز الكلمات/الأحرف خوارزمية LCS. أقل من 10 آلاف سطر فوري؛ أكثر من 50 ألف سطر يُنصح بمقارنة مقاطع منفصلة.">行级用 Myers 最短编辑距离（与 git diff 一致）；行内变化用 LCS 做单词/字符级高亮。10k 行内本地秒开，>50k 行建议抽段比较。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="为什么一模一样的代码还显示差异？" data-faq-en="Why diff on identical text?" data-faq-ar="لماذا يظهر اختلاف في نص متطابق؟">为什么一模一样的代码还显示差异？</div><div class="faq-a" data-faq-zh="通常是行尾、Tab/空格、BOM 不一样。勾选「忽略空白」可跳过这些；切到「字符级」可看精确位置。" data-faq-en="Usually CRLF/LF, tabs/spaces, or BOM. Toggle 'ignore whitespace' or switch to char-level to pinpoint." data-faq-ar="عادةً CRLF/LF أو علامات التبويب/المسافات أو BOM. فعّل &quot;تجاهل المسافات&quot; أو انتقل إلى المستوى الحرفي لتحديد الموقع.">通常是行尾、Tab/空格、BOM 不一样。勾选「忽略空白」可跳过这些；切到「字符级」可看精确位置。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="能直接读 git diff 格式吗？" data-faq-en="Reads git diff format?" data-faq-ar="هل يقرأ صيغة git diff؟">能直接读 git diff 格式吗？</div><div class="faq-a" data-faq-zh="本工具是「双输入差异」。如果你已有 unified diff，建议 git apply 后比较前后两版更直观。" data-faq-en="Tool takes two full inputs, not unified-diff format. If you have unified diff, apply it first, then compare both versions." data-faq-ar="تأخذ الأداة مدخلين كاملين، وليس صيغة unified-diff. إذا كان لديك unified diff، طبّقه أولاً ثم قارن النسختين.">本工具是「双输入差异」。如果你已有 unified diff，建议 git apply 后比较前后两版更直观。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are inputs uploaded?" data-faq-ar="هل يتم رفع المدخلات؟">数据会上传到服务器吗？</div><div class="faq-a" data-faq-zh="不会。jsdiff 库在浏览器内运行，输入从不离开你的设备。" data-faq-en="No. jsdiff runs in your browser; nothing leaves your device." data-faq-ar="لا. تعمل مكتبة jsdiff في متصفحك؛ لا شيء يغادر جهازك.">不会。jsdiff 库在浏览器内运行，输入从不离开你的设备。</div></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span>{}</span><span data-i18n-related="JSON 格式化|JSON|JSON">JSON 格式化</span></a>
+    <a href="hash.html" class="related-card"><span>#</span><span data-i18n-related="Hash 计算|Hash|Hash">Hash 计算</span></a>
+    <a href="regex.html" class="related-card"><span>/.*/</span><span data-i18n-related="正则测试器|Regex|Regex">正则测试器</span></a>
+    <a href="url-encode.html" class="related-card"><span>%20</span><span data-i18n-related="URL / HTML 编解码|URL/HTML|URL/HTML">URL / HTML 编解码</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script src="/vendor/diff@5.2.0/diff.min.js"></script>
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'文本 Diff','page.h1':'文本 Diff 对比<br><em>左右 / 统一双视图</em>','page.sub':'两段文本的差异对比工具：左右对比与统一视图（unified diff）双模式，行级 / 单词级 / 字符级粒度，可忽略空白与大小写。所有处理在浏览器本地完成。','opt.view':'视图','opt.view.side':'左右对比','opt.view.unified':'统一视图','opt.gran':'粒度','opt.gran.line':'行级（含行内单词高亮）','opt.gran.word':'单词级','opt.gran.char':'字符级','opt.iws':'忽略空白','opt.icase':'忽略大小写','btn.swap':'⇅ 交换 A / B','btn.sample':'示例','btn.clear':'清空','btn.run':'▶ 计算 Diff','pane.a':'A · 旧','pane.b':'B · 新','summary.empty':'输入两段文本后点「计算 Diff」','empty.hint':'— 还没有计算结果 —','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Text Diff','page.h1':'Text Diff Compare<br><em>side / unified</em>','page.sub':'Two-input text diff with side-by-side & unified views; line / word / char granularity; ignore whitespace & case. All in your browser.','opt.view':'View','opt.view.side':'Side-by-side','opt.view.unified':'Unified','opt.gran':'Granularity','opt.gran.line':'Line (with inline word highlight)','opt.gran.word':'Word','opt.gran.char':'Char','opt.iws':'Ignore whitespace','opt.icase':'Ignore case','btn.swap':'⇅ Swap A / B','btn.sample':'Sample','btn.clear':'Clear','btn.run':'▶ Compute Diff','pane.a':'A · Old','pane.b':'B · New','summary.empty':'Type two texts and click "Compute Diff"','empty.hint':'— No diff yet —','sub.title':'🔔 Get notified','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'مقارنة نص','page.h1':'مقارنة Diff','page.sub':'مقارنة نصين محلياً.','opt.view':'العرض','opt.view.side':'جنب لجنب','opt.view.unified':'موحد','opt.gran':'الدقة','opt.gran.line':'سطر','opt.gran.word':'كلمة','opt.gran.char':'حرف','opt.iws':'تجاهل المسافات','opt.icase':'تجاهل الحالة','btn.swap':'⇅ تبديل','btn.sample':'مثال','btn.clear':'مسح','btn.run':'▶ احسب','pane.a':'A · قديم','pane.b':'B · جديد','summary.empty':'الصق نصين','empty.hint':'لا نتيجة','sub.title':'🔔 أخبرني','sub.sub':'اشترك','sub.btn':'اشتراك','sub.ok':'✓ تم!','sub.support':'الأدوات مجانية ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function preprocess(s){
+  let v = s;
+  if($('optIcase').checked) v = v.toLowerCase();
+  if($('optIws').checked) v = v.split('\n').map(l => l.replace(/\s+$/, '')).join('\n');
+  return v;
+}
+
+function updateMeta(){
+  const ta = $('textA').value, tb = $('textB').value;
+  $('metaA').textContent = ta ? `${ta.split('\n').length} lines · ${ta.length} chars` : '';
+  $('metaB').textContent = tb ? `${tb.split('\n').length} lines · ${tb.length} chars` : '';
+}
+
+function compute(){
+  $('errBox').classList.add('hidden');
+  const A = preprocess($('textA').value);
+  const B = preprocess($('textB').value);
+  const view = $('viewSel').value;
+  const gran = $('granSel').value;
+
+  // Auto-downgrade big inputs
+  const tooBig = (A.split('\n').length + B.split('\n').length) > 50_000;
+  let realGran = gran;
+  if(tooBig && gran !== 'line') realGran = 'line';
+
+  let parts;
+  try{
+    if(realGran === 'line') parts = Diff.diffLines(A, B, { newlineIsToken: false });
+    else if(realGran === 'word') parts = Diff.diffWordsWithSpace(A, B);
+    else parts = Diff.diffChars(A, B);
+  }catch(e){
+    $('errBox').textContent = '错误：' + e.message;
+    $('errBox').classList.remove('hidden');
+    return;
+  }
+
+  // Stats
+  let added = 0, removed = 0, eq = 0;
+  for(const p of parts){
+    const n = realGran === 'line' ? (p.value.match(/\n/g) || []).length + (p.value.endsWith('\n')?0:1) : 1;
+    const v = realGran === 'line' ? n : p.value.length;
+    if(p.added) added += v;
+    else if(p.removed) removed += v;
+    else eq += v;
+  }
+  const totalChanges = added + removed;
+  $('summary').innerHTML = totalChanges === 0 && parts.length <= 1
+    ? '<span class="summary-tag summary-eq">✓ 两段完全一致</span>'
+    : `<span class="summary-tag summary-add">+ ${added} ${realGran==='line'?'行':'单元'}</span>
+       <span class="summary-tag summary-del">− ${removed} ${realGran==='line'?'行':'单元'}</span>
+       <span class="summary-tag summary-eq">≈ ${eq} ${realGran==='line'?'行':'单元'} 相同</span>
+       ${tooBig && gran !== realGran ? '<span style="color:var(--accent)">⚠ 输入过大，已降级为行级</span>' : ''}`;
+
+  if(view === 'side') renderSide(parts, realGran);
+  else renderUnified(parts, realGran);
+}
+
+// ── Side-by-side rendering ──
+function renderSide(parts, gran){
+  // For line-level, also compute inline word diff for changed line pairs
+  const rows = []; // {l, r, type} where type ∈ 'eq'|'add'|'del'|'mod'
+  if(gran === 'line'){
+    // Walk parts: removed-block immediately followed by added-block → "modified" pairing
+    let i = 0;
+    while(i < parts.length){
+      const p = parts[i];
+      const lines = p.value.replace(/\n$/,'').split('\n');
+      if(p.removed && parts[i+1] && parts[i+1].added){
+        const next = parts[i+1].value.replace(/\n$/,'').split('\n');
+        const m = Math.max(lines.length, next.length);
+        for(let k=0;k<m;k++){
+          const oldLine = lines[k] ?? '', newLine = next[k] ?? '';
+          if(lines[k] !== undefined && next[k] !== undefined){
+            // both — inline word diff
+            const inline = Diff.diffWordsWithSpace(oldLine, newLine);
+            const lHtml = inline.filter(s => !s.added).map(s => s.removed ? `<span class="inline-del">${esc(s.value)}</span>` : esc(s.value)).join('');
+            const rHtml = inline.filter(s => !s.removed).map(s => s.added ? `<span class="inline-add">${esc(s.value)}</span>` : esc(s.value)).join('');
+            rows.push({ l:{html:lHtml,raw:oldLine}, r:{html:rHtml,raw:newLine}, lt:'del', rt:'add' });
+          }else if(lines[k] !== undefined){
+            rows.push({ l:{html:esc(oldLine),raw:oldLine}, r:{html:'',raw:''}, lt:'del', rt:'empty' });
+          }else{
+            rows.push({ l:{html:'',raw:''}, r:{html:esc(newLine),raw:newLine}, lt:'empty', rt:'add' });
+          }
+        }
+        i += 2;
+      }else if(p.removed){
+        for(const ln of lines) rows.push({ l:{html:esc(ln),raw:ln}, r:{html:'',raw:''}, lt:'del', rt:'empty' });
+        i++;
+      }else if(p.added){
+        for(const ln of lines) rows.push({ l:{html:'',raw:''}, r:{html:esc(ln),raw:ln}, lt:'empty', rt:'add' });
+        i++;
+      }else{
+        for(const ln of lines) rows.push({ l:{html:esc(ln),raw:ln}, r:{html:esc(ln),raw:ln}, lt:'eq', rt:'eq' });
+        i++;
+      }
+    }
+  }else{
+    // word/char: assemble two-pane reconstruction with inline highlights
+    let lHtml = '', rHtml = '';
+    for(const p of parts){
+      const e = esc(p.value);
+      if(p.added) rHtml += `<span class="inline-add">${e}</span>`;
+      else if(p.removed) lHtml += `<span class="inline-del">${e}</span>`;
+      else { lHtml += e; rHtml += e; }
+    }
+    rows.push({ l:{html:lHtml,raw:''}, r:{html:rHtml,raw:''}, lt:'mixed', rt:'mixed', noNum: true });
+  }
+
+  // Build HTML
+  const out = $('diffOut');
+  out.classList.remove('diff-unified');
+  out.innerHTML = `
+    <div class="diff-side">
+      <div class="diff-col">
+        <div class="diff-col-head">A · 旧</div>
+        ${rows.map((r,idx) => r.noNum
+            ? `<div class="diff-line"><div class="diff-ln">—</div><div class="diff-content">${r.l.html}</div></div>`
+            : `<div class="diff-line ${r.lt}"><div class="diff-ln">${r.lt==='empty'?'':lineNoLeft(rows, idx)}</div><div class="diff-content">${r.l.html||'&nbsp;'}</div></div>`
+          ).join('')}
+      </div>
+      <div class="diff-col">
+        <div class="diff-col-head">B · 新</div>
+        ${rows.map((r,idx) => r.noNum
+            ? `<div class="diff-line"><div class="diff-ln">—</div><div class="diff-content">${r.r.html}</div></div>`
+            : `<div class="diff-line ${r.rt}"><div class="diff-ln">${r.rt==='empty'?'':lineNoRight(rows, idx)}</div><div class="diff-content">${r.r.html||'&nbsp;'}</div></div>`
+          ).join('')}
+      </div>
+    </div>`;
+}
+function lineNoLeft(rows, idx){
+  let n = 0; for(let i=0;i<=idx;i++) if(rows[i].lt !== 'empty') n++;
+  return n;
+}
+function lineNoRight(rows, idx){
+  let n = 0; for(let i=0;i<=idx;i++) if(rows[i].rt !== 'empty') n++;
+  return n;
+}
+
+// ── Unified rendering ──
+function renderUnified(parts, gran){
+  const lines = []; // [{ln_l, ln_r, type, html}]
+  let lnL = 0, lnR = 0;
+  if(gran === 'line'){
+    for(const p of parts){
+      const arr = p.value.replace(/\n$/,'').split('\n');
+      for(const ln of arr){
+        if(p.added){ lnR++; lines.push({ln_l:'', ln_r:lnR, type:'add', html:esc(ln)}); }
+        else if(p.removed){ lnL++; lines.push({ln_l:lnL, ln_r:'', type:'del', html:esc(ln)}); }
+        else { lnL++; lnR++; lines.push({ln_l:lnL, ln_r:lnR, type:'eq', html:esc(ln)}); }
+      }
+    }
+  }else{
+    let html = '';
+    for(const p of parts){
+      const e = esc(p.value);
+      if(p.added) html += `<span class="inline-add">${e}</span>`;
+      else if(p.removed) html += `<span class="inline-del">${e}</span>`;
+      else html += e;
+    }
+    lines.push({ln_l:'', ln_r:'', type:'eq', html});
+  }
+  const out = $('diffOut');
+  out.classList.add('diff-unified');
+  out.innerHTML = `
+    <div class="diff-col-head">Unified diff</div>
+    ${lines.map(l => `
+      <div class="diff-line ${l.type}">
+        <div class="diff-ln-l">${l.ln_l}</div>
+        <div class="diff-ln-r">${l.ln_r}</div>
+        <div class="diff-content">${l.html||'&nbsp;'}</div>
+      </div>`).join('')}`;
+}
+
+['textA','textB'].forEach(id => $(id).addEventListener('input', updateMeta));
+$('btnRun').onclick = compute;
+$('btnSwap').onclick = () => {
+  const a = $('textA').value, b = $('textB').value;
+  $('textA').value = b; $('textB').value = a;
+  updateMeta(); compute();
+};
+$('btnClear').onclick = () => {
+  $('textA').value = ''; $('textB').value = '';
+  updateMeta();
+  $('diffOut').innerHTML = '<div class="empty-hint">— 还没有计算结果 —</div>';
+  $('summary').innerHTML = '<span style="color:var(--gray-400)">输入两段文本后点「计算 Diff」</span>';
+};
+$('btnSample').onclick = () => {
+  $('textA').value =
+`function greet(name) {
+  console.log("Hello, " + name);
+  return name.length;
+}`;
+  $('textB').value =
+`function greet(name, lang = 'en') {
+  const prefix = lang === 'zh' ? '你好' : 'Hello';
+  console.log(prefix + ', ' + name);
+  return name.length;
+}`;
+  updateMeta(); compute();
+};
+['viewSel','granSel','optIws','optIcase'].forEach(id =>
+  $(id).addEventListener('change', () => { if($('textA').value || $('textB').value) compute(); }));
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+updateMeta();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

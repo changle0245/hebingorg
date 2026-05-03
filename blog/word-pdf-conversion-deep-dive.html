@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word 与 PDF 互转的 12 个隐藏陷阱：字体、表格、注释如何不丢失 ｜ hebing.org 博客</title>
+<meta name="description" content="Word 转 PDF 看似一键完成，但中文字体替换、嵌入式图表、批注等元素经常在转换中悄悄变形。本文逐一拆解每种丢失现象。中英阿三语版本。">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta property="og:title" content="12 Hidden Pitfalls When Converting Word ↔ PDF">
+<meta property="og:url" content="https://hebing.org/blog/word-pdf-conversion-deep-dive.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "Word 与 PDF 互转的 12 个隐藏陷阱",
+  "author": { "@type": "Organization", "name": "hebing.org" },
+  "publisher": { "@type": "Organization", "name": "hebing.org", "logo": { "@type": "ImageObject", "url": "https://hebing.org/og-image.png" }},
+  "datePublished": "2026-04-04","dateModified": "2026-04-04",
+  "mainEntityOfPage": "https://hebing.org/blog/word-pdf-conversion-deep-dive.html",
+  "image": "https://hebing.org/og-image.png","inLanguage": ["zh-CN","en","ar"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hebing.org/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Word PDF Conversion", "item": "https://hebing.org/blog/word-pdf-conversion-deep-dive.html" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="post.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/blog/" class="nav-back" id="navBack">← 所有文章</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<article class="container post-wrap">
+  <div class="post-tag" id="postTag">格式转换 · 深度分析</div>
+  <h1 class="post-h1" id="postH1">Word 与 PDF 互转的 12 个隐藏陷阱：字体、表格、注释如何不丢失</h1>
+  <div class="post-meta" id="postMeta"><span>2026-04-04</span><span class="dot">约 13 分钟阅读</span></div>
+
+  <div class="zh-content active"><div class="post-content">
+    <p>"另存为 PDF" 是 Word 里点击率最高的菜单之一，但用过的人都知道：每次转换都像开盲盒。最常见的故障：字体变成宋体、表格被截断、批注消失、目录页码错位、链接无法点击。</p>
+
+    <h2>一、为什么 Word 转 PDF 总是出问题？</h2>
+    <p>Word 文档（.docx）本质是 ZIP 压缩包，含 XML 描述的内容、样式、关系；PDF 是按页面布局固化的二进制格式。两者的数据模型完全不同：Word 描述"应该怎么排版"，PDF 描述"已经排成了什么样"。</p>
+    <p>转换是 Word 排版引擎根据当前系统环境（字体库、纸张大小）把内容重排成具体页面，再"打印"成 PDF。这意味着：同一份 .docx 在不同电脑上转出来可能不同。</p>
+
+    <h2>二、字体类陷阱（5 个）</h2>
+    <h3>陷阱 1：中文字体被替换成宋体</h3>
+    <p><strong>原因</strong>：转换工具只能用系统已安装的字体。<strong>解决</strong>：在 Word 里勾选"将字体嵌入文件"。</p>
+
+    <h3>陷阱 2：英文正常但中文乱码</h3>
+    <p><strong>原因</strong>：使用了"罗马+中文混搭"字体方案，混搭关系丢失。<strong>解决</strong>：显式给中文部分指定中文字体并嵌入。</p>
+
+    <h3>陷阱 3：粗体变细体</h3>
+    <p><strong>原因</strong>：原字体没有粗体变体，系统用"伪粗体"算法渲染。<strong>解决</strong>：换有真正粗体变体的字体。</p>
+
+    <h3>陷阱 4：从网络下载字体后排版错位</h3>
+    <p><strong>解决</strong>：要么嵌入字体，要么把视觉效果"固化"成图像。</p>
+
+    <h3>陷阱 5：emoji 在 PDF 里变成方框</h3>
+    <p><strong>解决</strong>：替换关键 emoji 为图片，或确认目标读者用支持彩色 emoji 的阅读器。</p>
+
+    <h2>三、布局类陷阱（4 个）</h2>
+    <h3>陷阱 6：表格被截断到下一页</h3>
+    <p><strong>解决</strong>：选中表格 → 表格属性 → 行 → 取消"允许跨页断行"。</p>
+
+    <h3>陷阱 7：图片位置漂移</h3>
+    <p><strong>解决</strong>：把关键图片改为"嵌入式"或"上下型环绕"。</p>
+
+    <h3>陷阱 8：页边距变小</h3>
+    <p><strong>解决</strong>：用 Word 自带的"导出为 PDF"，不要用"打印为 PDF"。</p>
+
+    <h3>陷阱 9：双栏文档列宽不一致</h3>
+    <p><strong>解决</strong>：转换前确认 Word 里的纸张大小与目标用途一致。</p>
+
+    <a href="/word-to-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">免费在线 Word 转 PDF</div>
+        <div class="tool-cta-sub">浏览器本地处理，文件不上传</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>四、动态元素类陷阱（3 个）</h2>
+    <h3>陷阱 10：批注/修订记录丢失</h3>
+    <p><strong>解决</strong>：转 PDF 前"接受所有修订"或"删除所有批注"；或在导出选项里勾选"作为注释"包括标记。</p>
+
+    <h3>陷阱 11：目录页码错位</h3>
+    <p><strong>解决</strong>：导出前 Ctrl+A 选中全文，按 F9 更新所有域。</p>
+
+    <h3>陷阱 12：超链接变成纯文本</h3>
+    <p><strong>解决</strong>：用 Word 原生"导出为 PDF"功能。</p>
+
+    <h2>五、不同转换工具的真实表现</h2>
+    <table>
+      <thead><tr><th>工具</th><th>字体</th><th>批注</th><th>链接</th><th>适合</th></tr></thead>
+      <tbody>
+        <tr><td>Word 自带导出</td><td>★★★★★</td><td>★★★★</td><td>★★★★★</td><td>原始最优</td></tr>
+        <tr><td>WPS 自带</td><td>★★★★</td><td>★★★</td><td>★★★★</td><td>WPS 用户</td></tr>
+        <tr><td>LibreOffice</td><td>★★★</td><td>★★</td><td>★★★</td><td>服务器批量</td></tr>
+        <tr><td>云端在线</td><td>★★★</td><td>★</td><td>★★★</td><td>临时单文件</td></tr>
+        <tr><td>本地在线</td><td>★★★</td><td>★</td><td>★★</td><td>隐私优先</td></tr>
+      </tbody>
+    </table>
+    <p><strong>规律</strong>：Word/WPS 自带导出始终最高质量。所有第三方工具都是"次优解"。</p>
+
+    <h2>结语</h2>
+    <p>Word 转 PDF 看似简单，背后涉及字体引擎、排版重计算、动态字段更新等多个环节。希望这篇文章能帮你少一些意外、多一份预案。</p>
+
+    <div class="related-posts">
+      <div class="related-title">相关文章</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>PDF 合并完整指南</strong></a>
+        <a href="image-compression-best-practices.html" class="related-card"><strong>图片压缩最佳实践</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="en-content"><div class="post-content">
+    <p>"Save as PDF" is one of Word's most-clicked menus, but anyone who's used it knows: every conversion is a lottery. Common failures: fonts become Song-ti, tables get cut off, comments vanish, TOC page numbers misalign, links become unclickable.</p>
+
+    <h2>1. Why Word-to-PDF Conversion Always Has Issues</h2>
+    <p>A Word .docx is essentially a ZIP archive containing XML describing content, styles, and relationships; PDF is a binary format with fixed page layout. Their data models differ: Word describes "how it should look," PDF describes "how it already looks."</p>
+    <p>Conversion is Word's layout engine reflowing content based on the current system (fonts, paper size), then "printing" to PDF. This means: the same .docx may produce different PDFs on different computers.</p>
+
+    <h2>2. Font Pitfalls (5)</h2>
+    <h3>Pitfall 1: Chinese fonts replaced with Song-ti</h3>
+    <p><strong>Cause</strong>: Conversion tools can only use installed fonts. <strong>Fix</strong>: Check "Embed fonts in file" in Word.</p>
+
+    <h3>Pitfall 2: English fine but Chinese garbled</h3>
+    <p><strong>Cause</strong>: Mixed Latin+CJK font scheme loses pairing. <strong>Fix</strong>: Explicitly set CJK font and embed.</p>
+
+    <h3>Pitfall 3: Bold becomes regular</h3>
+    <p><strong>Cause</strong>: Original font lacks a bold variant; system uses "fake bold" rendering. <strong>Fix</strong>: Use a font with real bold variants.</p>
+
+    <h3>Pitfall 4: Downloaded fonts cause layout shifts</h3>
+    <p><strong>Fix</strong>: Embed the font, or rasterize critical visuals to images.</p>
+
+    <h3>Pitfall 5: Emoji become boxes in PDF</h3>
+    <p><strong>Fix</strong>: Replace key emoji with images, or confirm target reader supports color emoji.</p>
+
+    <h2>3. Layout Pitfalls (4)</h2>
+    <h3>Pitfall 6: Tables cut to next page</h3>
+    <p><strong>Fix</strong>: Select table → Table Properties → Row → uncheck "Allow row to break across pages."</p>
+
+    <h3>Pitfall 7: Image position drifts</h3>
+    <p><strong>Fix</strong>: Change critical images to "In Line" or "Top and Bottom" wrapping.</p>
+
+    <h3>Pitfall 8: Margins become smaller</h3>
+    <p><strong>Fix</strong>: Use Word's built-in "Export as PDF," not "Print to PDF."</p>
+
+    <h3>Pitfall 9: Two-column documents have inconsistent column widths</h3>
+    <p><strong>Fix</strong>: Verify Word's paper size matches target use before conversion.</p>
+
+    <a href="/word-to-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">Free Online Word to PDF</div>
+        <div class="tool-cta-sub">Browser-local processing, no upload</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>4. Dynamic Element Pitfalls (3)</h2>
+    <h3>Pitfall 10: Comments/revisions lost</h3>
+    <p><strong>Fix</strong>: Accept all revisions or delete all comments before exporting; or check "as annotations" in export options.</p>
+
+    <h3>Pitfall 11: TOC page numbers misalign</h3>
+    <p><strong>Fix</strong>: Ctrl+A → F9 to update all fields before exporting.</p>
+
+    <h3>Pitfall 12: Hyperlinks become plain text</h3>
+    <p><strong>Fix</strong>: Use Word's native "Export as PDF."</p>
+
+    <h2>5. Real Performance of Different Tools</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Fonts</th><th>Comments</th><th>Links</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td>Word built-in</td><td>★★★★★</td><td>★★★★</td><td>★★★★★</td><td>Optimal</td></tr>
+        <tr><td>WPS built-in</td><td>★★★★</td><td>★★★</td><td>★★★★</td><td>WPS users</td></tr>
+        <tr><td>LibreOffice</td><td>★★★</td><td>★★</td><td>★★★</td><td>Server batch</td></tr>
+        <tr><td>Cloud online</td><td>★★★</td><td>★</td><td>★★★</td><td>One-off</td></tr>
+        <tr><td>Local online</td><td>★★★</td><td>★</td><td>★★</td><td>Privacy-first</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Rule</strong>: Word/WPS built-in export is always highest quality. All third-party tools are "second-best."</p>
+
+    <h2>Conclusion</h2>
+    <p>Word-to-PDF conversion looks simple but involves font engines, layout reflow, dynamic field updates. Hopefully this article helps you anticipate fewer surprises.</p>
+
+    <div class="related-posts">
+      <div class="related-title">Related Posts</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>The Complete PDF Merge Guide</strong></a>
+        <a href="image-compression-best-practices.html" class="related-card"><strong>Image Compression Best Practices</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="ar-content"><div class="post-content">
+    <p>"حفظ كـ PDF" واحدة من أكثر القوائم نقراً في Word، لكن من استخدمها يعرف: كل تحويل يانصيب. الفشل الشائع: الخطوط تتحول إلى Song-ti، الجداول تُقطع، التعليقات تختفي، أرقام صفحات الفهرس تنحرف، الروابط لا تعمل.</p>
+
+    <h2>1. لماذا تحويل Word إلى PDF دائماً به مشاكل</h2>
+    <p>ملف Word .docx أساساً أرشيف ZIP يحتوي XML يصف المحتوى والأنماط والعلاقات؛ PDF تنسيق ثنائي بتخطيط صفحة ثابت. نموذجا البيانات مختلفان: Word يصف "كيف ينبغي أن يبدو"، PDF يصف "كيف يبدو بالفعل".</p>
+    <p>التحويل هو محرك تخطيط Word يعيد تدفق المحتوى بناءً على النظام الحالي (الخطوط، حجم الورق)، ثم "يطبع" إلى PDF. هذا يعني: نفس .docx قد ينتج PDFs مختلفة على أجهزة مختلفة.</p>
+
+    <h2>2. عثرات الخطوط (5)</h2>
+    <h3>العثرة 1: الخطوط الصينية تُستبدل بـ Song-ti</h3>
+    <p><strong>السبب</strong>: أدوات التحويل تستخدم فقط الخطوط المثبتة. <strong>الحل</strong>: حدد "تضمين الخطوط في الملف" في Word.</p>
+
+    <h3>العثرة 2: الإنجليزية بخير لكن الصينية مشوهة</h3>
+    <p><strong>السبب</strong>: مخطط خطوط مختلط لاتيني+CJK يفقد الإقران. <strong>الحل</strong>: عيّن خط CJK بشكل صريح وضمّنه.</p>
+
+    <h3>العثرة 3: العريض يصبح عادياً</h3>
+    <p><strong>السبب</strong>: الخط الأصلي يفتقر لمتغير عريض. <strong>الحل</strong>: استخدم خطاً بمتغيرات عريض حقيقية.</p>
+
+    <h3>العثرة 4: الخطوط المنزلة تسبب تحولات تخطيط</h3>
+    <p><strong>الحل</strong>: ضمّن الخط، أو حوّل العناصر البصرية الحرجة إلى صور.</p>
+
+    <h3>العثرة 5: الإيموجي يصبح مربعات في PDF</h3>
+    <p><strong>الحل</strong>: استبدل الإيموجي الرئيسي بصور.</p>
+
+    <h2>3. عثرات التخطيط (4)</h2>
+    <h3>العثرة 6: الجداول تُقطع للصفحة التالية</h3>
+    <p><strong>الحل</strong>: حدد الجدول → خصائص → صف → ألغ "السماح بكسر الصف عبر الصفحات".</p>
+
+    <h3>العثرة 7: موضع الصورة ينحرف</h3>
+    <p><strong>الحل</strong>: غيّر الصور الحرجة إلى "متضمنة" أو "أعلى وأسفل".</p>
+
+    <h3>العثرة 8: الهوامش تصبح أصغر</h3>
+    <p><strong>الحل</strong>: استخدم "تصدير كـ PDF" المدمج في Word.</p>
+
+    <h3>العثرة 9: عرض أعمدة غير متسق في وثائق ذات عمودين</h3>
+    <p><strong>الحل</strong>: تحقق من حجم ورق Word قبل التحويل.</p>
+
+    <a href="/word-to-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">Word إلى PDF مجاناً عبر الإنترنت</div>
+        <div class="tool-cta-sub">معالجة محلية في المتصفح، بدون رفع</div>
+      </div>
+      <div class="tool-cta-arrow">←</div>
+    </a>
+
+    <h2>4. عثرات العناصر الديناميكية (3)</h2>
+    <h3>العثرة 10: التعليقات/المراجعات مفقودة</h3>
+    <p><strong>الحل</strong>: اقبل كل المراجعات أو احذف كل التعليقات قبل التصدير.</p>
+
+    <h3>العثرة 11: أرقام صفحات الفهرس منحرفة</h3>
+    <p><strong>الحل</strong>: Ctrl+A → F9 لتحديث كل الحقول قبل التصدير.</p>
+
+    <h3>العثرة 12: الروابط التشعبية تصبح نصاً عادياً</h3>
+    <p><strong>الحل</strong>: استخدم "تصدير كـ PDF" الأصلي في Word.</p>
+
+    <h2>5. الأداء الحقيقي للأدوات المختلفة</h2>
+    <table>
+      <thead><tr><th>الأداة</th><th>الخطوط</th><th>التعليقات</th><th>الروابط</th><th>الأنسب</th></tr></thead>
+      <tbody>
+        <tr><td>Word المدمج</td><td>★★★★★</td><td>★★★★</td><td>★★★★★</td><td>الأمثل</td></tr>
+        <tr><td>WPS المدمج</td><td>★★★★</td><td>★★★</td><td>★★★★</td><td>مستخدمو WPS</td></tr>
+        <tr><td>LibreOffice</td><td>★★★</td><td>★★</td><td>★★★</td><td>دفعات الخادم</td></tr>
+        <tr><td>سحابي</td><td>★★★</td><td>★</td><td>★★★</td><td>لمرة واحدة</td></tr>
+        <tr><td>محلي عبر الإنترنت</td><td>★★★</td><td>★</td><td>★★</td><td>أولوية الخصوصية</td></tr>
+      </tbody>
+    </table>
+    <p><strong>القاعدة</strong>: تصدير Word/WPS المدمج هو الأعلى جودة دائماً.</p>
+
+    <h2>الخاتمة</h2>
+    <p>تحويل Word إلى PDF يبدو بسيطاً لكنه يتضمن محركات الخطوط وإعادة تدفق التخطيط وتحديثات الحقول الديناميكية. أتمنى أن تساعدك هذه المقالة على توقع مفاجآت أقل.</p>
+
+    <div class="related-posts">
+      <div class="related-title">مقالات ذات صلة</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>الدليل الشامل لدمج PDF</strong></a>
+        <a href="image-compression-best-practices.html" class="related-card"><strong>أفضل ممارسات ضغط الصور</strong></a>
+      </div>
+    </div>
+  </div></div>
+</article>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const META = {
+  zh: { tag:'格式转换 · 深度分析', h1:'Word 与 PDF 互转的 12 个隐藏陷阱：字体、表格、注释如何不丢失', meta:'<span>2026-04-04</span><span class="dot">约 13 分钟阅读</span>', back:'← 所有文章', footer:['首页','关于','博客','联系','条款','隐私'] },
+  en: { tag:'Conversion · Deep Analysis', h1:'12 Hidden Pitfalls When Converting Between Word and PDF: Fonts, Tables, Comments', meta:'<span>2026-04-04</span><span class="dot">13 min read</span>', back:'← All Posts', footer:['Home','About','Blog','Contact','Terms','Privacy'] },
+  ar: { tag:'تحويل · تحليل متعمق', h1:'12 فخاً خفياً عند التحويل بين Word و PDF: الخطوط، الجداول، التعليقات', meta:'<span>2026-04-04</span><span class="dot">13 دقيقة قراءة</span>', back:'→ جميع المقالات', footer:['الرئيسية','حول','المدونة','تواصل','الشروط','الخصوصية'] }
+};
+function setLang(lang){
+  const m = META[lang]; if(!m) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  document.getElementById('postTag').textContent = m.tag;
+  document.getElementById('postH1').textContent = m.h1;
+  document.getElementById('postMeta').innerHTML = m.meta;
+  document.getElementById('navBack').textContent = m.back;
+  const links = ['/','/about.html','/blog/','/contact.html','/terms.html','/privacy.html'];
+  document.getElementById('footerLinks').innerHTML = m.footer.map((t,i)=>`<a href="${links[i]}">${t}</a>`).join('');
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

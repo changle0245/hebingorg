@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片压缩到底压了什么？JPEG、PNG、WebP 的本质区别与最佳实践 ｜ hebing.org 博客</title>
+<meta name="description" content="把 5MB 图片压到 500KB，质量能保住吗？本文从有损/无损压缩底层原理讲起，给出不同场景的具体参数。中英阿三语版本。">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/image-compression-best-practices.html">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/image-compression-best-practices.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/image-compression-best-practices.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/image-compression-best-practices.html">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/image-compression-best-practices.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta property="og:title" content="What Does Image Compression Actually Compress?">
+<meta property="og:url" content="https://hebing.org/blog/image-compression-best-practices.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"图片压缩到底压了什么？JPEG、PNG、WebP 的本质区别与最佳实践","author":{"@type":"Organization","name":"hebing.org"},"publisher":{"@type":"Organization","name":"hebing.org","logo":{"@type":"ImageObject","url":"https://hebing.org/og-image.png"}},"datePublished":"2026-04-01","dateModified":"2026-04-01","mainEntityOfPage":"https://hebing.org/blog/image-compression-best-practices.html","image":"https://hebing.org/og-image.png","inLanguage":["zh-CN","en","ar"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"hebing.org","item":"https://hebing.org/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://hebing.org/blog/"},{"@type":"ListItem","position":3,"name":"Image Compression","item":"https://hebing.org/blog/image-compression-best-practices.html"}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="post.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/blog/" class="nav-back" id="navBack">← 所有文章</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<article class="container post-wrap">
+  <div class="post-tag" id="postTag">图片处理 · 技术原理</div>
+  <h1 class="post-h1" id="postH1">图片压缩到底压了什么？JPEG、PNG、WebP 的本质区别与最佳实践</h1>
+  <div class="post-meta" id="postMeta"><span>2026-04-01</span><span class="dot">约 10 分钟阅读</span></div>
+
+  <div class="zh-content active"><div class="post-content">
+    <p>把 5MB 相机原图压到 500KB，质量没什么变化——这是怎么做到的？为什么有些 PNG 怎么压都还是几 MB？为什么 WebP 能比 JPEG 小 30% 还更清晰？</p>
+
+    <h2>一、压缩的本质：丢掉人眼看不见的信息</h2>
+    <ul>
+      <li><strong>无损压缩</strong>：用更紧凑的方式存储相同数据。一行 100 个白色像素，存"100 个白色"比存 100 次"白色"短得多；</li>
+      <li><strong>有损压缩</strong>：丢掉人眼不敏感的信息。把相邻几个像素的微小色差合并，肉眼看不出但数据量大幅减少。</li>
+    </ul>
+
+    <h2>二、三种主流格式的核心差异</h2>
+    <table>
+      <thead><tr><th>格式</th><th>压缩</th><th>透明度</th><th>动画</th><th>适合内容</th></tr></thead>
+      <tbody>
+        <tr><td>JPEG</td><td>有损</td><td>否</td><td>否</td><td>照片、复杂渐变</td></tr>
+        <tr><td>PNG</td><td>无损</td><td>是</td><td>否</td><td>截图、图标、透明</td></tr>
+        <tr><td>WebP</td><td>都支持</td><td>是</td><td>是</td><td>通用</td></tr>
+      </tbody>
+    </table>
+
+    <h2>三、JPEG：照片场景的工业标准</h2>
+    <p>1992 年定型的标准，至今最主流。流程：RGB → YCbCr → 4:2:0 子采样 → 8×8 DCT 变换 → 量化 → 霍夫曼编码。质量参数（0-100）控制量化激进程度：</p>
+    <ul>
+      <li><strong>95-100</strong>：摄影归档；</li>
+      <li><strong>80-90</strong>：网页、社交媒体最常用区间；</li>
+      <li><strong>60-80</strong>：缩略图、邮件附件；</li>
+      <li><strong>&lt; 60</strong>：明显失真。</li>
+    </ul>
+    <p><strong>误区</strong>：不要反复用 JPEG 编辑同一张图，每次保存都会重新有损压缩。</p>
+
+    <h2>四、PNG：清晰文字与透明背景的首选</h2>
+    <p>无损格式，特别适合截图、图标、Logo、线条画。压缩本质是 DEFLATE 算法，对"重复颜色块"特别有效。</p>
+    <ul>
+      <li><strong>调色板模式（PNG-8）</strong>：限制 256 色，可大幅减小；</li>
+      <li><strong>外部工具优化</strong>：pngcrush、optipng、oxipng 可无损减小 10-30%；</li>
+      <li><strong>有损 PNG（pngquant）</strong>：减少颜色数实现"伪无损"压缩，可减小 60-80%。</li>
+    </ul>
+
+    <a href="/image-compress.html" class="tool-cta">
+      <div class="tool-cta-icon">🗜️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">免费在线图片压缩工具</div>
+        <div class="tool-cta-sub">支持 JPEG/PNG/WebP，浏览器本地处理</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>五、WebP：现代场景的更优解</h2>
+    <p>Google 2010 年推出，吸收了 JPEG 和 PNG 各自优点：有损模式比 JPEG 小 25-35%；无损比 PNG 小 26%；支持透明、动画。但要注意：微信公众号不支持；老 iOS Safari 不支持。</p>
+
+    <h2>六、不同场景的最佳参数</h2>
+    <table>
+      <thead><tr><th>场景</th><th>格式</th><th>质量</th></tr></thead>
+      <tbody>
+        <tr><td>网页 Hero 图</td><td>WebP（JPEG 兜底）</td><td>80</td></tr>
+        <tr><td>电商主图</td><td>JPEG</td><td>90</td></tr>
+        <tr><td>社交媒体</td><td>JPEG</td><td>85</td></tr>
+        <tr><td>截图文档</td><td>PNG</td><td>无损</td></tr>
+        <tr><td>App 图标</td><td>PNG-8 / SVG</td><td>无损</td></tr>
+        <tr><td>邮件附件</td><td>JPEG</td><td>75</td></tr>
+        <tr><td>印刷级</td><td>TIFF / 无损 PNG</td><td>无损</td></tr>
+      </tbody>
+    </table>
+
+    <h2>七、批量压缩的工程化建议</h2>
+    <ul>
+      <li><strong>保留原图</strong>：永远不要原地覆盖；</li>
+      <li><strong>统一命名</strong>：<code>photo-1920w-q80.webp</code>；</li>
+      <li><strong>响应式图片</strong>：<code>&lt;picture&gt;</code> 标签；</li>
+      <li><strong>渐进式 JPEG</strong>：由模糊到清晰逐步加载；</li>
+      <li><strong>移动端预压缩</strong>：客户端先压再传。</li>
+    </ul>
+
+    <h2>结语</h2>
+    <p>图片压缩从来不是"质量越高越好"或"越小越好"的二选一，而是根据场景做精确权衡。</p>
+
+    <div class="related-posts">
+      <div class="related-title">相关文章</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>Word/PDF 互转的 12 个陷阱</strong></a>
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>二维码生成完整指南</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="en-content"><div class="post-content">
+    <p>Compress a 5MB camera photo to 500KB without visible quality loss — how is that possible? Why do some PNGs stay multiple MB no matter what? Why is WebP both 30% smaller than JPEG and clearer?</p>
+
+    <h2>1. The Essence: Discarding Information the Eye Can't See</h2>
+    <ul>
+      <li><strong>Lossless</strong>: Store the same data more compactly. A row of 100 white pixels stored as "100 white" beats storing "white" 100 times;</li>
+      <li><strong>Lossy</strong>: Discard information the eye is insensitive to. Merge tiny color differences in adjacent pixels — invisible but huge data savings.</li>
+    </ul>
+
+    <h2>2. Three Mainstream Formats Compared</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Compression</th><th>Transparency</th><th>Animation</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td>JPEG</td><td>Lossy</td><td>No</td><td>No</td><td>Photos, gradients</td></tr>
+        <tr><td>PNG</td><td>Lossless</td><td>Yes</td><td>No</td><td>Screenshots, icons</td></tr>
+        <tr><td>WebP</td><td>Both</td><td>Yes</td><td>Yes</td><td>Universal</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. JPEG: The Industry Standard for Photos</h2>
+    <p>Standardized in 1992, still mainstream. Pipeline: RGB → YCbCr → 4:2:0 chroma subsampling → 8×8 DCT → quantization → Huffman coding. Quality (0-100) controls quantization aggressiveness:</p>
+    <ul>
+      <li><strong>95-100</strong>: Photo archive;</li>
+      <li><strong>80-90</strong>: Web, social media (most common);</li>
+      <li><strong>60-80</strong>: Thumbnails, email;</li>
+      <li><strong>&lt; 60</strong>: Visible artifacts.</li>
+    </ul>
+    <p><strong>Pitfall</strong>: Don't repeatedly edit the same JPEG — each save re-compresses lossily.</p>
+
+    <h2>4. PNG: Best for Sharp Text and Transparency</h2>
+    <p>Lossless, ideal for screenshots, icons, logos, line art. Compression is DEFLATE — particularly effective on "repeated color blocks."</p>
+    <ul>
+      <li><strong>Palette mode (PNG-8)</strong>: 256 colors, much smaller;</li>
+      <li><strong>External optimizers</strong>: pngcrush, optipng, oxipng — 10-30% lossless reduction;</li>
+      <li><strong>Lossy PNG (pngquant)</strong>: reduce colors for 60-80% reduction.</li>
+    </ul>
+
+    <a href="/image-compress.html" class="tool-cta">
+      <div class="tool-cta-icon">🗜️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">Free Online Image Compression</div>
+        <div class="tool-cta-sub">JPEG/PNG/WebP, browser-local processing</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>5. WebP: The Modern Better Option</h2>
+    <p>Released by Google in 2010, combines JPEG and PNG advantages: lossy mode 25-35% smaller than JPEG; lossless 26% smaller than PNG; supports transparency and animation. Caveats: WeChat doesn't support; older iOS Safari doesn't support.</p>
+
+    <h2>6. Best Parameters by Scenario</h2>
+    <table>
+      <thead><tr><th>Scenario</th><th>Format</th><th>Quality</th></tr></thead>
+      <tbody>
+        <tr><td>Web hero image</td><td>WebP (JPEG fallback)</td><td>80</td></tr>
+        <tr><td>E-commerce main image</td><td>JPEG</td><td>90</td></tr>
+        <tr><td>Social media</td><td>JPEG</td><td>85</td></tr>
+        <tr><td>Screenshot docs</td><td>PNG</td><td>Lossless</td></tr>
+        <tr><td>App icons</td><td>PNG-8 / SVG</td><td>Lossless</td></tr>
+        <tr><td>Email attachments</td><td>JPEG</td><td>75</td></tr>
+        <tr><td>Print-grade</td><td>TIFF / lossless PNG</td><td>Lossless</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Engineering Tips for Batch Compression</h2>
+    <ul>
+      <li><strong>Keep originals</strong>: never overwrite in place;</li>
+      <li><strong>Naming convention</strong>: <code>photo-1920w-q80.webp</code>;</li>
+      <li><strong>Responsive images</strong>: <code>&lt;picture&gt;</code> tag;</li>
+      <li><strong>Progressive JPEG</strong>: blur-to-clear loading;</li>
+      <li><strong>Mobile pre-compression</strong>: compress client-side before upload.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Image compression is never a binary choice between "highest quality" or "smallest size" — it's precise tradeoffs based on context.</p>
+
+    <div class="related-posts">
+      <div class="related-title">Related Posts</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>12 Pitfalls Converting Word ↔ PDF</strong></a>
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>Complete QR Code Guide</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="ar-content"><div class="post-content">
+    <p>ضغط صورة كاميرا 5MB إلى 500KB بدون فقدان جودة مرئي — كيف يمكن ذلك؟ لماذا تبقى بعض ملفات PNG عدة ميجابايت مهما فعلت؟ لماذا WebP أصغر بـ 30% من JPEG وأوضح أيضاً؟</p>
+
+    <h2>1. الجوهر: التخلص من المعلومات التي لا تراها العين</h2>
+    <ul>
+      <li><strong>بدون فقدان</strong>: تخزين نفس البيانات بشكل أكثر إحكاماً. صف من 100 بكسل أبيض يُخزن كـ "100 أبيض" أفضل من "أبيض" 100 مرة؛</li>
+      <li><strong>مع فقدان</strong>: التخلص من المعلومات التي لا تحس بها العين.</li>
+    </ul>
+
+    <h2>2. مقارنة ثلاثة تنسيقات رئيسية</h2>
+    <table>
+      <thead><tr><th>التنسيق</th><th>الضغط</th><th>الشفافية</th><th>الحركة</th><th>الأنسب لـ</th></tr></thead>
+      <tbody>
+        <tr><td>JPEG</td><td>مع فقدان</td><td>لا</td><td>لا</td><td>صور، تدرجات</td></tr>
+        <tr><td>PNG</td><td>بدون فقدان</td><td>نعم</td><td>لا</td><td>لقطات، أيقونات</td></tr>
+        <tr><td>WebP</td><td>كلاهما</td><td>نعم</td><td>نعم</td><td>عام</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. JPEG: المعيار الصناعي للصور</h2>
+    <p>تم توحيده عام 1992، لا يزال السائد. خط المعالجة: RGB → YCbCr → عينات اللون 4:2:0 → DCT 8×8 → كمية → ترميز Huffman.</p>
+    <ul>
+      <li><strong>95-100</strong>: أرشيف الصور؛</li>
+      <li><strong>80-90</strong>: ويب، وسائل التواصل؛</li>
+      <li><strong>60-80</strong>: صور مصغرة، بريد إلكتروني؛</li>
+      <li><strong>&lt; 60</strong>: تشوهات مرئية.</li>
+    </ul>
+    <p><strong>عثرة</strong>: لا تحرر نفس صورة JPEG مراراً — كل حفظ يعيد الضغط مع الفقدان.</p>
+
+    <h2>4. PNG: الأفضل للنص الواضح والشفافية</h2>
+    <p>بدون فقدان، مثالي للقطات الشاشة والأيقونات والشعارات. الضغط هو DEFLATE — فعال جداً على "كتل الألوان المتكررة".</p>
+
+    <a href="/image-compress.html" class="tool-cta">
+      <div class="tool-cta-icon">🗜️</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">ضغط الصور مجاناً عبر الإنترنت</div>
+        <div class="tool-cta-sub">JPEG/PNG/WebP، معالجة محلية</div>
+      </div>
+      <div class="tool-cta-arrow">←</div>
+    </a>
+
+    <h2>5. WebP: الخيار الحديث الأفضل</h2>
+    <p>أصدرته Google عام 2010، يجمع مزايا JPEG و PNG: الوضع مع فقدان أصغر بـ 25-35%؛ بدون فقدان أصغر بـ 26%؛ يدعم الشفافية والحركة.</p>
+
+    <h2>6. أفضل المعاملات حسب السيناريو</h2>
+    <table>
+      <thead><tr><th>السيناريو</th><th>التنسيق</th><th>الجودة</th></tr></thead>
+      <tbody>
+        <tr><td>صورة بطل ويب</td><td>WebP (JPEG كبديل)</td><td>80</td></tr>
+        <tr><td>صورة منتج تجارة</td><td>JPEG</td><td>90</td></tr>
+        <tr><td>وسائل التواصل</td><td>JPEG</td><td>85</td></tr>
+        <tr><td>وثائق لقطة شاشة</td><td>PNG</td><td>بدون فقدان</td></tr>
+        <tr><td>أيقونات تطبيقات</td><td>PNG-8 / SVG</td><td>بدون فقدان</td></tr>
+        <tr><td>مرفقات بريد</td><td>JPEG</td><td>75</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. نصائح هندسية للضغط الجماعي</h2>
+    <ul>
+      <li><strong>احتفظ بالأصول</strong>: لا تكتب فوقها أبداً؛</li>
+      <li><strong>اصطلاح التسمية</strong>: <code>photo-1920w-q80.webp</code>؛</li>
+      <li><strong>صور متجاوبة</strong>: علامة <code>&lt;picture&gt;</code>؛</li>
+      <li><strong>JPEG تدريجي</strong>: تحميل من ضبابي إلى واضح.</li>
+    </ul>
+
+    <h2>الخاتمة</h2>
+    <p>ضغط الصور ليس اختياراً ثنائياً بين "أعلى جودة" أو "أصغر حجم" — إنه مقايضات دقيقة بناءً على السياق.</p>
+
+    <div class="related-posts">
+      <div class="related-title">مقالات ذات صلة</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>12 فخاً عند تحويل Word/PDF</strong></a>
+        <a href="qrcode-generation-guide.html" class="related-card"><strong>الدليل الشامل لرمز QR</strong></a>
+      </div>
+    </div>
+  </div></div>
+</article>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const META = {
+  zh: { tag:'图片处理 · 技术原理', h1:'图片压缩到底压了什么？JPEG、PNG、WebP 的本质区别与最佳实践', meta:'<span>2026-04-01</span><span class="dot">约 10 分钟阅读</span>', back:'← 所有文章', footer:['首页','关于','博客','联系','条款','隐私'] },
+  en: { tag:'Images · Tech Principles', h1:'What Does Image Compression Actually Compress? JPEG, PNG, WebP', meta:'<span>2026-04-01</span><span class="dot">10 min read</span>', back:'← All Posts', footer:['Home','About','Blog','Contact','Terms','Privacy'] },
+  ar: { tag:'الصور · مبادئ تقنية', h1:'ماذا يضغط ضغط الصور فعلياً؟ JPEG و PNG و WebP', meta:'<span>2026-04-01</span><span class="dot">10 دقائق قراءة</span>', back:'→ جميع المقالات', footer:['الرئيسية','حول','المدونة','تواصل','الشروط','الخصوصية'] }
+};
+function setLang(lang){
+  const m = META[lang]; if(!m) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  document.getElementById('postTag').textContent = m.tag;
+  document.getElementById('postH1').textContent = m.h1;
+  document.getElementById('postMeta').innerHTML = m.meta;
+  document.getElementById('navBack').textContent = m.back;
+  const links = ['/','/about.html','/blog/','/contact.html','/terms.html','/privacy.html'];
+  document.getElementById('footerLinks').innerHTML = m.footer.map((t,i)=>`<a href="${links[i]}">${t}</a>`).join('');
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

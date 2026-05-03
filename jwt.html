@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT 解析在线 - 免费 Token 解码与签名验证 | hebing.org</title>
+<meta name="description" content="免费在线 JWT 解析工具，自动解码 Header / Payload / Signature 三段式 Token，识别算法、过期时间、签发者、受众等标准 Claim，并支持 HS256 / HS384 / HS512 HMAC 签名校验。Token 完全在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="jwt解析,jwt解码,jwt调试,jwt在线,token解析,jwt verify,jwt online,jwt decoder,hs256验证,jwt签名校验">
+<link rel="canonical" href="https://hebing.org/jwt.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="JWT 解析在线 - 免费 Token 解码与签名验证 | hebing.org">
+<meta property="og:url" content="https://hebing.org/jwt.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/jwt.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/jwt.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/jwt.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--danger:#b91c1c;--danger-bg:#fef2f2;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;--jwt-red:#e11d48;--jwt-purple:#7c3aed;--jwt-cyan:#0891b2;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:580px;}
+.tool-wrap{padding:28px 0;}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:38px;padding:0 16px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.t-sep{flex:1;}
+.input-pane{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);margin-bottom:14px;}
+.input-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.jwt-input{width:100%;min-height:120px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;word-break:break-all;}
+.jwt-input.colored{background:transparent;color:transparent;caret-color:var(--black);position:relative;z-index:2;}
+.jwt-stage{position:relative;}
+.jwt-overlay{position:absolute;inset:0;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;word-break:break-all;white-space:pre-wrap;pointer-events:none;color:var(--black);overflow:hidden;}
+.jwt-overlay .h{color:var(--jwt-red);}
+.jwt-overlay .p{color:var(--jwt-purple);}
+.jwt-overlay .s{color:var(--jwt-cyan);}
+.jwt-overlay .dot{color:var(--gray-400);}
+.error-box{padding:14px 16px;background:var(--danger-bg);border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:var(--danger);margin-bottom:16px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.success-box{padding:12px 16px;background:var(--success-bg);border:1px solid #bbf7d0;border-radius:var(--radius-lg);font-size:13px;color:var(--success);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.success-box.hidden{display:none!important;}
+.parts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:760px){.parts-grid{grid-template-columns:1fr;}}
+.part-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.part-pane.full{grid-column:1/-1;}
+.part-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+.part-head.head-h{background:#fef1f2;color:var(--jwt-red);}
+.part-head.head-p{background:#f5f3ff;color:var(--jwt-purple);}
+.part-head.head-s{background:#ecfeff;color:var(--jwt-cyan);}
+.part-head .e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.part-body{padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-all;color:var(--black);min-height:140px;background:var(--white);}
+.part-body.empty{color:var(--gray-400);font-family:var(--font-sans);font-size:13px;}
+.json-key{color:var(--jwt-purple);}
+.json-string{color:var(--success);}
+.json-number{color:var(--accent);}
+.json-bool{color:var(--jwt-cyan);}
+.json-null{color:var(--gray-400);}
+.claims-pane{margin-bottom:16px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.claims-pane.hidden{display:none;}
+.claims-head{padding:10px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.claims-body{padding:8px 14px;}
+.claim-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--gray-200);font-size:13px;gap:12px;flex-wrap:wrap;}
+.claim-row:last-child{border-bottom:none;}
+.claim-key{font-family:var(--font-mono);color:var(--gray-600);font-size:12px;min-width:64px;}
+.claim-val{flex:1;color:var(--black);word-break:break-all;}
+.claim-tag{font-family:var(--font-mono);font-size:11px;padding:2px 8px;border-radius:var(--radius);background:var(--gray-100);color:var(--gray-600);}
+.claim-tag.ok{background:var(--success-bg);color:var(--success);border:1px solid #bbf7d0;}
+.claim-tag.err{background:var(--danger-bg);color:var(--danger);border:1px solid #fecaca;}
+.claim-tag.warn{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.verify-pane{margin-bottom:16px;padding:18px 20px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);background:var(--gray-100);}
+.verify-title{font-size:13px;font-weight:600;color:var(--black);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.verify-sub{font-size:12px;color:var(--gray-600);margin-bottom:14px;}
+.verify-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.verify-row input[type="text"],.verify-row input[type="password"]{flex:1;min-width:220px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;font-family:var(--font-mono);}
+.verify-row input:focus{border-color:var(--black);}
+.verify-result{margin-top:12px;font-family:var(--font-mono);font-size:13px;}
+.verify-result.ok{color:var(--success);}
+.verify-result.err{color:var(--danger);}
+.verify-result.hidden{display:none;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+.sample-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.sample-btn{padding:6px 12px;font-size:12px;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius);color:var(--gray-600);cursor:pointer;font-family:var(--font-mono);}
+.sample-btn:hover{border-color:var(--black);color:var(--black);background:var(--white);}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;--danger:#fca5a5;--danger-bg:#2d0a0a;}
+  nav{background:rgba(17,17,16,0.95);}
+  .jwt-input,.subscribe-input,.verify-row input{background:var(--white);}
+  .scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .success-box{border-color:#14532d;}
+  .part-head.head-h{background:#3a0a10;color:#fca5a5;}
+  .part-head.head-p{background:#231047;color:#c4b5fd;}
+  .part-head.head-s{background:#082f3a;color:#67e8f9;}
+  .claim-tag{background:var(--gray-200);color:var(--gray-600);}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org JWT 解析",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/jwt.html",
+  "description": "免费在线 JWT 解析工具，自动解码 Header / Payload / Signature 三段式 Token，识别算法、过期时间、签发者与受众，并支持 HS256 / HS384 / HS512 HMAC 签名校验。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["JWT 三段式自动解码", "Header / Payload JSON 美化与语法高亮", "iat / exp / nbf 时间戳人类化展示", "过期状态实时检测", "HS256 / HS384 / HS512 HMAC 签名校验", "URL-safe Base64 解码"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费解析 JWT",
+  "description": "使用 hebing.org 在浏览器本地解析 JWT Token，无需上传任何内容。",
+  "totalTime": "PT5S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "粘贴 Token", "text": "把 JWT 字符串完整粘贴到输入框中。" },
+    { "@type": "HowToStep", "position": 2, "name": "查看解码结果", "text": "Header、Payload、Signature 三段会自动解码并美化显示。" },
+    { "@type": "HowToStep", "position": 3, "name": "检查时间声明", "text": "工具会把 iat、exp、nbf 等时间戳转为本地时间，并标记是否已过期。" },
+    { "@type": "HowToStep", "position": 4, "name": "校验签名（可选）", "text": "如果是 HMAC 算法（HS256/384/512），输入密钥可在浏览器本地校验签名是否有效。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "JWT 解析", "item": "https://hebing.org/jwt.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "粘贴 JWT 后会被发送到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。Token 完全在你的浏览器内解码（atob + JSON.parse），从不离开你的设备。HMAC 签名校验也使用浏览器原生 SubtleCrypto 在本地完成。可以放心粘贴生产环境 Token。" }
+    },
+    {
+      "@type": "Question",
+      "name": "支持校验 RS256 / ES256 等非对称算法吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "当前内置 HS256 / HS384 / HS512 三种 HMAC 对称算法的本地校验。RS / PS / ES 系列依赖 PEM 或 JWK 格式的公钥，由于公钥分发场景较复杂，暂未开放在线校验入口。Token 本身依然能正常解码并展示算法和过期时间。" }
+    },
+    {
+      "@type": "Question",
+      "name": "为什么显示 'iat in future' 或 'expired'？",
+      "acceptedAnswer": { "@type": "Answer", "text": "JWT 的 iat（签发时间）、exp（过期时间）、nbf（生效时间）均为 Unix 秒级时间戳。如果 iat 在未来或 exp 已过去，工具会用红色 / 黄色 / 绿色标签直观提示，帮你快速排查时区或时钟漂移问题。" }
+    },
+    {
+      "@type": "Question",
+      "name": "JWT 解码 ≠ 解密，对吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "对。常见的 JWT（如 HS256/RS256 签名后的 Token）只是 Base64URL 编码，并未加密，任何人拿到后都可读出 Payload 内容。请勿把密码、银行卡号等敏感信息明文写入 JWT。如需保密内容应使用 JWE（加密的 JWT），或在传输层使用 HTTPS 并将敏感数据放在仅服务端可见的 Session 中。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">JWT 解析</span></div>
+  <h1 class="page-title" data-i18n="page.h1">JWT 解析<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">自动解码 Header / Payload / Signature 三段，识别算法、过期时间、签发者与受众，可用 HS256/384/512 校验签名。Token 完全在浏览器本地处理。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="sample-row">
+    <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;align-self:center;margin-right:6px" data-i18n="sample.label">示例：</span>
+    <button class="sample-btn" onclick="loadSample('hs256')">HS256</button>
+    <button class="sample-btn" onclick="loadSample('rs256')">RS256</button>
+    <button class="sample-btn" onclick="loadSample('expired')" data-i18n="sample.expired">已过期</button>
+  </div>
+
+  <div class="input-pane">
+    <div class="input-head">
+      <span data-i18n="pane.input">JWT Token</span>
+      <span class="e-meta" id="inMeta"></span>
+    </div>
+    <div class="jwt-stage">
+      <textarea class="jwt-input colored" id="jwtInput" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwibmFtZSI6IkphbmUgRG9lIn0.signature"></textarea>
+      <div class="jwt-overlay" id="jwtOverlay" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="parts-grid">
+    <div class="part-pane">
+      <div class="part-head head-h"><span>HEADER</span><span class="e-meta" id="hMeta"></span></div>
+      <div class="part-body empty" id="hBody" data-i18n="empty.header">粘贴 JWT 后这里显示已解码的 Header</div>
+    </div>
+    <div class="part-pane">
+      <div class="part-head head-p"><span>PAYLOAD</span><span class="e-meta" id="pMeta"></span></div>
+      <div class="part-body empty" id="pBody" data-i18n="empty.payload">粘贴 JWT 后这里显示已解码的 Payload</div>
+    </div>
+    <div class="part-pane full">
+      <div class="part-head head-s"><span>SIGNATURE</span><span class="e-meta" id="sMeta"></span></div>
+      <div class="part-body empty" id="sBody" data-i18n="empty.sig">签名（Base64URL 原文，HMAC 算法可在下方校验）</div>
+    </div>
+  </div>
+
+  <div class="claims-pane hidden" id="claimsPane">
+    <div class="claims-head" data-i18n="claims.title">标准 Claim 解读</div>
+    <div class="claims-body" id="claimsBody"></div>
+  </div>
+
+  <div class="verify-pane">
+    <div class="verify-title" data-i18n="verify.title">🔐 HMAC 签名校验</div>
+    <div class="verify-sub" id="verifySub" data-i18n="verify.sub">仅 HS256 / HS384 / HS512 算法可在浏览器本地校验。粘贴生成 Token 时使用的密钥（secret）：</div>
+    <div class="verify-row">
+      <input type="text" id="secretInput" placeholder="your-256-bit-secret" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="t-btn" id="btnVerify" data-i18n="btn.verify">校验签名</button>
+      <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+    </div>
+    <div class="verify-result hidden" id="verifyResult"></div>
+  </div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="JWT 的常见使用场景" data-en="Common JWT Use Cases">JWT 的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🔑</div><div class="scene-title" data-scene-zh="API 认证" data-scene-en="API Authentication">API 认证</div><div class="scene-desc" data-scene-zh="后端签发短期 JWT，前端在 Authorization: Bearer ... 头中携带。本工具帮你快速看清 Token 里到底放了什么。" data-scene-en="Backend issues short-lived JWTs; frontend carries them in Authorization: Bearer …. This tool reveals exactly what your token contains.">后端签发短期 JWT，前端在 Authorization: Bearer ... 头中携带。本工具帮你快速看清 Token 里到底放了什么。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔄</div><div class="scene-title" data-scene-zh="OAuth / OIDC 调试" data-scene-en="OAuth / OIDC Debugging">OAuth / OIDC 调试</div><div class="scene-desc" data-scene-zh="OAuth2 access_token、id_token 大多是 JWT。粘贴 Token 即可查看 iss、aud、scope、exp，定位 401/403 问题。" data-scene-en="Most OAuth2 access_tokens and id_tokens are JWTs. Inspect iss / aud / scope / exp to debug 401/403 errors.">OAuth2 access_token、id_token 大多是 JWT。粘贴 Token 即可查看 iss、aud、scope、exp，定位 401/403 问题。</div></div>
+      <div class="scene-card"><div class="scene-icon">⏰</div><div class="scene-title" data-scene-zh="过期时间排查" data-scene-en="Expiry Diagnostics">过期时间排查</div><div class="scene-desc" data-scene-zh="服务器与客户端时钟漂移会导致 JWT 看似已过期。本工具直观显示剩余时间或过期多久。" data-scene-en="Server/client clock skew often makes JWTs look expired. The tool shows time remaining (or expired by how long) at a glance.">服务器与客户端时钟漂移会导致 JWT 看似已过期。本工具直观显示剩余时间或过期多久。</div></div>
+      <div class="scene-card"><div class="scene-icon">✅</div><div class="scene-title" data-scene-zh="签名校验" data-scene-en="Signature Verification">签名校验</div><div class="scene-desc" data-scene-zh="对 HS256 类对称算法，输入密钥即可本地校验，确认 Token 没有被篡改。校验过程不离开浏览器。" data-scene-en="For HS-family algorithms, enter the secret to verify the signature locally — confirms the token wasn't tampered with. Never leaves the browser.">对 HS256 类对称算法，输入密钥即可本地校验，确认 Token 没有被篡改。校验过程不离开浏览器。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>三段着色</strong>：粘贴后输入框中 Header、Payload、Signature 会以红 / 紫 / 蓝三色分段高亮，方便肉眼区分。</li>
+      <li><strong>时间声明</strong>：iat、exp、nbf 等数字时间戳会自动转为本地时间，红色 = 已过期，黄色 = 时间异常（如 iat 在未来），绿色 = 有效。</li>
+      <li><strong>本地签名校验</strong>：HS256/384/512 用浏览器原生 <code>SubtleCrypto.verify</code>，密钥不离开本机。RS / ES 算法需公钥，目前未实现在线校验。</li>
+      <li><strong>JWT ≠ JWE</strong>：本工具只解析 JWS（已签名）的 JWT，对加密的 JWT（5 段，xxx.xxx.xxx.xxx.xxx）不做解密。</li>
+      <li><strong>不要把密码放进 Payload</strong>：JWT 是明文 Base64URL 编码，任何拿到 Token 的人都可读。Payload 应只放无害的标识字段。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>Three-color view</strong>: after paste, header / payload / signature show in red / purple / cyan inside the input — easy to scan visually.</li>
+      <li><strong>Time claims</strong>: iat, exp, nbf are auto-converted to your local time. Red = expired, yellow = anomaly (e.g. iat in the future), green = valid.</li>
+      <li><strong>Local verification</strong>: HS256/384/512 use the browser's native <code>SubtleCrypto.verify</code> — the secret never leaves your machine. RS / ES need a public key and are not yet supported here.</li>
+      <li><strong>JWT ≠ JWE</strong>: this tool parses JWS (signed) JWTs. Encrypted JWTs (5 segments) are not decrypted.</li>
+      <li><strong>Don't put passwords in payload</strong>: JWTs are plaintext Base64URL — anyone holding the token can read it. Keep payload to harmless identifiers.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>عرض ثلاثي الألوان: بعد اللصق، يظهر header / payload / signature بالأحمر / البنفسجي / السماوي داخل المدخل — سهل الفحص بصرياً.</li><li>مطالبات الوقت: تُحوَّل iat و exp و nbf تلقائياً إلى وقتك المحلي. أحمر = منتهٍ، أصفر = شذوذ (مثلاً iat في المستقبل)، أخضر = صالح.</li><li>تحقق محلي: يستخدم HS256/384/512 SubtleCrypto.verify الأصلي للمتصفح — السر لا يغادر جهازك. تحتاج RS / ES إلى مفتاح عام وغير مدعومة بعد هنا.</li><li>JWT ≠ JWE: تحلل هذه الأداة JWS (الموقَّع) JWTs. JWTs المشفَّرة (5 مقاطع) لا تُفك تشفيرها.</li><li>لا تضع كلمات مرور في الحمولة: JWTs نص عادي Base64URL — أي شخص بالرمز يمكنه قراءته. احتفظ بالحمولة لمعرفات غير ضارة.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="粘贴 JWT 后会被发送到服务器吗？" data-faq-en="Are pasted JWTs sent to a server?" data-faq-ar="هل تُرسل JWTs الملصقة إلى خادم؟">粘贴 JWT 后会被发送到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。Token 完全在你的浏览器内解码（atob + JSON.parse），从不离开你的设备。HMAC 签名校验也使用浏览器原生 SubtleCrypto 在本地完成。可以放心粘贴生产环境 Token。" data-faq-en="No. Tokens are decoded entirely in your browser (atob + JSON.parse) and never leave the device. HMAC verification uses the browser's native SubtleCrypto, also locally. Safe to paste production tokens." data-faq-ar="لا. تُفك ترميز الرموز بالكامل في متصفحك (atob + JSON.parse) ولا تغادر الجهاز أبداً. يستخدم التحقق من توقيع HMAC واجهة SubtleCrypto الأصلية في المتصفح، أيضاً محلياً. آمن للصق رموز الإنتاج.">不会。Token 完全在你的浏览器内解码（atob + JSON.parse），从不离开你的设备。HMAC 签名校验也使用浏览器原生 SubtleCrypto 在本地完成。可以放心粘贴生产环境 Token。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持校验 RS256 / ES256 等非对称算法吗？" data-faq-en="Does it verify RS256 / ES256?" data-faq-ar="هل يتحقق من RS256 / ES256؟">支持校验 RS256 / ES256 等非对称算法吗？</div>
+        <div class="faq-a" data-faq-zh="当前内置 HS256 / HS384 / HS512 三种 HMAC 对称算法的本地校验。RS / PS / ES 系列依赖 PEM 或 JWK 格式的公钥，由于公钥分发场景较复杂，暂未开放在线校验入口。Token 本身依然能正常解码并展示算法和过期时间。" data-faq-en="HS256/384/512 are supported for local verification. RS / PS / ES need a PEM or JWK public key — distribution flows are complex enough that online verify isn't exposed here. The token still decodes fully and shows algorithm + expiry." data-faq-ar="يدعم HS256/384/512 للتحقق المحلي. تتطلب RS / PS / ES مفتاحاً عمومياً بصيغة PEM أو JWK — تدفقات التوزيع معقدة بما يكفي لذا لا يُعرَض التحقق عبر الإنترنت هنا. لا يزال الرمز يفك الترميز بالكامل ويعرض الخوارزمية وانتهاء الصلاحية.">当前内置 HS256 / HS384 / HS512 三种 HMAC 对称算法的本地校验。RS / PS / ES 系列依赖 PEM 或 JWK 格式的公钥，由于公钥分发场景较复杂，暂未开放在线校验入口。Token 本身依然能正常解码并展示算法和过期时间。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="为什么显示 'iat in future' 或 'expired'？" data-faq-en="Why does it say 'iat in future' / 'expired'?" data-faq-ar="لماذا يقول &quot;iat in future&quot; / &quot;expired&quot;؟">为什么显示 'iat in future' 或 'expired'？</div>
+        <div class="faq-a" data-faq-zh="JWT 的 iat（签发时间）、exp（过期时间）、nbf（生效时间）均为 Unix 秒级时间戳。如果 iat 在未来或 exp 已过去，工具会用红色 / 黄色 / 绿色标签直观提示，帮你快速排查时区或时钟漂移问题。" data-faq-en="iat (issued), exp (expires), nbf (not before) are Unix-seconds timestamps. If iat is in the future or exp already passed, the tool flags it red/yellow/green so you can spot timezone or clock-skew issues fast." data-faq-ar="iat (الإصدار) و exp (انتهاء الصلاحية) و nbf (لا يصح قبل) هي طوابع زمنية بثواني Unix. إذا كان iat في المستقبل أو exp مضى، تشير الأداة بالأحمر/الأصفر/الأخضر لتسهيل اكتشاف مشكلات المنطقة الزمنية أو انحراف الساعة.">JWT 的 iat（签发时间）、exp（过期时间）、nbf（生效时间）均为 Unix 秒级时间戳。如果 iat 在未来或 exp 已过去，工具会用红色 / 黄色 / 绿色标签直观提示，帮你快速排查时区或时钟漂移问题。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="JWT 解码 ≠ 解密，对吗？" data-faq-en="JWT decode is not decrypt — right?" data-faq-ar="فك ترميز JWT ليس فك تشفيراً — صحيح؟">JWT 解码 ≠ 解密，对吗？</div>
+        <div class="faq-a" data-faq-zh="对。常见的 JWT（如 HS256/RS256 签名后的 Token）只是 Base64URL 编码，并未加密，任何人拿到后都可读出 Payload 内容。请勿把密码、银行卡号等敏感信息明文写入 JWT。如需保密内容应使用 JWE（加密的 JWT），或在传输层使用 HTTPS 并将敏感数据放在仅服务端可见的 Session 中。" data-faq-en="Right. Standard signed JWTs are only Base64URL-encoded — anyone with the token can read the payload. Don't put passwords or card numbers in there. Use JWE for confidentiality, or keep secrets server-side behind HTTPS sessions." data-faq-ar="صحيح. JWTs الموقَّعة القياسية مرمزة Base64URL فقط — أي شخص بالرمز يمكنه قراءة الحمولة. لا تضع كلمات المرور أو أرقام البطاقات هناك. استخدم JWE للسرية، أو احتفظ بالأسرار في الخادم خلف جلسات HTTPS.">对。常见的 JWT（如 HS256/RS256 签名后的 Token）只是 Base64URL 编码，并未加密，任何人拿到后都可读出 Payload 内容。请勿把密码、银行卡号等敏感信息明文写入 JWT。如需保密内容应使用 JWE（加密的 JWT），或在传输层使用 HTTPS 并将敏感数据放在仅服务端可见的 Session 中。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="base64.html" class="related-card"><span>⇄</span><span data-i18n-related="Base64编解码|Base64 Encode/Decode|Base64">Base64编解码</span></a>
+    <a href="hash.html" class="related-card"><span>#</span><span data-i18n-related="Hash 计算|Hash|Hash">Hash 计算</span></a>
+    <a href="json-formatter.html" class="related-card"><span>{ }</span><span data-i18n-related="JSON 格式化|JSON Formatter|منسق JSON">JSON 格式化</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'JWT 解析','page.h1':'JWT 解析<br><em>在线免费</em>','page.sub':'自动解码 Header / Payload / Signature 三段，识别算法、过期时间、签发者与受众，可用 HS256/384/512 校验签名。Token 完全在浏览器本地处理。','sample.label':'示例：','sample.expired':'已过期','pane.input':'JWT Token','empty.header':'粘贴 JWT 后这里显示已解码的 Header','empty.payload':'粘贴 JWT 后这里显示已解码的 Payload','empty.sig':'签名（Base64URL 原文，HMAC 算法可在下方校验）','claims.title':'标准 Claim 解读','verify.title':'🔐 HMAC 签名校验','verify.sub':'仅 HS256 / HS384 / HS512 算法可在浏览器本地校验。粘贴生成 Token 时使用的密钥（secret）：','btn.verify':'校验签名','btn.clear':'清空','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'JWT Decoder','page.h1':'JWT Decoder<br><em>Free Online</em>','page.sub':'Decodes Header / Payload / Signature, exposes algorithm, expiry, issuer, audience, and verifies HS256/384/512 signatures locally. Token never leaves your browser.','sample.label':'Sample:','sample.expired':'Expired','pane.input':'JWT Token','empty.header':'Decoded Header appears here after paste','empty.payload':'Decoded Payload appears here after paste','empty.sig':'Signature (Base64URL raw — HMAC algos verifiable below)','claims.title':'Standard claims','verify.title':'🔐 HMAC signature verify','verify.sub':'Only HS256 / HS384 / HS512 can be verified locally. Paste the secret used when the token was issued:','btn.verify':'Verify','btn.clear':'Clear','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'فك ترميز JWT','page.h1':'فك ترميز JWT<br><em>مجاناً عبر الإنترنت</em>','page.sub':'فك Header / Payload / Signature تلقائياً، عرض الخوارزمية وانتهاء الصلاحية والمُصدِر والجمهور، والتحقق من توقيعات HS256/384/512 محلياً. لا يغادر الرمز متصفحك.','sample.label':'مثال:','sample.expired':'منتهي','pane.input':'رمز JWT','empty.header':'يظهر Header بعد لصق الرمز','empty.payload':'يظهر Payload بعد لصق الرمز','empty.sig':'التوقيع (Base64URL خام — يمكن التحقق من HMAC أدناه)','claims.title':'المطالبات القياسية','verify.title':'🔐 التحقق من توقيع HMAC','verify.sub':'يمكن التحقق محلياً من HS256/384/512 فقط. الصق السر:','btn.verify':'تحقق','btn.clear':'مسح','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const inEl = $('jwtInput'), overlay = $('jwtOverlay');
+
+// ── Base64URL helpers ─────────────────────────────────────────
+function b64urlToBytes(s){
+  s = s.replace(/[\s\r\n]+/g,'').replace(/-/g,'+').replace(/_/g,'/');
+  const pad = s.length % 4;
+  if(pad === 2) s += '==';
+  else if(pad === 3) s += '=';
+  else if(pad !== 0) throw new Error('Invalid Base64URL length');
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+function b64urlToText(s){
+  return new TextDecoder('utf-8',{fatal:false}).decode(b64urlToBytes(s));
+}
+
+// ── JSON syntax highlighting ──────────────────────────────────
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function highlightJson(obj){
+  const json = JSON.stringify(obj, null, 2);
+  return escapeHtml(json).replace(/("(\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g, m => {
+    let cls = 'json-number';
+    if(/^"/.test(m)) cls = /:$/.test(m) ? 'json-key' : 'json-string';
+    else if(/true|false/.test(m)) cls = 'json-bool';
+    else if(/null/.test(m)) cls = 'json-null';
+    return `<span class="${cls}">${m}</span>`;
+  });
+}
+
+// ── Claim helpers ─────────────────────────────────────────────
+const TIME_CLAIMS = ['iat', 'exp', 'nbf', 'auth_time'];
+const KNOWN_CLAIMS = {
+  iss: { zh:'签发者 (issuer)', en:'Issuer' },
+  sub: { zh:'主体 (subject)', en:'Subject' },
+  aud: { zh:'受众 (audience)', en:'Audience' },
+  exp: { zh:'过期时间 (expires)', en:'Expires' },
+  nbf: { zh:'生效时间 (not before)', en:'Not before' },
+  iat: { zh:'签发时间 (issued at)', en:'Issued at' },
+  jti: { zh:'JWT ID (jti)', en:'JWT ID' },
+  scope: { zh:'权限作用域 (scope)', en:'Scope' },
+  azp: { zh:'授权方 (azp)', en:'Authorized party' },
+  auth_time: { zh:'认证时间 (auth_time)', en:'Auth time' }
+};
+function fmtTime(secs){
+  const d = new Date(secs * 1000);
+  if(isNaN(d.getTime())) return String(secs);
+  const lang = document.documentElement.lang;
+  const locale = lang === 'zh' ? 'zh-CN' : lang === 'ar' ? 'ar' : 'en-US';
+  return d.toLocaleString(locale) + ' (' + d.toISOString() + ')';
+}
+function fmtDuration(seconds, lang){
+  const abs = Math.abs(seconds);
+  if(abs < 60) return Math.round(abs) + (lang==='en'?'s':lang==='ar'?' ث':'秒');
+  if(abs < 3600) return Math.round(abs/60) + (lang==='en'?'min':lang==='ar'?' د':'分钟');
+  if(abs < 86400) return (abs/3600).toFixed(1) + (lang==='en'?'h':lang==='ar'?' س':'小时');
+  return (abs/86400).toFixed(1) + (lang==='en'?'d':lang==='ar'?' يوم':'天');
+}
+
+// ── Main parse ────────────────────────────────────────────────
+let parsed = null; // { headerObj, payloadObj, headerStr, payloadStr, sigStr, signingInput }
+
+function update(){
+  const raw = inEl.value.trim();
+  parsed = null;
+  // Repaint overlay coloring
+  paintOverlay(raw);
+  $('inMeta').textContent = raw ? `${raw.length.toLocaleString()} chars` : '';
+  if(!raw){
+    resetParts();
+    $('errBox').classList.add('hidden');
+    $('claimsPane').classList.add('hidden');
+    $('verifyResult').classList.add('hidden');
+    return;
+  }
+  const parts = raw.split('.');
+  if(parts.length !== 3 && parts.length !== 5){
+    showErr(document.documentElement.lang==='en'?`Not a JWT — expected 3 (JWS) or 5 (JWE) segments separated by '.', got ${parts.length}.`:document.documentElement.lang==='ar'?`ليس JWT صالحاً — العدد ${parts.length}.`:`不是合法 JWT — 应有 3 段（JWS）或 5 段（JWE），实际 ${parts.length} 段。`);
+    resetParts();
+    return;
+  }
+  if(parts.length === 5){
+    showErr(document.documentElement.lang==='en'?'JWE (encrypted JWT, 5 segments) is not decoded by this tool.':document.documentElement.lang==='ar'?'JWE المشفر غير مدعوم هنا.':'本工具不支持 JWE（加密 JWT，5 段式）的解密。');
+    resetParts();
+    return;
+  }
+  const [h, p, s] = parts;
+  let headerObj, payloadObj, headerStr, payloadStr;
+  try{
+    headerStr = b64urlToText(h);
+    headerObj = JSON.parse(headerStr);
+  }catch(e){
+    showErr(document.documentElement.lang==='en'?`Header invalid: ${e.message}`:document.documentElement.lang==='ar'?`Header غير صالح: ${e.message}`:`Header 解码失败：${e.message}`);
+    resetParts(); return;
+  }
+  try{
+    payloadStr = b64urlToText(p);
+    payloadObj = payloadStr ? JSON.parse(payloadStr) : {};
+  }catch(e){
+    showErr(document.documentElement.lang==='en'?`Payload invalid: ${e.message}`:document.documentElement.lang==='ar'?`Payload غير صالح: ${e.message}`:`Payload 解码失败：${e.message}`);
+    resetParts(); return;
+  }
+  $('errBox').classList.add('hidden');
+  parsed = { headerObj, payloadObj, headerStr, payloadStr, sigStr: s, signingInput: `${h}.${p}` };
+  renderParts();
+}
+
+function paintOverlay(raw){
+  if(!raw){ overlay.innerHTML=''; return; }
+  const parts = raw.split('.');
+  const segClass = ['h','p','s'];
+  let html = '';
+  parts.forEach((seg, i) => {
+    if(i > 0) html += `<span class="dot">.</span>`;
+    const cls = i < 3 ? segClass[i] : 's';
+    html += `<span class="${cls}">${escapeHtml(seg)}</span>`;
+  });
+  overlay.innerHTML = html;
+}
+
+function resetParts(){
+  const lang = document.documentElement.lang;
+  const empties = I18N[lang] || I18N.zh;
+  $('hBody').innerHTML=''; $('hBody').textContent = empties['empty.header']; $('hBody').classList.add('empty');
+  $('pBody').innerHTML=''; $('pBody').textContent = empties['empty.payload']; $('pBody').classList.add('empty');
+  $('sBody').innerHTML=''; $('sBody').textContent = empties['empty.sig']; $('sBody').classList.add('empty');
+  $('hMeta').textContent=''; $('pMeta').textContent=''; $('sMeta').textContent='';
+  $('claimsPane').classList.add('hidden');
+}
+
+function renderParts(){
+  if(!parsed) return;
+  const { headerObj, payloadObj, headerStr, payloadStr, sigStr } = parsed;
+  $('hBody').innerHTML = highlightJson(headerObj);
+  $('hBody').classList.remove('empty');
+  $('hMeta').textContent = `${headerStr.length} bytes${headerObj.alg ? ' · ' + headerObj.alg : ''}`;
+  $('pBody').innerHTML = highlightJson(payloadObj);
+  $('pBody').classList.remove('empty');
+  $('pMeta').textContent = `${payloadStr.length} bytes`;
+  $('sBody').textContent = sigStr || '(none)';
+  $('sBody').classList.remove('empty');
+  $('sMeta').textContent = sigStr ? `${sigStr.length} chars` : '0 chars';
+  renderClaims(payloadObj);
+  $('verifyResult').classList.add('hidden');
+}
+
+function renderClaims(payload){
+  const lang = document.documentElement.lang;
+  const body = $('claimsBody');
+  body.innerHTML = '';
+  const keys = Object.keys(payload);
+  const known = keys.filter(k => KNOWN_CLAIMS[k]);
+  if(!known.length){
+    $('claimsPane').classList.add('hidden');
+    return;
+  }
+  const now = Math.floor(Date.now() / 1000);
+  for(const k of known){
+    const v = payload[k];
+    const meta = KNOWN_CLAIMS[k];
+    const row = document.createElement('div');
+    row.className = 'claim-row';
+    const keySpan = document.createElement('div');
+    keySpan.className = 'claim-key';
+    keySpan.textContent = (lang==='en'?meta.en:meta.zh);
+    const valSpan = document.createElement('div');
+    valSpan.className = 'claim-val';
+    if(TIME_CLAIMS.includes(k) && typeof v === 'number'){
+      const delta = v - now;
+      valSpan.textContent = fmtTime(v);
+      const tag = document.createElement('span');
+      tag.className = 'claim-tag';
+      if(k === 'exp'){
+        if(delta < 0){
+          tag.classList.add('err');
+          tag.textContent = (lang==='en'?'Expired '+fmtDuration(delta,lang)+' ago':lang==='ar'?'منتهٍ منذ '+fmtDuration(delta,lang):'已过期 '+fmtDuration(delta,lang)+'前');
+        }else{
+          tag.classList.add('ok');
+          tag.textContent = (lang==='en'?'Valid · '+fmtDuration(delta,lang)+' left':lang==='ar'?'صالح · '+fmtDuration(delta,lang):'有效 · 还剩 '+fmtDuration(delta,lang));
+        }
+      }else if(k === 'nbf'){
+        if(delta > 0){
+          tag.classList.add('warn');
+          tag.textContent = (lang==='en'?'Not active for '+fmtDuration(delta,lang):lang==='ar'?'غير ساري بعد '+fmtDuration(delta,lang):fmtDuration(delta,lang)+'后才生效');
+        }else{
+          tag.classList.add('ok');
+          tag.textContent = (lang==='en'?'Active':lang==='ar'?'ساري':'已生效');
+        }
+      }else if(k === 'iat'){
+        if(delta > 60){
+          tag.classList.add('warn');
+          tag.textContent = (lang==='en'?'iat in future · clock skew?':lang==='ar'?'iat في المستقبل':'iat 在未来 · 时钟漂移？');
+        }else{
+          tag.classList.add('ok');
+          tag.textContent = fmtDuration(-delta, lang) + (lang==='en'?' ago':lang==='ar'?'':'前签发');
+        }
+      }
+      row.appendChild(keySpan); row.appendChild(valSpan); row.appendChild(tag);
+    }else{
+      valSpan.textContent = typeof v === 'string' ? v : JSON.stringify(v);
+      row.appendChild(keySpan); row.appendChild(valSpan);
+    }
+    body.appendChild(row);
+  }
+  $('claimsPane').classList.remove('hidden');
+}
+
+function showErr(msg){
+  $('errBox').textContent = msg;
+  $('errBox').classList.remove('hidden');
+}
+
+inEl.addEventListener('input', update);
+inEl.addEventListener('scroll', () => { overlay.scrollTop = inEl.scrollTop; });
+
+// ── HMAC verify ──────────────────────────────────────────────
+$('btnVerify').onclick = async () => {
+  const lang = document.documentElement.lang;
+  const result = $('verifyResult');
+  if(!parsed){
+    result.className = 'verify-result err';
+    result.textContent = lang==='en'?'Paste a JWT first.':lang==='ar'?'الصق JWT أولاً.':'请先粘贴 JWT。';
+    result.classList.remove('hidden');
+    return;
+  }
+  const alg = (parsed.headerObj.alg || '').toUpperCase();
+  const algMap = { HS256: 'SHA-256', HS384: 'SHA-384', HS512: 'SHA-512' };
+  if(!algMap[alg]){
+    result.className = 'verify-result err';
+    result.textContent = lang==='en'?`Algorithm "${parsed.headerObj.alg}" cannot be verified locally — only HS256/384/512 are supported.`:lang==='ar'?'الخوارزمية غير مدعومة محلياً.':`算法 "${parsed.headerObj.alg}" 不支持本地校验，仅支持 HS256/384/512。`;
+    result.classList.remove('hidden');
+    return;
+  }
+  const secret = $('secretInput').value;
+  if(!secret){
+    result.className = 'verify-result err';
+    result.textContent = lang==='en'?'Enter the HMAC secret to verify.':lang==='ar'?'أدخل السر.':'请输入 HMAC 密钥。';
+    result.classList.remove('hidden');
+    return;
+  }
+  try{
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: algMap[alg] }, false, ['verify']);
+    const sigBytes = b64urlToBytes(parsed.sigStr);
+    const ok = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(parsed.signingInput));
+    if(ok){
+      result.className = 'verify-result ok';
+      result.textContent = (lang==='en'?'✓ Signature valid · ':lang==='ar'?'✓ التوقيع صالح · ':'✓ 签名有效 · ') + alg;
+    }else{
+      result.className = 'verify-result err';
+      result.textContent = (lang==='en'?'✗ Signature mismatch · check secret or token integrity ('+alg+')':lang==='ar'?'✗ التوقيع غير مطابق':'✗ 签名不匹配 — 请检查密钥或 Token 完整性（'+alg+'）');
+    }
+  }catch(e){
+    result.className = 'verify-result err';
+    result.textContent = (lang==='en'?'Error: ':lang==='ar'?'خطأ: ':'错误：') + e.message;
+  }
+  result.classList.remove('hidden');
+};
+
+$('btnClear').onclick = () => {
+  inEl.value = ''; $('secretInput').value = '';
+  update();
+  $('verifyResult').classList.add('hidden');
+  inEl.focus();
+};
+
+// ── Samples ──────────────────────────────────────────────────
+function bytesToB64Url(bytes){
+  let bin='';
+  for(let i=0;i<bytes.length;i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function strToB64Url(s){
+  return bytesToB64Url(new TextEncoder().encode(s));
+}
+async function buildHs256Sample(){
+  const header = '{"alg":"HS256","typ":"JWT"}';
+  const payload = JSON.stringify({sub:'1234567890', name:'Jane Doe', iat:1735689600, exp:4089520999, role:'admin'});
+  const signingInput = strToB64Url(header) + '.' + strToB64Url(payload);
+  const secret = 'your-256-bit-secret';
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name:'HMAC', hash:'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(signingInput));
+  return signingInput + '.' + bytesToB64Url(new Uint8Array(sig));
+}
+const STATIC_SAMPLES = {
+  rs256: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyM2FiYyJ9.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmV4YW1wbGUuY29tIiwic3ViIjoidXNlci00MiIsImF1ZCI6Im15LWFwcCIsImlhdCI6MTczNTY4OTYwMCwiZXhwIjo0MDg5NTIwOTk5LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIn0.ZmFrZS1zaWduYXR1cmU',
+  expired: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwibmFtZSI6IlRlc3QgVXNlciIsImlhdCI6MTU3NzgzNjgwMCwiZXhwIjoxNTc3ODQwNDAwfQ.dummy'
+};
+async function loadSample(k){
+  if(k === 'hs256'){
+    inEl.value = await buildHs256Sample();
+    $('secretInput').value = 'your-256-bit-secret';
+  }else{
+    inEl.value = STATIC_SAMPLES[k] || '';
+    $('secretInput').value = '';
+  }
+  update();
+  $('verifyResult').classList.add('hidden');
+}
+
+// ── Subscribe ─────────────────────────────────────────────
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+// ── Init ──────────────────────────────────────────────────
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+update();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

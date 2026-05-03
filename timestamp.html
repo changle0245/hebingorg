@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unix 时间戳转换 与 ISO 8601 / 时区互转 - 免费在线工具 | hebing.org</title>
+<meta name="description" content="免费在线时间戳工具：Unix 秒 / 毫秒 / 微秒 / 纳秒 ↔ ISO 8601 ↔ 本地时间多向同步换算，500+ IANA 时区即时切换，相对时间「3 天前」自动渲染。所有处理在浏览器本地完成。">
+<meta name="keywords" content="时间戳转换,unix时间戳,iso 8601,时区转换,timestamp,unix time,日期转换,在线时间戳">
+<link rel="canonical" href="https://hebing.org/timestamp.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="Unix 时间戳转换 与 ISO 8601 / 时区互转 | hebing.org">
+<meta property="og:url" content="https://hebing.org/timestamp.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/timestamp.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/timestamp.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/timestamp.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:640px;}
+.tool-wrap{padding:28px 0;}
+.now-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;background:var(--accent-light);border:1px solid #fed7aa;border-radius:var(--radius-lg);margin-bottom:20px;}
+.now-label{font-family:var(--font-mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-weight:500;}
+.now-val{font-family:var(--font-mono);font-size:14px;color:var(--black);font-weight:500;}
+.now-spacer{flex:1;}
+.t-btn{height:34px;padding:0 14px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-group{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);}
+.t-group select,.t-group input[type="text"]{height:30px;padding:0 8px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-family:var(--font-mono);font-size:12px;outline:none;min-width:170px;}
+.t-group select:focus,.t-group input[type="text"]:focus{border-color:var(--black);}
+.t-sep{flex:1;}
+.row-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px;}
+.row-card{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.row-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.row-head em{font-style:normal;color:var(--gray-400);}
+.row-card input{width:100%;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:14px;background:var(--white);color:var(--black);}
+.row-card.invalid input{color:#b91c1c;background:#fef2f2;}
+.relative-row{padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);font-family:var(--font-mono);font-size:13px;line-height:1.7;color:var(--gray-600);margin-bottom:14px;}
+.relative-row strong{color:var(--black);font-size:14px;}
+.relative-row .rel-val{color:var(--accent);font-weight:500;}
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);}
+.error-box.hidden{display:none!important;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+@media (prefers-color-scheme: dark){:root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}nav{background:rgba(17,17,16,0.95);}.t-group select,.t-group input,.row-card input{background:var(--white);}.subscribe-input{background:var(--gray-100);}.scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}.related-card{background:var(--gray-100);border-color:var(--gray-200);}.related-card:hover{background:var(--gray-200);color:var(--black);}.error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}.row-card.invalid input{background:#2d0a0a;color:#fca5a5;}}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"hebing.org Unix 时间戳转换","applicationCategory":"DeveloperApplication","operatingSystem":"Any (browser-based)","url":"https://hebing.org/timestamp.html","description":"免费在线 Unix 时间戳与 ISO 8601 互转，500+ IANA 时区即时切换，相对时间渲染。","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Unix 秒 / 毫秒 / 微秒 / 纳秒 ↔ ISO 8601 ↔ 本地时间","500+ IANA 时区切换","相对时间「3 天前」","实时同步与现在按钮","本地处理"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"hebing.org","item":"https://hebing.org/"},{"@type":"ListItem","position":2,"name":"时间戳转换","item":"https://hebing.org/timestamp.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"如何在线转换 Unix 时间戳与 ISO 8601 / 本地时间","description":"使用 hebing.org 在浏览器本地把 Unix 时间戳（秒 / 毫秒 / 微秒 / 纳秒）双向换算到 ISO 8601、本地时间与 RFC 2822，并切换 IANA 时区。","totalTime":"PT10S","step":[
+{"@type":"HowToStep","position":1,"name":"选择时区与单位","text":"工具默认用系统时区，下拉里有 500+ IANA 时区可切；单位下拉默认按数字位数自动推断。"},
+{"@type":"HowToStep","position":2,"name":"粘贴任意一种格式","text":"在 Unix / ISO 8601 / 本地时间 / RFC 2822 任一字段粘贴值，其他三个字段同步更新。"},
+{"@type":"HowToStep","position":3,"name":"查看相对时间","text":"下方相对时间行显示「3 天前」、ISO 第几周、闰年与星期。"},
+{"@type":"HowToStep","position":4,"name":"用现在时间","text":"点「⏱ 用现在时间」按钮，立即填入毫秒精度的当前时间戳。"}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Unix 时间戳的秒、毫秒、微秒、纳秒怎么区分？","acceptedAnswer":{"@type":"Answer","text":"以 2026-01-01 00:00:00 UTC 为例：秒级是 10 位（1767225600），毫秒 13 位（1767225600000），微秒 16 位，纳秒 19 位。本工具会自动按位数推断单位，也可在下拉里手动指定。"}},
+{"@type":"Question","name":"为什么我从数据库导出的时间戳显示成 1970 年？","acceptedAnswer":{"@type":"Answer","text":"数据库存毫秒时间戳，但你可能误当成秒解析了——把 1767225600000 当秒就成了 56000 年后；反过来把 1767225600 当毫秒就成了 1970-01-21。本工具同时显示 4 种单位的解析结果，一眼能看出哪个是合理日期。"}},
+{"@type":"Question","name":"时区切换是切到我电脑当前时区还是某个固定时区？","acceptedAnswer":{"@type":"Answer","text":"下拉默认是你系统当前时区（通过 Intl.DateTimeFormat().resolvedOptions().timeZone 探测）。可手动切到 UTC、Asia/Shanghai、America/New_York 等任意 IANA 时区，所有时间字段同步重排，但 Unix 时间戳本身（始终是 UTC 起算）不变。"}},
+{"@type":"Question","name":"数据会上传到服务器吗？","acceptedAnswer":{"@type":"Answer","text":"不会。所有换算都在你的浏览器内完成（原生 Date + Intl API），输入内容从不离开你的设备。"}}
+]}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">时间戳转换</span></div>
+  <h1 class="page-title" data-i18n="page.h1">Unix 时间戳 与 ISO 8601<br><em>多向同步</em></h1>
+  <p class="page-sub" data-i18n="page.sub">Unix 秒 / 毫秒 / 微秒 / 纳秒 ↔ ISO 8601 ↔ 本地时间多向同步换算，500+ IANA 时区即时切换，相对时间「3 天前」自动渲染。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+
+  <div class="now-bar">
+    <span class="now-label" data-i18n="now.label">现在</span>
+    <span class="now-val" id="nowVal">—</span>
+    <span class="now-spacer"></span>
+    <button class="t-btn" id="btnNow" data-i18n="btn.now">⏱ 用现在时间</button>
+    <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+  </div>
+
+  <div class="toolbar">
+    <span class="t-group">
+      <span data-i18n="opt.tz">时区</span>
+      <select id="tzSel">
+        <!-- populated at runtime from Intl.supportedValuesOf('timeZone') -->
+      </select>
+    </span>
+    <span class="t-sep"></span>
+    <span class="t-group">
+      <span data-i18n="opt.unit">默认单位</span>
+      <select id="unitSel">
+        <option value="auto" selected data-i18n="opt.unit.auto">自动按位数推断</option>
+        <option value="s">秒（10 位）</option>
+        <option value="ms">毫秒（13 位）</option>
+        <option value="us">微秒（16 位）</option>
+        <option value="ns">纳秒（19 位）</option>
+      </select>
+    </span>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="row-grid">
+    <div class="row-card">
+      <div class="row-head"><span>UNIX <em data-i18n="lab.unix">秒 / 毫秒 / 微秒 / 纳秒</em></span><span id="m_unix"></span></div>
+      <input type="text" id="in_unix" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="1767225600 / 1767225600000 / …">
+    </div>
+    <div class="row-card">
+      <div class="row-head"><span>ISO 8601 <em data-i18n="lab.iso">UTC 形式</em></span><span id="m_iso"></span></div>
+      <input type="text" id="in_iso" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="2026-01-01T00:00:00.000Z">
+    </div>
+    <div class="row-card">
+      <div class="row-head"><span data-i18n="lab.local">本地时间 <em>YYYY-MM-DD HH:mm:ss</em></span><span id="m_local"></span></div>
+      <input type="text" id="in_local" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="2026-01-01 08:00:00">
+    </div>
+    <div class="row-card">
+      <div class="row-head"><span>RFC 2822 <em>Email / HTTP</em></span><span id="m_rfc"></span></div>
+      <input type="text" id="in_rfc" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Wed, 01 Jan 2026 00:00:00 GMT">
+    </div>
+  </div>
+
+  <div class="relative-row" id="relRow">
+    <span style="color:var(--gray-400)" data-i18n="rel.hint">输入任一时间格式后这里会显示相对时间与日历信息</span>
+  </div>
+
+  <div class="subscribe-box" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="常见使用场景" data-en="Common use cases">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🐛</div><div class="scene-title" data-scene-zh="读应用日志" data-scene-en="Read app logs">读应用日志</div><div class="scene-desc" data-scene-zh="日志里的 1767225600 是什么时候？粘进来立刻看到 ISO + 本地时间 + 离现在多久。" data-scene-en="A 1767225600 in your logs — paste it to see ISO time, local time, and how long ago.">日志里的 1767225600 是什么时候？粘进来立刻看到 ISO + 本地时间 + 离现在多久。</div></div>
+      <div class="scene-card"><div class="scene-icon">🗄️</div><div class="scene-title" data-scene-zh="数据库 / API 调试" data-scene-en="DB / API debugging">数据库 / API 调试</div><div class="scene-desc" data-scene-zh="API 返回 1767225600000，是秒还是毫秒？同时显示 4 种单位解析结果，1970 年的就是错的。" data-scene-en="API returns 1767225600000 — sec or ms? See all four unit parses; the 1970 result tells you which is wrong.">API 返回 1767225600000，是秒还是毫秒？同时显示 4 种单位解析结果，1970 年的就是错的。</div></div>
+      <div class="scene-card"><div class="scene-icon">🌍</div><div class="scene-title" data-scene-zh="跨时区会议" data-scene-en="Cross-timezone meetings">跨时区会议</div><div class="scene-desc" data-scene-zh="客户给的「上海时间下午 3 点」对纽约同事是几点？切时区即可看本地表示。" data-scene-en="Client says '3pm Shanghai time' — switch the timezone dropdown to see the equivalent for any city.">客户给的「上海时间下午 3 点」对纽约同事是几点？切时区即可看本地表示。</div></div>
+      <div class="scene-card"><div class="scene-icon">📅</div><div class="scene-title" data-scene-zh="JWT iat / exp 验证" data-scene-en="JWT iat / exp">JWT iat / exp 验证</div><div class="scene-desc" data-scene-zh="解出 JWT payload 后那个 1767225600 是 iat 还是 exp？查一下离现在多久就知道有没有过期。" data-scene-en="A JWT iat / exp value — check the relative time to instantly tell if it's expired.">解出 JWT payload 后那个 1767225600 是 iat 还是 exp？查一下离现在多久就知道有没有过期。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>位数自动判断</strong>：默认按数字位数自动推断秒（10 位）、毫秒（13 位）、微秒（16 位）、纳秒（19 位）。也可下拉强制指定。</li>
+      <li><strong>「现在时间」按钮</strong>：一键填入当前精确到毫秒的时间戳。</li>
+      <li><strong>本地时间格式宽容</strong>：接受 `2026-01-01 08:00`、`2026/1/1`、`2026-01-01T08:00`、Excel 复制的 `2026-01-01 08:00:00.000` 等。</li>
+      <li><strong>相对时间</strong>：自动渲染 `3 天前 / 2 小时后`，并显示星期 + 是否为闰年 + 当年第几周。</li>
+      <li><strong>时区切换不动 Unix 戳</strong>：Unix 时间戳是 UTC 起算，永远不变。切时区只重排「ISO 形式」「本地时间」字段以方便人类阅读。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>Auto unit detection</strong>: digit count infers seconds (10) / ms (13) / μs (16) / ns (19). Override via dropdown.</li>
+      <li><strong>Now button</strong>: fills current millisecond-precision timestamp.</li>
+      <li><strong>Lenient local input</strong>: accepts `2026-01-01 08:00`, `2026/1/1`, `2026-01-01T08:00`, Excel-style `2026-01-01 08:00:00.000`.</li>
+      <li><strong>Relative time</strong>: auto renders `3 days ago / 2 hours from now`, plus weekday + leap-year + ISO week number.</li>
+      <li><strong>Timezone never changes Unix value</strong>: Unix is UTC-anchored. Switching timezone only re-renders the ISO and local fields.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>كشف الوحدة التلقائي: عدد الأرقام يستنتج الثواني (10) / ms (13) / μs (16) / ns (19). الاستبدال عبر القائمة المنسدلة.</li><li>زر الآن: يملأ الطابع الزمني الحالي بدقة الميلي ثانية.</li><li>إدخال محلي متسامح: يقبل 2026-01-01 08:00 و 2026/1/1 و 2026-01-01T08:00 ونمط Excel 2026-01-01 08:00:00.000.</li><li>الوقت النسبي: تصيير تلقائي لـ "قبل 3 أيام / بعد ساعتين"، بالإضافة إلى يوم الأسبوع + السنة الكبيسة + رقم أسبوع ISO.</li><li>المنطقة الزمنية لا تغير قيمة Unix أبداً: Unix مرتبط بـ UTC. تبديل المنطقة الزمنية يعيد فقط تصيير حقول ISO والمحلي.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q" data-faq-zh="Unix 时间戳的秒、毫秒、微秒、纳秒怎么区分？" data-faq-en="How to tell apart sec / ms / μs / ns?" data-faq-ar="كيف أميّز بين الثواني والميلي ثانية والميكرو ثانية والنانو ثانية؟">Unix 时间戳的秒、毫秒、微秒、纳秒怎么区分？</div><div class="faq-a" data-faq-zh="以 2026-01-01 00:00:00 UTC 为例：秒级是 10 位（1767225600），毫秒 13 位，微秒 16 位，纳秒 19 位。本工具会自动按位数推断单位，也可手动指定。" data-faq-en="At 2026-01-01 00:00 UTC: seconds = 10 digits (1767225600), ms = 13, μs = 16, ns = 19. The tool auto-infers from digit count, or you can override." data-faq-ar="في 2026-01-01 00:00 UTC: الثواني = 10 أرقام (1767225600)، ms = 13، μs = 16، ns = 19. تستنتج الأداة من عدد الأرقام تلقائياً، أو يمكنك الاستبدال يدوياً.">以 2026-01-01 00:00:00 UTC 为例：秒级是 10 位（1767225600），毫秒 13 位，微秒 16 位，纳秒 19 位。本工具会自动按位数推断单位，也可手动指定。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="为什么我从数据库导出的时间戳显示成 1970 年？" data-faq-en="Why does my DB timestamp show 1970?" data-faq-ar="لماذا تظهر طوابع قاعدة البيانات الخاصة بي عام 1970؟">为什么我从数据库导出的时间戳显示成 1970 年？</div><div class="faq-a" data-faq-zh="把毫秒当秒（或反之）解析了。本工具同时显示 4 种单位的解析结果，一眼能看出哪个是合理日期。" data-faq-en="You parsed ms as sec (or vice versa). The tool shows all four unit parses simultaneously so the right one is obvious." data-faq-ar="حللت ms كثوانٍ (أو العكس). تعرض الأداة جميع الوحدات الأربع في وقت واحد، لذا يكون التحليل الصحيح واضحاً.">把毫秒当秒（或反之）解析了。本工具同时显示 4 种单位的解析结果，一眼能看出哪个是合理日期。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="时区切换是切到我电脑当前时区还是某个固定时区？" data-faq-en="Does TZ switch use my system or a fixed one?" data-faq-ar="هل يستخدم تبديل المنطقة الزمنية المنطقة الخاصة بنظامي أم منطقة ثابتة؟">时区切换是切到我电脑当前时区还是某个固定时区？</div><div class="faq-a" data-faq-zh="默认是你系统当前时区（Intl 探测）。可手动切到 UTC、Asia/Shanghai、America/New_York 等。Unix 时间戳本身（UTC 起算）不变。" data-faq-en="Defaults to your system tz via Intl. Switch to UTC, Asia/Shanghai, America/New_York etc. Unix value (UTC-anchored) never changes." data-faq-ar="يفترض المنطقة الزمنية لنظامك عبر Intl. بدّل إلى UTC أو Asia/Shanghai أو America/New_York إلخ. قيمة Unix (مرتبطة بـ UTC) لا تتغير أبداً.">默认是你系统当前时区（Intl 探测）。可手动切到 UTC、Asia/Shanghai、America/New_York 等。Unix 时间戳本身（UTC 起算）不变。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are inputs uploaded?" data-faq-ar="هل يتم رفع المدخلات؟">数据会上传到服务器吗？</div><div class="faq-a" data-faq-zh="不会。所有换算都在你的浏览器内完成（原生 Date + Intl API），输入从不离开你的设备。" data-faq-en="No. Everything runs locally (native Date + Intl). Inputs never leave your device." data-faq-ar="لا. كل شيء يعمل محلياً (Date + Intl الأصليان). لا تغادر المدخلات جهازك أبداً.">不会。所有换算都在你的浏览器内完成（原生 Date + Intl API），输入从不离开你的设备。</div></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="hex.html" class="related-card"><span>0x</span><span data-i18n-related="进制 / HEX 桥|Base / HEX|Base / HEX">进制 / HEX 桥</span></a>
+    <a href="jwt.html" class="related-card"><span>🔐</span><span data-i18n-related="JWT 解析|JWT|JWT">JWT 解析</span></a>
+    <a href="regex.html" class="related-card"><span>/.*/</span><span data-i18n-related="正则测试器|Regex|Regex">正则测试器</span></a>
+    <a href="json-formatter.html" class="related-card"><span>{}</span><span data-i18n-related="JSON 格式化|JSON|JSON">JSON 格式化</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'时间戳转换','page.h1':'Unix 时间戳 与 ISO 8601<br><em>多向同步</em>','page.sub':'Unix 秒 / 毫秒 / 微秒 / 纳秒 ↔ ISO 8601 ↔ 本地时间多向同步换算，500+ IANA 时区即时切换，相对时间「3 天前」自动渲染。所有处理在浏览器本地完成。','now.label':'现在','btn.now':'⏱ 用现在时间','btn.clear':'清空','opt.tz':'时区','opt.unit':'默认单位','opt.unit.auto':'自动按位数推断','lab.unix':'秒 / 毫秒 / 微秒 / 纳秒','lab.iso':'UTC 形式','lab.local':'本地时间 <em>YYYY-MM-DD HH:mm:ss</em>','rel.hint':'输入任一时间格式后这里会显示相对时间与日历信息','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Timestamp Convert','page.h1':'Unix & ISO 8601 Timestamps<br><em>multi-sync</em>','page.sub':'Unix sec / ms / μs / ns ↔ ISO 8601 ↔ local time, sync across 500+ IANA timezones, with relative-time rendering. All in your browser.','now.label':'Now','btn.now':'⏱ Use now','btn.clear':'Clear','opt.tz':'Timezone','opt.unit':'Default unit','opt.unit.auto':'Auto by digit count','lab.unix':'sec / ms / μs / ns','lab.iso':'UTC form','lab.local':'Local <em>YYYY-MM-DD HH:mm:ss</em>','rel.hint':'Type any time to see relative + calendar info','sub.title':'🔔 Get notified','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'الطوابع الزمنية','page.h1':'Unix و ISO 8601<br><em>متعدد الاتجاهات</em>','page.sub':'تحويل بين الطوابع الزمنية والصيغ الزمنية محلياً في متصفحك.','now.label':'الآن','btn.now':'⏱ استخدم الآن','btn.clear':'مسح','opt.tz':'المنطقة الزمنية','opt.unit':'الوحدة','opt.unit.auto':'تلقائي','lab.unix':'ثوانٍ / ميلي / ميكرو / نانو','lab.iso':'UTC','lab.local':'محلي','rel.hint':'اكتب أي صيغة زمنية لرؤية الوقت النسبي','sub.title':'🔔 أخبرني','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم!','sub.support':'الأدوات مجانية ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+  refresh();
+}
+
+const $ = id => document.getElementById(id);
+
+// ── Populate timezone dropdown ────────────────────────────
+const sysTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+let tzList;
+try{ tzList = Intl.supportedValuesOf('timeZone'); }catch(_){
+  tzList = ['UTC','Asia/Shanghai','Asia/Tokyo','Asia/Singapore','Asia/Dubai','Europe/London','Europe/Paris','Europe/Berlin','Europe/Moscow','America/New_York','America/Los_Angeles','America/Chicago','America/Sao_Paulo','Australia/Sydney','Pacific/Auckland'];
+}
+const tzSel = $('tzSel');
+// system first, then UTC, then alphabetic
+const others = tzList.filter(z => z !== sysTz && z !== 'UTC');
+[sysTz, 'UTC', ...others].forEach(tz => {
+  const o = document.createElement('option');
+  o.value = tz; o.textContent = tz === sysTz ? `${tz}（系统）` : tz;
+  tzSel.appendChild(o);
+});
+tzSel.value = sysTz;
+
+// ── Now ticker ────────────────────────────────────────────
+function tickNow(){
+  const d = new Date();
+  $('nowVal').textContent = `${d.getTime()} ms · ${d.toISOString()}`;
+}
+tickNow();
+setInterval(tickNow, 1000);
+
+// ── State ─────────────────────────────────────────────────
+let masterDate = null; // single source of truth (a Date object, ms-precision)
+let userUnit = 'ms';   // unit the user typed in (so we re-emit Unix in same unit)
+
+// ── Parse helpers ─────────────────────────────────────────
+function parseUnix(s){
+  s = s.trim();
+  if(!s) return null;
+  if(!/^-?\d+(\.\d+)?$/.test(s)) throw new Error('Unix 时间戳必须是数字');
+  const unitOpt = $('unitSel').value;
+  let unit = unitOpt;
+  if(unit === 'auto'){
+    const d = s.replace(/^-/,'').split('.')[0].length;
+    unit = d <= 10 ? 's' : d <= 13 ? 'ms' : d <= 16 ? 'us' : 'ns';
+  }
+  const num = Number(s);
+  let ms;
+  if(unit === 's')  ms = num * 1000;
+  else if(unit === 'ms') ms = num;
+  else if(unit === 'us') ms = num / 1000;
+  else                   ms = num / 1_000_000;
+  userUnit = unit;
+  return new Date(ms);
+}
+function parseIso(s){
+  s = s.trim(); if(!s) return null;
+  const d = new Date(s);
+  if(isNaN(d.getTime())) throw new Error('无效 ISO 8601');
+  return d;
+}
+function parseLocal(s){
+  s = s.trim(); if(!s) return null;
+  // Lenient: replace / with -, T with space, accept 2026-1-1 or 2026/01/01 8:00 etc.
+  let n = s.replace(/[\/]/g,'-').replace(/[T]/,' ').trim();
+  // Pad: split into parts
+  const m = n.match(/^(-?\d{1,4})-(\d{1,2})-(\d{1,2})(?:[ ](\d{1,2})(?::(\d{1,2}))?(?::(\d{1,2}))?(?:[.,](\d{1,9}))?)?$/);
+  if(!m) throw new Error('本地时间格式无法识别 (期望 YYYY-MM-DD HH:mm:ss)');
+  const [_, Y, M, D, h='0', mi='0', se='0', frac='0'] = m;
+  const tz = $('tzSel').value;
+  // Build a date whose components in `tz` equal the input. We use trial-and-error.
+  // Simpler: assume the input is in the selected tz; compute UTC from local + tz offset.
+  const ms = Number(('0.' + frac.padEnd(3,'0').slice(0,3)).replace(/^0\.0*/,'')) || 0;
+  const naiveUtcGuess = Date.UTC(+Y, +M - 1, +D, +h, +mi, +se, ms);
+  // Compute the offset that the selected tz would have at that instant
+  const offset = tzOffsetMinutes(tz, naiveUtcGuess);
+  const realUtc = naiveUtcGuess - offset * 60_000;
+  // Refine once (DST edges)
+  const offset2 = tzOffsetMinutes(tz, realUtc);
+  return new Date(naiveUtcGuess - offset2 * 60_000);
+}
+function parseRfc(s){
+  s = s.trim(); if(!s) return null;
+  const d = new Date(s);
+  if(isNaN(d.getTime())) throw new Error('无效 RFC 2822 / Email 日期');
+  return d;
+}
+
+// ── Compute the offset (in MINUTES east of UTC) for a given tz at a given UTC ms ──
+function tzOffsetMinutes(tz, utcMs){
+  const d = new Date(utcMs);
+  // Use formatToParts to read the components in `tz`, then compute the difference
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, hour12:false,
+    year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit'
+  }).formatToParts(d).reduce((a,p)=>{a[p.type]=p.value; return a;},{});
+  const Y = +parts.year, M = +parts.month, D = +parts.day;
+  let h = +parts.hour, mi = +parts.minute, se = +parts.second;
+  if(h === 24) h = 0;
+  const asIfUtc = Date.UTC(Y, M-1, D, h, mi, se);
+  return Math.round((asIfUtc - utcMs) / 60_000);
+}
+
+// ── Render ────────────────────────────────────────────────
+function emitUnix(d){
+  const ms = d.getTime();
+  if(userUnit === 's')   return Math.floor(ms/1000).toString();
+  if(userUnit === 'ms')  return ms.toString();
+  if(userUnit === 'us')  return (ms * 1000).toString();
+  if(userUnit === 'ns')  return (ms * 1_000_000).toString();
+  return ms.toString();
+}
+function emitIso(d){
+  // Render ISO in selected tz with offset
+  const tz = $('tzSel').value;
+  if(tz === 'UTC') return d.toISOString();
+  const offset = tzOffsetMinutes(tz, d.getTime());
+  const sign = offset >= 0 ? '+' : '-';
+  const abs = Math.abs(offset);
+  const hh = String(Math.floor(abs/60)).padStart(2,'0');
+  const mm = String(abs%60).padStart(2,'0');
+  // Build the local time ISO without Z
+  const parts = formatPartsAt(d, tz);
+  const ms = String(d.getTime() % 1000).padStart(3,'0');
+  return `${parts.Y}-${parts.M}-${parts.D}T${parts.h}:${parts.mi}:${parts.se}.${ms}${sign}${hh}:${mm}`;
+}
+function emitLocal(d){
+  const tz = $('tzSel').value;
+  const p = formatPartsAt(d, tz);
+  const ms = String(d.getTime() % 1000).padStart(3,'0');
+  return `${p.Y}-${p.M}-${p.D} ${p.h}:${p.mi}:${p.se}.${ms}`;
+}
+function emitRfc(d){
+  // RFC 2822 in GMT: "Wed, 01 Jan 2026 00:00:00 GMT"
+  return d.toUTCString();
+}
+function formatPartsAt(d, tz){
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, hour12:false,
+    year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit'
+  }).formatToParts(d).reduce((a,p)=>{a[p.type]=p.value; return a;},{});
+  return { Y:parts.year, M:parts.month, D:parts.day,
+           h: parts.hour === '24' ? '00' : parts.hour, mi:parts.minute, se:parts.second };
+}
+
+function renderRelative(d){
+  const now = new Date();
+  const diffSec = Math.round((d.getTime() - now.getTime())/1000);
+  const abs = Math.abs(diffSec);
+  let rel;
+  const lang = document.documentElement.lang;
+  const f = (n, unit_zh, unit_en, suffix_past_zh, suffix_future_zh, past_en, fut_en) => {
+    if(lang === 'en') return diffSec >= 0 ? `in ${n} ${unit_en}` : `${n} ${unit_en} ago`;
+    return diffSec >= 0 ? `${n}${unit_zh}后` : `${n}${unit_zh}前`;
+  };
+  if(abs < 60)        rel = f(abs, '秒', 'second' + (abs!==1?'s':''));
+  else if(abs < 3600) rel = f(Math.round(abs/60), '分钟', 'minute' + (Math.round(abs/60)!==1?'s':''));
+  else if(abs < 86400)rel = f(Math.round(abs/3600), '小时', 'hour' + (Math.round(abs/3600)!==1?'s':''));
+  else if(abs < 86400*30) rel = f(Math.round(abs/86400), '天', 'day' + (Math.round(abs/86400)!==1?'s':''));
+  else if(abs < 86400*365)rel = f(Math.round(abs/86400/30), '个月', 'month' + (Math.round(abs/86400/30)!==1?'s':''));
+  else rel = f(Math.round(abs/86400/365), '年', 'year' + (Math.round(abs/86400/365)!==1?'s':''));
+  // Day of week + ISO week + leap year
+  const tz = $('tzSel').value;
+  const dow = new Intl.DateTimeFormat(lang==='en'?'en-US':lang==='ar'?'ar-SA':'zh-CN', { timeZone: tz, weekday:'long' }).format(d);
+  const Y = +formatPartsAt(d, tz).Y;
+  const isLeap = (Y%4===0 && Y%100!==0) || Y%400===0;
+  const isoWeek = computeIsoWeek(d, tz);
+  const tzLabel = tz + (tz === sysTz ? '（系统）' : '');
+  return lang === 'en'
+    ? `<strong>${rel}</strong> · ${dow} · ISO week ${isoWeek} · ${isLeap?'leap year':'common year'} · TZ <span class="rel-val">${tz}${tz===sysTz?' (system)':''}</span>`
+    : `<strong>${rel}</strong> · ${dow} · ISO 第 ${isoWeek} 周 · ${isLeap?'闰年':'平年'} · 时区 <span class="rel-val">${tzLabel}</span>`;
+}
+function computeIsoWeek(d, tz){
+  // Build a date in the tz at midnight Thursday of same week, then count weeks since week 1
+  const p = formatPartsAt(d, tz);
+  const date = new Date(Date.UTC(+p.Y, +p.M-1, +p.D));
+  const dayNum = (date.getUTCDay() + 6) % 7;
+  date.setUTCDate(date.getUTCDate() - dayNum + 3);
+  const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+  const ftDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - ftDayNum + 3);
+  return 1 + Math.round((date - firstThursday) / (7*86400_000));
+}
+
+// ── Main loop: when masterDate is set, fill all fields except the active one ──
+function refresh(activeId){
+  if(!masterDate || isNaN(masterDate.getTime())){
+    $('relRow').innerHTML = '<span style="color:var(--gray-400)">输入任一时间格式后这里会显示相对时间与日历信息</span>';
+    return;
+  }
+  const fill = (id, fn) => {
+    if(id === activeId) return;
+    const el = $(id);
+    if(document.activeElement !== el) el.value = fn(masterDate);
+    el.parentElement.classList.remove('invalid');
+  };
+  fill('in_unix',  emitUnix);
+  fill('in_iso',   emitIso);
+  fill('in_local', emitLocal);
+  fill('in_rfc',   emitRfc);
+  $('relRow').innerHTML = renderRelative(masterDate);
+  hideErr();
+}
+
+function setFromInput(id){
+  const el = $(id);
+  const raw = el.value;
+  if(!raw.trim()){ masterDate = null; refresh(id); return; }
+  try{
+    let d;
+    if(id === 'in_unix')  d = parseUnix(raw);
+    if(id === 'in_iso')   d = parseIso(raw);
+    if(id === 'in_local') d = parseLocal(raw);
+    if(id === 'in_rfc')   d = parseRfc(raw);
+    if(d && !isNaN(d.getTime())){
+      masterDate = d;
+      el.parentElement.classList.remove('invalid');
+      refresh(id);
+    }else throw new Error('无法解析');
+  }catch(e){
+    el.parentElement.classList.add('invalid');
+    showErr(e.message);
+  }
+}
+
+['in_unix','in_iso','in_local','in_rfc'].forEach(id =>
+  $(id).addEventListener('input', () => setFromInput(id)));
+['tzSel','unitSel'].forEach(id =>
+  $(id).addEventListener('change', () => refresh()));
+
+$('btnNow').onclick = () => {
+  masterDate = new Date();
+  userUnit = 'ms';
+  refresh();
+};
+$('btnClear').onclick = () => {
+  masterDate = null;
+  ['in_unix','in_iso','in_local','in_rfc'].forEach(id => { $(id).value = ''; $(id).parentElement.classList.remove('invalid'); });
+  $('relRow').innerHTML = '<span style="color:var(--gray-400)">输入任一时间格式后这里会显示相对时间与日历信息</span>';
+  hideErr();
+};
+
+function showErr(msg){
+  $('errBox').textContent = '错误：' + msg;
+  $('errBox').classList.remove('hidden');
+}
+function hideErr(){ $('errBox').classList.add('hidden'); }
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

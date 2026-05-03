@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel 批量合并实战：从 200 个销售报表到统一数据池的完整流程 ｜ hebing.org 博客</title>
+<meta name="description" content="财务、运营、HR 每月都在重复同一件事。本文用真实案例对比手动复制、Power Query、VBA、在线工具四种方案。中英阿三语版本。">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/excel-batch-processing.html">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/excel-batch-processing.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/excel-batch-processing.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/excel-batch-processing.html">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/excel-batch-processing.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta property="og:title" content="Excel Batch Merge in Practice">
+<meta property="og:url" content="https://hebing.org/blog/excel-batch-processing.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "Excel 批量合并实战：从 200 个销售报表到统一数据池的完整流程",
+  "author": { "@type": "Organization", "name": "hebing.org" },
+  "publisher": { "@type": "Organization", "name": "hebing.org", "logo": { "@type": "ImageObject", "url": "https://hebing.org/og-image.png" }},
+  "datePublished": "2026-04-12","dateModified": "2026-04-12",
+  "mainEntityOfPage": "https://hebing.org/blog/excel-batch-processing.html",
+  "image": "https://hebing.org/og-image.png","inLanguage": ["zh-CN","en","ar"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hebing.org/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Excel Batch Merge", "item": "https://hebing.org/blog/excel-batch-processing.html" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="post.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/blog/" class="nav-back" id="navBack">← 所有文章</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<article class="container post-wrap">
+  <div class="post-tag" id="postTag">Excel 技巧 · 实战教程</div>
+  <h1 class="post-h1" id="postH1">Excel 批量合并实战：从 200 个销售报表到统一数据池的完整流程</h1>
+  <div class="post-meta" id="postMeta"><span>2026-04-12</span><span class="dot">约 14 分钟阅读</span></div>
+
+  <div class="zh-content active"><div class="post-content">
+    <p>每个月 1 号的早上，全国 200 家分公司的销售经理把上个月的销售报表发到总部邮箱。负责数据汇总的小李打开邮箱，发现 200 封邮件、200 个 .xlsx 附件——格式相似但又不完全一样：有的多了一列"备注"，有的把日期写成了文本格式，有的把表头放在了第二行。</p>
+    <p>她要把这 200 个文件合并成一份总数据池再做透视分析。最朴素的方法（一个个打开 → 复制 → 粘贴）大概要花一整天。但事实上这个工作可以在 5 分钟内完成——前提是你选对了方法。</p>
+
+    <h2>一、为什么 Excel 合并比想象中复杂</h2>
+    <p>"把表 A 和表 B 拼起来"听起来简单，但真正做的时候有至少 8 个变量需要处理：</p>
+    <ul>
+      <li><strong>列名是否一致</strong>——"客户名称" vs "客户" vs "Customer"；</li>
+      <li><strong>列顺序是否一致</strong>——同一份模板可能被人手动调整；</li>
+      <li><strong>列数是否一致</strong>——某些月份多了/少了几列；</li>
+      <li><strong>表头位置</strong>——有的从 A1 开始，有的前面有 Logo 占了三行；</li>
+      <li><strong>数据类型</strong>——同一列里日期、数字、文本混杂；</li>
+      <li><strong>空行/合并单元格</strong>——分隔不同区域的视觉装饰；</li>
+      <li><strong>多 Sheet 工作簿</strong>——合并所有 Sheet 还是只合并第一个？</li>
+      <li><strong>来源标识</strong>——合并后能否反查每行来自哪个文件？</li>
+    </ul>
+
+    <h2>二、四种方案的硬性对比</h2>
+    <table>
+      <thead><tr><th>方案</th><th>适合规模</th><th>学习成本</th><th>处理速度</th></tr></thead>
+      <tbody>
+        <tr><td>手动复制粘贴</td><td>&lt; 5 个文件</td><td>0</td><td>慢</td></tr>
+        <tr><td>Power Query</td><td>5-500 个</td><td>中等</td><td>快</td></tr>
+        <tr><td>VBA 宏</td><td>任意</td><td>高</td><td>极快</td></tr>
+        <tr><td>在线工具</td><td>&lt; 50 个</td><td>0</td><td>快</td></tr>
+      </tbody>
+    </table>
+
+    <h2>三、方案二：Power Query（强烈推荐）</h2>
+    <p>Power Query 是 Excel 2016 之后内置的工具，专门为这种场景设计：</p>
+    <ol>
+      <li><strong>把所有文件放到同一个文件夹</strong>，如 <code>D:\销售报表\2026-04\</code>；</li>
+      <li><strong>从文件夹导入</strong>：数据 → 获取数据 → 从文件 → 从文件夹；</li>
+      <li><strong>合并和加载</strong>：Power Query 自动选第一个文件作为模板；</li>
+      <li><strong>处理常见问题</strong>：列名不一致用"重命名列"、表头不在第一行用"删除前 N 行"；</li>
+      <li><strong>来源标识</strong>：自动加 <code>Source.Name</code> 列；</li>
+      <li><strong>下个月再来一次</strong>：把新文件丢到同一个文件夹，回到 Excel 点"刷新"。</li>
+    </ol>
+
+    <a href="/merge-excel.html" class="tool-cta">
+      <div class="tool-cta-icon">📊</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">如果只是临时合并几个文件</div>
+        <div class="tool-cta-sub">浏览器本地处理，不上传服务器</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h3>Power Query 隐藏陷阱</h3>
+    <ul>
+      <li><strong>大文件加载慢</strong>：单个超过 50MB 时类型推断会很慢；</li>
+      <li><strong>类型自动推断会出错</strong>：前几行全是数字，后面出现文本会被强制转 null；</li>
+      <li><strong>日期格式国际化坑</strong>："01/02/2026" 是 1 月 2 日还是 2 月 1 日取决于区域设置。</li>
+    </ul>
+
+    <h2>四、方案三：VBA 宏（适合定制化场景）</h2>
+    <pre>Sub MergeAllExcel()
+    Dim folderPath As String, fileName As String
+    Dim wbSrc As Workbook, wsDst As Worksheet
+    Dim lastRow As Long
+    folderPath = "D:\销售报表\2026-04\"
+    Set wsDst = ThisWorkbook.Sheets("汇总")
+    fileName = Dir(folderPath & "*.xlsx")
+    Do While fileName &lt;&gt; ""
+        Set wbSrc = Workbooks.Open(folderPath & fileName)
+        With wbSrc.Sheets(1)
+            lastRow = wsDst.Cells(wsDst.Rows.Count, 1).End(xlUp).Row + 1
+            .UsedRange.Offset(1).Copy wsDst.Cells(lastRow, 1)
+        End With
+        wbSrc.Close False
+        fileName = Dir
+    Loop
+End Sub</pre>
+
+    <h2>五、合并完之后必做的 5 项检查</h2>
+    <ol>
+      <li><strong>总行数核对</strong>：合并后行数 = 各文件行数之和；</li>
+      <li><strong>金额求和核对</strong>：把所有文件金额单独算出，再和合并后比较；</li>
+      <li><strong>抽样比对</strong>：随机抽 5 个文件的最后一行；</li>
+      <li><strong>类型分布</strong>：用筛选查看每列数据类型；</li>
+      <li><strong>来源完整性</strong>：检查 Source.Name 去重值数量 = 文件总数。</li>
+    </ol>
+
+    <h2>结语</h2>
+    <p>Excel 批量合并是个被严重低估的"重复劳动黑洞"——很多人花掉每月一整天，其实可以用 Power Query 30 分钟一次配置 + 每月 1 分钟刷新解决。</p>
+
+    <div class="related-posts">
+      <div class="related-title">相关文章</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>PDF 合并完整指南</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>本地处理 vs 云端工具</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="en-content"><div class="post-content">
+    <p>On the 1st of every month, sales managers from 200 branches across the country email last month's sales reports to headquarters. Lily, who handles data aggregation, opens her inbox to find 200 emails with 200 .xlsx attachments — similar in format but not identical: some have an extra "Notes" column, some have dates as text, some put headers in row 2.</p>
+    <p>She needs to merge these 200 files into one master data pool for pivot analysis. The naive approach (open → copy → paste, one by one) would take all day. But this can actually be done in 5 minutes — if you pick the right method.</p>
+
+    <h2>1. Why Excel Merging Is More Complex Than You Think</h2>
+    <p>"Combining sheet A with sheet B" sounds simple, but at least 8 variables matter:</p>
+    <ul>
+      <li><strong>Column name consistency</strong> — "Customer Name" vs "Customer" vs "客户";</li>
+      <li><strong>Column order consistency</strong> — templates may be manually adjusted;</li>
+      <li><strong>Column count consistency</strong> — some months add/drop columns;</li>
+      <li><strong>Header row position</strong> — A1 vs row 4 (after a logo block);</li>
+      <li><strong>Data types</strong> — dates, numbers, text mixed in one column;</li>
+      <li><strong>Empty rows / merged cells</strong> — visual decorations;</li>
+      <li><strong>Multi-Sheet workbooks</strong> — merge all sheets or just the first?</li>
+      <li><strong>Source identification</strong> — can you trace each row back to its file?</li>
+    </ul>
+
+    <h2>2. Hard Comparison of Four Approaches</h2>
+    <table>
+      <thead><tr><th>Approach</th><th>Scale</th><th>Learning</th><th>Speed</th></tr></thead>
+      <tbody>
+        <tr><td>Manual copy-paste</td><td>&lt; 5 files</td><td>0</td><td>Slow</td></tr>
+        <tr><td>Power Query</td><td>5-500</td><td>Medium</td><td>Fast</td></tr>
+        <tr><td>VBA macros</td><td>Any</td><td>High</td><td>Very fast</td></tr>
+        <tr><td>Online tools</td><td>&lt; 50</td><td>0</td><td>Fast</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Approach Two: Power Query (Strongly Recommended)</h2>
+    <p>Power Query is built into Excel 2016+, designed exactly for this scenario:</p>
+    <ol>
+      <li><strong>Put all files in one folder</strong>, e.g. <code>D:\sales-reports\2026-04\</code>;</li>
+      <li><strong>Import from folder</strong>: Data → Get Data → From File → From Folder;</li>
+      <li><strong>Combine and Load</strong>: Power Query auto-selects the first file as template;</li>
+      <li><strong>Handle common issues</strong>: rename columns, "Remove Top N Rows" if header isn't row 1;</li>
+      <li><strong>Source tracking</strong>: <code>Source.Name</code> column added automatically;</li>
+      <li><strong>Repeat next month</strong>: drop new files into the folder, click Refresh.</li>
+    </ol>
+
+    <a href="/merge-excel.html" class="tool-cta">
+      <div class="tool-cta-icon">📊</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">For one-off small merges</div>
+        <div class="tool-cta-sub">Browser-local processing, no upload</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h3>Power Query Hidden Pitfalls</h3>
+    <ul>
+      <li><strong>Slow for large files</strong>: type inference takes long for 50MB+;</li>
+      <li><strong>Type auto-inference fails</strong>: numeric column with later text rows turns text into null;</li>
+      <li><strong>Date format I18N trap</strong>: "01/02/2026" is Jan 2 or Feb 1 depending on regional settings.</li>
+    </ul>
+
+    <h2>4. Approach Three: VBA Macros</h2>
+    <pre>Sub MergeAllExcel()
+    Dim folderPath As String, fileName As String
+    Dim wbSrc As Workbook, wsDst As Worksheet
+    Dim lastRow As Long
+    folderPath = "D:\sales-reports\2026-04\"
+    Set wsDst = ThisWorkbook.Sheets("Summary")
+    fileName = Dir(folderPath & "*.xlsx")
+    Do While fileName &lt;&gt; ""
+        Set wbSrc = Workbooks.Open(folderPath & fileName)
+        With wbSrc.Sheets(1)
+            lastRow = wsDst.Cells(wsDst.Rows.Count, 1).End(xlUp).Row + 1
+            .UsedRange.Offset(1).Copy wsDst.Cells(lastRow, 1)
+        End With
+        wbSrc.Close False
+        fileName = Dir
+    Loop
+End Sub</pre>
+
+    <h2>5. Five Quality Checks After Merging</h2>
+    <ol>
+      <li><strong>Row count</strong>: merged rows = sum of file rows;</li>
+      <li><strong>Sum verification</strong>: total amount across all files vs merged total;</li>
+      <li><strong>Sample check</strong>: random 5 file last-rows present in merged;</li>
+      <li><strong>Type distribution</strong>: filter each column to spot anomalies;</li>
+      <li><strong>Source completeness</strong>: distinct Source.Name count = file count.</li>
+    </ol>
+
+    <h2>Conclusion</h2>
+    <p>Excel batch merging is a hugely underestimated "repetitive labor sink" — many spend a full day monthly when a one-time 30-min Power Query setup + monthly 1-min refresh would do.</p>
+
+    <div class="related-posts">
+      <div class="related-title">Related Posts</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>The Complete PDF Merge Guide</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>Browser-Local vs Cloud Tools</strong></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="ar-content"><div class="post-content">
+    <p>في صباح أول كل شهر، يرسل مديرو المبيعات في 200 فرع تقارير الشهر الماضي إلى المقر. ليلى المسؤولة عن التجميع تجد 200 بريداً مع 200 ملف .xlsx — متشابهة في الشكل لكن غير متطابقة: بعضها يحتوي عمود "ملاحظات" إضافي، بعضها بتواريخ نصية، بعضها برؤوس في الصف الثاني.</p>
+    <p>تحتاج لدمج هذه الـ 200 ملف في قاعدة بيانات رئيسية للتحليل. الطريقة الساذجة (افتح → انسخ → الصق) ستستغرق يوماً كاملاً. لكن يمكن إنجاز هذا في 5 دقائق — إذا اخترت الطريقة الصحيحة.</p>
+
+    <h2>1. لماذا دمج Excel أكثر تعقيداً مما تظن</h2>
+    <p>"دمج جدول A مع B" يبدو بسيطاً، لكن 8 متغيرات على الأقل مهمة:</p>
+    <ul>
+      <li><strong>اتساق أسماء الأعمدة</strong> — "اسم العميل" مقابل "العميل"؛</li>
+      <li><strong>اتساق ترتيب الأعمدة</strong>؛</li>
+      <li><strong>اتساق عدد الأعمدة</strong>؛</li>
+      <li><strong>موقع صف الرأس</strong> — A1 أو الصف 4؛</li>
+      <li><strong>أنواع البيانات</strong> — تواريخ وأرقام ونصوص ممزوجة؛</li>
+      <li><strong>الصفوف الفارغة / الخلايا المدمجة</strong>؛</li>
+      <li><strong>المصنفات متعددة الأوراق</strong>؛</li>
+      <li><strong>تحديد المصدر</strong> — هل يمكن تتبع كل صف إلى ملفه؟</li>
+    </ul>
+
+    <h2>2. مقارنة صارمة لأربعة أساليب</h2>
+    <table>
+      <thead><tr><th>الأسلوب</th><th>الحجم</th><th>التعلم</th><th>السرعة</th></tr></thead>
+      <tbody>
+        <tr><td>نسخ يدوي</td><td>&lt; 5 ملفات</td><td>0</td><td>بطيء</td></tr>
+        <tr><td>Power Query</td><td>5-500</td><td>متوسط</td><td>سريع</td></tr>
+        <tr><td>ماكرو VBA</td><td>أي</td><td>عالي</td><td>سريع جداً</td></tr>
+        <tr><td>أدوات الإنترنت</td><td>&lt; 50</td><td>0</td><td>سريع</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. الأسلوب الثاني: Power Query (موصى بشدة)</h2>
+    <ol>
+      <li><strong>ضع كل الملفات في مجلد واحد</strong>؛</li>
+      <li><strong>استورد من المجلد</strong>: Data → Get Data → From Folder؛</li>
+      <li><strong>دمج وتحميل</strong>: يختار Power Query تلقائياً الملف الأول كقالب؛</li>
+      <li><strong>تعامل مع المشاكل الشائعة</strong>: إعادة تسمية الأعمدة، حذف الصفوف العلوية؛</li>
+      <li><strong>تتبع المصدر</strong>: عمود <code>Source.Name</code> يُضاف تلقائياً؛</li>
+      <li><strong>كرر الشهر القادم</strong>: ضع ملفات جديدة، انقر تحديث.</li>
+    </ol>
+
+    <a href="/merge-excel.html" class="tool-cta">
+      <div class="tool-cta-icon">📊</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">للدمج العرضي لبضعة ملفات</div>
+        <div class="tool-cta-sub">معالجة محلية في المتصفح، بدون رفع</div>
+      </div>
+      <div class="tool-cta-arrow">←</div>
+    </a>
+
+    <h3>عثرات Power Query الخفية</h3>
+    <ul>
+      <li><strong>بطيء للملفات الكبيرة</strong>: استدلال النوع يطول لـ 50MB+؛</li>
+      <li><strong>استدلال النوع التلقائي يفشل</strong>: أعمدة رقمية بنصوص لاحقة تتحول إلى null؛</li>
+      <li><strong>فخ تنسيق التاريخ</strong>: "01/02/2026" قد يكون 2 يناير أو 1 فبراير.</li>
+    </ul>
+
+    <h2>4. الأسلوب الثالث: ماكرو VBA</h2>
+    <pre>Sub MergeAllExcel()
+    folderPath = "D:\sales\"
+    fileName = Dir(folderPath & "*.xlsx")
+    Do While fileName &lt;&gt; ""
+        Set wbSrc = Workbooks.Open(folderPath & fileName)
+        wbSrc.Sheets(1).UsedRange.Copy
+        wbSrc.Close False
+        fileName = Dir
+    Loop
+End Sub</pre>
+
+    <h2>5. خمسة فحوصات بعد الدمج</h2>
+    <ol>
+      <li><strong>عدد الصفوف</strong>: المدموج = مجموع صفوف الملفات؛</li>
+      <li><strong>التحقق من المجموع</strong>: مجاميع كل ملف vs المدموج؛</li>
+      <li><strong>فحص العينة</strong>: آخر صف من 5 ملفات عشوائية؛</li>
+      <li><strong>توزيع الأنواع</strong>: مرشحات الأعمدة لاكتشاف الشذوذ؛</li>
+      <li><strong>اكتمال المصدر</strong>: عدد قيم Source.Name = عدد الملفات.</li>
+    </ol>
+
+    <h2>الخاتمة</h2>
+    <p>دمج Excel المجمع بالوعة عمل متكرر تم التقليل من شأنها بشكل كبير — يقضي كثيرون يوماً كاملاً شهرياً بينما إعداد Power Query لمرة واحدة (30 دقيقة) + تحديث شهري (1 دقيقة) يكفي.</p>
+
+    <div class="related-posts">
+      <div class="related-title">مقالات ذات صلة</div>
+      <div class="related-list">
+        <a href="pdf-merge-complete-guide.html" class="related-card"><strong>الدليل الشامل لدمج PDF</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>المعالجة المحلية مقابل السحابية</strong></a>
+      </div>
+    </div>
+  </div></div>
+</article>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const META = {
+  zh: { tag:'Excel 技巧 · 实战教程', h1:'Excel 批量合并实战：从 200 个销售报表到统一数据池的完整流程', meta:'<span>2026-04-12</span><span class="dot">约 14 分钟阅读</span>', back:'← 所有文章', footer:['首页','关于','博客','联系','条款','隐私'] },
+  en: { tag:'Excel · Practical Tutorial', h1:'Excel Batch Merge in Practice: From 200 Sales Reports to a Unified Data Pool', meta:'<span>2026-04-12</span><span class="dot">14 min read</span>', back:'← All Posts', footer:['Home','About','Blog','Contact','Terms','Privacy'] },
+  ar: { tag:'Excel · دليل عملي', h1:'دمج Excel المجمع عملياً: من 200 تقرير مبيعات إلى قاعدة بيانات موحدة', meta:'<span>2026-04-12</span><span class="dot">14 دقيقة قراءة</span>', back:'→ جميع المقالات', footer:['الرئيسية','حول','المدونة','تواصل','الشروط','الخصوصية'] }
+};
+function setLang(lang){
+  const m = META[lang]; if(!m) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  document.getElementById('postTag').textContent = m.tag;
+  document.getElementById('postH1').textContent = m.h1;
+  document.getElementById('postMeta').innerHTML = m.meta;
+  document.getElementById('navBack').textContent = m.back;
+  const links = ['/','/about.html','/blog/','/contact.html','/terms.html','/privacy.html'];
+  document.getElementById('footerLinks').innerHTML = m.footer.map((t,i)=>`<a href="${links[i]}">${t}</a>`).join('');
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

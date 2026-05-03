@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>进制转换 与 文本 ↔ HEX / 二进制 - 免费在线工具 | hebing.org</title>
+<meta name="description" content="免费在线进制转换 + 文本/字节互转工具：二进制 / 八进制 / 十进制 / 十六进制 即时同步换算，支持有符号 / 无符号 8-64 位整数；UTF-8 文本与 HEX、二进制位串双向桥，支持 0x、空格、逗号等分隔符。所有处理在浏览器本地完成。">
+<meta name="keywords" content="进制转换,二进制转十进制,十进制转二进制,十六进制转换,hex转字符串,字符串转hex,binary转字符串,utf-8 hex,在线进制转换,二进制工具">
+<link rel="canonical" href="https://hebing.org/hex.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="进制转换 与 文本 ↔ HEX / 二进制 - 免费在线工具 | hebing.org">
+<meta property="og:url" content="https://hebing.org/hex.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/hex.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/hex.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/hex.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:600px;}
+.tool-wrap{padding:28px 0;}
+.mode-tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;width:fit-content;margin-bottom:14px;flex-wrap:wrap;}
+.mode-tab{padding:8px 18px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);font-family:var(--font-sans);font-weight:500;}
+.mode-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:38px;padding:0 16px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.t-sep{flex:1;}
+.t-group{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);}
+.t-group select,.t-group input[type="text"]{height:30px;padding:0 8px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-family:var(--font-mono);font-size:12px;outline:none;}
+.t-group select:focus,.t-group input[type="text"]:focus{border-color:var(--black);}
+.t-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);user-select:none;cursor:pointer;}
+.t-check input{cursor:pointer;}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:760px){.editor-grid{grid-template-columns:1fr;}}
+.editor-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.editor-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.editor-head .e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.editor-area{width:100%;min-height:200px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;word-break:break-all;}
+.editor-area.output{background:var(--gray-100);}
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.success-line{font-size:12px;color:var(--success);font-family:var(--font-mono);margin-bottom:14px;}
+.success-line.hidden{display:none;}
+/* number-mode rows */
+.num-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px;}
+.num-card{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.num-card-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.num-card-head em{font-style:normal;color:var(--gray-400);}
+.num-card input{width:100%;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:14px;background:var(--white);color:var(--black);}
+.num-card.invalid input{color:#b91c1c;background:#fef2f2;}
+.bits-row{margin-top:6px;padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);font-family:var(--font-mono);font-size:13px;line-height:1.8;color:var(--gray-600);word-break:break-all;}
+.bits-row strong{color:var(--black);}
+.bits-row .bit-1{color:var(--accent);font-weight:500;}
+.bits-row .bit-0{color:var(--gray-400);}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .editor-area,.num-card input{background:var(--white);color:var(--black);}
+  .editor-area.output{background:var(--gray-100);}
+  .mode-tab.active{background:var(--gray-200);box-shadow:none;}
+  .subscribe-input,.t-group select,.t-group input[type="text"]{background:var(--gray-100);}
+  .scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .num-card.invalid input{background:#2d0a0a;color:#fca5a5;}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org 进制转换 与 文本 ↔ HEX / 二进制",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/hex.html",
+  "description": "免费在线进制转换 + 文本/字节互转工具：二进制 / 八进制 / 十进制 / 十六进制 即时同步换算，支持有符号 / 无符号 8-64 位整数；UTF-8 文本与 HEX、二进制位串双向桥。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["二进制 / 八进制 / 十进制 / 十六进制 四档同步换算", "8 / 16 / 32 / 64 位 有符号 / 无符号 整数支持", "比特位可视化（1 高亮）", "UTF-8 文本 ↔ HEX 双向桥", "UTF-8 文本 ↔ 二进制位串 双向桥", "0x 前缀 / 空格 / 逗号分隔符可选"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "进制转换 / HEX 桥", "item": "https://hebing.org/hex.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线进行进制转换 / 文本 HEX 互转",
+  "description": "使用 hebing.org 在浏览器本地完成 2/8/10/16 进制同步换算与 UTF-8 文本 ↔ HEX / 二进制双向桥。",
+  "totalTime": "PT15S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "选择模式", "text": "顶部切换「数字进制」「文本 ↔ HEX」或「文本 ↔ Binary」三档。" },
+    { "@type": "HowToStep", "position": 2, "name": "输入数字 / 文本", "text": "在任一进制框输入数字或在文本框粘贴 UTF-8 文本，结果实时同步。" },
+    { "@type": "HowToStep", "position": 3, "name": "调整选项", "text": "数字模式可选位宽（8/16/32/64-bit）与有/无符号；HEX 模式可选 0x 前缀、空格、逗号分隔与大小写。" },
+    { "@type": "HowToStep", "position": 4, "name": "复制结果", "text": "点对应字段右上的「复制」按钮，结果直接进剪贴板。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "为什么我的二进制 11111111 转十进制是 255 而不是 -1？",
+      "acceptedAnswer": { "@type": "Answer", "text": "默认按「无符号」解析，11111111 (8-bit) 即 255。如果你想要二补码下的 -1，把位宽切到 8-bit 并切到「有符号」即可看到 -1。位宽超出范围时输入框会变红提示。" }
+    },
+    {
+      "@type": "Question",
+      "name": "中文字符在 HEX 模式下是按什么编码转换的？",
+      "acceptedAnswer": { "@type": "Answer", "text": "默认按 UTF-8。例如「中」字会变成 E4 B8 AD（3 字节）。可以在「分隔符」中切换 0x、空格、逗号或紧贴格式，结果按字节顺序输出，方便粘贴到代码里。" }
+    },
+    {
+      "@type": "Question",
+      "name": "HEX 解码遇到非法字符会怎么处理？",
+      "acceptedAnswer": { "@type": "Answer", "text": "工具会自动跳过空格、0x 前缀、逗号、换行等常见分隔符，只识别 0-9 / a-f / A-F。如果剩余字符长度不是偶数或包含非法字符，会在错误栏给出确切位置；UTF-8 解析失败时会回退为「显示替换符 �」并提示。" }
+    },
+    {
+      "@type": "Question",
+      "name": "数据会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有换算都在你的浏览器内完成（BigInt + TextEncoder / TextDecoder），输入内容从不离开你的设备，可放心处理含密钥、Token、协议字段的内容。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">进制转换 / HEX 桥</span></div>
+  <h1 class="page-title" data-i18n="page.h1">进制转换 与 文本 ↔ HEX / 二进制<br><em>三模式</em></h1>
+  <p class="page-sub" data-i18n="page.sub">数字 4 进制同步换算 + UTF-8 文本与字节双向桥，支持 8-64 位有符号/无符号整数、0x 前缀、空格 / 逗号分隔符。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabNum" onclick="setMode('num')" data-i18n="mode.num">🔢 数字进制</button>
+    <button class="mode-tab" id="tabHex" onclick="setMode('hex')" data-i18n="mode.hex">🟧 文本 ↔ HEX</button>
+    <button class="mode-tab" id="tabBin" onclick="setMode('bin')" data-i18n="mode.bin">⚫ 文本 ↔ Binary</button>
+  </div>
+
+  <!-- ─── NUMBER MODE ─── -->
+  <div id="numWrap">
+    <div class="toolbar">
+      <span class="t-group">
+        <span data-i18n="opt.bits">位宽</span>
+        <select id="numBits">
+          <option value="8">8-bit</option>
+          <option value="16">16-bit</option>
+          <option value="32" selected>32-bit</option>
+          <option value="64">64-bit</option>
+        </select>
+      </span>
+      <span class="t-group">
+        <span data-i18n="opt.signed">符号</span>
+        <select id="numSigned">
+          <option value="unsigned" selected data-i18n="opt.unsigned">无符号</option>
+          <option value="signed" data-i18n="opt.signed.s">有符号（二补码）</option>
+        </select>
+      </span>
+      <span class="t-sep"></span>
+      <button class="t-btn secondary" id="btnNumClear" data-i18n="btn.clear">清空</button>
+    </div>
+
+    <div class="num-grid">
+      <div class="num-card" data-base="2">
+        <div class="num-card-head"><span>BIN <em>base 2</em></span><span class="e-meta" id="m2">0 bits</span></div>
+        <input type="text" id="in2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="0 / 1">
+      </div>
+      <div class="num-card" data-base="8">
+        <div class="num-card-head"><span>OCT <em>base 8</em></span><span class="e-meta" id="m8"></span></div>
+        <input type="text" id="in8" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="0-7">
+      </div>
+      <div class="num-card" data-base="10">
+        <div class="num-card-head"><span>DEC <em>base 10</em></span><span class="e-meta" id="m10"></span></div>
+        <input type="text" id="in10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="0-9">
+      </div>
+      <div class="num-card" data-base="16">
+        <div class="num-card-head"><span>HEX <em>base 16</em></span><span class="e-meta" id="m16"></span></div>
+        <input type="text" id="in16" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="0-9 a-f">
+      </div>
+    </div>
+
+    <div class="bits-row" id="bitsRow"><span style="color:var(--gray-400)" data-i18n="bits.hint">输入任一进制后这里会显示比特位</span></div>
+  </div>
+
+  <!-- ─── HEX MODE ─── -->
+  <div id="hexWrap" class="hidden">
+    <div class="toolbar">
+      <span class="t-group">
+        <span data-i18n="opt.sep">分隔符</span>
+        <select id="hexSep">
+          <option value="space" selected data-i18n="opt.sep.space">空格 (E4 B8 AD)</option>
+          <option value="none" data-i18n="opt.sep.none">紧贴 (E4B8AD)</option>
+          <option value="0x" data-i18n="opt.sep.0x">0x 前缀 (0xE4 0xB8 0xAD)</option>
+          <option value="comma" data-i18n="opt.sep.comma">逗号 (E4,B8,AD)</option>
+        </select>
+      </span>
+      <label class="t-check"><input type="checkbox" id="hexUpper" checked><span data-i18n="opt.upper">大写</span></label>
+      <span class="t-sep"></span>
+      <button class="t-btn secondary" id="btnHexSwap" data-i18n="btn.swap">⇅ 交换输入输出</button>
+      <button class="t-btn secondary" id="btnHexClear" data-i18n="btn.clear">清空</button>
+    </div>
+
+    <div class="error-box hidden" id="hexErr"></div>
+
+    <div class="editor-grid">
+      <div class="editor-pane">
+        <div class="editor-head">
+          <span data-i18n="pane.text">文本（UTF-8）</span>
+          <span class="e-meta" id="hexInMeta"></span>
+        </div>
+        <textarea class="editor-area" id="hexTextIn" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="hebing.org 是一个隐私优先的工具箱"></textarea>
+      </div>
+      <div class="editor-pane">
+        <div class="editor-head">
+          <span data-i18n="pane.hex">HEX 字节</span>
+          <span class="e-meta" id="hexOutMeta"></span>
+        </div>
+        <textarea class="editor-area output" id="hexBytesIn" spellcheck="false" placeholder="68 65 62 69 6E 67 …"></textarea>
+      </div>
+    </div>
+
+    <div class="success-line hidden" id="hexOk"></div>
+
+    <div class="toolbar">
+      <button class="t-btn" id="btnTextToHex" data-i18n="btn.text2hex">文本 ▶ HEX</button>
+      <button class="t-btn" id="btnHexToText" data-i18n="btn.hex2text">◀ HEX 转文本</button>
+      <span class="t-sep"></span>
+      <button class="t-btn secondary" id="btnHexCopyText" data-i18n="btn.copy.text">复制文本</button>
+      <button class="t-btn secondary" id="btnHexCopyHex" data-i18n="btn.copy.hex">复制 HEX</button>
+    </div>
+  </div>
+
+  <!-- ─── BINARY MODE ─── -->
+  <div id="binWrap" class="hidden">
+    <div class="toolbar">
+      <span class="t-group">
+        <span data-i18n="opt.binsep">分隔符</span>
+        <select id="binSep">
+          <option value="space" selected data-i18n="opt.binsep.space">每字节空格</option>
+          <option value="none" data-i18n="opt.binsep.none">紧贴</option>
+        </select>
+      </span>
+      <span class="t-sep"></span>
+      <button class="t-btn secondary" id="btnBinSwap" data-i18n="btn.swap">⇅ 交换输入输出</button>
+      <button class="t-btn secondary" id="btnBinClear" data-i18n="btn.clear">清空</button>
+    </div>
+
+    <div class="error-box hidden" id="binErr"></div>
+
+    <div class="editor-grid">
+      <div class="editor-pane">
+        <div class="editor-head">
+          <span data-i18n="pane.text">文本（UTF-8）</span>
+          <span class="e-meta" id="binInMeta"></span>
+        </div>
+        <textarea class="editor-area" id="binTextIn" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="hebing.org 是一个隐私优先的工具箱"></textarea>
+      </div>
+      <div class="editor-pane">
+        <div class="editor-head">
+          <span data-i18n="pane.bin">二进制位串</span>
+          <span class="e-meta" id="binOutMeta"></span>
+        </div>
+        <textarea class="editor-area output" id="binBitsIn" spellcheck="false" placeholder="01101000 01100101 …"></textarea>
+      </div>
+    </div>
+
+    <div class="success-line hidden" id="binOk"></div>
+
+    <div class="toolbar">
+      <button class="t-btn" id="btnTextToBin" data-i18n="btn.text2bin">文本 ▶ Binary</button>
+      <button class="t-btn" id="btnBinToText" data-i18n="btn.bin2text">◀ Binary 转文本</button>
+      <span class="t-sep"></span>
+      <button class="t-btn secondary" id="btnBinCopyText" data-i18n="btn.copy.text">复制文本</button>
+      <button class="t-btn secondary" id="btnBinCopyBin" data-i18n="btn.copy.bin">复制位串</button>
+    </div>
+  </div>
+
+  <div class="subscribe-box" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="常见使用场景" data-en="Common use cases">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🐛</div><div class="scene-title" data-scene-zh="读协议 / 抓包" data-scene-en="Read protocol / packet">读协议 / 抓包</div><div class="scene-desc" data-scene-zh="Wireshark 抓包看到的字节流是 HEX，把它粘进来一键回到 ASCII / UTF-8，HTTP 报文头与 JSON body 立刻可读。" data-scene-en="Hex bytes from Wireshark captures decode straight to ASCII / UTF-8 — HTTP headers and JSON bodies become instantly readable.">Wireshark 抓包看到的字节流是 HEX，把它粘进来一键回到 ASCII / UTF-8，HTTP 报文头与 JSON body 立刻可读。</div></div>
+      <div class="scene-card"><div class="scene-icon">⚙️</div><div class="scene-title" data-scene-zh="嵌入式 / 单片机" data-scene-en="Embedded / MCU">嵌入式 / 单片机</div><div class="scene-desc" data-scene-zh="寄存器位、CAN 报文、I2C 数据，二/十/十六进制来回算很烦，这里同步显示，比特位高亮看哪一位被设置一目了然。" data-scene-en="Register bits, CAN frames, I2C bytes — base conversions sync live and highlighted bits show which flag is set.">寄存器位、CAN 报文、I2C 数据，二/十/十六进制来回算很烦，这里同步显示，比特位高亮看哪一位被设置一目了然。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔐</div><div class="scene-title" data-scene-zh="密钥 / 哈希" data-scene-en="Keys / Hashes">密钥 / 哈希</div><div class="scene-desc" data-scene-zh="把 HEX 形式的密钥转回字符串，或者把密码转 HEX 直接喂给 OpenSSL / Crypto 接口，省去手写脚本。" data-scene-en="Flip hex keys back to strings, or hex-encode passwords for OpenSSL / Crypto APIs — no scripting needed.">把 HEX 形式的密钥转回字符串，或者把密码转 HEX 直接喂给 OpenSSL / Crypto 接口，省去手写脚本。</div></div>
+      <div class="scene-card"><div class="scene-icon">📚</div><div class="scene-title" data-scene-zh="计算机基础学习" data-scene-en="CS fundamentals">计算机基础学习</div><div class="scene-desc" data-scene-zh="二补码、位扩展、进制换算等课堂题目，输入一个数立刻看到 4 种进制 + 比特位可视化，加深直觉。" data-scene-en="Two's complement, bit-width extension, base conversion homework — see all 4 bases + bit visualization in one shot.">二补码、位扩展、进制换算等课堂题目，输入一个数立刻看到 4 种进制 + 比特位可视化，加深直觉。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>负数怎么算</strong>：把符号切到「有符号（二补码）」，输入十进制 -1，HEX 立刻显示 FF（8-bit）/ FFFFFFFF（32-bit）；反过来粘 0xFF 进 HEX 框，DEC 显示为 -1。</li>
+      <li><strong>0x / 0b / 0o 前缀</strong>：HEX 框可粘 0xFF；DEC 框也接受 0x/0b/0o 前缀（自动按 16/2/8 进制读入）。</li>
+      <li><strong>分隔符不挑剔</strong>：HEX 解码会跳过空格、逗号、换行、0x 前缀；位串解码也会自动跳空格。粘贴日志、Wireshark 输出都能直接喂。</li>
+      <li><strong>UTF-8 不损失</strong>：中文「中」=「E4 B8 AD」3 字节，日文 emoji 4 字节，全部走原生 TextEncoder，0 编码差异。</li>
+      <li><strong>位宽溢出会标红</strong>：在 8-bit 框输入 256，输入框会变红提示「超出范围」。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>Negative numbers</strong>: switch sign to "Signed (two's complement)", type DEC −1 → HEX shows FF (8-bit) or FFFFFFFF (32-bit). Pasting 0xFF in HEX with signed-8 shows DEC = −1.</li>
+      <li><strong>0x / 0b / 0o prefixes</strong>: HEX accepts 0x prefix; DEC also accepts 0x / 0b / 0o (parsed as 16/2/8).</li>
+      <li><strong>Forgiving separators</strong>: HEX decode skips spaces, commas, newlines, 0x prefixes. Binary decode also skips whitespace. Paste logs and Wireshark output as-is.</li>
+      <li><strong>Lossless UTF-8</strong>: Chinese "中" = "E4 B8 AD" (3 bytes), emoji = 4 bytes — all via native TextEncoder, zero-loss.</li>
+      <li><strong>Width overflow turns red</strong>: typing 256 in 8-bit highlights the field as out-of-range.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>الأرقام السالبة: بدّل الإشارة إلى "موقَّع (متمم اثنين)"، اكتب DEC -1 ← يعرض HEX FF (8-bit) أو FFFFFFFF (32-bit). لصق 0xFF في HEX مع موقَّع 8 يعرض DEC = -1.</li><li>بادئات 0x / 0b / 0o: يقبل HEX بادئة 0x؛ يقبل DEC أيضاً 0x / 0b / 0o (يُحلَّل كـ 16/2/8).</li><li>فواصل متسامحة: يتخطى فك ترميز HEX المسافات والفواصل والأسطر الجديدة وبادئات 0x. يتخطى فك ترميز Binary أيضاً المسافات. الصق السجلات ومخرجات Wireshark كما هي.</li><li>UTF-8 بدون فقد: '中' الصيني = "E4 B8 AD" (3 بايت)، رمز تعبيري = 4 بايت — كلها عبر TextEncoder الأصلي، صفر فقد.</li><li>فيض العرض يتحول إلى الأحمر: كتابة 256 في 8-bit يبرز الحقل كخارج النطاق.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="为什么我的二进制 11111111 转十进制是 255 而不是 -1？" data-faq-en="Why is binary 11111111 decoded as 255 and not −1?" data-faq-ar="لماذا يُفك ترميز 11111111 الثنائي إلى 255 وليس -1؟">为什么我的二进制 11111111 转十进制是 255 而不是 -1？</div>
+        <div class="faq-a" data-faq-zh="默认按「无符号」解析，11111111 (8-bit) 即 255。如果你想要二补码下的 -1，把位宽切到 8-bit 并切到「有符号」即可看到 -1。位宽超出范围时输入框会变红提示。" data-faq-en="Default mode is unsigned, so 11111111 (8-bit) → 255. To see two's-complement −1, flip width to 8-bit and switch to Signed. Out-of-range inputs turn the field red." data-faq-ar="الوضع الافتراضي هو غير الموقَّع، لذا 11111111 (8-bit) ← 255. لرؤية -1 بمتمم اثنين، بدّل العرض إلى 8-bit وانتقل إلى موقَّع. تتحول الحقول إلى الأحمر للمدخلات خارج النطاق.">默认按「无符号」解析，11111111 (8-bit) 即 255。如果你想要二补码下的 -1，把位宽切到 8-bit 并切到「有符号」即可看到 -1。位宽超出范围时输入框会变红提示。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="中文字符在 HEX 模式下是按什么编码转换的？" data-faq-en="What encoding does HEX mode use for Chinese?" data-faq-ar="ما الترميز المستخدم لوضع HEX مع الصينية؟">中文字符在 HEX 模式下是按什么编码转换的？</div>
+        <div class="faq-a" data-faq-zh="默认按 UTF-8。例如「中」字会变成 E4 B8 AD（3 字节）。可以在「分隔符」中切换 0x、空格、逗号或紧贴格式，结果按字节顺序输出，方便粘贴到代码里。" data-faq-en="UTF-8 by default. '中' → E4 B8 AD (3 bytes). The separator dropdown switches between 0x prefix, space, comma, or no-separator output styles for easy paste into source code." data-faq-ar="UTF-8 افتراضياً. '中' ← E4 B8 AD (3 بايت). تبدّل قائمة الفاصل بين بادئة 0x والمسافة والفاصلة وبدون فاصل لتسهيل اللصق في الكود.">默认按 UTF-8。例如「中」字会变成 E4 B8 AD（3 字节）。可以在「分隔符」中切换 0x、空格、逗号或紧贴格式，结果按字节顺序输出，方便粘贴到代码里。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="HEX 解码遇到非法字符会怎么处理？" data-faq-en="How does HEX decode handle bad chars?" data-faq-ar="كيف يتعامل فك ترميز HEX مع الأحرف غير الصالحة؟">HEX 解码遇到非法字符会怎么处理？</div>
+        <div class="faq-a" data-faq-zh="工具会自动跳过空格、0x 前缀、逗号、换行等常见分隔符，只识别 0-9 / a-f / A-F。如果剩余字符长度不是偶数或包含非法字符，会在错误栏给出确切位置；UTF-8 解析失败时会回退为「显示替换符 �」并提示。" data-faq-en="Whitespace, 0x prefix, comma, and newlines are auto-stripped; only 0-9 / a-f / A-F are kept. Odd-length or invalid characters yield a precise error; broken UTF-8 falls back to � with a note." data-faq-ar="يتم تجريد المسافات وبادئات 0x والفواصل والأسطر الجديدة تلقائياً؛ يُحتفظ فقط بـ 0-9 / a-f / A-F. الطول الفردي أو الأحرف غير الصالحة تنتج خطأً دقيقاً؛ UTF-8 المعطل يعود إلى � مع ملاحظة.">工具会自动跳过空格、0x 前缀、逗号、换行等常见分隔符，只识别 0-9 / a-f / A-F。如果剩余字符长度不是偶数或包含非法字符，会在错误栏给出确切位置；UTF-8 解析失败时会回退为「显示替换符 �」并提示。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are inputs uploaded?" data-faq-ar="هل يتم رفع المدخلات؟">数据会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有换算都在你的浏览器内完成（BigInt + TextEncoder / TextDecoder），输入内容从不离开你的设备，可放心处理含密钥、Token、协议字段的内容。" data-faq-en="No. Everything runs locally (BigInt + TextEncoder / TextDecoder). Input never leaves your device — safe for keys, tokens, protocol fields." data-faq-ar="لا. كل شيء يعمل محلياً (BigInt + TextEncoder / TextDecoder). لا تغادر المدخلات جهازك — آمنة للمفاتيح والرموز وحقول البروتوكول.">不会。所有换算都在你的浏览器内完成（BigInt + TextEncoder / TextDecoder），输入内容从不离开你的设备，可放心处理含密钥、Token、协议字段的内容。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="url-encode.html" class="related-card"><span>%20</span><span data-i18n-related="URL / HTML 编解码|URL / HTML Encode|URL / HTML">URL / HTML 编解码</span></a>
+    <a href="base64.html" class="related-card"><span>⇄</span><span data-i18n-related="Base64 编解码|Base64|Base64">Base64 编解码</span></a>
+    <a href="hash.html" class="related-card"><span>#</span><span data-i18n-related="Hash 计算|Hash|Hash">Hash 计算</span></a>
+    <a href="jwt.html" class="related-card"><span>🔐</span><span data-i18n-related="JWT 解析|JWT Decoder|JWT">JWT 解析</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'进制转换 / HEX 桥','page.h1':'进制转换 与 文本 ↔ HEX / 二进制<br><em>三模式</em>','page.sub':'数字 4 进制同步换算 + UTF-8 文本与字节双向桥，支持 8-64 位有符号/无符号整数、0x 前缀、空格 / 逗号分隔符。所有处理在浏览器本地完成。','mode.num':'🔢 数字进制','mode.hex':'🟧 文本 ↔ HEX','mode.bin':'⚫ 文本 ↔ Binary','opt.bits':'位宽','opt.signed':'符号','opt.unsigned':'无符号','opt.signed.s':'有符号（二补码）','opt.sep':'分隔符','opt.sep.space':'空格 (E4 B8 AD)','opt.sep.none':'紧贴 (E4B8AD)','opt.sep.0x':'0x 前缀 (0xE4 0xB8 0xAD)','opt.sep.comma':'逗号 (E4,B8,AD)','opt.upper':'大写','opt.binsep':'分隔符','opt.binsep.space':'每字节空格','opt.binsep.none':'紧贴','pane.text':'文本（UTF-8）','pane.hex':'HEX 字节','pane.bin':'二进制位串','btn.text2hex':'文本 ▶ HEX','btn.hex2text':'◀ HEX 转文本','btn.text2bin':'文本 ▶ Binary','btn.bin2text':'◀ Binary 转文本','btn.swap':'⇅ 交换输入输出','btn.clear':'清空','btn.copy.text':'复制文本','btn.copy.hex':'复制 HEX','btn.copy.bin':'复制位串','bits.hint':'输入任一进制后这里会显示比特位','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Base / HEX Bridge','page.h1':'Number Bases & Text ↔ HEX / Binary<br><em>three modes</em>','page.sub':'Synchronous 4-base conversion + lossless UTF-8 text/byte bridge. 8-64 bit signed/unsigned integers, 0x prefixes, space / comma separators. All in your browser.','mode.num':'🔢 Number','mode.hex':'🟧 Text ↔ HEX','mode.bin':'⚫ Text ↔ Binary','opt.bits':'Width','opt.signed':'Sign','opt.unsigned':'Unsigned','opt.signed.s':'Signed (two\'s complement)','opt.sep':'Separator','opt.sep.space':'Space (E4 B8 AD)','opt.sep.none':'Tight (E4B8AD)','opt.sep.0x':'0x prefix (0xE4 0xB8 0xAD)','opt.sep.comma':'Comma (E4,B8,AD)','opt.upper':'Uppercase','opt.binsep':'Separator','opt.binsep.space':'Per-byte space','opt.binsep.none':'Tight','pane.text':'Text (UTF-8)','pane.hex':'HEX bytes','pane.bin':'Binary bits','btn.text2hex':'Text ▶ HEX','btn.hex2text':'◀ HEX to Text','btn.text2bin':'Text ▶ Binary','btn.bin2text':'◀ Binary to Text','btn.swap':'⇅ Swap','btn.clear':'Clear','btn.copy.text':'Copy text','btn.copy.hex':'Copy HEX','btn.copy.bin':'Copy bits','bits.hint':'Type a number to see its bits here','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'تحويل الأنظمة / HEX','page.h1':'تحويل الأنظمة و نص ↔ HEX / ثنائي<br><em>ثلاثة أوضاع</em>','page.sub':'تحويل أربعة أنظمة عددية وجسر بين النص (UTF-8) والبايتات. كل المعالجة محلياً في متصفحك.','mode.num':'🔢 رقم','mode.hex':'🟧 نص ↔ HEX','mode.bin':'⚫ نص ↔ ثنائي','opt.bits':'العرض','opt.signed':'الإشارة','opt.unsigned':'بدون إشارة','opt.signed.s':'مع إشارة','opt.sep':'الفاصل','opt.sep.space':'مسافة','opt.sep.none':'متلاصق','opt.sep.0x':'بادئة 0x','opt.sep.comma':'فاصلة','opt.upper':'كبير','opt.binsep':'الفاصل','opt.binsep.space':'مسافة','opt.binsep.none':'متلاصق','pane.text':'نص (UTF-8)','pane.hex':'بايتات HEX','pane.bin':'بتات ثنائية','btn.text2hex':'نص ▶ HEX','btn.hex2text':'◀ HEX إلى نص','btn.text2bin':'نص ▶ ثنائي','btn.bin2text':'◀ ثنائي إلى نص','btn.swap':'⇅ تبديل','btn.clear':'مسح','btn.copy.text':'نسخ النص','btn.copy.hex':'نسخ HEX','btn.copy.bin':'نسخ البتات','bits.hint':'اكتب رقماً ليظهر تمثيله بالبتات','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+let mode = 'num';
+
+function setMode(m){
+  mode = m;
+  ['Num','Hex','Bin'].forEach(x=>{$('tab'+x).classList.toggle('active', m===x.toLowerCase());$(x.toLowerCase()+'Wrap').classList.toggle('hidden', m!==x.toLowerCase());});
+}
+
+// ─────────────────────────── NUMBER MODE ───────────────────────────
+const NUM_INS = { 2:'in2', 8:'in8', 10:'in10', 16:'in16' };
+const NUM_META = { 2:'m2', 8:'m8', 10:'m10', 16:'m16' };
+let numLast = null; // last successfully-parsed BigInt (unsigned canonical)
+
+function widthBig(){ return BigInt($('numBits').value); }
+function isSignedMode(){ return $('numSigned').value === 'signed'; }
+function maxUnsigned(){ return (1n << widthBig()) - 1n; }
+function maxSigned(){ return (1n << (widthBig()-1n)) - 1n; }
+function minSigned(){ return -(1n << (widthBig()-1n)); }
+
+// Parse a value entered in `base` into a canonical UNSIGNED BigInt within current width.
+// Throws on invalid syntax / out-of-range.
+function parseAt(base, s){
+  s = s.trim();
+  if(!s) return null;
+  let neg = false;
+  if(s[0] === '-'){ neg = true; s = s.slice(1); if(!isSignedMode() || base !== 10) throw new Error('only signed-DEC accepts a leading minus'); }
+  // strip 0x/0b/0o for base-10 input convenience
+  if(base === 10){
+    if(/^0x/i.test(s)) return parseAt(16, s.slice(2));
+    if(/^0b/i.test(s)) return parseAt(2,  s.slice(2));
+    if(/^0o/i.test(s)) return parseAt(8,  s.slice(2));
+  }
+  // strip 0x for base-16
+  if(base === 16 && /^0x/i.test(s)) s = s.slice(2);
+  // validate digits
+  const re = base===2?/^[01]+$/:base===8?/^[0-7]+$/:base===10?/^\d+$/:/^[0-9a-fA-F]+$/;
+  if(!re.test(s)) throw new Error(`非法字符 / invalid char in base-${base}`);
+  let v = BigInt('0' + (base===2?'b':base===8?'o':base===16?'x':'') + (base===10?s:s));
+  // Range check (per current width + sign mode)
+  const w = widthBig();
+  if(isSignedMode()){
+    if(neg){
+      if(v > -minSigned()) throw new Error(`超出 ${w}-bit 有符号范围`);
+      // two's-complement encoding of -v
+      v = (1n << w) - v;
+    }else{
+      // For non-DEC bases in signed mode, treat input as raw bit pattern (may already be in 2's-complement form)
+      if(v > maxUnsigned()) throw new Error(`超出 ${w}-bit 范围`);
+    }
+  }else{
+    if(neg) throw new Error('无符号模式不接受负数');
+    if(v > maxUnsigned()) throw new Error(`超出 ${w}-bit 无符号范围`);
+  }
+  return v;
+}
+
+// Render canonical unsigned BigInt v across all 4 bases + bits row.
+function renderNum(v){
+  numLast = v;
+  const w = Number(widthBig());
+  const dispDec = isSignedMode() && (v >> (widthBig()-1n)) === 1n
+    ? (v - (1n << widthBig())).toString()
+    : v.toString();
+  const fields = {
+    2:  v.toString(2),
+    8:  v.toString(8),
+    10: dispDec,
+    16: v.toString(16).toUpperCase()
+  };
+  for(const b of [2,8,10,16]){
+    const el = $(NUM_INS[b]);
+    if(document.activeElement !== el) el.value = fields[b];
+    el.parentElement.classList.remove('invalid');
+  }
+  // Bit string padded to width
+  const padded = v.toString(2).padStart(w, '0');
+  // Group into 8-bit bytes for readability
+  const bytes = [];
+  for(let i=0;i<padded.length;i+=8) bytes.push(padded.slice(i, i+8));
+  const html = bytes.map(byte =>
+    [...byte].map(b => `<span class="bit-${b}">${b}</span>`).join('')
+  ).join(' ');
+  $('bitsRow').innerHTML = `<strong>${w}-bit</strong> ${isSignedMode()?'signed':'unsigned'} · ${html} · <em style="color:var(--gray-400)">DEC ${dispDec}</em>`;
+  // Per-base char meta (length)
+  for(const b of [2,8,10,16]) $(NUM_META[b]).textContent = fields[b].length + ' chars';
+}
+
+function clearNum(){
+  for(const b of [2,8,10,16]){
+    $(NUM_INS[b]).value = '';
+    $(NUM_META[b]).textContent = '';
+    $(NUM_INS[b]).parentElement.classList.remove('invalid');
+  }
+  $('bitsRow').innerHTML = '<span style="color:var(--gray-400)">输入任一进制后这里会显示比特位</span>';
+  numLast = null;
+}
+
+function onNumInput(base){
+  const el = $(NUM_INS[base]);
+  const raw = el.value;
+  if(!raw.trim()){
+    // blank → clear other fields too
+    for(const b of [2,8,10,16]) if(b!==base){ $(NUM_INS[b]).value=''; $(NUM_META[b]).textContent=''; }
+    $('bitsRow').innerHTML='<span style="color:var(--gray-400)">输入任一进制后这里会显示比特位</span>';
+    el.parentElement.classList.remove('invalid');
+    return;
+  }
+  try{
+    const v = parseAt(base, raw);
+    if(v === null) return;
+    renderNum(v);
+  }catch(e){
+    el.parentElement.classList.add('invalid');
+    $('bitsRow').innerHTML = `<span style="color:#b91c1c">⚠ ${e.message}</span>`;
+  }
+}
+
+[2,8,10,16].forEach(b => $(NUM_INS[b]).addEventListener('input', () => onNumInput(b)));
+['numBits','numSigned'].forEach(id => $(id).addEventListener('change', () => {
+  // re-render from numLast if still in range, else clear
+  if(numLast === null) return;
+  try{
+    if(numLast > maxUnsigned()){ clearNum(); return; }
+    renderNum(numLast);
+  }catch(_){ clearNum(); }
+}));
+$('btnNumClear').onclick = clearNum;
+
+// ─────────────────────────── HEX MODE ───────────────────────────
+const enc = new TextEncoder(), dec = new TextDecoder('utf-8', { fatal: false });
+
+function bytesToHex(bytes){
+  const sep = $('hexSep').value, upper = $('hexUpper').checked;
+  const parts = Array.from(bytes, b => b.toString(16).padStart(2,'0'));
+  const cased = upper ? parts.map(p=>p.toUpperCase()) : parts;
+  if(sep === 'none')  return cased.join('');
+  if(sep === 'space') return cased.join(' ');
+  if(sep === 'comma') return cased.join(',');
+  if(sep === '0x')    return cased.map(p => '0x'+p).join(' ');
+  return cased.join(' ');
+}
+function hexToBytes(s){
+  // strip 0x prefixes, then strip non-hex
+  let cleaned = s.replace(/0[xX]/g, '').replace(/[^0-9a-fA-F]/g, '');
+  if(cleaned.length === 0) return new Uint8Array(0);
+  if(cleaned.length % 2 !== 0) throw new Error(`HEX 长度不是偶数（${cleaned.length} chars after strip）`);
+  const out = new Uint8Array(cleaned.length / 2);
+  for(let i=0;i<out.length;i++) out[i] = parseInt(cleaned.substr(i*2, 2), 16);
+  return out;
+}
+
+function textToHex(){
+  const src = $('hexTextIn').value;
+  $('hexErr').classList.add('hidden');
+  if(!src){ $('hexBytesIn').value=''; updHexMeta(); return; }
+  const bytes = enc.encode(src);
+  $('hexBytesIn').value = bytesToHex(bytes);
+  updHexMeta();
+  showHexOk(`✓ ${src.length} chars → ${bytes.length} bytes`);
+}
+function hexToText(){
+  $('hexErr').classList.add('hidden');
+  try{
+    const bytes = hexToBytes($('hexBytesIn').value);
+    if(bytes.length === 0){ $('hexTextIn').value=''; updHexMeta(); return; }
+    const txt = new TextDecoder('utf-8',{fatal:false}).decode(bytes);
+    $('hexTextIn').value = txt;
+    updHexMeta();
+    showHexOk(`✓ ${bytes.length} bytes → ${txt.length} chars`);
+  }catch(e){ $('hexErr').textContent = '错误：' + e.message; $('hexErr').classList.remove('hidden'); }
+}
+function updHexMeta(){
+  $('hexInMeta').textContent  = $('hexTextIn').value  ? `${$('hexTextIn').value.length} chars` : '';
+  const hb = $('hexBytesIn').value;
+  let n = 0; try{ n = hexToBytes(hb).length; }catch(_){ n = -1; }
+  $('hexOutMeta').textContent = hb ? (n>=0?`${n} bytes`:'invalid') : '';
+}
+function showHexOk(msg){ $('hexOk').textContent = msg; $('hexOk').classList.remove('hidden'); $('hexErr').classList.add('hidden'); }
+
+$('hexTextIn').addEventListener('input', textToHex);
+$('hexBytesIn').addEventListener('input', () => { updHexMeta(); });
+['hexSep','hexUpper'].forEach(id => $(id).addEventListener('change', textToHex));
+$('btnTextToHex').onclick = textToHex;
+$('btnHexToText').onclick = hexToText;
+$('btnHexClear').onclick = () => { $('hexTextIn').value=''; $('hexBytesIn').value=''; $('hexErr').classList.add('hidden'); $('hexOk').classList.add('hidden'); updHexMeta(); };
+$('btnHexSwap').onclick = () => {
+  // swap = take HEX, decode to text, put in text pane (and vice versa drives via input listener)
+  hexToText();
+};
+$('btnHexCopyText').onclick = () => copyText($('hexTextIn').value, 'hex');
+$('btnHexCopyHex').onclick  = () => copyText($('hexBytesIn').value, 'hex');
+
+// ─────────────────────────── BINARY MODE ───────────────────────────
+function bytesToBin(bytes){
+  const sep = $('binSep').value === 'space' ? ' ' : '';
+  return Array.from(bytes, b => b.toString(2).padStart(8,'0')).join(sep);
+}
+function binToBytes(s){
+  const cleaned = s.replace(/[^01]/g, '');
+  if(cleaned.length === 0) return new Uint8Array(0);
+  if(cleaned.length % 8 !== 0) throw new Error(`Binary 长度不是 8 的倍数（${cleaned.length} bits after strip）`);
+  const n = cleaned.length / 8;
+  const out = new Uint8Array(n);
+  for(let i=0;i<n;i++) out[i] = parseInt(cleaned.substr(i*8, 8), 2);
+  return out;
+}
+
+function textToBin(){
+  const src = $('binTextIn').value;
+  $('binErr').classList.add('hidden');
+  if(!src){ $('binBitsIn').value=''; updBinMeta(); return; }
+  const bytes = enc.encode(src);
+  $('binBitsIn').value = bytesToBin(bytes);
+  updBinMeta();
+  showBinOk(`✓ ${src.length} chars → ${bytes.length} bytes (${bytes.length*8} bits)`);
+}
+function binToText(){
+  $('binErr').classList.add('hidden');
+  try{
+    const bytes = binToBytes($('binBitsIn').value);
+    if(bytes.length === 0){ $('binTextIn').value=''; updBinMeta(); return; }
+    const txt = new TextDecoder('utf-8',{fatal:false}).decode(bytes);
+    $('binTextIn').value = txt;
+    updBinMeta();
+    showBinOk(`✓ ${bytes.length*8} bits → ${txt.length} chars`);
+  }catch(e){ $('binErr').textContent = '错误：' + e.message; $('binErr').classList.remove('hidden'); }
+}
+function updBinMeta(){
+  $('binInMeta').textContent  = $('binTextIn').value  ? `${$('binTextIn').value.length} chars` : '';
+  const bb = $('binBitsIn').value;
+  let n = 0; try{ n = binToBytes(bb).length; }catch(_){ n = -1; }
+  $('binOutMeta').textContent = bb ? (n>=0?`${n} bytes`:'invalid') : '';
+}
+function showBinOk(msg){ $('binOk').textContent = msg; $('binOk').classList.remove('hidden'); $('binErr').classList.add('hidden'); }
+
+$('binTextIn').addEventListener('input', textToBin);
+$('binBitsIn').addEventListener('input', () => { updBinMeta(); });
+$('binSep').addEventListener('change', textToBin);
+$('btnTextToBin').onclick = textToBin;
+$('btnBinToText').onclick = binToText;
+$('btnBinClear').onclick = () => { $('binTextIn').value=''; $('binBitsIn').value=''; $('binErr').classList.add('hidden'); $('binOk').classList.add('hidden'); updBinMeta(); };
+$('btnBinSwap').onclick = binToText;
+$('btnBinCopyText').onclick = () => copyText($('binTextIn').value, 'bin');
+$('btnBinCopyBin').onclick  = () => copyText($('binBitsIn').value, 'bin');
+
+// ─────────────────────────── shared ───────────────────────────
+async function copyText(text, scope){
+  if(!text) return;
+  try{ await navigator.clipboard.writeText(text); if(scope==='hex') showHexOk('已复制 ✓'); else if(scope==='bin') showBinOk('已复制 ✓'); }
+  catch(_){ }
+}
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

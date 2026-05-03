@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF 合并完整指南：从基础操作到企业级批量处理的 7 种场景 ｜ hebing.org 博客</title>
+<meta name="description" content="PDF 合并不只是把几个文件拼起来。本文系统梳理桌面端、命令行、在线工具三种路径，针对 7 种典型场景给出最佳实践。中文/English/العربية 三语版本。">
+<meta name="keywords" content="PDF合并,PDF合并教程,在线PDF合并,PDF合并软件,批量合并PDF,PDF merge guide">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<link rel="alternate" hreflang="zh-CN" href="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta property="og:title" content="The Complete PDF Merge Guide: 7 Scenarios">
+<meta property="og:description" content="Desktop, command-line, and online tool approaches with best practices.">
+<meta property="og:url" content="https://hebing.org/blog/pdf-merge-complete-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "PDF 合并完整指南：从基础操作到企业级批量处理的 7 种场景",
+  "author": { "@type": "Organization", "name": "hebing.org" },
+  "publisher": { "@type": "Organization", "name": "hebing.org", "logo": { "@type": "ImageObject", "url": "https://hebing.org/og-image.png" }},
+  "datePublished": "2026-04-15","dateModified": "2026-04-15",
+  "mainEntityOfPage": "https://hebing.org/blog/pdf-merge-complete-guide.html",
+  "image": "https://hebing.org/og-image.png","inLanguage": ["zh-CN","en","ar"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hebing.org/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "PDF Merge Guide", "item": "https://hebing.org/blog/pdf-merge-complete-guide.html" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="post.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a href="/" class="nav-logo">he<span>bing</span>.org</a>
+  <div style="display:flex;gap:18px;align-items:center">
+    <a href="/blog/" class="nav-back" id="navBack">← 所有文章</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</div></nav>
+
+<article class="container post-wrap">
+  <div class="post-tag" id="postTag">PDF 处理 · 深度教程</div>
+  <h1 class="post-h1" id="postH1">PDF 合并完整指南：从基础操作到企业级批量处理的 7 种场景</h1>
+  <div class="post-meta" id="postMeta"><span>2026-04-15</span><span class="dot">约 12 分钟阅读</span></div>
+
+  <!-- 中文 -->
+  <div class="zh-content active">
+    <div class="post-content">
+    <p>"把几个 PDF 拼成一个"听起来像一分钟就能解决的小事，但当你真的需要每月处理 200 份发票、整理一份带书签的招标书、或者把 50 个学生的作业合并成一份带目录的总文档时，工具的选择就会直接决定你是花 3 分钟还是 3 小时。</p>
+    <p>过去三年我们维护一个免费的在线文件工具站，看到用户提的问题里 PDF 合并占了将近三成。这篇文章把我们整理出来的 7 种典型场景、3 类工具方案、以及大家最常踩的坑，一次性讲清楚。</p>
+
+    <h2>一、PDF 合并的本质：不是"粘贴"而是"重建"</h2>
+    <p>很多人以为 PDF 合并就像把几张纸订在一起，但 PDF 文件内部其实是一个由对象（Object）组成的引用图：每一页引用字体、图片、注释、超链接等资源。合并两个 PDF 时，工具需要做的是：</p>
+    <ul>
+      <li>把所有资源对象重新编号（避免 ID 冲突）；</li>
+      <li>把每一页的引用关系指向新的对象 ID；</li>
+      <li>合并交叉引用表（xref table）和文档目录；</li>
+      <li>视情况重新计算书签、超链接、表单字段的页面索引。</li>
+    </ul>
+    <p>这意味着合并后的文件 <strong>不一定等于</strong> 输入文件大小之和——重复的字体子集会被去重，未引用的资源会被丢弃，而损坏的 xref 表则会让整个合并失败。</p>
+
+    <h2>二、三类工具方案的硬性对比</h2>
+    <table>
+      <thead><tr><th>维度</th><th>桌面软件</th><th>命令行</th><th>浏览器在线工具</th></tr></thead>
+      <tbody>
+        <tr><td>安装成本</td><td>下载+注册</td><td>配环境</td><td>打开网页即用</td></tr>
+        <tr><td>处理速度</td><td>快</td><td>极快</td><td>取决于浏览器</td></tr>
+        <tr><td>批量能力</td><td>一般</td><td>极强</td><td>取决于实现</td></tr>
+        <tr><td>隐私安全</td><td>本地处理</td><td>本地处理</td><td>本地或上传</td></tr>
+      </tbody>
+    </table>
+    <p>"在线工具"分两种：浏览器内本地处理 vs 上传到服务器。判断方法：合上笔记本断网再试一次，如果还能用就是本地处理。</p>
+
+    <a href="/merge-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">免费在线 PDF 合并工具</div>
+        <div class="tool-cta-sub">浏览器本地处理，文件不上传，无大小限制</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>三、7 种典型场景与对应方案</h2>
+    <h3>场景 1：学生合并课件、作业、笔记</h3>
+    <p>典型需求：把一学期 16 周的讲义和作业合并成一份期末复习册。文件 20-50 个，单个 1-5MB。<strong>推荐</strong>：浏览器在线工具。提前给文件改名为 <code>01_第一周.pdf</code> 这样的格式可以避免人工排序。</p>
+
+    <h3>场景 2：律师合并案卷、证据材料</h3>
+    <p>典型需求：把诉状、证据、判决书合并成完整案卷，要求保留页眉页脚、自动页码、生成书签目录。<strong>推荐</strong>：桌面端 Acrobat Pro。案卷文件高度敏感，绝不能上传到任何在线工具。</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ 安全提醒</div>
+      <p>涉及隐私的法律、医疗、财务文件，永远不要上传到不明来源的"免费在线工具"。哪怕对方声称"24 小时自动删除"，文件在传输和处理过程中仍可能被截留。</p>
+    </div>
+
+    <h3>场景 3：会计合并发票、报销单</h3>
+    <p>50 张以下用浏览器在线工具最快；50 张以上推荐写一段命令行脚本（pdftk 一行命令搞定），并嵌入到月度财务自动化流程里。</p>
+
+    <h3>场景 4：HR 合并候选人简历</h3>
+    <p>浏览器在线工具 + 简单的命名规范。在合并前给每份简历加上候选人姓名前缀，合并后面试官能直接通过书签栏快速跳转。</p>
+
+    <h3>场景 5：研究人员合并扫描的文献</h3>
+    <p>先合并、再压缩。合并工具的目标是保留原始数据，压缩是另一个独立步骤。直接尝试"边合并边压缩"的工具往往效果不可控。</p>
+
+    <h3>场景 6：开发者批量处理项目文档</h3>
+    <p>必须用命令行工具。<code>qpdf --empty --pages a.pdf b.pdf c.pdf -- merged.pdf</code> 一行命令解决，可直接嵌入 Makefile 或 GitHub Actions。</p>
+
+    <h3>场景 7：跨境团队合并合同、提案</h3>
+    <p>浏览器本地处理工具，因为合同涉密、销售人员通常不想装专业软件。优先选支持中英文字体的工具。</p>
+
+    <h2>四、合并 PDF 时最容易踩的 6 个坑</h2>
+    <ol>
+      <li><strong>加密 PDF 不能直接合并</strong>——必须先解密；</li>
+      <li><strong>表单字段会冲突</strong>——同名字段合并后会同步内容；</li>
+      <li><strong>书签可能错位</strong>——某些工具会丢失"命名目标"跳转；</li>
+      <li><strong>文件大小可能变大</strong>——字体重复嵌入导致；</li>
+      <li><strong>扫描件方向不一致</strong>——合并前批量统一旋转；</li>
+      <li><strong>页码连续性</strong>——原文档页码会让读者困惑，需要重新注入。</li>
+    </ol>
+
+    <h2>五、命令行高手专享：qpdf 技巧</h2>
+    <h3>合并指定页码范围</h3>
+    <pre>qpdf --empty --pages a.pdf 1-5 b.pdf 3-7 -- output.pdf</pre>
+
+    <h3>批量合并目录下所有 PDF</h3>
+    <pre>qpdf --empty --pages $(ls *.pdf | sort) -- merged.pdf</pre>
+
+    <h3>合并并线性化（优化网络打开）</h3>
+    <pre>qpdf --linearize --empty --pages *.pdf -- output.pdf</pre>
+
+    <h2>六、关于 hebing.org 的 PDF 合并工具</h2>
+    <p>我们的 <a href="/merge-pdf.html">PDF 合并工具</a> 完全运行在浏览器内，使用开源的 pdf-lib 库在客户端完成合并。文件不上传，没有大小限制，免费，无需注册。</p>
+
+    <h2>结语</h2>
+    <p>PDF 合并是个被严重低估的工作场景——看似简单，但场景千差万别。希望这篇文章能帮你下次合并时少走几步弯路。问题或建议邮件：<a href="mailto:hello@hebing.org">hello@hebing.org</a>。</p>
+
+    <div class="related-posts">
+      <div class="related-title" id="relatedTitleZh">相关文章</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>Word 与 PDF 互转的 12 个隐藏陷阱</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>浏览器本地处理 vs 云端在线工具</strong></a>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- English -->
+  <div class="en-content">
+    <div class="post-content">
+    <p>"Combine a few PDFs into one" sounds like a one-minute task, but when you actually need to process 200 invoices monthly, organize a bookmarked tender document, or merge 50 student assignments into one document with a table of contents, your tool choice directly determines whether it takes 3 minutes or 3 hours.</p>
+    <p>Over three years of running a free online file toolkit, we found PDF merging accounts for nearly a third of user questions. This article covers 7 typical scenarios, 3 types of tool approaches, and the most common pitfalls.</p>
+
+    <h2>1. The Nature of PDF Merging: Not "Pasting" but "Rebuilding"</h2>
+    <p>Many think PDF merging is like stapling pages together, but a PDF file is actually a reference graph of objects: each page references fonts, images, annotations, hyperlinks. When merging two PDFs, the tool must:</p>
+    <ul>
+      <li>Renumber all resource objects (to avoid ID conflicts);</li>
+      <li>Update each page's references to point to the new object IDs;</li>
+      <li>Merge the cross-reference table (xref) and document catalog;</li>
+      <li>Recalculate page indexes for bookmarks, hyperlinks, and form fields.</li>
+    </ul>
+    <p>This means the merged file <strong>does not necessarily equal</strong> the sum of input file sizes — duplicate font subsets are deduplicated, unreferenced resources are dropped, and a corrupted xref table can fail the entire merge.</p>
+
+    <h2>2. Hard Comparison of Three Tool Approaches</h2>
+    <table>
+      <thead><tr><th>Dimension</th><th>Desktop</th><th>CLI</th><th>Browser Online</th></tr></thead>
+      <tbody>
+        <tr><td>Setup cost</td><td>Download+register</td><td>Config env</td><td>Open page</td></tr>
+        <tr><td>Speed</td><td>Fast</td><td>Very fast</td><td>Browser-dependent</td></tr>
+        <tr><td>Batch ability</td><td>Average</td><td>Excellent</td><td>Implementation-dependent</td></tr>
+        <tr><td>Privacy</td><td>Local</td><td>Local</td><td>Local or uploaded</td></tr>
+      </tbody>
+    </table>
+    <p>"Online tools" come in two forms: browser-local processing vs server upload. Test method: disconnect from the internet and try again — if it still works, it's local.</p>
+
+    <a href="/merge-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">Free Online PDF Merge Tool</div>
+        <div class="tool-cta-sub">Browser-local processing, no uploads, no size limits</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2>3. Seven Typical Scenarios</h2>
+    <h3>Scenario 1: Students merging slides and assignments</h3>
+    <p>Typical: Combine 16 weeks of lectures into one final review packet. Files 20-50, each 1-5MB. <strong>Recommended</strong>: Browser online tool. Pre-rename files like <code>01_week.pdf</code> to avoid manual sorting.</p>
+
+    <h3>Scenario 2: Lawyers merging case files</h3>
+    <p>Typical: Combine pleadings, evidence, and judgments into a complete case file with headers, automatic page numbers, and bookmark TOC. <strong>Recommended</strong>: Desktop Acrobat Pro. Case files are highly sensitive — never upload to any online tool.</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ Security Note</div>
+      <p>Never upload legal, medical, or financial files to unknown "free online tools." Even claims of "auto-delete in 24 hours" can't prevent interception during transfer or processing.</p>
+    </div>
+
+    <h3>Scenario 3: Accountants merging invoices</h3>
+    <p>Under 50 files: browser tool. Over 50: write a CLI script (pdftk one-liner) and embed in monthly finance automation.</p>
+
+    <h3>Scenario 4: HR merging candidate resumes</h3>
+    <p>Browser online tool + simple naming. Add candidate name prefix to each resume so interviewers can use the bookmark sidebar to jump quickly.</p>
+
+    <h3>Scenario 5: Researchers merging scanned literature</h3>
+    <p>Merge first, then compress. Merge tools aim to preserve original data; compression is a separate step. "Merge-and-compress" tools rarely give controllable results.</p>
+
+    <h3>Scenario 6: Developers handling project docs in CI/CD</h3>
+    <p>Use CLI tools. <code>qpdf --empty --pages a.pdf b.pdf c.pdf -- merged.pdf</code> in one line, embed in Makefile or GitHub Actions.</p>
+
+    <h3>Scenario 7: Cross-border teams merging contracts</h3>
+    <p>Browser-local tools. Contracts are confidential and salespeople rarely want to install professional software. Prefer tools supporting Chinese/English fonts.</p>
+
+    <h2>4. Six Common Pitfalls</h2>
+    <ol>
+      <li><strong>Encrypted PDFs can't be merged directly</strong> — decrypt first;</li>
+      <li><strong>Form fields conflict</strong> — same-named fields sync content after merging;</li>
+      <li><strong>Bookmarks may break</strong> — some tools lose "named destination" jumps;</li>
+      <li><strong>File size may grow</strong> — duplicate font embedding;</li>
+      <li><strong>Inconsistent scan orientation</strong> — batch-rotate before merging;</li>
+      <li><strong>Page numbering continuity</strong> — original page numbers confuse readers; reinject.</li>
+    </ol>
+
+    <h2>5. CLI Power User: qpdf Tips</h2>
+    <h3>Merge specific page ranges</h3>
+    <pre>qpdf --empty --pages a.pdf 1-5 b.pdf 3-7 -- output.pdf</pre>
+
+    <h3>Batch merge a directory</h3>
+    <pre>qpdf --empty --pages $(ls *.pdf | sort) -- merged.pdf</pre>
+
+    <h3>Merge and linearize (web-fast view)</h3>
+    <pre>qpdf --linearize --empty --pages *.pdf -- output.pdf</pre>
+
+    <h2>6. About hebing.org's PDF Merge Tool</h2>
+    <p>Our <a href="/merge-pdf.html">PDF merge tool</a> runs entirely in your browser using the open-source pdf-lib. No uploads, no size limits, free, no signup required.</p>
+
+    <h2>Conclusion</h2>
+    <p>PDF merging is a seriously underestimated workflow — looks simple, but scenarios vary widely. Hope this helps you save some detours next time. Questions: <a href="mailto:hello@hebing.org">hello@hebing.org</a>.</p>
+
+    <div class="related-posts">
+      <div class="related-title">Related Posts</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>12 Hidden Pitfalls When Converting Word ↔ PDF</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>Browser-Local vs Cloud Online Tools</strong></a>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- العربية -->
+  <div class="ar-content">
+    <div class="post-content">
+    <p>"دمج عدة ملفات PDF في ملف واحد" يبدو مهمة دقيقة واحدة، لكن عند الحاجة لمعالجة 200 فاتورة شهرياً، أو تنظيم وثيقة مناقصة بإشارات مرجعية، أو دمج 50 واجباً طلابياً في وثيقة واحدة بجدول محتويات، فإن اختيار الأداة يحدد ما إذا كان الأمر يستغرق 3 دقائق أم 3 ساعات.</p>
+    <p>على مدى ثلاث سنوات من إدارة مجموعة أدوات ملفات مجانية عبر الإنترنت، وجدنا أن دمج PDF يمثل ما يقرب من ثلث أسئلة المستخدمين. يغطي هذا المقال 7 سيناريوهات نموذجية، 3 أنواع من الأدوات، والأخطاء الأكثر شيوعاً.</p>
+
+    <h2>1. طبيعة دمج PDF: ليس "لصقاً" بل "إعادة بناء"</h2>
+    <p>يعتقد كثيرون أن دمج PDF كتدبيس صفحات معاً، لكن ملف PDF داخلياً هو رسم مرجعي للكائنات: كل صفحة تشير إلى الخطوط، الصور، التعليقات، الروابط. عند دمج ملفي PDF، يجب على الأداة:</p>
+    <ul>
+      <li>إعادة ترقيم جميع كائنات الموارد (لتجنب تعارض المعرفات)؛</li>
+      <li>تحديث مراجع كل صفحة لتشير إلى المعرفات الجديدة؛</li>
+      <li>دمج جدول المراجع المتقاطعة (xref) وفهرس الوثيقة؛</li>
+      <li>إعادة حساب فهارس الصفحات للإشارات والروابط وحقول النماذج.</li>
+    </ul>
+
+    <h2>2. مقارنة صارمة لثلاثة أساليب</h2>
+    <table>
+      <thead><tr><th>البعد</th><th>سطح المكتب</th><th>سطر الأوامر</th><th>متصفح عبر الإنترنت</th></tr></thead>
+      <tbody>
+        <tr><td>تكلفة الإعداد</td><td>تنزيل+تسجيل</td><td>إعداد بيئة</td><td>افتح صفحة</td></tr>
+        <tr><td>السرعة</td><td>سريع</td><td>سريع جداً</td><td>يعتمد على المتصفح</td></tr>
+        <tr><td>القدرة المجمعة</td><td>متوسطة</td><td>ممتازة</td><td>تعتمد على التنفيذ</td></tr>
+        <tr><td>الخصوصية</td><td>محلي</td><td>محلي</td><td>محلي أو مرفوع</td></tr>
+      </tbody>
+    </table>
+    <p>"الأدوات عبر الإنترنت" نوعان: معالجة محلية في المتصفح أو رفع إلى خادم. اختبار: افصل الإنترنت وحاول مرة أخرى — إذا لا يزال يعمل، فهو محلي.</p>
+
+    <a href="/merge-pdf.html" class="tool-cta">
+      <div class="tool-cta-icon">📄</div>
+      <div class="tool-cta-text">
+        <div class="tool-cta-title">أداة دمج PDF مجانية عبر الإنترنت</div>
+        <div class="tool-cta-sub">معالجة محلية في المتصفح، بدون رفع، بدون حدود حجم</div>
+      </div>
+      <div class="tool-cta-arrow">←</div>
+    </a>
+
+    <h2>3. سبعة سيناريوهات نموذجية</h2>
+    <h3>السيناريو 1: الطلاب يدمجون الشرائح والواجبات</h3>
+    <p>نموذجي: دمج 16 أسبوعاً من المحاضرات في حزمة مراجعة نهائية. ملفات 20-50، كل منها 1-5MB. <strong>موصى به</strong>: أداة المتصفح. أعد تسمية الملفات مسبقاً مثل <code>01_week.pdf</code> لتجنب الفرز اليدوي.</p>
+
+    <h3>السيناريو 2: المحامون يدمجون ملفات القضايا</h3>
+    <p>نموذجي: دمج المرافعات والأدلة والأحكام في ملف قضية كامل برؤوس وأرقام صفحات تلقائية وفهرس إشارات. <strong>موصى به</strong>: Acrobat Pro. ملفات القضايا حساسة جداً — لا ترفعها أبداً إلى أي أداة عبر الإنترنت.</p>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ ملاحظة أمنية</div>
+      <p>لا ترفع أبداً الملفات القانونية أو الطبية أو المالية إلى "أدوات مجانية عبر الإنترنت" مجهولة المصدر. حتى ادعاءات "الحذف التلقائي خلال 24 ساعة" لا يمكنها منع الاعتراض أثناء النقل أو المعالجة.</p>
+    </div>
+
+    <h3>السيناريو 3: المحاسبون يدمجون الفواتير</h3>
+    <p>أقل من 50 ملف: أداة المتصفح. أكثر من 50: اكتب نص CLI (سطر pdftk واحد) واضمنه في أتمتة المالية الشهرية.</p>
+
+    <h3>السيناريو 4: الموارد البشرية تدمج السير الذاتية</h3>
+    <p>أداة المتصفح + تسمية بسيطة. أضف بادئة اسم المرشح إلى كل سيرة ذاتية حتى يتمكن المحاورون من القفز السريع باستخدام شريط الإشارات.</p>
+
+    <h3>السيناريو 5: الباحثون يدمجون الأدبيات الممسوحة</h3>
+    <p>ادمج أولاً، ثم اضغط. تهدف أدوات الدمج إلى الحفاظ على البيانات الأصلية؛ الضغط خطوة منفصلة.</p>
+
+    <h3>السيناريو 6: المطورون في CI/CD</h3>
+    <p>استخدم أدوات سطر الأوامر. <code>qpdf --empty --pages a.pdf b.pdf c.pdf -- merged.pdf</code> في سطر واحد.</p>
+
+    <h3>السيناريو 7: فرق عابرة للحدود تدمج العقود</h3>
+    <p>أدوات محلية في المتصفح. العقود سرية والمندوبون نادراً ما يريدون تثبيت برامج احترافية.</p>
+
+    <h2>4. ست عثرات شائعة</h2>
+    <ol>
+      <li><strong>لا يمكن دمج PDFs المشفرة مباشرة</strong> — فك التشفير أولاً؛</li>
+      <li><strong>تتعارض حقول النماذج</strong> — الحقول بنفس الاسم تتزامن بعد الدمج؛</li>
+      <li><strong>قد تنكسر الإشارات</strong> — بعض الأدوات تفقد قفزات "الوجهة المسماة"؛</li>
+      <li><strong>قد يزداد حجم الملف</strong> — تضمين الخطوط المكرر؛</li>
+      <li><strong>اتجاه المسح الضوئي غير متسق</strong> — التدوير قبل الدمج؛</li>
+      <li><strong>استمرارية ترقيم الصفحات</strong> — أرقام الصفحات الأصلية تربك القراء.</li>
+    </ol>
+
+    <h2>5. للمستخدم المتقدم: نصائح qpdf</h2>
+    <h3>دمج نطاقات صفحات محددة</h3>
+    <pre>qpdf --empty --pages a.pdf 1-5 b.pdf 3-7 -- output.pdf</pre>
+
+    <h3>دمج دفعة كاملة لدليل</h3>
+    <pre>qpdf --empty --pages $(ls *.pdf | sort) -- merged.pdf</pre>
+
+    <h3>دمج وتخطيط (عرض ويب سريع)</h3>
+    <pre>qpdf --linearize --empty --pages *.pdf -- output.pdf</pre>
+
+    <h2>6. حول أداة دمج PDF في hebing.org</h2>
+    <p>تعمل <a href="/merge-pdf.html">أداة دمج PDF</a> الخاصة بنا بالكامل في متصفحك باستخدام pdf-lib مفتوح المصدر. لا رفع، لا حدود حجم، مجاني، بدون تسجيل.</p>
+
+    <h2>الخاتمة</h2>
+    <p>دمج PDF سير عمل تم التقليل من شأنه بشكل كبير — يبدو بسيطاً، لكن السيناريوهات تختلف على نطاق واسع. أسئلة: <a href="mailto:hello@hebing.org">hello@hebing.org</a>.</p>
+
+    <div class="related-posts">
+      <div class="related-title">مقالات ذات صلة</div>
+      <div class="related-list">
+        <a href="word-pdf-conversion-deep-dive.html" class="related-card"><strong>12 فخاً عند التحويل بين Word و PDF</strong></a>
+        <a href="local-vs-cloud-tools.html" class="related-card"><strong>المعالجة المحلية مقابل الأدوات السحابية</strong></a>
+      </div>
+    </div>
+    </div>
+  </div>
+</article>
+
+<footer><div class="container footer-inner">
+  <a href="/" class="footer-logo">he<span>bing</span>.org</a>
+  <div class="footer-links" id="footerLinks"></div>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const META = {
+  zh: { tag:'PDF 处理 · 深度教程', h1:'PDF 合并完整指南：从基础操作到企业级批量处理的 7 种场景', meta:'<span>2026-04-15</span><span class="dot">约 12 分钟阅读</span>', back:'← 所有文章', footer:['首页','关于','博客','联系','条款','隐私'] },
+  en: { tag:'PDF · Deep Tutorial', h1:'The Complete PDF Merge Guide: 7 Scenarios from Basic Use to Enterprise Batch Processing', meta:'<span>2026-04-15</span><span class="dot">12 min read</span>', back:'← All Posts', footer:['Home','About','Blog','Contact','Terms','Privacy'] },
+  ar: { tag:'PDF · دليل متعمق', h1:'الدليل الشامل لدمج PDF: 7 سيناريوهات من الاستخدام الأساسي إلى المعالجة المؤسسية', meta:'<span>2026-04-15</span><span class="dot">12 دقيقة قراءة</span>', back:'→ جميع المقالات', footer:['الرئيسية','حول','المدونة','تواصل','الشروط','الخصوصية'] }
+};
+function setLang(lang){
+  const m = META[lang]; if(!m) return;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang];
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
+  document.querySelector('.' + lang + '-content').classList.add('active');
+  document.getElementById('postTag').textContent = m.tag;
+  document.getElementById('postH1').textContent = m.h1;
+  document.getElementById('postMeta').innerHTML = m.meta;
+  document.getElementById('navBack').textContent = m.back;
+  const links = ['/','/about.html','/blog/','/contact.html','/terms.html','/privacy.html'];
+  document.getElementById('footerLinks').innerHTML = m.footer.map((t,i)=>`<a href="${links[i]}">${t}</a>`).join('');
+  localStorage.setItem('hebing_lang', lang);
+}
+const sl = localStorage.getItem('hebing_lang') || (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+setLang(sl);
+</script>
+</body>
+</html>

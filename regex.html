@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正则表达式测试器 - 免费在线 Regex 调试与替换 | hebing.org</title>
+<meta name="description" content="免费在线正则表达式测试器，实时高亮匹配结果，展示捕获组与命名组，支持 g/i/m/s/u/y 全部 flag，含替换模式、常用模式库与速查表。所有处理在浏览器本地完成，正则与文本不上传服务器。">
+<meta name="keywords" content="正则表达式,regex测试,regex tester,正则在线,正则调试,regex 替换,正则替换,捕获组,命名组,正则速查">
+<link rel="canonical" href="https://hebing.org/regex.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="正则表达式测试器 - 免费在线 Regex 工具 | hebing.org">
+<meta property="og:url" content="https://hebing.org/regex.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/regex.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/regex.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/regex.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--danger:#b91c1c;--danger-bg:#fef2f2;--match-bg:#fef08a;--match-bg-2:#fde68a;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:580px;}
+.tool-wrap{padding:28px 0;}
+.mode-tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;width:fit-content;margin-bottom:14px;}
+.mode-tab{padding:8px 18px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);font-family:var(--font-sans);font-weight:500;}
+.mode-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+
+/* ── PATTERN INPUT ─────────── */
+.pattern-row{display:flex;align-items:stretch;gap:0;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);margin-bottom:10px;}
+.pattern-row:focus-within{border-color:var(--black);}
+.pattern-prefix{display:flex;align-items:center;padding:0 12px;background:var(--gray-100);font-family:var(--font-mono);font-size:18px;color:var(--accent);font-weight:500;border-right:1px solid var(--gray-200);}
+.pattern-input{flex:1;border:none;outline:none;padding:12px 14px;font-family:var(--font-mono);font-size:14px;background:transparent;color:var(--black);min-width:0;}
+.pattern-suffix{display:flex;align-items:center;padding:0 12px;background:var(--gray-100);font-family:var(--font-mono);font-size:18px;color:var(--accent);font-weight:500;border-left:1px solid var(--gray-200);}
+.flags-input{flex:0 0 auto;width:90px;border:none;outline:none;padding:12px 8px 12px 0;font-family:var(--font-mono);font-size:14px;color:var(--accent);background:transparent;}
+
+.flag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center;}
+.flag-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;font-size:11px;font-family:var(--font-mono);background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius);color:var(--gray-600);cursor:pointer;user-select:none;text-transform:lowercase;}
+.flag-chip.active{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.flag-chip code{font-weight:600;font-family:var(--font-mono);}
+.flag-chip .desc{opacity:0.8;}
+
+.preset-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center;}
+.preset-row .lbl{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;align-self:center;margin-right:6px;}
+.preset-btn{padding:5px 10px;font-size:11px;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius);color:var(--gray-600);cursor:pointer;font-family:var(--font-mono);}
+.preset-btn:hover{border-color:var(--black);color:var(--black);background:var(--white);}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:38px;padding:0 16px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-sep{flex:1;}
+
+.error-box{padding:12px 14px;background:var(--danger-bg);border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:var(--danger);margin-bottom:14px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.success-line{font-size:12px;color:var(--success);font-family:var(--font-mono);margin-bottom:14px;}
+.success-line.hidden{display:none;}
+
+.split-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;}
+.editor-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.editor-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.editor-head .e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+
+.test-stage{position:relative;}
+.test-input{width:100%;min-height:200px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:transparent;color:transparent;caret-color:var(--black);resize:vertical;white-space:pre-wrap;word-break:break-word;position:relative;z-index:2;}
+.test-overlay{position:absolute;inset:0;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-word;pointer-events:none;color:var(--black);overflow:hidden;}
+.test-overlay mark{background:var(--match-bg);color:inherit;border-radius:2px;padding:0 1px;box-shadow:0 0 0 1px rgba(0,0,0,0.04);}
+.test-overlay mark.alt{background:var(--match-bg-2);}
+.test-overlay mark.cur{background:var(--accent);color:var(--white);}
+
+.replace-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.replace-row.hidden{display:none;}
+.replace-row label{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;}
+.replace-row input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;font-family:var(--font-mono);}
+.replace-row input:focus{border-color:var(--black);}
+
+.result-pane{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);margin-bottom:16px;}
+.result-pane.hidden{display:none;}
+.result-body{padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-word;color:var(--black);min-height:80px;background:var(--gray-100);}
+.result-body mark{background:var(--match-bg);}
+.result-body.empty{color:var(--gray-400);font-family:var(--font-sans);}
+
+.matches-pane{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);margin-bottom:16px;}
+.matches-pane.hidden{display:none;}
+.matches-body{max-height:360px;overflow:auto;}
+.match-row{padding:10px 14px;border-bottom:1px solid var(--gray-200);font-size:13px;display:flex;flex-direction:column;gap:6px;cursor:pointer;}
+.match-row:last-child{border-bottom:none;}
+.match-row:hover{background:var(--gray-100);}
+.match-row.cur{background:var(--accent-light);}
+.match-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;color:var(--gray-600);}
+.match-idx{padding:1px 7px;background:var(--accent);color:var(--white);border-radius:var(--radius);font-weight:500;}
+.match-pos{color:var(--gray-400);}
+.match-text{font-family:var(--font-mono);font-size:13px;color:var(--black);word-break:break-all;}
+.match-groups{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-family:var(--font-mono);font-size:11px;color:var(--gray-600);margin-top:4px;border-top:1px dashed var(--gray-200);padding-top:6px;}
+.match-groups .gk{color:var(--accent);}
+.match-groups .gv{color:var(--black);word-break:break-all;}
+.match-groups.empty{display:none;}
+
+/* ── CHEATSHEET ──── */
+.cheat-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.cheat-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.cheat-card{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:14px 16px;}
+.cheat-card-title{font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;color:var(--gray-600);margin-bottom:8px;}
+.cheat-list{display:flex;flex-direction:column;gap:5px;}
+.cheat-row{display:flex;gap:10px;font-size:12px;line-height:1.55;}
+.cheat-row code{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:1px 6px;font-family:var(--font-mono);color:var(--accent);font-size:11.5px;flex:0 0 auto;}
+.cheat-row span{color:var(--gray-600);}
+
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;--danger:#fca5a5;--danger-bg:#2d0a0a;--match-bg:#854d0e;--match-bg-2:#a16207;}
+  nav{background:rgba(17,17,16,0.95);}
+  .test-overlay mark{color:#fde68a;}
+  .test-overlay mark.cur{color:var(--white);}
+  .replace-row input,.subscribe-input{background:var(--gray-100);}
+  .scene-card,.faq-item,.cheat-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org 正则表达式测试器",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/regex.html",
+  "description": "免费在线正则表达式测试器，实时高亮匹配结果，展示捕获组与命名捕获组，支持 g/i/m/s/u/y 全部 flag，含替换模式、常用模式库与速查表。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["实时匹配高亮（多色相邻区分）", "捕获组与命名捕获组列表", "替换模式（支持 $1 / $<name> / $$ / $& / $` / $')", "g/i/m/s/u/y 六个 flag 切换", "常用模式库（邮箱 / URL / IPv4 / 中国手机 / 身份证 / 日期）", "ECMAScript 正则速查表"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线测试正则表达式",
+  "description": "使用 hebing.org 在浏览器本地实时测试正则表达式，无需上传任何内容。",
+  "totalTime": "PT10S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "输入正则", "text": "在顶部输入正则表达式与 flag。" },
+    { "@type": "HowToStep", "position": 2, "name": "粘贴测试文本", "text": "在文本框粘贴待测试的字符串，匹配会自动高亮。" },
+    { "@type": "HowToStep", "position": 3, "name": "查看捕获组", "text": "下方匹配列表会逐条展示位置、完整匹配与全部捕获组。" },
+    { "@type": "HowToStep", "position": 4, "name": "切换替换模式（可选）", "text": "切到「替换」模式输入替换字符串预览结果，支持 $1、$<name> 等占位符。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "正则表达式测试器", "item": "https://hebing.org/regex.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "本工具支持哪种正则方言？",
+      "acceptedAnswer": { "@type": "Answer", "text": "ECMAScript（JavaScript 内置 RegExp）方言。这与 V8 / Chrome / Node.js 完全一致，与 Python / PCRE / Java 的方言略有差异（例如不支持 \\A、\\Z、(?P<name>) 等扩展，但支持命名捕获组的 (?<name>...) 形式）。如果你的代码运行在浏览器或 Node.js，本工具的结果就是你代码运行时的真实结果。" }
+    },
+    {
+      "@type": "Question",
+      "name": "为什么有些正则会卡住或报「too long」？",
+      "acceptedAnswer": { "@type": "Answer", "text": "正则可能因「灾难性回溯」在某些输入上指数级卡顿（如 (a+)+b 匹配 'aaaa...x'）。本工具会限制单次匹配不超过 5 万个，并对运行时间设上限，避免浏览器卡死。如果遇到此提示，请检查正则中是否有嵌套量词，必要时改写为占有量词式样或先简化输入。" }
+    },
+    {
+      "@type": "Question",
+      "name": "替换字符串支持哪些占位符？",
+      "acceptedAnswer": { "@type": "Answer", "text": "完整支持 ECMAScript String.prototype.replace 的占位符：$1～$9 或 $99 引用编号捕获组，$<name> 引用命名捕获组（需 u flag），$& 整个匹配，$` 匹配前的内容，$' 匹配后的内容，$$ 表示一个 $ 字面量。" }
+    },
+    {
+      "@type": "Question",
+      "name": "我的正则会被上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。本工具完全在你的浏览器内运行（new RegExp + matchAll + replaceAll），正则与文本从不离开你的设备，可放心粘贴含敏感数据的样本进行调试。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">正则表达式测试器</span></div>
+  <h1 class="page-title" data-i18n="page.h1">正则表达式测试器<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">实时匹配高亮、捕获组与命名组列表、替换模式、常用模式库与速查表。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabMatch" onclick="setMode('match')" data-i18n="mode.match">🔍 匹配</button>
+    <button class="mode-tab" id="tabReplace" onclick="setMode('replace')" data-i18n="mode.replace">↻ 替换</button>
+  </div>
+
+  <div class="pattern-row">
+    <span class="pattern-prefix">/</span>
+    <input class="pattern-input" id="pattern" type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="\b\w+@\w+\.\w+\b" value="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b">
+    <span class="pattern-suffix">/</span>
+    <input class="flags-input" id="flags" type="text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="gi" value="gi">
+  </div>
+
+  <div class="flag-row" id="flagRow">
+    <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;align-self:center;margin-right:6px" data-i18n="flag.label">FLAGS：</span>
+    <button class="flag-chip" data-flag="g" onclick="toggleFlag('g')"><code>g</code> <span class="desc" data-i18n="flag.g">全局</span></button>
+    <button class="flag-chip" data-flag="i" onclick="toggleFlag('i')"><code>i</code> <span class="desc" data-i18n="flag.i">忽略大小写</span></button>
+    <button class="flag-chip" data-flag="m" onclick="toggleFlag('m')"><code>m</code> <span class="desc" data-i18n="flag.m">多行</span></button>
+    <button class="flag-chip" data-flag="s" onclick="toggleFlag('s')"><code>s</code> <span class="desc" data-i18n="flag.s">. 匹配换行</span></button>
+    <button class="flag-chip" data-flag="u" onclick="toggleFlag('u')"><code>u</code> <span class="desc" data-i18n="flag.u">Unicode</span></button>
+    <button class="flag-chip" data-flag="y" onclick="toggleFlag('y')"><code>y</code> <span class="desc" data-i18n="flag.y">粘连</span></button>
+  </div>
+
+  <div class="preset-row">
+    <span class="lbl" data-i18n="preset.label">常用模式：</span>
+    <button class="preset-btn" onclick="applyPreset('email')">Email</button>
+    <button class="preset-btn" onclick="applyPreset('url')">URL</button>
+    <button class="preset-btn" onclick="applyPreset('ipv4')">IPv4</button>
+    <button class="preset-btn" onclick="applyPreset('phoneCN')" data-i18n="preset.phone">中国手机</button>
+    <button class="preset-btn" onclick="applyPreset('idCN')" data-i18n="preset.id">身份证</button>
+    <button class="preset-btn" onclick="applyPreset('date')" data-i18n="preset.date">日期 YYYY-MM-DD</button>
+    <button class="preset-btn" onclick="applyPreset('hex')">Hex 颜色</button>
+    <button class="preset-btn" onclick="applyPreset('num')" data-i18n="preset.num">浮点数</button>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="replace-row hidden" id="replaceRow">
+    <label data-i18n="replace.label">替换为</label>
+    <input type="text" id="replaceInput" placeholder="$1 [$&]" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+
+  <div class="editor-pane">
+    <div class="editor-head">
+      <span data-i18n="pane.test">测试字符串</span>
+      <span class="e-meta" id="testMeta"></span>
+    </div>
+    <div class="test-stage">
+      <textarea class="test-input" id="testInput" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="">联系邮箱: support@hebing.org 与 hello@example.cn
+请勿回复至 noreply@example.com
+错误地址: not-an-email,or@@bad
+联系电话: support@office.io</textarea>
+      <div class="test-overlay" id="testOverlay" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="success-line" id="okLine"></div>
+
+  <div class="result-pane hidden" id="resultPane">
+    <div class="editor-head">
+      <span data-i18n="result.title">替换结果</span>
+      <span class="e-meta" id="resultMeta"></span>
+    </div>
+    <div class="result-body" id="resultBody"></div>
+    <div class="toolbar" style="padding:10px 14px;margin:0;border-top:1px solid var(--gray-200);background:var(--white)">
+      <button class="t-btn secondary" id="btnCopyResult" data-i18n="btn.copy">复制结果</button>
+    </div>
+  </div>
+
+  <div class="matches-pane hidden" id="matchesPane">
+    <div class="editor-head">
+      <span data-i18n="matches.title">匹配列表</span>
+      <span class="e-meta" id="matchesMeta"></span>
+    </div>
+    <div class="matches-body" id="matchesBody"></div>
+  </div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container">
+<div class="cheat-section">
+  <div class="cheat-title" data-zh="速查表（ECMAScript 正则）" data-en="Cheat sheet (ECMAScript regex)">速查表（ECMAScript 正则）</div>
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <div class="cheat-card-title" data-zh="字符类" data-en="Character classes">字符类</div>
+      <div class="cheat-list">
+        <div class="cheat-row"><code>.</code><span data-zh="任意字符（s flag 时含换行）" data-en="any char (newline if s flag)">任意字符（s flag 时含换行）</span></div>
+        <div class="cheat-row"><code>\d</code><span data-zh="数字 [0-9]" data-en="digit [0-9]">数字 [0-9]</span></div>
+        <div class="cheat-row"><code>\D</code><span data-zh="非数字" data-en="non-digit">非数字</span></div>
+        <div class="cheat-row"><code>\w</code><span data-zh="单词字符 [A-Za-z0-9_]" data-en="word char [A-Za-z0-9_]">单词字符 [A-Za-z0-9_]</span></div>
+        <div class="cheat-row"><code>\W</code><span data-zh="非单词字符" data-en="non-word">非单词字符</span></div>
+        <div class="cheat-row"><code>\s</code><span data-zh="空白（空格 / 制表 / 换行）" data-en="whitespace">空白（空格 / 制表 / 换行）</span></div>
+        <div class="cheat-row"><code>\S</code><span data-zh="非空白" data-en="non-whitespace">非空白</span></div>
+        <div class="cheat-row"><code>[abc]</code><span data-zh="集合：a 或 b 或 c" data-en="any of a, b, c">集合：a 或 b 或 c</span></div>
+        <div class="cheat-row"><code>[^abc]</code><span data-zh="排除：非 a/b/c" data-en="not a / b / c">排除：非 a/b/c</span></div>
+        <div class="cheat-row"><code>[a-z]</code><span data-zh="范围 a 到 z" data-en="range a–z">范围 a 到 z</span></div>
+      </div>
+    </div>
+    <div class="cheat-card">
+      <div class="cheat-card-title" data-zh="量词" data-en="Quantifiers">量词</div>
+      <div class="cheat-list">
+        <div class="cheat-row"><code>*</code><span data-zh="0 次或多次" data-en="0 or more">0 次或多次</span></div>
+        <div class="cheat-row"><code>+</code><span data-zh="1 次或多次" data-en="1 or more">1 次或多次</span></div>
+        <div class="cheat-row"><code>?</code><span data-zh="0 次或 1 次" data-en="0 or 1">0 次或 1 次</span></div>
+        <div class="cheat-row"><code>{n}</code><span data-zh="正好 n 次" data-en="exactly n">正好 n 次</span></div>
+        <div class="cheat-row"><code>{n,}</code><span data-zh="至少 n 次" data-en="at least n">至少 n 次</span></div>
+        <div class="cheat-row"><code>{n,m}</code><span data-zh="n 到 m 次" data-en="n–m times">n 到 m 次</span></div>
+        <div class="cheat-row"><code>*?</code><span data-zh="非贪婪 *" data-en="lazy *">非贪婪 *</span></div>
+        <div class="cheat-row"><code>+?</code><span data-zh="非贪婪 +" data-en="lazy +">非贪婪 +</span></div>
+      </div>
+    </div>
+    <div class="cheat-card">
+      <div class="cheat-card-title" data-zh="边界与锚点" data-en="Anchors">边界与锚点</div>
+      <div class="cheat-list">
+        <div class="cheat-row"><code>^</code><span data-zh="行首（m flag 下每行）" data-en="line start (per-line with m)">行首（m flag 下每行）</span></div>
+        <div class="cheat-row"><code>$</code><span data-zh="行尾" data-en="line end">行尾</span></div>
+        <div class="cheat-row"><code>\b</code><span data-zh="单词边界" data-en="word boundary">单词边界</span></div>
+        <div class="cheat-row"><code>\B</code><span data-zh="非单词边界" data-en="non-boundary">非单词边界</span></div>
+      </div>
+    </div>
+    <div class="cheat-card">
+      <div class="cheat-card-title" data-zh="分组与回引" data-en="Groups & backref">分组与回引</div>
+      <div class="cheat-list">
+        <div class="cheat-row"><code>(...)</code><span data-zh="捕获组（自动编号）" data-en="capturing group">捕获组（自动编号）</span></div>
+        <div class="cheat-row"><code>(?:...)</code><span data-zh="非捕获组" data-en="non-capturing">非捕获组</span></div>
+        <div class="cheat-row"><code>(?&lt;name&gt;...)</code><span data-zh="命名捕获组" data-en="named group">命名捕获组</span></div>
+        <div class="cheat-row"><code>\1</code><span data-zh="回引第 1 组" data-en="backref group 1">回引第 1 组</span></div>
+        <div class="cheat-row"><code>\k&lt;name&gt;</code><span data-zh="回引命名组" data-en="backref named">回引命名组</span></div>
+        <div class="cheat-row"><code>(?=...)</code><span data-zh="正向先行" data-en="lookahead">正向先行</span></div>
+        <div class="cheat-row"><code>(?!...)</code><span data-zh="负向先行" data-en="negative lookahead">负向先行</span></div>
+        <div class="cheat-row"><code>(?&lt;=...)</code><span data-zh="正向后顾" data-en="lookbehind">正向后顾</span></div>
+        <div class="cheat-row"><code>(?&lt;!...)</code><span data-zh="负向后顾" data-en="negative lookbehind">负向后顾</span></div>
+      </div>
+    </div>
+    <div class="cheat-card">
+      <div class="cheat-card-title" data-zh="替换占位符" data-en="Replace placeholders">替换占位符</div>
+      <div class="cheat-list">
+        <div class="cheat-row"><code>$&amp;</code><span data-zh="完整匹配" data-en="full match">完整匹配</span></div>
+        <div class="cheat-row"><code>$1 ~ $9</code><span data-zh="第 N 组捕获" data-en="Nth capture">第 N 组捕获</span></div>
+        <div class="cheat-row"><code>$&lt;name&gt;</code><span data-zh="命名捕获组" data-en="named capture">命名捕获组</span></div>
+        <div class="cheat-row"><code>$`</code><span data-zh="匹配前的内容" data-en="text before match">匹配前的内容</span></div>
+        <div class="cheat-row"><code>$'</code><span data-zh="匹配后的内容" data-en="text after match">匹配后的内容</span></div>
+        <div class="cheat-row"><code>$$</code><span data-zh="$ 字面量" data-en="literal $">$ 字面量</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="本工具支持哪种正则方言？" data-faq-en="Which regex flavor is supported?" data-faq-ar="ما لهجة Regex المدعومة؟">本工具支持哪种正则方言？</div>
+        <div class="faq-a" data-faq-zh="ECMAScript（JavaScript 内置 RegExp）方言。这与 V8 / Chrome / Node.js 完全一致，与 Python / PCRE / Java 的方言略有差异。如果你的代码运行在浏览器或 Node.js，本工具的结果就是你代码运行时的真实结果。" data-faq-en="ECMAScript (JavaScript's built-in RegExp). It matches V8 / Chrome / Node.js exactly — slightly different from Python / PCRE / Java. If your code runs in a browser or Node, this tool reproduces the actual runtime behavior." data-faq-ar="ECMAScript (RegExp المدمج في JavaScript). يطابق V8 / Chrome / Node.js تماماً — يختلف قليلاً عن Python / PCRE / Java. إذا كان كودك يعمل في متصفح أو Node، فإن هذه الأداة تعيد إنتاج السلوك الحقيقي للتشغيل.">ECMAScript（JavaScript 内置 RegExp）方言。这与 V8 / Chrome / Node.js 完全一致，与 Python / PCRE / Java 的方言略有差异。如果你的代码运行在浏览器或 Node.js，本工具的结果就是你代码运行时的真实结果。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="为什么有些正则会卡住或报「too long」？" data-faq-en="Why does the page hang on some regex?" data-faq-ar="لماذا تتعطل الصفحة على بعض Regex؟">为什么有些正则会卡住或报「too long」？</div>
+        <div class="faq-a" data-faq-zh="正则可能因「灾难性回溯」在某些输入上指数级卡顿（如 (a+)+b 匹配 'aaaa...x'）。本工具会限制单次匹配数与运行时间，避免浏览器卡死。如果遇到此提示，请检查正则中是否有嵌套量词，必要时改写为更精确的写法。" data-faq-en="Some regexes hit catastrophic backtracking on certain inputs (e.g. (a+)+b on 'aaaa…x'). The tool caps match count and runtime to keep the page responsive. If you hit this, look for nested quantifiers and rewrite more precisely." data-faq-ar="بعض التعابير النمطية تصل إلى تراجع كارثي على بعض المدخلات (مثل (a+)+b على 'aaaa…x'). تحدّ الأداة من عدد المطابقات ووقت التشغيل للحفاظ على استجابة الصفحة. إذا واجهت هذا، ابحث عن المحددات الكمية المتداخلة وأعد كتابة بدقة أكبر.">正则可能因「灾难性回溯」在某些输入上指数级卡顿（如 (a+)+b 匹配 'aaaa...x'）。本工具会限制单次匹配数与运行时间，避免浏览器卡死。如果遇到此提示，请检查正则中是否有嵌套量词，必要时改写为更精确的写法。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="替换支持哪些占位符？" data-faq-en="Which replacement placeholders work?" data-faq-ar="ما عناصر الاستبدال التي تعمل؟">替换支持哪些占位符？</div>
+        <div class="faq-a" data-faq-zh="完整支持 ECMAScript String.prototype.replace 的占位符：$1～$9 引用编号捕获组，$<name> 引用命名捕获组，$& 整个匹配，$` 匹配前的内容，$' 匹配后的内容，$$ 表示一个 $ 字面量。" data-faq-en="All ECMAScript String.prototype.replace placeholders: $1–$9 numeric groups, $<name> named groups, $& full match, $` text before match, $' text after match, $$ literal $." data-faq-ar="جميع عناصر String.prototype.replace في ECMAScript: $1-$9 المجموعات الرقمية، $&lt;name&gt; المجموعات المسماة، $&amp; المطابقة الكاملة، $` النص قبل المطابقة، $' النص بعد المطابقة، $$ علامة $ حرفية.">完整支持 ECMAScript String.prototype.replace 的占位符：$1～$9 引用编号捕获组，$&lt;name&gt; 引用命名捕获组，$&amp; 整个匹配，$` 匹配前的内容，$' 匹配后的内容，$$ 表示一个 $ 字面量。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="我的正则会被上传到服务器吗？" data-faq-en="Are regexes sent to a server?" data-faq-ar="هل تُرسل التعابير النمطية إلى خادم؟">我的正则会被上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。本工具完全在你的浏览器内运行（new RegExp + matchAll + replaceAll），正则与文本从不离开你的设备，可放心粘贴含敏感数据的样本进行调试。" data-faq-en="No. Everything runs locally (new RegExp + matchAll + replaceAll). Patterns and text never leave your device — safe for sensitive sample data." data-faq-ar="لا. كل شيء يعمل محلياً (new RegExp + matchAll + replaceAll). الأنماط والنص لا تغادر جهازك أبداً — آمنة للبيانات الحساسة.">不会。本工具完全在你的浏览器内运行（new RegExp + matchAll + replaceAll），正则与文本从不离开你的设备，可放心粘贴含敏感数据的样本进行调试。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span>{ }</span><span data-i18n-related="JSON 格式化|JSON Formatter|منسق JSON">JSON 格式化</span></a>
+    <a href="jwt.html" class="related-card"><span>🔐</span><span data-i18n-related="JWT 解析|JWT Decoder|JWT">JWT 解析</span></a>
+    <a href="base64.html" class="related-card"><span>⇄</span><span data-i18n-related="Base64 编解码|Base64|Base64">Base64 编解码</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'正则表达式测试器','page.h1':'正则表达式测试器<br><em>在线免费</em>','page.sub':'实时匹配高亮、捕获组与命名组列表、替换模式、常用模式库与速查表。所有处理在浏览器本地完成。','mode.match':'🔍 匹配','mode.replace':'↻ 替换','flag.label':'FLAGS：','flag.g':'全局','flag.i':'忽略大小写','flag.m':'多行','flag.s':'. 匹配换行','flag.u':'Unicode','flag.y':'粘连','preset.label':'常用模式：','preset.phone':'中国手机','preset.id':'身份证','preset.date':'日期 YYYY-MM-DD','preset.num':'浮点数','replace.label':'替换为','pane.test':'测试字符串','result.title':'替换结果','matches.title':'匹配列表','btn.copy':'复制结果','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Regex Tester','page.h1':'Regex Tester<br><em>Free Online</em>','page.sub':'Real-time match highlight, capture & named groups, replace mode, common patterns and a cheat sheet. Everything runs locally in your browser.','mode.match':'🔍 Match','mode.replace':'↻ Replace','flag.label':'FLAGS:','flag.g':'global','flag.i':'ignore case','flag.m':'multiline','flag.s':'. matches \\n','flag.u':'unicode','flag.y':'sticky','preset.label':'Presets:','preset.phone':'CN mobile','preset.id':'CN ID','preset.date':'Date YYYY-MM-DD','preset.num':'Float','replace.label':'Replace with','pane.test':'Test string','result.title':'Replace result','matches.title':'Matches','btn.copy':'Copy result','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'مختبر التعبيرات النمطية','page.h1':'مختبر Regex<br><em>مجاناً عبر الإنترنت</em>','page.sub':'تظليل المطابقة فوراً، مجموعات الالتقاط والمسمّاة، وضع الاستبدال، أنماط شائعة ومرجع سريع. تتم المعالجة محلياً.','mode.match':'🔍 مطابقة','mode.replace':'↻ استبدال','flag.label':'FLAGS:','flag.g':'عام','flag.i':'تجاهل حالة','flag.m':'متعدد الأسطر','flag.s':'. تشمل سطراً','flag.u':'يونيكود','flag.y':'لاصق','preset.label':'أنماط:','preset.phone':'جوال صيني','preset.id':'هوية صينية','preset.date':'تاريخ YYYY-MM-DD','preset.num':'عشري','replace.label':'استبدل بـ','pane.test':'نص الاختبار','result.title':'نتيجة الاستبدال','matches.title':'المطابقات','btn.copy':'نسخ','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const patEl = $('pattern'), flagEl = $('flags'), testEl = $('testInput'), replaceEl = $('replaceInput'), overlay = $('testOverlay');
+const errBox = $('errBox'), okLine = $('okLine');
+let mode = 'match';
+
+const MAX_MATCHES = 50000;
+const ESC_HTML = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// ── Mode switching ─────────────────────────────────────────
+function setMode(m){
+  mode = m;
+  $('tabMatch').classList.toggle('active', m==='match');
+  $('tabReplace').classList.toggle('active', m==='replace');
+  $('replaceRow').classList.toggle('hidden', m!=='replace');
+  $('resultPane').classList.toggle('hidden', m!=='replace');
+  $('matchesPane').classList.toggle('hidden', m!=='match');
+  run();
+}
+
+// ── Flags ──────────────────────────────────────────────────
+function syncFlagChips(){
+  const flags = flagEl.value;
+  document.querySelectorAll('.flag-chip').forEach(b => {
+    const f = b.dataset.flag;
+    b.classList.toggle('active', flags.includes(f));
+  });
+}
+function toggleFlag(f){
+  let flags = flagEl.value;
+  if(flags.includes(f)) flags = flags.replace(new RegExp(f, 'g'), '');
+  else flags += f;
+  // De-dupe & sort to canonical order
+  flags = Array.from(new Set(flags.split(''))).filter(c => 'gimsuy'.includes(c)).sort().join('');
+  flagEl.value = flags;
+  syncFlagChips();
+  run();
+}
+flagEl.addEventListener('input', () => { syncFlagChips(); run(); });
+
+// ── Presets ────────────────────────────────────────────────
+const PRESETS = {
+  email:   { p: '\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b', f: 'gi', s: 'support@hebing.org\nhello@example.cn\nbad@@no\nfirst.last+tag@sub.example.io' },
+  url:     { p: 'https?:\\/\\/[\\w.-]+(?:\\:\\d+)?(?:\\/[\\w./?%&=#+-]*)?', f: 'gi', s: '访问 https://hebing.org/qrcode.html\n或者 http://example.com:8080/path?x=1#a\n非链接 example.com' },
+  ipv4:    { p: '\\b(?:(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\b', f: 'g', s: 'server: 192.168.1.1\nrouter: 10.0.0.255\nbad: 999.999.0.1\npublic: 8.8.8.8' },
+  phoneCN: { p: '(?<!\\d)1[3-9]\\d{9}(?!\\d)', f: 'g', s: '客服电话 13800138000\n紧急 19012345678\n座机 010-12345678\n短号 18888' },
+  idCN:    { p: '\\b[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]\\b', f: 'g', s: '示例身份证: 11010119900307123X\n旧 15 位: 110101900307123\n非法: 999999199001011234' },
+  date:    { p: '(?<year>\\d{4})-(?<month>0[1-9]|1[0-2])-(?<day>0[1-9]|[12]\\d|3[01])', f: 'g', s: '会议 2026-04-27\n截止 2026-12-31\n非法 2026-13-01\n旧式 2026/04/27' },
+  hex:     { p: '#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\\b', f: 'g', s: '主色 #d4440a\n半透明 #ff0000aa\n短写 #fff #abc4\n非法 #ggg #1' },
+  num:     { p: '-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?', f: 'g', s: '价格 19.99 与 -3.14\n科学计数 6.022e23 与 1.5E-10\n整数 42 与 -7\n非数字 abc' }
+};
+function applyPreset(k){
+  const p = PRESETS[k]; if(!p) return;
+  patEl.value = p.p;
+  flagEl.value = p.f;
+  testEl.value = p.s;
+  syncFlagChips();
+  run();
+}
+
+// ── Worker-based execution (terminable on catastrophic backtracking) ──
+const WORKER_SRC = `self.onmessage = function(e){
+  var d = e.data;
+  try {
+    var f = d.flags.indexOf('g') >= 0 ? d.flags : d.flags + 'g';
+    var re = new RegExp(d.pattern, f);
+    var matches = [];
+    var m;
+    while ((m = re.exec(d.text)) !== null) {
+      if (m.index === re.lastIndex) { re.lastIndex++; if (m[0] === '') continue; }
+      var groups = [];
+      for (var i = 1; i < m.length; i++) groups.push(m[i] === undefined ? null : m[i]);
+      var named = null;
+      if (m.groups) { named = {}; for (var k in m.groups) named[k] = m.groups[k] === undefined ? null : m.groups[k]; }
+      matches.push({ match: m[0], index: m.index, groups: groups, named: named });
+      if (matches.length > d.maxMatches) { self.postMessage({ ok:false, err:'too_many', count: matches.length }); return; }
+    }
+    var replaced = null;
+    if (d.doReplace) {
+      var re2 = new RegExp(d.pattern, f);
+      replaced = d.text.replace(re2, d.replacement);
+    }
+    self.postMessage({ ok:true, matches: matches, replaced: replaced });
+  } catch (err) {
+    self.postMessage({ ok:false, err:'exception', message: err && err.message ? err.message : String(err) });
+  }
+};`;
+
+let worker = null;
+let runSeq = 0;
+let runTimer = null;
+const RUN_TIMEOUT_MS = 1500;
+
+function makeWorker(){
+  const blob = new Blob([WORKER_SRC], { type:'application/javascript' });
+  const u = URL.createObjectURL(blob);
+  const w = new Worker(u);
+  URL.revokeObjectURL(u);  // Worker holds its own reference once instantiated
+  return w;
+}
+function killWorker(){
+  if(worker){ try{ worker.terminate(); }catch(_){} worker = null; }
+  if(runTimer){ clearTimeout(runTimer); runTimer = null; }
+}
+function ensureWorker(){
+  if(!worker) worker = makeWorker();
+  return worker;
+}
+
+function showErr(msg){
+  const lang = document.documentElement.lang;
+  errBox.textContent = (lang==='en'?'Regex error: ':lang==='ar'?'خطأ Regex: ':'正则错误：') + msg;
+  errBox.classList.remove('hidden');
+  $('matchesPane').classList.add('hidden');
+  $('resultPane').classList.add('hidden');
+  okLine.classList.add('hidden');
+  overlay.innerHTML = ESC_HTML(testEl.value);
+}
+function clearErr(){ errBox.classList.add('hidden'); }
+
+// ── Match & highlight ─────────────────────────────────────
+function run(){
+  clearErr();
+  const text = testEl.value;
+  $('testMeta').textContent = text ? `${text.length.toLocaleString()} chars` : '';
+  if(!patEl.value){
+    overlay.innerHTML = ESC_HTML(text);
+    okLine.classList.add('hidden');
+    $('matchesPane').classList.add('hidden');
+    $('resultPane').classList.add('hidden');
+    return;
+  }
+  // Pre-validate pattern in main thread for fast error feedback (won't catastrophic-backtrack on construction)
+  try{ new RegExp(patEl.value, flagEl.value); }
+  catch(e){ showErr(e.message); return; }
+
+  const seq = ++runSeq;
+  if(runTimer){ clearTimeout(runTimer); runTimer = null; }
+  const w = ensureWorker();
+  const start = performance.now();
+  w.onmessage = (ev) => {
+    if(seq !== runSeq) return; // stale response
+    if(runTimer){ clearTimeout(runTimer); runTimer = null; }
+    const ms = performance.now() - start;
+    const d = ev.data;
+    if(!d.ok){
+      const lang = document.documentElement.lang;
+      if(d.err === 'too_many') showErr(lang==='en'?`Too many matches (>${MAX_MATCHES}), aborted.`:lang==='ar'?'مطابقات كثيرة جداً.':`匹配过多（>${MAX_MATCHES}），已中止以保护浏览器。`);
+      else showErr(d.message || 'Unknown error');
+      return;
+    }
+    paintOverlay(text, d.matches);
+    showOk(d.matches.length, ms);
+    if(mode === 'match'){
+      renderMatches(text, d.matches);
+      $('resultPane').classList.add('hidden');
+    }else{
+      $('matchesPane').classList.add('hidden');
+      $('resultPane').classList.remove('hidden');
+      $('resultBody').textContent = d.replaced;
+      $('resultBody').classList.toggle('empty', !d.replaced);
+      const lang = document.documentElement.lang;
+      $('resultMeta').textContent = `${(d.replaced||'').length.toLocaleString()} chars · ${d.matches.length} ${lang==='en'?'replaced':lang==='ar'?'استبدلت':'处替换'}`;
+    }
+  };
+  w.onerror = (ev) => {
+    if(seq !== runSeq) return;
+    if(runTimer){ clearTimeout(runTimer); runTimer = null; }
+    showErr(ev.message || 'Worker error');
+  };
+  w.postMessage({
+    pattern: patEl.value,
+    flags: flagEl.value,
+    text: text,
+    replacement: replaceEl.value,
+    doReplace: mode === 'replace',
+    maxMatches: MAX_MATCHES
+  });
+  runTimer = setTimeout(() => {
+    if(seq !== runSeq) return;
+    runTimer = null;
+    killWorker();
+    const lang = document.documentElement.lang;
+    showErr(lang==='en'?`Regex took >${RUN_TIMEOUT_MS}ms — likely catastrophic backtracking. Aborted.`:lang==='ar'?'تم إيقاف النمط البطيء جداً.':`正则运行超过 ${RUN_TIMEOUT_MS}ms — 可能存在灾难性回溯，已强制中止。`);
+  }, RUN_TIMEOUT_MS);
+}
+
+function paintOverlay(text, matches){
+  let html = '';
+  let last = 0;
+  matches.forEach((m, i) => {
+    html += ESC_HTML(text.slice(last, m.index));
+    const cls = i % 2 === 0 ? '' : ' class="alt"';
+    html += `<mark${cls}>${ESC_HTML(m.match) || '∅'}</mark>`;
+    last = m.index + m.match.length;
+  });
+  html += ESC_HTML(text.slice(last));
+  // Trailing newline is collapsed by browsers — add a sentinel to keep height in sync
+  if(text.endsWith('\n')) html += '​';
+  overlay.innerHTML = html;
+}
+
+function showOk(count, ms){
+  const lang = document.documentElement.lang;
+  if(count === 0){
+    okLine.textContent = lang==='en'?'0 matches':lang==='ar'?'0 مطابقات':'0 个匹配';
+  }else{
+    okLine.textContent = lang==='en'?`✓ ${count} match${count>1?'es':''} · ${ms.toFixed(1)} ms`:lang==='ar'?`✓ ${count} مطابقة · ${ms.toFixed(1)} ms`:`✓ ${count} 个匹配 · ${ms.toFixed(1)} ms`;
+  }
+  okLine.classList.remove('hidden');
+}
+
+// ── Match list ───────────────────────────────────────────
+function renderMatches(text, matches){
+  const body = $('matchesBody');
+  body.innerHTML = '';
+  $('matchesMeta').textContent = `${matches.length} ${document.documentElement.lang==='en'?'matches':document.documentElement.lang==='ar'?'مطابقة':'个'}`;
+  if(matches.length === 0){
+    $('matchesPane').classList.add('hidden');
+    return;
+  }
+  $('matchesPane').classList.remove('hidden');
+  matches.forEach((m, i) => {
+    const row = document.createElement('div');
+    row.className = 'match-row';
+    const head = document.createElement('div');
+    head.className = 'match-head';
+    head.innerHTML = `<span class="match-idx">#${i+1}</span><span class="match-pos">@${m.index}–${m.index+m.match.length-1}</span><span class="match-pos">len ${m.match.length}</span>`;
+    const txt = document.createElement('div');
+    txt.className = 'match-text';
+    txt.textContent = m.match;
+    row.appendChild(head);
+    row.appendChild(txt);
+    // Capture groups
+    const groups = document.createElement('div');
+    groups.className = 'match-groups';
+    let hasGroups = false;
+    (m.groups || []).forEach((val, idx) => {
+      hasGroups = true;
+      const k = document.createElement('span'); k.className='gk'; k.textContent='$'+(idx+1);
+      const v = document.createElement('span'); v.className='gv'; v.textContent = val === null ? '(undefined)' : val;
+      groups.appendChild(k); groups.appendChild(v);
+    });
+    if(m.named){
+      for(const name of Object.keys(m.named)){
+        hasGroups = true;
+        const k = document.createElement('span'); k.className='gk'; k.textContent='$<'+name+'>';
+        const v = document.createElement('span'); v.className='gv'; v.textContent = m.named[name] === null ? '(undefined)' : m.named[name];
+        groups.appendChild(k); groups.appendChild(v);
+      }
+    }
+    if(!hasGroups) groups.classList.add('empty');
+    row.appendChild(groups);
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.match-row').forEach(r => r.classList.remove('cur'));
+      row.classList.add('cur');
+      testEl.focus();
+      testEl.setSelectionRange(m.index, m.index + m.match.length);
+    });
+    body.appendChild(row);
+  });
+}
+
+$('btnCopyResult').onclick = async () => {
+  try{
+    await navigator.clipboard.writeText($('resultBody').textContent);
+    const lang = document.documentElement.lang;
+    okLine.textContent = lang==='en'?'Copied ✓':lang==='ar'?'تم النسخ ✓':'已复制 ✓';
+    okLine.classList.remove('hidden');
+  }catch(_){ /* ignore */ }
+};
+
+// ── Wire events ──────────────────────────────────────────
+patEl.addEventListener('input', run);
+flagEl.addEventListener('input', () => { syncFlagChips(); run(); });
+testEl.addEventListener('input', () => { $('testMeta').textContent = `${testEl.value.length.toLocaleString()} chars`; run(); });
+testEl.addEventListener('scroll', () => { overlay.scrollTop = testEl.scrollTop; });
+replaceEl.addEventListener('input', run);
+
+// ── Subscribe ────────────────────────────────────────────
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+// ── Init ─────────────────────────────────────────────────
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+syncFlagChips();
+run();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

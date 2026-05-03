@@ -1,0 +1,20 @@
+{
+  "https://cdn.jsdelivr.net/npm/diff@5.2.0/dist/diff.min.js": "sha384-lJJVaUgxmk/PVfQnAsGN1QuJZrE+n6bg2EMu33yVZOJ2av/3UzTHbmnPCI7ENJYa",
+  "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js": "sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG",
+  "https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js": "sha384-weMABwrltA6jWR8DDe9Jp5blk+tZQh7ugpCsF3JwSA53WZM9/14PjS5LAJNHNjAI",
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js": "sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e",
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js": "sha384-SnzOobpRMLXZ52iJvZm/C0fYw0OQemTXzTjIsdsfMcrCtCEe9qgzxTd3RSklO5x2",
+  "https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js": "sha384-rNlaE5fs9dGIjmxWDALQh/RBAaGRYT5ChrzHo6tRfgrZ36iRFAiquP5g41Jsv+0j",
+  "https://cdnjs.cloudflare.com/ajax/libs/upng-js/2.1.0/UPNG.js": "sha384-5zRBkJ6IHy9ezWHX/cBuwC0SnrK23Cfx6G6kIjwR5no9khaSv2md2ZHMXphI3UCB",
+  "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js": "sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw",
+  "https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js": "sha384-D/t0ZMqQW31H3az8ktEiNb39wyKnS82iFY52QPACM+IjKW3jDUhyIgh2PApRqJZs",
+  "https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/dist/lamejs.iife.min.js": "sha384-NfdzQPNkVwFzd4TdTOk3vSfEYGUDfGtA5i5230IAx7Jj4UQ7CXeBU/6K69dE0kg8",
+  "https://cdn.jsdelivr.net/npm/js-md5@0.7.3/build/md5.min.js": "sha384-yJUw6XamEfSzojQ+RJyCBpqgZF+gukQ/6wgEBnIuuMLmpGzNp7LCDoflHqqWECqT",
+  "https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js": "sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz",
+  "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js": "sha384-b5Ya4Bq3qCyz39m2ISh+4DxjAIljdeFwK/BsXLuj9gugaNwAcj/ia15fxNZL9Nlx",
+  "https://unpkg.com/docx@8.5.0/build/index.umd.js": "sha384-4xaIisuLEy2lo2HkB2C4rEf7v8jbTb2kuogX6TkuEt9feTWKBSFSOzsqNNbV+sKh",
+  "https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.6.5/dist/pdf-lib.min.js": "sha384-XsE4pdDefih5GAJtCu1BuT1kznn1mRwGlZx3V2AWRVJdby2LSekVzdIavDdzZF8G",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf.js": "sha384-4zfr/YU3O59FZ8VydcYMO8FXEkWJZDjFtWi6VX7oHnBy2yn3apFi4nINo8oOCPqw",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf-wasm.js": "sha384-0OSLnLF8Wlf+pWuY5BcUUMIrWp4B61IWVMTEJ6Q1BxGNCxi9BbJ214L7/dlSRtAq",
+  "https://cdn.jsdelivr.net/npm/mupdf@1.27.0/dist/mupdf-wasm.wasm": "sha384-jumdnhLMi8rAmx4x7JhFMJwbrk0hMzxStjGj7sDR3khFEs8jPyQgAfnhcjRqlWzh"
+}

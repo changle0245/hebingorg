@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>颜色转换器 HEX ↔ RGB ↔ HSL ↔ OKLCH 与 WCAG 对比度 | hebing.org</title>
+<meta name="description" content="免费在线颜色转换工具：HEX ↔ RGB ↔ HSL ↔ OKLCH 多向同步，可视化色板与 HSL 滑块，自动生成 tints / shades / 互补色 / 三色调和板，WCAG 2.1 AA / AAA 对比度检查。所有处理在浏览器本地完成。">
+<meta name="keywords" content="颜色转换,hex转rgb,rgb转hsl,oklch,wcag对比度,调色板,色彩工具,在线颜色,hex picker">
+<link rel="canonical" href="https://hebing.org/color.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="颜色转换器 HEX ↔ RGB ↔ HSL ↔ OKLCH | hebing.org">
+<meta property="og:url" content="https://hebing.org/color.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/color.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/color.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/color.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:640px;}
+.tool-wrap{padding:28px 0;}
+.swatch-wrap{display:grid;grid-template-columns:240px 1fr;gap:18px;margin-bottom:18px;}
+@media(max-width:680px){.swatch-wrap{grid-template-columns:1fr;}}
+.swatch{height:240px;border-radius:var(--radius-lg);border:1px solid var(--gray-200);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.04);position:relative;overflow:hidden;}
+.swatch-tag{position:absolute;left:12px;bottom:10px;padding:4px 10px;border-radius:var(--radius);font-family:var(--font-mono);font-size:11px;background:rgba(0,0,0,0.55);color:#fff;}
+.fields-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;}
+.field-card{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.field-head{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.field-card input{width:100%;border:none;outline:none;padding:11px 14px;font-family:var(--font-mono);font-size:13px;background:var(--white);color:var(--black);}
+.field-card.invalid input{color:#b91c1c;background:#fef2f2;}
+.copy-mini{padding:2px 8px;font-size:10px;font-family:var(--font-mono);background:transparent;color:var(--gray-400);border:1px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;}
+.copy-mini:hover{color:var(--black);border-color:var(--black);}
+
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0;padding:18px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.slider-row{display:flex;flex-direction:column;gap:6px;}
+.slider-row label{font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;display:flex;justify-content:space-between;}
+.slider-row label span{color:var(--black);font-weight:500;}
+.slider-row input[type="range"]{width:100%;-webkit-appearance:none;appearance:none;height:6px;background:var(--gray-200);border-radius:3px;outline:none;}
+.slider-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;background:var(--black);border-radius:50%;cursor:pointer;}
+.slider-row input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--black);border-radius:50%;cursor:pointer;border:0;}
+
+.section-h{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:2px;margin:24px 0 10px;}
+.palette-row{display:grid;grid-template-columns:repeat(11, 1fr);gap:4px;margin-bottom:14px;border-radius:var(--radius);overflow:hidden;}
+.palette-cell{aspect-ratio:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-family:var(--font-mono);font-size:9px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.4);cursor:pointer;}
+.palette-cell:hover{outline:2px solid var(--black);outline-offset:-2px;z-index:5;position:relative;}
+.harmony-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px;}
+.harmony-cell{aspect-ratio:2.5;border-radius:var(--radius);display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px;font-family:var(--font-mono);font-size:10px;cursor:pointer;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.4);border:1px solid rgba(0,0,0,0.06);}
+.harmony-cell strong{font-size:11px;font-weight:500;}
+
+.contrast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.contrast-card{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;}
+.contrast-preview{padding:24px 18px;font-size:18px;font-weight:500;}
+.contrast-stats{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-100);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);border-top:1px solid var(--gray-200);}
+.tag-pass{color:var(--success);font-weight:500;}
+.tag-fail{color:#b91c1c;font-weight:500;}
+
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);}
+.error-box.hidden{display:none!important;}
+
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+@media (prefers-color-scheme: dark){:root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}nav{background:rgba(17,17,16,0.95);}.field-card input{background:var(--white);}.subscribe-input{background:var(--gray-100);}.scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}.related-card{background:var(--gray-100);border-color:var(--gray-200);}.related-card:hover{background:var(--gray-200);color:var(--black);}.error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}.field-card.invalid input{background:#2d0a0a;color:#fca5a5;}}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4KL258YW1Y');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"hebing.org 颜色转换器","applicationCategory":"DesignApplication","operatingSystem":"Any (browser-based)","url":"https://hebing.org/color.html","description":"免费在线 HEX / RGB / HSL / OKLCH 颜色多向同步换算 + WCAG 对比度。","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["HEX ↔ RGB ↔ HSL ↔ OKLCH 同步","调色板（tints / shades / 50–950 色阶）","互补色 / 三色调和板","WCAG 2.1 AA / AAA 对比度"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"hebing.org","item":"https://hebing.org/"},{"@type":"ListItem","position":2,"name":"颜色转换器","item":"https://hebing.org/color.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"如何在线转换 HEX / RGB / HSL / OKLCH 颜色","description":"使用 hebing.org 在浏览器本地完成 HEX、RGB、HSL、OKLCH 四种色彩空间多向同步换算 + 自动 50–950 色阶 + WCAG 对比度判定。","totalTime":"PT15S","step":[
+{"@type":"HowToStep","position":1,"name":"输入任一颜色","text":"在 HEX / RGB / HSL / OKLCH 任一字段粘贴或输入颜色值，其他三个字段同步更新。"},
+{"@type":"HowToStep","position":2,"name":"用滑块微调","text":"拖动 H / S / L 滑块即时调色，色板与互补色同步刷新。"},
+{"@type":"HowToStep","position":3,"name":"取色阶","text":"50–950 色阶（OKLCH 算法生成）下方排列，点任一档可一键切为新主色。"},
+{"@type":"HowToStep","position":4,"name":"检查对比度","text":"WCAG 2.1 区块同时显示在白底 / 黑底的对比度数值与 AA / AAA 判定。"}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"OKLCH 是什么？为什么我应该关注？","acceptedAnswer":{"@type":"Answer","text":"OKLCH 是基于人眼感知的均匀色彩空间，2020 年由 Björn Ottosson 提出，2023 年进入 CSS Color Level 4。Lightness 50 的红、绿、蓝在屏幕上看起来一样亮，HSL 做不到。生成色阶（tints/shades）时 OKLCH 不会有 HSL 那种「中间灰糊」的问题。"}},
+{"@type":"Question","name":"WCAG AA 与 AAA 各对比度多少？","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 AA：常规文本 ≥ 4.5:1，大文本（≥18pt 或 ≥14pt 加粗）≥ 3:1。AAA：常规 7:1，大文本 4.5:1。本工具同时显示文本/大文本/UI 三档判定，写按钮、表单、icon 时一目了然能不能过。"}},
+{"@type":"Question","name":"为什么我的 HEX 输入是 #fff 但显示成 #FFFFFF？","acceptedAnswer":{"@type":"Answer","text":"#fff 是 #ffffff 的 CSS 简写（#RGB → #RRGGBB）。本工具内部规范化成 6 位输出。如果想要简写形式直接复制 input 框里的值即可，工具会保留你的原始输入。"}},
+{"@type":"Question","name":"数据会上传到服务器吗？","acceptedAnswer":{"@type":"Answer","text":"不会。所有色彩计算都在你的浏览器内完成（纯 JS 矩阵运算 + Canvas 取色），输入从不离开你的设备。"}}
+]}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">颜色转换器</span></div>
+  <h1 class="page-title" data-i18n="page.h1">HEX ↔ RGB ↔ HSL ↔ OKLCH<br><em>颜色转换 + 调色板 + WCAG</em></h1>
+  <p class="page-sub" data-i18n="page.sub">四种色彩空间多向同步换算，色板可视化与 HSL 滑块，自动生成 50–950 tints/shades 色阶 + 互补 / 三色和谐板，WCAG 2.1 AA / AAA 对比度即时判定。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="swatch-wrap">
+    <div class="swatch" id="swatch"><span class="swatch-tag" id="swatchTag">#d4440a</span></div>
+    <div class="fields-grid">
+      <div class="field-card" data-fmt="hex">
+        <div class="field-head"><span>HEX</span><button type="button" class="copy-mini" data-copy="in_hex" aria-label="复制 HEX 值 / Copy HEX value">复制</button></div>
+        <input type="text" id="in_hex" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="#d4440a">
+      </div>
+      <div class="field-card" data-fmt="rgb">
+        <div class="field-head"><span>RGB</span><button type="button" class="copy-mini" data-copy="in_rgb" aria-label="复制 RGB 值 / Copy RGB value">复制</button></div>
+        <input type="text" id="in_rgb" autocomplete="off" spellcheck="false" placeholder="rgb(212, 68, 10)">
+      </div>
+      <div class="field-card" data-fmt="hsl">
+        <div class="field-head"><span>HSL</span><button type="button" class="copy-mini" data-copy="in_hsl" aria-label="复制 HSL 值 / Copy HSL value">复制</button></div>
+        <input type="text" id="in_hsl" autocomplete="off" spellcheck="false" placeholder="hsl(18, 91%, 44%)">
+      </div>
+      <div class="field-card" data-fmt="oklch">
+        <div class="field-head"><span>OKLCH</span><button type="button" class="copy-mini" data-copy="in_oklch" aria-label="复制 OKLCH 值 / Copy OKLCH value">复制</button></div>
+        <input type="text" id="in_oklch" autocomplete="off" spellcheck="false" placeholder="oklch(58% 0.18 35)">
+      </div>
+    </div>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="sliders">
+    <div class="slider-row">
+      <label>H <span id="hVal">18°</span></label>
+      <input type="range" id="hSld" min="0" max="360" step="0.5" value="18">
+    </div>
+    <div class="slider-row">
+      <label>S <span id="sVal">91%</span></label>
+      <input type="range" id="sSld" min="0" max="100" step="0.5" value="91">
+    </div>
+    <div class="slider-row">
+      <label>L <span id="lVal">44%</span></label>
+      <input type="range" id="lSld" min="0" max="100" step="0.5" value="44">
+    </div>
+  </div>
+
+  <div class="section-h" data-i18n="sec.tints">TINTS &amp; SHADES (Tailwind-like 50–950, OKLCH-based)</div>
+  <div class="palette-row" id="paletteRow"></div>
+
+  <div class="section-h" data-i18n="sec.harmony">HARMONY (互补 / 类比 / 三色 / 四色 / 分裂互补)</div>
+  <div class="harmony-row" id="harmonyRow"></div>
+
+  <div class="section-h" data-i18n="sec.contrast">CONTRAST (WCAG 2.1)</div>
+  <div class="contrast-grid">
+    <div class="contrast-card">
+      <div class="contrast-preview" id="contrastWhite" style="background:#d4440a;color:#fff">在白色背景的对比 / on white</div>
+      <div class="contrast-stats" id="statsWhite"></div>
+    </div>
+    <div class="contrast-card">
+      <div class="contrast-preview" id="contrastBlack" style="background:#000;color:#d4440a">作为前景在黑色上 / fg on black</div>
+      <div class="contrast-stats" id="statsBlack"></div>
+    </div>
+  </div>
+
+  <div class="subscribe-box" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="常见使用场景" data-en="Common use cases">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🎨</div><div class="scene-title" data-scene-zh="设计稿 → 代码" data-scene-en="Design → code">设计稿 → 代码</div><div class="scene-desc" data-scene-zh="设计师给的 HEX 直接转 HSL 微调亮度，转 RGB 给 SVG，转 OKLCH 喂 modern CSS variables。" data-scene-en="Designer hands you HEX — convert to HSL to nudge lightness, RGB for SVG, OKLCH for modern CSS variables.">设计师给的 HEX 直接转 HSL 微调亮度，转 RGB 给 SVG，转 OKLCH 喂 modern CSS variables。</div></div>
+      <div class="scene-card"><div class="scene-icon">🌈</div><div class="scene-title" data-scene-zh="生成 Tailwind 色阶" data-scene-en="Tailwind palette">生成 Tailwind 色阶</div><div class="scene-desc" data-scene-zh="一个品牌色直接展开成 50–950 共 11 阶 OKLCH 色阶，CSS 变量直接拷走。" data-scene-en="One brand color → 11-step OKLCH palette (50-950). Copy each step as a CSS variable.">一个品牌色直接展开成 50–950 共 11 阶 OKLCH 色阶，CSS 变量直接拷走。</div></div>
+      <div class="scene-card"><div class="scene-icon">♿</div><div class="scene-title" data-scene-zh="无障碍审查" data-scene-en="Accessibility audit">无障碍审查</div><div class="scene-desc" data-scene-zh="按钮文字在背景色上够不够对比？同时显示文本/大文本/UI 三档 WCAG AA/AAA 判定，过不过一眼能看。" data-scene-en="Does the button text contrast enough? See text / large text / UI WCAG AA/AAA verdicts at a glance.">按钮文字在背景色上够不够对比？同时显示文本/大文本/UI 三档 WCAG AA/AAA 判定，过不过一眼能看。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔮</div><div class="scene-title" data-scene-zh="配色实验" data-scene-en="Palette experimentation">配色实验</div><div class="scene-desc" data-scene-zh="拖 HSL 滑块边拖边看色阶 + 互补色变化，比传统色环工具更直观。" data-scene-en="Drag HSL sliders, watch palette + complementary update live — more direct than a static color wheel.">拖 HSL 滑块边拖边看色阶 + 互补色变化，比传统色环工具更直观。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>HEX 短写支持</strong>：`#fff`、`#fffa`（带 alpha）都接受，自动展开。8 位带 alpha 的 HEX（`#RRGGBBAA`）也行。</li>
+      <li><strong>HSL 与 RGB 各种语法</strong>：`hsl(18 91% 44%)`、`hsl(18, 91%, 44%)`、`hsla(18, 91%, 44%, 0.8)` 都接受。</li>
+      <li><strong>OKLCH 输入</strong>：`oklch(58% 0.18 35)` 或 `oklch(0.58 0.18 35)`。Lightness 用 0-1 或 0%-100% 都可。Chroma 范围一般 0-0.4。</li>
+      <li><strong>点色阶单元格</strong>：直接把那一档颜色变成主色，链式微调很方便。</li>
+      <li><strong>WCAG 计算</strong>：用 sRGB 相对亮度公式（WCAG 2.1 §1.4.3），与 axe / Lighthouse 一致。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>HEX shorthands</strong>: `#fff`, `#fffa` (with alpha), `#RRGGBBAA` all accepted.</li>
+      <li><strong>HSL / RGB syntax variants</strong>: `hsl(18 91% 44%)`, `hsl(18, 91%, 44%)`, `hsla(...)` all parse.</li>
+      <li><strong>OKLCH input</strong>: `oklch(58% 0.18 35)` or `oklch(0.58 0.18 35)`. Lightness as 0-1 or 0%-100%; chroma usually 0-0.4.</li>
+      <li><strong>Click a palette cell</strong>: it becomes the new primary — quick chain-tuning.</li>
+      <li><strong>WCAG math</strong>: sRGB relative luminance per WCAG 2.1 §1.4.3 — matches axe / Lighthouse.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>اختصارات HEX: #fff و #fffa (مع ألفا) و #RRGGBBAA كلها مقبولة.</li><li>متغيرات بناء HSL / RGB: hsl(18 91% 44%) و hsl(18, 91%, 44%) و hsla(...) كلها تُحلَّل.</li><li>إدخال OKLCH: oklch(58% 0.18 35) أو oklch(0.58 0.18 35). السطوع 0-1 أو 0%-100%؛ الصبغة عادةً 0-0.4.</li><li>انقر خلية في اللوحة: تصبح الأساسية الجديدة — ضبط متسلسل سريع.</li><li>حسابات WCAG: السطوع النسبي sRGB وفقاً لـ WCAG 2.1 §1.4.3 — يطابق axe / Lighthouse.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q" data-faq-zh="OKLCH 是什么？为什么我应该关注？" data-faq-en="What is OKLCH? Why care?" data-faq-ar="ما هو OKLCH؟ ولماذا يهم؟">OKLCH 是什么？为什么我应该关注？</div><div class="faq-a" data-faq-zh="OKLCH 是基于人眼感知的均匀色彩空间，2023 年进入 CSS Color Level 4。Lightness 50 的红、绿、蓝在屏幕上看起来一样亮；生成色阶时 OKLCH 不会有 HSL 那种「中间灰糊」的问题。" data-faq-en="OKLCH is a perceptually uniform color space (CSS Color Level 4, 2023). L=50 red/green/blue look equally bright. Color ramps in OKLCH avoid HSL's mid-grey muddiness." data-faq-ar="OKLCH هو فضاء ألوان موحد إدراكياً (CSS Color Level 4، 2023). الألوان عند L=50 الأحمر والأخضر والأزرق تبدو متساوية في السطوع. تتجنب تدرجات الألوان في OKLCH &quot;العكورة الرمادية&quot; المتوسطة الموجودة في HSL.">OKLCH 是基于人眼感知的均匀色彩空间，2023 年进入 CSS Color Level 4。Lightness 50 的红、绿、蓝在屏幕上看起来一样亮；生成色阶时 OKLCH 不会有 HSL 那种「中间灰糊」的问题。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="WCAG AA 与 AAA 各对比度多少？" data-faq-en="WCAG AA vs AAA?" data-faq-ar="WCAG AA مقابل AAA؟">WCAG AA 与 AAA 各对比度多少？</div><div class="faq-a" data-faq-zh="AA：常规文本 ≥ 4.5:1，大文本（≥18pt 或 ≥14pt 加粗）≥ 3:1。AAA：常规 7:1，大文本 4.5:1。本工具同时显示文本/大文本/UI 三档判定。" data-faq-en="AA: text ≥ 4.5:1, large text (≥18pt or ≥14pt bold) ≥ 3:1. AAA: 7:1 / 4.5:1. The tool shows all three at once." data-faq-ar="AA: النص ≥ 4.5:1، النص الكبير (≥18pt أو ≥14pt عريض) ≥ 3:1. AAA: 7:1 / 4.5:1. تعرض الأداة المستويات الثلاثة في وقت واحد.">AA：常规文本 ≥ 4.5:1，大文本（≥18pt 或 ≥14pt 加粗）≥ 3:1。AAA：常规 7:1，大文本 4.5:1。本工具同时显示文本/大文本/UI 三档判定。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="为什么我的 HEX 输入是 #fff 但显示成 #FFFFFF？" data-faq-en="Why does #fff become #FFFFFF?" data-faq-ar="لماذا يصبح #fff هو #FFFFFF؟">为什么我的 HEX 输入是 #fff 但显示成 #FFFFFF？</div><div class="faq-a" data-faq-zh="#fff 是 #ffffff 的 CSS 简写。本工具内部规范化成 6 位输出，但你可以直接复制其他色彩空间字段。" data-faq-en="#fff is the CSS shorthand for #ffffff. The tool normalizes to 6 digits internally; copy other format fields if you prefer." data-faq-ar="#fff هو الاختصار في CSS لـ #ffffff. تطبّع الأداة إلى 6 أرقام داخلياً؛ يمكنك نسخ حقول الصيغ الأخرى إذا فضّلتَ ذلك.">#fff 是 #ffffff 的 CSS 简写。本工具内部规范化成 6 位输出，但你可以直接复制其他色彩空间字段。</div></div>
+      <div class="faq-item"><div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are inputs uploaded?" data-faq-ar="هل يتم رفع المدخلات؟">数据会上传到服务器吗？</div><div class="faq-a" data-faq-zh="不会。所有色彩计算都在你的浏览器内完成（纯 JS 矩阵运算），输入从不离开你的设备。" data-faq-en="No. All math is in-browser pure JS. Nothing leaves your device." data-faq-ar="لا. جميع العمليات الحسابية تعمل في المتصفح بـ JavaScript خالص. لا شيء يغادر جهازك.">不会。所有色彩计算都在你的浏览器内完成（纯 JS 矩阵运算），输入从不离开你的设备。</div></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="image-convert.html" class="related-card"><span>🖼</span><span data-i18n-related="图片格式转换|Image Convert|Image">图片格式转换</span></a>
+    <a href="qrcode.html" class="related-card"><span>▣</span><span data-i18n-related="二维码|QR Code|QR">二维码</span></a>
+    <a href="hex.html" class="related-card"><span>0x</span><span data-i18n-related="进制 / HEX 桥|Base/HEX|Base/HEX">进制 / HEX 桥</span></a>
+    <a href="json-formatter.html" class="related-card"><span>{}</span><span data-i18n-related="JSON 格式化|JSON|JSON">JSON 格式化</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'颜色转换器','page.h1':'HEX ↔ RGB ↔ HSL ↔ OKLCH<br><em>颜色转换 + 调色板 + WCAG</em>','page.sub':'四种色彩空间多向同步换算，色板可视化与 HSL 滑块，自动生成 50–950 tints/shades 色阶 + 互补 / 三色和谐板，WCAG 2.1 AA / AAA 对比度即时判定。所有处理在浏览器本地完成。','sec.tints':'TINTS & SHADES (Tailwind-like 50–950, OKLCH-based)','sec.harmony':'HARMONY (互补 / 类比 / 三色 / 四色 / 分裂互补)','sec.contrast':'CONTRAST (WCAG 2.1)','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Color Converter','page.h1':'HEX ↔ RGB ↔ HSL ↔ OKLCH<br><em>palette + WCAG</em>','page.sub':'Four-space color sync, HSL sliders, auto 50–950 tints/shades + harmony palettes, WCAG 2.1 AA/AAA contrast verdict. All in your browser.','sec.tints':'TINTS & SHADES (Tailwind-like 50–950, OKLCH)','sec.harmony':'HARMONY (complementary / analogous / triadic / tetradic / split)','sec.contrast':'CONTRAST (WCAG 2.1)','sub.title':'🔔 Get notified','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'محول الألوان','page.h1':'HEX ↔ RGB ↔ HSL ↔ OKLCH','page.sub':'تحويل الألوان وWCAG محلياً.','sec.tints':'درجات','sec.harmony':'تناغم','sec.contrast':'تباين','sub.title':'🔔 أخبرني','sub.sub':'اشترك','sub.btn':'اشتراك','sub.ok':'✓ تم!','sub.support':'الأدوات مجانية ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+
+// ── Color math ──────────────────────────────────────────
+const clamp = (v, a=0, b=1) => Math.min(b, Math.max(a, v));
+function srgbToLinear(c){ c /= 255; return c <= 0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+function linearToSrgb(c){ const v = c <= 0.0031308 ? 12.92*c : 1.055*Math.pow(c, 1/2.4) - 0.055; return Math.round(clamp(v)*255); }
+
+function rgbToHex({r,g,b,a=1}){
+  const h = n => n.toString(16).padStart(2, '0').toUpperCase();
+  let s = '#' + h(r) + h(g) + h(b);
+  if(a < 1) s += h(Math.round(a*255));
+  return s;
+}
+function hexToRgb(s){
+  let m = s.trim().replace(/^#/, '');
+  if(/^[0-9a-f]{3}$/i.test(m)) m = [...m].map(c => c+c).join('');
+  if(/^[0-9a-f]{4}$/i.test(m)) m = [...m].map(c => c+c).join('');
+  if(!/^[0-9a-f]{6}([0-9a-f]{2})?$/i.test(m)) throw new Error('无效 HEX (期望 #RGB / #RRGGBB / #RRGGBBAA)');
+  const r = parseInt(m.slice(0,2), 16), g = parseInt(m.slice(2,4), 16), b = parseInt(m.slice(4,6), 16);
+  const a = m.length === 8 ? parseInt(m.slice(6,8), 16)/255 : 1;
+  return { r, g, b, a };
+}
+function rgbStr({r,g,b,a=1}){
+  return a < 1 ? `rgba(${r}, ${g}, ${b}, ${(+a.toFixed(3))})` : `rgb(${r}, ${g}, ${b})`;
+}
+function parseRgb(s){
+  const m = s.match(/rgba?\s*\(\s*([0-9.]+)\s*[, ]\s*([0-9.]+)\s*[, ]\s*([0-9.]+)\s*(?:[,/ ]\s*([0-9.%]+))?\s*\)/i);
+  if(!m) throw new Error('无效 RGB (期望 rgb(r,g,b) 或 rgba(r,g,b,a))');
+  const r = Math.round(+m[1]), g = Math.round(+m[2]), b = Math.round(+m[3]);
+  let a = 1;
+  if(m[4]) a = m[4].endsWith('%') ? parseFloat(m[4])/100 : +m[4];
+  return { r, g, b, a };
+}
+
+// HSL  (CSS standard sRGB-based HSL)
+function rgbToHsl({r,g,b,a=1}){
+  const rn = r/255, gn = g/255, bn = b/255;
+  const max = Math.max(rn,gn,bn), min = Math.min(rn,gn,bn);
+  let h = 0, s = 0; const l = (max + min) / 2;
+  if(max !== min){
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch(max){
+      case rn: h = (gn - bn) / d + (gn < bn ? 6 : 0); break;
+      case gn: h = (bn - rn) / d + 2; break;
+      case bn: h = (rn - gn) / d + 4; break;
+    }
+    h *= 60;
+  }
+  return { h, s: s*100, l: l*100, a };
+}
+function hslToRgb({h, s, l, a=1}){
+  h = ((h % 360) + 360) % 360; s/=100; l/=100;
+  const c = (1 - Math.abs(2*l - 1)) * s;
+  const x = c * (1 - Math.abs(((h/60) % 2) - 1));
+  const m = l - c/2;
+  let r=0,g=0,b=0;
+  if(h<60){ r=c; g=x; }
+  else if(h<120){ r=x; g=c; }
+  else if(h<180){ g=c; b=x; }
+  else if(h<240){ g=x; b=c; }
+  else if(h<300){ r=x; b=c; }
+  else          { r=c; b=x; }
+  return { r: Math.round((r+m)*255), g: Math.round((g+m)*255), b: Math.round((b+m)*255), a };
+}
+function hslStr({h,s,l,a=1}){
+  const out = `hsl(${+h.toFixed(1)}, ${+s.toFixed(1)}%, ${+l.toFixed(1)}%)`;
+  return a < 1 ? out.replace('hsl(', 'hsla(').replace(')', `, ${+a.toFixed(3)})`) : out;
+}
+function parseHsl(s){
+  const m = s.match(/hsla?\s*\(\s*([\-0-9.]+)(?:deg)?\s*[, ]\s*([0-9.]+)%\s*[, ]\s*([0-9.]+)%\s*(?:[,/ ]\s*([0-9.%]+))?\s*\)/i);
+  if(!m) throw new Error('无效 HSL (期望 hsl(h, s%, l%))');
+  let a = 1;
+  if(m[4]) a = m[4].endsWith('%') ? parseFloat(m[4])/100 : +m[4];
+  return { h: +m[1], s: +m[2], l: +m[3], a };
+}
+
+// OKLCH ↔ linear sRGB (Björn Ottosson's transform)
+function rgbToOklch({r,g,b,a=1}){
+  const lr = srgbToLinear(r), lg = srgbToLinear(g), lb = srgbToLinear(b);
+  const L_ = Math.cbrt(0.4122214708*lr + 0.5363325363*lg + 0.0514459929*lb);
+  const M_ = Math.cbrt(0.2119034982*lr + 0.6806995451*lg + 0.1073969566*lb);
+  const S_ = Math.cbrt(0.0883024619*lr + 0.2817188376*lg + 0.6299787005*lb);
+  const L = 0.2104542553*L_ + 0.7936177850*M_ - 0.0040720468*S_;
+  const A = 1.9779984951*L_ - 2.4285922050*M_ + 0.4505937099*S_;
+  const B = 0.0259040371*L_ + 0.7827717662*M_ - 0.8086757660*S_;
+  const C = Math.sqrt(A*A + B*B);
+  let H = Math.atan2(B, A) * 180/Math.PI;
+  if(H < 0) H += 360;
+  return { L, C, h: H, a };
+}
+function oklchToRgb({L, C, h, a=1}){
+  const A = C * Math.cos(h * Math.PI/180);
+  const B = C * Math.sin(h * Math.PI/180);
+  const L_ = (L + 0.3963377774*A + 0.2158037573*B) ** 3;
+  const M_ = (L - 0.1055613458*A - 0.0638541728*B) ** 3;
+  const S_ = (L - 0.0894841775*A - 1.2914855480*B) ** 3;
+  const lr =  4.0767416621*L_ - 3.3077115913*M_ + 0.2309699292*S_;
+  const lg = -1.2684380046*L_ + 2.6097574011*M_ - 0.3413193965*S_;
+  const lb = -0.0041960863*L_ - 0.7034186147*M_ + 1.7076147010*S_;
+  return { r: linearToSrgb(lr), g: linearToSrgb(lg), b: linearToSrgb(lb), a };
+}
+function oklchStr({L, C, h, a=1}){
+  const out = `oklch(${(L*100).toFixed(1)}% ${C.toFixed(3)} ${h.toFixed(1)})`;
+  return a < 1 ? out.replace(')', ` / ${+a.toFixed(3)})`) : out;
+}
+function parseOklch(s){
+  const m = s.match(/oklch\s*\(\s*([0-9.]+%?)\s+([0-9.]+)\s+([\-0-9.]+)(?:deg)?\s*(?:\/\s*([0-9.%]+))?\s*\)/i);
+  if(!m) throw new Error('无效 OKLCH (期望 oklch(L C h) 或 oklch(L% C h))');
+  let L = m[1].endsWith('%') ? parseFloat(m[1])/100 : +m[1];
+  if(L > 1.5) L = L/100; // tolerate "58" without %
+  return { L, C: +m[2], h: +m[3], a: m[4] ? (m[4].endsWith('%')?parseFloat(m[4])/100:+m[4]) : 1 };
+}
+
+// ── State + sync ─────────────────────────────────────────
+let cur = { r: 0xd4, g: 0x44, b: 0x0a, a: 1 };
+
+function clearInvalid(){ document.querySelectorAll('.field-card').forEach(c => c.classList.remove('invalid')); $('errBox').classList.add('hidden'); }
+function showErr(msg){ $('errBox').textContent = '错误：' + msg; $('errBox').classList.remove('hidden'); }
+
+function syncAll(except){
+  const hex   = rgbToHex(cur);
+  const rgb   = rgbStr(cur);
+  const hsl   = rgbToHsl(cur);
+  const oklch = rgbToOklch(cur);
+  const set = (id, val) => { if(id !== except && document.activeElement !== $(id)) $(id).value = val; };
+  set('in_hex', hex);
+  set('in_rgb', rgb);
+  set('in_hsl', hslStr(hsl));
+  set('in_oklch', oklchStr(oklch));
+
+  // swatch
+  $('swatch').style.background = rgb;
+  $('swatchTag').textContent = hex;
+
+  // sliders
+  $('hSld').value = hsl.h.toFixed(1); $('hVal').textContent = hsl.h.toFixed(0) + '°';
+  $('sSld').value = hsl.s.toFixed(1); $('sVal').textContent = hsl.s.toFixed(0) + '%';
+  $('lSld').value = hsl.l.toFixed(1); $('lVal').textContent = hsl.l.toFixed(0) + '%';
+
+  renderPalette(oklch);
+  renderHarmony(hsl);
+  renderContrast(cur);
+  clearInvalid();
+}
+
+function renderPalette(oklch){
+  // Tailwind-like 11 stops with target L from 0.985 down to 0.18
+  const stops = [{ name: 50, L: 0.985 }, { name: 100, L: 0.96 }, { name: 200, L: 0.91 }, { name: 300, L: 0.83 }, { name: 400, L: 0.71 }, { name: 500, L: 0.6 }, { name: 600, L: 0.52 }, { name: 700, L: 0.43 }, { name: 800, L: 0.35 }, { name: 900, L: 0.27 }, { name: 950, L: 0.18 }];
+  const row = $('paletteRow'); row.innerHTML = '';
+  for(const s of stops){
+    // Decay chroma at extremes so we stay in sRGB gamut
+    const chromaScale = 1 - 4 * (s.L - 0.5) ** 2;
+    const C = oklch.C * Math.max(0.15, chromaScale);
+    const rgb = oklchToRgb({ L: s.L, C, h: oklch.h, a: 1 });
+    const hex = rgbToHex(rgb);
+    const cell = document.createElement('div');
+    cell.className = 'palette-cell';
+    cell.style.background = hex;
+    cell.style.color = s.L > 0.55 ? '#000' : '#fff';
+    cell.textContent = s.name;
+    cell.title = hex + ' · stop ' + s.name;
+    cell.onclick = () => { cur = rgb; syncAll(); };
+    row.appendChild(cell);
+  }
+}
+
+function renderHarmony(hsl){
+  const harms = [
+    { name: '互补 / Complementary', shifts: [0, 180] },
+    { name: '类比 / Analogous',     shifts: [-30, 0, 30] },
+    { name: '三色 / Triadic',       shifts: [0, 120, 240] },
+    { name: '四色 / Tetradic',      shifts: [0, 90, 180, 270] },
+    { name: '分裂互补 / Split',     shifts: [0, 150, 210] }
+  ];
+  const row = $('harmonyRow'); row.innerHTML = '';
+  for(const h of harms){
+    const cell = document.createElement('div');
+    cell.className = 'harmony-cell';
+    const colors = h.shifts.map(s => rgbStr(hslToRgb({ h: hsl.h + s, s: hsl.s, l: hsl.l, a: 1 })));
+    cell.style.background = `linear-gradient(90deg, ${colors.join(', ')})`;
+    cell.innerHTML = `<strong>${h.name}</strong><span>${h.shifts.length} 色</span>`;
+    cell.onclick = () => { /* harmony cells are display-only for now */ };
+    row.appendChild(cell);
+  }
+}
+
+// WCAG relative luminance (sRGB)
+function relativeLuminance({r,g,b}){
+  return 0.2126 * srgbToLinear(r) + 0.7152 * srgbToLinear(g) + 0.0722 * srgbToLinear(b);
+}
+function contrastRatio(c1, c2){
+  const L1 = relativeLuminance(c1), L2 = relativeLuminance(c2);
+  const [a, b] = L1 > L2 ? [L1, L2] : [L2, L1];
+  return (a + 0.05) / (b + 0.05);
+}
+function verdictText(ratio){
+  const tag = (label, threshold) => ratio >= threshold
+    ? `<span class="tag-pass">${label} ✓</span>`
+    : `<span class="tag-fail">${label} ✗</span>`;
+  return `${tag('AA-text', 4.5)} · ${tag('AA-large', 3)} · ${tag('AAA-text', 7)} · UI ${tag('3:1', 3)}`;
+}
+function renderContrast(rgb){
+  const onWhite = contrastRatio(rgb, { r:255, g:255, b:255 });
+  const onBlack = contrastRatio(rgb, { r:0, g:0, b:0 });
+  $('contrastWhite').style.background = '#fff';
+  $('contrastWhite').style.color = rgbStr(rgb);
+  $('contrastBlack').style.background = '#000';
+  $('contrastBlack').style.color = rgbStr(rgb);
+  $('statsWhite').innerHTML = `${onWhite.toFixed(2)}:1 · ${verdictText(onWhite)}`;
+  $('statsBlack').innerHTML = `${onBlack.toFixed(2)}:1 · ${verdictText(onBlack)}`;
+}
+
+// ── Field input handling ────────────────────────────────
+function trySet(id, parser, fn){
+  const el = $(id);
+  el.addEventListener('input', () => {
+    const v = el.value.trim();
+    if(!v){ el.parentElement.classList.remove('invalid'); return; }
+    try{
+      const parsed = parser(v);
+      cur = fn(parsed);
+      el.parentElement.classList.remove('invalid');
+      $('errBox').classList.add('hidden');
+      syncAll(id);
+    }catch(e){
+      el.parentElement.classList.add('invalid');
+      showErr(e.message);
+    }
+  });
+}
+trySet('in_hex',   hexToRgb,    p => p);
+trySet('in_rgb',   parseRgb,    p => p);
+trySet('in_hsl',   parseHsl,    p => hslToRgb(p));
+trySet('in_oklch', parseOklch,  p => oklchToRgb(p));
+
+['hSld','sSld','lSld'].forEach(id => $(id).addEventListener('input', () => {
+  const h = +$('hSld').value, s = +$('sSld').value, l = +$('lSld').value;
+  cur = hslToRgb({ h, s, l, a: cur.a });
+  syncAll();
+}));
+
+document.querySelectorAll('.copy-mini').forEach(b => b.addEventListener('click', async () => {
+  const v = $(b.dataset.copy).value;
+  try{ await navigator.clipboard.writeText(v); b.textContent = '✓'; setTimeout(()=>b.textContent='复制', 800); }catch(_){}
+}));
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+syncAll();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

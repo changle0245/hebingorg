@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64编解码在线 - 免费文本与文件Base64转换 | hebing.org</title>
+<meta name="description" content="免费在线 Base64 编解码工具，支持文本与文件、URL-safe 变体、自动检测 UTF-8。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="base64编码,base64解码,base64在线,文件转base64,base64转图片,url-safe base64">
+<link rel="canonical" href="https://hebing.org/base64.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="Base64编解码在线免费 | hebing.org">
+<meta property="og:url" content="https://hebing.org/base64.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/base64.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/base64.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/base64.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:560px;}
+.tool-wrap{padding:28px 0;}
+.mode-tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;width:fit-content;margin-bottom:14px;}
+.mode-tab{padding:8px 18px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);font-family:var(--font-sans);font-weight:500;}
+.mode-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:38px;padding:0 16px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.t-sep{flex:1;}
+.t-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);user-select:none;cursor:pointer;}
+.t-check input{cursor:pointer;}
+.t-check.hidden{display:none!important;}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:760px){.editor-grid{grid-template-columns:1fr;}}
+.editor-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.editor-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.editor-head .e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.editor-area{width:100%;min-height:340px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;word-break:break-all;}
+.editor-area.output{background:var(--gray-100);}
+.file-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:24px 20px;text-align:center;cursor:pointer;background:var(--gray-100);position:relative;margin-bottom:14px;}
+.file-zone:hover,.file-zone.drag-over{border-color:var(--black);background:var(--white);}
+.file-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.file-zone.hidden{display:none!important;}
+.fz-icon{font-size:28px;margin-bottom:8px;line-height:1;}
+.fz-label{font-size:14px;color:var(--black);font-weight:500;}
+.fz-sub{font-size:12px;color:var(--gray-400);margin-top:4px;}
+.file-info{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:14px;}
+.file-info.hidden{display:none!important;}
+.fi-name{flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.fi-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+.fi-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;}
+.fi-del:hover{color:#b91c1c;}
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.success-box{padding:12px 16px;background:var(--success-bg);border:1px solid #bbf7d0;border-radius:var(--radius-lg);font-size:13px;color:var(--success);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.success-box.hidden{display:none!important;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .file-zone{background:var(--gray-100);}
+  .editor-area{background:var(--white);color:var(--black);}
+  .editor-area.output{background:var(--gray-100);}
+  .mode-tab.active{background:var(--gray-200);box-shadow:none;}
+  .subscribe-input{background:var(--gray-100);}
+  .scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .success-box{border-color:#14532d;}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org Base64 编解码",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/base64.html",
+  "description": "免费在线 Base64 文本与文件编解码工具，支持 UTF-8、URL-safe 变体、Data URI 输出、文件上传转 Base64、Base64 反向下载为文件。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["文本 ↔ Base64", "文件 ↔ Base64（任意类型）", "URL-safe Base64", "无填充模式", "Data URI 输出", "UTF-8 安全编码"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费进行 Base64 编码与解码",
+  "description": "使用 hebing.org 在浏览器本地完成 Base64 文本或文件编解码，支持 URL-safe 变体。",
+  "totalTime": "PT10S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "选择模式", "text": "顶部切换「文本」或「文件」模式。" },
+    { "@type": "HowToStep", "position": 2, "name": "输入内容", "text": "粘贴文本或拖拽文件到上传区。" },
+    { "@type": "HowToStep", "position": 3, "name": "点击编码或解码", "text": "选择 URL-safe / 无填充等选项后点击编码或解码按钮。" },
+    { "@type": "HowToStep", "position": 4, "name": "复制或下载", "text": "复制结果到剪贴板，或下载为文件。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Base64 编解码", "item": "https://hebing.org/base64.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "支持中文等多字节字符吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "支持。本工具使用 TextEncoder('utf-8') 处理字符串，所有 Unicode 字符（中文、emoji、阿拉伯文）都会以 UTF-8 字节序列正确编解码，与 Java/Python/Go 的标准 Base64 行为一致。" }
+    },
+    {
+      "@type": "Question",
+      "name": "URL-safe Base64 是什么？",
+      "acceptedAnswer": { "@type": "Answer", "text": "标准 Base64 含有 + / = 三个在 URL 中需要转义的字符。URL-safe 变体（RFC 4648 §5）将 + 替换为 -、/ 替换为 _，可选去掉填充字符 =，便于直接放入 URL、文件名、JWT。" }
+    },
+    {
+      "@type": "Question",
+      "name": "可以编解码图片或 PDF 等二进制文件吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以。切换到「文件」模式上传任意类型文件即可生成 Base64 字符串（含 Data URI），反向解码后会作为文件下载。完全在浏览器本地运行。" }
+    },
+    {
+      "@type": "Question",
+      "name": "数据会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有处理都在你的浏览器内完成（btoa / atob + TextEncoder + FileReader），输入内容从不离开你的设备。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">Base64 编解码</span></div>
+  <h1 class="page-title" data-i18n="page.h1">Base64 编解码<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">文本与文件双模式 Base64 编解码，支持 UTF-8、URL-safe 变体、Data URI 输出。所有处理在浏览器本地完成。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabText" onclick="setMode('text')" data-i18n="mode.text">📝 文本</button>
+    <button class="mode-tab" id="tabFile" onclick="setMode('file')" data-i18n="mode.file">📎 文件</button>
+  </div>
+
+  <div class="toolbar">
+    <button class="t-btn" id="btnEncode" data-i18n="btn.encode">编码 ▶</button>
+    <button class="t-btn" id="btnDecode" data-i18n="btn.decode">◀ 解码</button>
+    <span class="t-sep"></span>
+    <label class="t-check"><input type="checkbox" id="urlSafe"><span data-i18n="opt.urlsafe">URL-safe（-_）</span></label>
+    <label class="t-check"><input type="checkbox" id="noPad"><span data-i18n="opt.nopad">去掉填充 =</span></label>
+    <label class="t-check hidden" id="dataUriLbl"><input type="checkbox" id="dataUri"><span data-i18n="opt.datauri">输出 Data URI</span></label>
+  </div>
+
+  <!-- File mode: file picker -->
+  <div class="file-zone hidden" id="fileZone">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel">
+    <div class="fz-icon">📎</div>
+    <div class="fz-label" id="dropLabel" data-i18n="file.label">点击选择文件，或拖拽到此处</div>
+    <div class="fz-sub" data-i18n="file.sub">任意类型 · 文件不上传服务器</div>
+  </div>
+  <div class="file-info hidden" id="fileInfo">
+    <span style="font-size:18px">📄</span>
+    <div style="flex:1;min-width:0">
+      <div class="fi-name" id="fName"></div>
+      <div class="fi-size" id="fMeta"></div>
+    </div>
+    <span class="fi-del" onclick="clearFile()">✕</span>
+  </div>
+
+  <div class="editor-grid">
+    <div class="editor-pane">
+      <div class="editor-head">
+        <span data-i18n="pane.input">输入</span>
+        <span class="e-meta" id="inMeta"></span>
+      </div>
+      <textarea class="editor-area" id="inputArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="hebing.org 是一个隐私优先的工具箱"></textarea>
+    </div>
+    <div class="editor-pane">
+      <div class="editor-head">
+        <span data-i18n="pane.output">输出</span>
+        <span class="e-meta" id="outMeta"></span>
+      </div>
+      <textarea class="editor-area output" id="outputArea" spellcheck="false" readonly placeholder=""></textarea>
+    </div>
+  </div>
+
+  <div class="success-box hidden" id="okBox">
+    <span>✓</span>
+    <span id="okText"></span>
+  </div>
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="toolbar">
+    <button class="t-btn secondary" id="btnSwap" data-i18n="btn.swap">⇅ 交换输入输出</button>
+    <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+    <span class="t-sep"></span>
+    <button class="t-btn secondary" id="btnCopy" data-i18n="btn.copy">复制结果</button>
+    <button class="t-btn secondary" id="btnDownload" data-i18n="btn.download">下载结果</button>
+  </div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="Base64 的常见使用场景" data-en="Common Use Cases">Base64 的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🔗</div><div class="scene-title" data-scene-zh="API 传输二进制数据" data-scene-en="Binary in APIs">API 传输二进制数据</div><div class="scene-desc" data-scene-zh="JSON 和 XML 不能直接承载二进制，需先 Base64 编码再放入 string 字段，接收端解码还原。" data-scene-en="JSON/XML can't hold raw binary — encode to Base64 first, decode on the receiver side.">JSON 和 XML 不能直接承载二进制，需先 Base64 编码再放入 string 字段，接收端解码还原。</div></div>
+      <div class="scene-card"><div class="scene-icon">🖼️</div><div class="scene-title" data-scene-zh="图片内联到 HTML/CSS" data-scene-en="Inline Images">图片内联到 HTML/CSS</div><div class="scene-desc" data-scene-zh="把小图标编为 Data URI 直接写入 CSS 或 HTML，减少一次 HTTP 请求。" data-scene-en="Encode small icons as Data URI to inline in CSS/HTML and skip an HTTP request.">把小图标编为 Data URI 直接写入 CSS 或 HTML，减少一次 HTTP 请求。</div></div>
+      <div class="scene-card"><div class="scene-icon">🎫</div><div class="scene-title" data-scene-zh="JWT / 签名" data-scene-en="JWT / Signing">JWT / 签名</div><div class="scene-desc" data-scene-zh="JWT 三段式 token 内部使用 URL-safe Base64 编码 header、payload、signature。" data-scene-en="JWT's three segments are URL-safe Base64 encoded for header, payload, signature.">JWT 三段式 token 内部使用 URL-safe Base64 编码 header、payload、signature。</div></div>
+      <div class="scene-card"><div class="scene-icon">📧</div><div class="scene-title" data-scene-zh="邮件附件" data-scene-en="Email Attachments">邮件附件</div><div class="scene-desc" data-scene-zh="MIME 邮件标准用 Base64 编码二进制附件，本工具能解码 .eml 中的附件部分。" data-scene-en="MIME emails encode binary attachments as Base64 — this tool can decode payloads from .eml.">MIME 邮件标准用 Base64 编码二进制附件，本工具能解码 .eml 中的附件部分。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>UTF-8 安全</strong>：本工具用 TextEncoder 处理字符串，中文、emoji、阿拉伯文等多字节字符都能正确编解码（普通 <code>btoa</code> 会报错）。</li>
+      <li><strong>URL-safe</strong>：勾选后会把 + 替换为 -、/ 替换为 _，适合 URL 参数、文件名、JWT。</li>
+      <li><strong>Data URI 模式</strong>：文件编码时勾选「输出 Data URI」会输出 <code>data:image/png;base64,...</code> 形式，可直接放入 <code>&lt;img src&gt;</code> 或 CSS。</li>
+      <li><strong>反向下载</strong>：把 Base64 字符串粘到输入区点「解码」，然后点「下载结果」可保存为文件。</li>
+      <li>编码后体积约为原始的 4/3（增加 33%），解码后恢复原始大小。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>UTF-8 safe</strong>: built on TextEncoder, so Chinese, emoji and Arabic characters encode correctly (plain <code>btoa</code> fails on these).</li>
+      <li><strong>URL-safe</strong>: replaces + with - and / with _ — perfect for URLs, filenames, and JWTs.</li>
+      <li><strong>Data URI mode</strong>: in file mode, enable "Output Data URI" to get <code>data:image/png;base64,...</code> form, ready to drop into <code>&lt;img src&gt;</code> or CSS.</li>
+      <li><strong>Reverse download</strong>: paste a Base64 string, click Decode, then "Download result" to save as a file.</li>
+      <li>Encoded size is ~4/3 of original (+33%); decoding restores the original size.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>آمن لـ UTF-8: مبني على TextEncoder، لذا تُشفَّر الصينية والرموز التعبيرية والعربية بشكل صحيح (btoa العادي يفشل في هذه).</li><li>آمن لعناوين URL: يستبدل + بـ - و / بـ _ — مثالي لعناوين URL وأسماء الملفات و JWT.</li><li>وضع Data URI: في وضع الملف، فعّل "إخراج Data URI" للحصول على صيغة data:image/png;base64,... جاهزة للإسقاط في &lt;img src&gt; أو CSS.</li><li>تنزيل عكسي: الصق سلسلة Base64، انقر فك التشفير، ثم "تنزيل النتيجة" لحفظها كملف.</li><li>الحجم المشفّر ~4/3 من الأصلي (+33٪)؛ فك التشفير يعيد الحجم الأصلي.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持中文等多字节字符吗？" data-faq-en="Does it handle non-ASCII like Chinese?" data-faq-ar="هل يتعامل مع الأحرف غير اللاتينية مثل الصينية؟">支持中文等多字节字符吗？</div>
+        <div class="faq-a" data-faq-zh="支持。本工具使用 TextEncoder('utf-8') 把字符串先转为 UTF-8 字节序列再做 Base64，所有 Unicode 字符（中文、emoji、阿拉伯文等）都能正确编解码，与 Java、Python、Go 等语言标准库行为一致。" data-faq-en="Yes. The tool runs strings through TextEncoder('utf-8') before Base64, so any Unicode (Chinese, emoji, Arabic) round-trips correctly — matching Java / Python / Go standard libraries." data-faq-ar="نعم. تستخدم الأداة TextEncoder('utf-8') قبل Base64، لذا تُشفَّر جميع أحرف Unicode (الصينية، الرموز التعبيرية، العربية) بشكل صحيح — بنفس سلوك مكتبات Java و Python و Go.">支持。本工具使用 TextEncoder('utf-8') 把字符串先转为 UTF-8 字节序列再做 Base64，所有 Unicode 字符（中文、emoji、阿拉伯文等）都能正确编解码，与 Java、Python、Go 等语言标准库行为一致。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="URL-safe Base64 是什么？" data-faq-en="What is URL-safe Base64?" data-faq-ar="ما هو Base64 الآمن لعناوين URL؟">URL-safe Base64 是什么？</div>
+        <div class="faq-a" data-faq-zh="标准 Base64 含 + / = 三个字符，在 URL、文件名、JWT 中需要转义。URL-safe 变体（RFC 4648 §5）把 + 替换为 -、/ 替换为 _，可选去掉填充字符 =，可直接嵌入 URL 而无需 percent-encode。" data-faq-en="Standard Base64 uses + / = which need escaping in URLs, filenames, and JWTs. The URL-safe variant (RFC 4648 §5) substitutes - for + and _ for /, and optionally drops the = padding, so the output drops straight into a URL." data-faq-ar="يستخدم Base64 القياسي + / = التي تتطلب الهروب في عناوين URL وأسماء الملفات و JWT. يستبدل المتغير الآمن لـ URL (RFC 4648 §5) - بدلاً من + و _ بدلاً من /، ويحذف اختيارياً الحشو =، فيخرج النص جاهزاً للإدراج المباشر في عنوان URL.">标准 Base64 含 + / = 三个字符，在 URL、文件名、JWT 中需要转义。URL-safe 变体（RFC 4648 §5）把 + 替换为 -、/ 替换为 _，可选去掉填充字符 =，可直接嵌入 URL 而无需 percent-encode。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="可以编解码图片或 PDF 等二进制文件吗？" data-faq-en="Does it handle binary files (images / PDF)?" data-faq-ar="هل يتعامل مع الملفات الثنائية (صور / PDF)؟">可以编解码图片或 PDF 等二进制文件吗？</div>
+        <div class="faq-a" data-faq-zh="可以。切换到「文件」模式上传任意类型文件即可生成 Base64 字符串，勾选「输出 Data URI」可直接得到 <code>data:image/png;base64,...</code> 形式。反向操作时将 Base64 粘到输入区点「解码」，再点「下载结果」即可保存为文件。" data-faq-en="Yes. Switch to File mode and upload any file to get the Base64 string. Enable 'Output Data URI' to get a <code>data:image/png;base64,...</code> form. To reverse, paste the Base64, click Decode, then 'Download result' to save as a file." data-faq-ar="نعم. انتقل إلى وضع الملف وارفع أي نوع من الملفات للحصول على نص Base64. فعّل &quot;إخراج Data URI&quot; للحصول على صيغة &lt;code&gt;data:image/png;base64,...&lt;/code&gt;. للعكس، الصق نص Base64، انقر &quot;فك التشفير&quot;، ثم &quot;تنزيل النتيجة&quot; لحفظها كملف.">可以。切换到「文件」模式上传任意类型文件即可生成 Base64 字符串，勾选「输出 Data URI」可直接得到 <code>data:image/png;base64,...</code> 形式。反向操作时将 Base64 粘到输入区点「解码」，再点「下载结果」即可保存为文件。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are files uploaded to a server?" data-faq-ar="هل يتم رفع الملفات إلى خادم؟">数据会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理都在你的浏览器内完成（btoa / atob + TextEncoder + FileReader），输入内容从不离开你的设备。可以放心处理含敏感字段（密钥、Token、私钥）的内容。" data-faq-en="No. Everything runs locally in your browser (btoa / atob + TextEncoder + FileReader). Your input never leaves the device — safe for secrets, tokens, and private keys." data-faq-ar="لا. كل شيء يعمل محلياً في متصفحك (btoa / atob + TextEncoder + FileReader). لا تغادر مدخلاتك الجهاز أبداً — آمن للأسرار والرموز والمفاتيح الخاصة.">不会。所有处理都在你的浏览器内完成（btoa / atob + TextEncoder + FileReader），输入内容从不离开你的设备。可以放心处理含敏感字段（密钥、Token、私钥）的内容。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span>{ }</span><span data-i18n-related="JSON格式化|JSON Formatter|منسق JSON">JSON格式化</span></a>
+    <a href="image-convert.html" class="related-card"><span>🔄</span><span data-i18n-related="图片格式转换|Image Convert|تحويل الصور">图片格式转换</span></a>
+    <a href="image-compress.html" class="related-card"><span>🗜️</span><span data-i18n-related="图片压缩|Image Compress|ضغط الصور">图片压缩</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'Base64 编解码','page.h1':'Base64 编解码<br><em>在线免费</em>','page.sub':'文本与文件双模式 Base64 编解码，支持 UTF-8、URL-safe 变体、Data URI 输出。所有处理在浏览器本地完成。','mode.text':'📝 文本','mode.file':'📎 文件','btn.encode':'编码 ▶','btn.decode':'◀ 解码','opt.urlsafe':'URL-safe（-_）','opt.nopad':'去掉填充 =','opt.datauri':'输出 Data URI','file.label':'点击选择文件，或拖拽到此处','file.sub':'任意类型 · 文件不上传服务器','pane.input':'输入','pane.output':'输出','btn.swap':'⇅ 交换输入输出','btn.clear':'清空','btn.copy':'复制结果','btn.download':'下载结果','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Base64 Encode/Decode','page.h1':'Base64 Encode / Decode<br><em>Free Online</em>','page.sub':'Text and file Base64 encode/decode with UTF-8, URL-safe variant, and Data URI output. Processed locally in your browser.','mode.text':'📝 Text','mode.file':'📎 File','btn.encode':'Encode ▶','btn.decode':'◀ Decode','opt.urlsafe':'URL-safe (-_)','opt.nopad':'No padding =','opt.datauri':'Output Data URI','file.label':'Click to select a file, or drag & drop','file.sub':'Any file type · stays on your device','pane.input':'Input','pane.output':'Output','btn.swap':'⇅ Swap I/O','btn.clear':'Clear','btn.copy':'Copy result','btn.download':'Download result','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'ترميز Base64','page.h1':'ترميز / فك ترميز Base64<br><em>مجاناً عبر الإنترنت</em>','page.sub':'ترميز/فك للنصوص والملفات مع UTF-8 و URL-safe و Data URI. تتم المعالجة محلياً في متصفحك.','mode.text':'📝 نص','mode.file':'📎 ملف','btn.encode':'ترميز ▶','btn.decode':'◀ فك','opt.urlsafe':'آمن للروابط (-_)','opt.nopad':'بدون حشو =','opt.datauri':'إخراج Data URI','file.label':'انقر لاختيار ملف، أو اسحبه هنا','file.sub':'أي نوع · يبقى على جهازك','pane.input':'إدخال','pane.output':'إخراج','btn.swap':'⇅ تبديل','btn.clear':'مسح','btn.copy':'نسخ النتيجة','btn.download':'تنزيل النتيجة','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const inEl = $('inputArea'), outEl = $('outputArea');
+const okBox = $('okBox'), errBox = $('errBox');
+
+let mode = 'text';        // 'text' | 'file'
+let pickedFile = null;     // File or null
+let pickedFileBytes = null; // Uint8Array of file bytes when in file mode
+
+function fmtBytes(n){if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(2)+' MB';}
+
+function updateMeta(){
+  $('inMeta').textContent = inEl.value ? `${inEl.value.length.toLocaleString()} chars` : '';
+  $('outMeta').textContent = outEl.value ? `${outEl.value.length.toLocaleString()} chars` : '';
+}
+inEl.addEventListener('input', () => { hideStatus(); updateMeta(); });
+
+function hideStatus(){okBox.classList.add('hidden');errBox.classList.add('hidden');}
+function showOk(text){
+  errBox.classList.add('hidden');
+  $('okText').textContent = text;
+  okBox.classList.remove('hidden');
+}
+function showErr(msg){
+  okBox.classList.add('hidden');
+  errBox.textContent = msg;
+  errBox.classList.remove('hidden');
+}
+
+// ── Base64 helpers ──────────────────────────────────────────────
+function bytesToBase64(bytes){
+  // Chunked to avoid call-stack overflow on very long inputs
+  let bin = '';
+  const CHUNK = 0x8000;
+  for(let i=0;i<bytes.length;i+=CHUNK){
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i+CHUNK));
+  }
+  return btoa(bin);
+}
+function base64ToBytes(b64){
+  // Normalize URL-safe variant + restore padding
+  let s = b64.replace(/[\s\r\n]+/g,'').replace(/-/g,'+').replace(/_/g,'/');
+  const pad = s.length % 4;
+  if(pad === 2) s += '==';
+  else if(pad === 3) s += '=';
+  else if(pad !== 0) throw new Error('Invalid Base64 length');
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+function applyVariant(b64){
+  if($('urlSafe').checked) b64 = b64.replace(/\+/g,'-').replace(/\//g,'_');
+  if($('noPad').checked) b64 = b64.replace(/=+$/,'');
+  return b64;
+}
+function utf8Encode(str){ return new TextEncoder().encode(str); }
+function utf8Decode(bytes){ return new TextDecoder('utf-8',{fatal:true}).decode(bytes); }
+
+// ── Mode switching ──────────────────────────────────────────────
+function setMode(m){
+  mode = m;
+  $('tabText').classList.toggle('active', m==='text');
+  $('tabFile').classList.toggle('active', m==='file');
+  $('fileZone').classList.toggle('hidden', m!=='file' || pickedFile);
+  $('fileInfo').classList.toggle('hidden', m!=='file' || !pickedFile);
+  $('dataUriLbl').classList.toggle('hidden', m!=='file');
+  inEl.disabled = (m==='file');
+  inEl.placeholder = m==='file' ? '' : (document.documentElement.lang==='en' ? 'Paste text here…' : '请输入文本…');
+  hideStatus();
+}
+
+function clearFile(){
+  pickedFile = null;
+  pickedFileBytes = null;
+  $('fileZone').classList.remove('hidden');
+  $('fileInfo').classList.add('hidden');
+  hideStatus();
+}
+
+// File picker
+const fileInput = $('fileInput'), fileZone = $('fileZone');
+async function handleFile(f){
+  if(!f) return;
+  pickedFile = f;
+  pickedFileBytes = new Uint8Array(await f.arrayBuffer());
+  $('fName').textContent = f.name;
+  $('fMeta').textContent = `${fmtBytes(f.size)} · ${f.type || 'binary'}`;
+  $('fileZone').classList.add('hidden');
+  $('fileInfo').classList.remove('hidden');
+  hideStatus();
+}
+fileInput.addEventListener('change', e => { handleFile(e.target.files[0]); fileInput.value=''; });
+fileZone.addEventListener('dragover', e => { e.preventDefault(); fileZone.classList.add('drag-over'); });
+fileZone.addEventListener('dragleave', () => fileZone.classList.remove('drag-over'));
+fileZone.addEventListener('drop', e => { e.preventDefault(); fileZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+
+// ── Encode ──────────────────────────────────────────────
+$('btnEncode').onclick = () => {
+  hideStatus();
+  try{
+    let bytes, b64, lang = document.documentElement.lang;
+    if(mode === 'file'){
+      if(!pickedFile) throw new Error(lang==='en'?'Please pick a file first':'请先选择文件');
+      bytes = pickedFileBytes;
+      b64 = applyVariant(bytesToBase64(bytes));
+      if($('dataUri').checked){
+        const mt = pickedFile.type || 'application/octet-stream';
+        b64 = `data:${mt};base64,${b64}`;
+      }
+      outEl.value = b64;
+      updateMeta();
+      showOk(lang==='en'?`Encoded ✓ ${fmtBytes(bytes.length)} → ${b64.length.toLocaleString()} chars`:lang==='ar'?`تم ✓`:`编码完成 ✓ ${fmtBytes(bytes.length)} → ${b64.length.toLocaleString()} 字符`);
+    }else{
+      const src = inEl.value;
+      if(!src) throw new Error(lang==='en'?'Input is empty':'输入为空');
+      bytes = utf8Encode(src);
+      b64 = applyVariant(bytesToBase64(bytes));
+      outEl.value = b64;
+      updateMeta();
+      showOk(lang==='en'?`Encoded ✓ ${bytes.length} bytes → ${b64.length} chars`:lang==='ar'?`تم ✓`:`编码完成 ✓ ${bytes.length} 字节 → ${b64.length} 字符`);
+    }
+  }catch(e){ showErr((document.documentElement.lang==='en'?'Error: ':'错误：') + e.message); }
+};
+
+// ── Decode ──────────────────────────────────────────────
+$('btnDecode').onclick = () => {
+  hideStatus();
+  const lang = document.documentElement.lang;
+  try{
+    let src = (mode === 'file') ? inEl.value : inEl.value;
+    if(!src.trim()) throw new Error(lang==='en'?'Input is empty':'输入为空');
+    // Strip data URI prefix if present
+    let mimeFromUri = null;
+    const m = src.match(/^data:([^;,]*)(;base64)?,(.*)$/s);
+    if(m){
+      mimeFromUri = m[1] || 'application/octet-stream';
+      src = m[3];
+    }
+    const bytes = base64ToBytes(src);
+    if(mode === 'file'){
+      // Decode → trigger download
+      const blob = new Blob([bytes], {type: mimeFromUri || 'application/octet-stream'});
+      // Try to infer extension
+      let ext = '';
+      const mt = mimeFromUri || '';
+      const map = {'image/png':'.png','image/jpeg':'.jpg','image/webp':'.webp','image/gif':'.gif','image/svg+xml':'.svg','application/pdf':'.pdf','application/zip':'.zip','text/plain':'.txt','application/json':'.json'};
+      ext = map[mt] || '.bin';
+      const fname = (lang==='en'?'decoded':lang==='ar'?'مفكوك':'解码结果') + ext;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fname;
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 30000);
+      outEl.value = `[${(lang==='en'?'binary downloaded':lang==='ar'?'تم تنزيل ثنائي':'已下载二进制文件')}: ${fname} · ${fmtBytes(bytes.length)}]`;
+      updateMeta();
+      showOk(lang==='en'?`Decoded ✓ ${fmtBytes(bytes.length)} downloaded as ${fname}`:lang==='ar'?`تم ✓`:`解码完成 ✓ 已下载 ${fname}（${fmtBytes(bytes.length)}）`);
+    }else{
+      // Decode → text via UTF-8
+      let text;
+      try{ text = utf8Decode(bytes); }
+      catch(_){
+        // Fallback: not valid UTF-8 — show as escaped string + offer download
+        text = Array.from(bytes).map(b=>b<0x20||b===0x7f?'\\x'+b.toString(16).padStart(2,'0'):String.fromCharCode(b)).join('');
+        showOk(lang==='en'?`Decoded ${bytes.length} bytes (not valid UTF-8 — shown escaped)`:`解码完成 ${bytes.length} 字节（非合法 UTF-8，已转义显示）`);
+        outEl.value = text;
+        updateMeta();
+        return;
+      }
+      outEl.value = text;
+      updateMeta();
+      showOk(lang==='en'?`Decoded ✓ ${text.length} chars`:lang==='ar'?`تم ✓`:`解码完成 ✓ ${text.length} 字符`);
+    }
+  }catch(e){ showErr((lang==='en'?'Error: ':'错误：') + e.message); }
+};
+
+// ── Misc ──────────────────────────────────────────────
+$('btnSwap').onclick = () => {
+  if(mode==='file'){
+    showErr(document.documentElement.lang==='en'?'Swap not available in File mode':'文件模式下不支持交换');
+    return;
+  }
+  const a = inEl.value, b = outEl.value;
+  inEl.value = b; outEl.value = a;
+  updateMeta(); hideStatus();
+};
+$('btnClear').onclick = () => {
+  inEl.value = ''; outEl.value = '';
+  if(mode==='file') clearFile();
+  updateMeta(); hideStatus();
+  inEl.focus();
+};
+$('btnCopy').onclick = async () => {
+  const lang = document.documentElement.lang;
+  if(!outEl.value){ showErr(lang==='en'?'Nothing to copy':'没有可复制的内容'); return; }
+  try{
+    await navigator.clipboard.writeText(outEl.value);
+    showOk(lang==='en'?'Copied to clipboard ✓':lang==='ar'?'تم النسخ ✓':'已复制到剪贴板 ✓');
+  }catch(_){
+    outEl.select(); document.execCommand('copy');
+    showOk(lang==='en'?'Copied to clipboard ✓':'已复制到剪贴板 ✓');
+  }
+};
+$('btnDownload').onclick = () => {
+  const lang = document.documentElement.lang;
+  if(!outEl.value){ showErr(lang==='en'?'Nothing to download':'没有可下载的内容'); return; }
+  const blob = new Blob([outEl.value], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (lang==='en'?'output':lang==='ar'?'الإخراج':'输出') + '.txt';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 30000);
+};
+
+// Cmd/Ctrl+Enter shortcut: Encode
+inEl.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+    e.preventDefault();
+    $('btnEncode').click();
+  }
+});
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+updateMeta();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

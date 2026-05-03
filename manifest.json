@@ -1,0 +1,29 @@
+{
+  "name": "hebing.org — 免费在线文件工具箱 / Free Online File Toolkit",
+  "short_name": "hebing.org",
+  "description": "30+ 款免费在线文件合并、转换、压缩、加密与开发者工具，浏览器本地处理，文件不上传服务器。30+ free file tools — merge / convert / compress / encrypt / dev utilities — all client-side, files never uploaded.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "background_color": "#fafaf8",
+  "theme_color": "#d4440a",
+  "categories": ["productivity", "utilities", "developer"],
+  "icons": [
+    { "src": "/favicon-16.png",         "sizes": "16x16",   "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-32.png",         "sizes": "32x32",   "type": "image/png", "purpose": "any" },
+    { "src": "/apple-touch-icon.png",   "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/android-chrome-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "PDF 合并 / PDF Merge", "url": "/merge-pdf.html", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] },
+    { "name": "PDF 加密 / PDF Encrypt", "url": "/pdf-encrypt.html", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] },
+    { "name": "JSON 格式化 / JSON Formatter", "url": "/json-formatter.html", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] },
+    { "name": "Hash 计算 / Hash Calculator", "url": "/hash.html", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] }
+  ]
+}

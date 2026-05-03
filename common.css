@@ -1,0 +1,97 @@
+/* hebing.org — shared styles
+ *
+ * Minimal shared styles so common.js's cookie banner works on every page without per-page
+ * <style> edits. Page-specific styles continue to live inline in each HTML file (a fuller
+ * dedup is a separate, higher-risk refactor).
+ */
+
+/* ---- Cookie consent banner ------------------------------------------------------------------ */
+.hebing-cookie-banner{
+  position:fixed;
+  left:16px;
+  right:16px;
+  bottom:16px;
+  z-index:99999;
+  max-width:860px;
+  margin:0 auto;
+  background:#0a0a0a;
+  color:#fafaf8;
+  border-radius:10px;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+  font-family:'Noto Sans SC', system-ui, sans-serif;
+  animation:hebing-cookie-in .25s ease both;
+}
+@keyframes hebing-cookie-in{
+  from{opacity:0; transform:translateY(20px);}
+  to  {opacity:1; transform:translateY(0);}
+}
+.hebing-cookie-banner[dir="rtl"]{ font-family:'Noto Sans Arabic', system-ui, sans-serif; }
+.hebing-cookie-inner{
+  padding:18px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.hebing-cookie-title{
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+.hebing-cookie-body{
+  font-size:13px;
+  line-height:1.6;
+  color:#d0cdc8;
+  margin:0;
+}
+.hebing-cookie-link{
+  color:#fafaf8;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.hebing-cookie-link:hover{ color:#e85d2a; }
+.hebing-cookie-btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-end;
+}
+.hebing-cookie-banner[dir="rtl"] .hebing-cookie-btns{ justify-content:flex-start; }
+.hebing-cookie-btn{
+  font-family:inherit;
+  font-size:13px;
+  font-weight:500;
+  padding:8px 16px;
+  border-radius:6px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:opacity .15s, background .15s, border-color .15s;
+}
+.hebing-cookie-btn-reject{
+  background:transparent;
+  color:#a09e9b;
+  border-color:#2a2a28;
+}
+.hebing-cookie-btn-reject:hover{
+  color:#fafaf8;
+  border-color:#6b6966;
+}
+.hebing-cookie-btn-analytics{
+  background:transparent;
+  color:#fafaf8;
+  border-color:#6b6966;
+}
+.hebing-cookie-btn-analytics:hover{
+  border-color:#fafaf8;
+}
+.hebing-cookie-btn-all{
+  background:#d4440a;
+  color:#fafaf8;
+}
+.hebing-cookie-btn-all:hover{ opacity:.9; }
+
+@media (max-width:520px){
+  .hebing-cookie-banner{ left:8px; right:8px; bottom:8px; }
+  .hebing-cookie-inner{ padding:14px 16px; }
+  .hebing-cookie-btns{ justify-content:stretch; }
+  .hebing-cookie-btn{ flex:1; padding:10px 12px; }
+}

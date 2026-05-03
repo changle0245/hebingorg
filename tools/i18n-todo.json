@@ -1,0 +1,1852 @@
+{
+  "faq": {
+    "base64.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "支持中文等多字节字符吗？",
+        "en": "Does it handle non-ASCII like Chinese?",
+        "ar": null
+      },
+      {
+        "zh": "支持。本工具使用 TextEncoder('utf-8') 把字符串先转为 UTF-8 字节序列再做 Base64，所有 Unicode 字符（中文、emoji、阿拉伯文等）都能正确编解码，与 Java、Python、Go 等语言标准库行为一致。",
+        "en": "Yes. The tool runs strings through TextEncoder('utf-8') before Base64, so any Unicode (Chinese, emoji, Arabic) round-trips correctly — matching Java / Python / Go standard libraries.",
+        "ar": null
+      },
+      {
+        "zh": "URL-safe Base64 是什么？",
+        "en": "What is URL-safe Base64?",
+        "ar": null
+      },
+      {
+        "zh": "标准 Base64 含 + / = 三个字符，在 URL、文件名、JWT 中需要转义。URL-safe 变体（RFC 4648 §5）把 + 替换为 -、/ 替换为 _，可选去掉填充字符 =，可直接嵌入 URL 而无需 percent-encode。",
+        "en": "Standard Base64 uses + / = which need escaping in URLs, filenames, and JWTs. The URL-safe variant (RFC 4648 §5) substitutes - for + and _ for /, and optionally drops the = padding, so the output drops straight into a URL.",
+        "ar": null
+      },
+      {
+        "zh": "可以编解码图片或 PDF 等二进制文件吗？",
+        "en": "Does it handle binary files (images / PDF)?",
+        "ar": null
+      },
+      {
+        "zh": "可以。切换到「文件」模式上传任意类型文件即可生成 Base64 字符串，勾选「输出 Data URI」可直接得到 <code>data:image/png;base64,...</code> 形式。反向操作时将 Base64 粘到输入区点「解码」，再点「下载结果」即可保存为文件。",
+        "en": "Yes. Switch to File mode and upload any file to get the Base64 string. Enable 'Output Data URI' to get a <code>data:image/png;base64,...</code> form. To reverse, paste the Base64, click Decode, then 'Download result' to save as a file.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理都在你的浏览器内完成（btoa / atob + TextEncoder + FileReader），输入内容从不离开你的设备。可以放心处理含敏感字段（密钥、Token、私钥）的内容。",
+        "en": "No. Everything runs locally in your browser (btoa / atob + TextEncoder + FileReader). Your input never leaves the device — safe for secrets, tokens, and private keys.",
+        "ar": null
+      }
+    ],
+    "color.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "OKLCH 是什么？为什么我应该关注？",
+        "en": "What is OKLCH? Why care?",
+        "ar": null
+      },
+      {
+        "zh": "OKLCH 是基于人眼感知的均匀色彩空间，2023 年进入 CSS Color Level 4。Lightness 50 的红、绿、蓝在屏幕上看起来一样亮；生成色阶时 OKLCH 不会有 HSL 那种「中间灰糊」的问题。",
+        "en": "OKLCH is a perceptually uniform color space (CSS Color Level 4, 2023). L=50 red/green/blue look equally bright. Color ramps in OKLCH avoid HSL's mid-grey muddiness.",
+        "ar": null
+      },
+      {
+        "zh": "WCAG AA 与 AAA 各对比度多少？",
+        "en": "WCAG AA vs AAA?",
+        "ar": null
+      },
+      {
+        "zh": "AA：常规文本 ≥ 4.5:1，大文本（≥18pt 或 ≥14pt 加粗）≥ 3:1。AAA：常规 7:1，大文本 4.5:1。本工具同时显示文本/大文本/UI 三档判定。",
+        "en": "AA: text ≥ 4.5:1, large text (≥18pt or ≥14pt bold) ≥ 3:1. AAA: 7:1 / 4.5:1. The tool shows all three at once.",
+        "ar": null
+      },
+      {
+        "zh": "为什么我的 HEX 输入是 #fff 但显示成 #FFFFFF？",
+        "en": "Why does #fff become #FFFFFF?",
+        "ar": null
+      },
+      {
+        "zh": "#fff 是 #ffffff 的 CSS 简写。本工具内部规范化成 6 位输出，但你可以直接复制其他色彩空间字段。",
+        "en": "#fff is the CSS shorthand for #ffffff. The tool normalizes to 6 digits internally; copy other format fields if you prefer.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有色彩计算都在你的浏览器内完成（纯 JS 矩阵运算），输入从不离开你的设备。",
+        "en": "No. All math is in-browser pure JS. Nothing leaves your device.",
+        "ar": null
+      }
+    ],
+    "diff.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "Diff 算法是什么？大文件会卡吗？",
+        "en": "What algorithm? Lag on big files?",
+        "ar": null
+      },
+      {
+        "zh": "行级用 Myers 最短编辑距离（与 git diff 一致）；行内变化用 LCS 做单词/字符级高亮。10k 行内本地秒开，>50k 行建议抽段比较。",
+        "en": "Line-level uses Myers (same as git diff). Word/char highlighting uses LCS. <10k lines is instant; >50k consider extracting sections.",
+        "ar": null
+      },
+      {
+        "zh": "为什么一模一样的代码还显示差异？",
+        "en": "Why diff on identical text?",
+        "ar": null
+      },
+      {
+        "zh": "通常是行尾、Tab/空格、BOM 不一样。勾选「忽略空白」可跳过这些；切到「字符级」可看精确位置。",
+        "en": "Usually CRLF/LF, tabs/spaces, or BOM. Toggle 'ignore whitespace' or switch to char-level to pinpoint.",
+        "ar": null
+      },
+      {
+        "zh": "能直接读 git diff 格式吗？",
+        "en": "Reads git diff format?",
+        "ar": null
+      },
+      {
+        "zh": "本工具是「双输入差异」。如果你已有 unified diff，建议 git apply 后比较前后两版更直观。",
+        "en": "Tool takes two full inputs, not unified-diff format. If you have unified diff, apply it first, then compare both versions.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。jsdiff 库在浏览器内运行，输入从不离开你的设备。",
+        "en": "No. jsdiff runs in your browser; nothing leaves your device.",
+        "ar": null
+      }
+    ],
+    "hash.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "MD5 还安全吗？",
+        "en": "Is MD5 still safe?",
+        "ar": null
+      },
+      {
+        "zh": "不安全。MD5 自 2004 年起已发现实际碰撞攻击（可以构造两个不同输入产生同样 hash），不再适合密码存储、数字签名等安全场景。但作为非安全用途的完整性校验（如下载文件比对、缓存 key、去重）依然广泛使用。安全场景请使用 SHA-256 及以上。",
+        "en": "No. MD5 has had practical collision attacks since 2004 — it's unsafe for password storage or digital signatures. It's still widely used for non-security integrity checks (download verification, cache keys, dedup). Use SHA-256 or above for security-sensitive contexts.",
+        "ar": null
+      },
+      {
+        "zh": "支持大文件吗？",
+        "en": "Can it handle large files?",
+        "ar": null
+      },
+      {
+        "zh": "支持。SubtleCrypto.digest 一次性吞入整个文件，受限于浏览器可用内存，单文件建议不超过 1GB。在大多数现代设备上每秒可处理数百 MB（SHA-256/512），MD5 略慢一些。",
+        "en": "Yes. SubtleCrypto.digest takes the whole file at once — limited by available browser memory, so we suggest <1GB per file. Modern devices process hundreds of MB/s for SHA-256/512; MD5 is slightly slower.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。SHA-1/256/384/512 通过原生 SubtleCrypto API 在浏览器内完成；MD5 在你点击「计算」时按需懒加载小型纯 JS 库（js-md5）在本地计算。文件从不上传服务器。",
+        "en": "No. SHA-1/256/384/512 use the browser's native SubtleCrypto API. MD5 lazy-loads a small pure-JS library (js-md5) on click and runs locally. Files never leave your device.",
+        "ar": null
+      },
+      {
+        "zh": "为什么不同工具的 Hash 结果有时不同？",
+        "en": "Why do other tools sometimes give different hashes?",
+        "ar": null
+      },
+      {
+        "zh": "因为输入字节不一致：行尾差异（CRLF vs LF）、文本编码（UTF-8 vs UTF-8 BOM vs GBK）、隐藏空白字符、文件末尾是否有换行等。本工具默认按 UTF-8（无 BOM）编码字符串，与 Java、Python、Go、Linux md5sum 完全一致。",
+        "en": "Because input bytes differ: line endings (CRLF vs LF), encoding (UTF-8 vs UTF-8-BOM vs GBK), hidden whitespace, trailing newline. This tool encodes strings as UTF-8 without BOM, matching Java, Python, Go, and Linux md5sum.",
+        "ar": null
+      }
+    ],
+    "hex.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "为什么我的二进制 11111111 转十进制是 255 而不是 -1？",
+        "en": "Why is binary 11111111 decoded as 255 and not −1?",
+        "ar": null
+      },
+      {
+        "zh": "默认按「无符号」解析，11111111 (8-bit) 即 255。如果你想要二补码下的 -1，把位宽切到 8-bit 并切到「有符号」即可看到 -1。位宽超出范围时输入框会变红提示。",
+        "en": "Default mode is unsigned, so 11111111 (8-bit) → 255. To see two's-complement −1, flip width to 8-bit and switch to Signed. Out-of-range inputs turn the field red.",
+        "ar": null
+      },
+      {
+        "zh": "中文字符在 HEX 模式下是按什么编码转换的？",
+        "en": "What encoding does HEX mode use for Chinese?",
+        "ar": null
+      },
+      {
+        "zh": "默认按 UTF-8。例如「中」字会变成 E4 B8 AD（3 字节）。可以在「分隔符」中切换 0x、空格、逗号或紧贴格式，结果按字节顺序输出，方便粘贴到代码里。",
+        "en": "UTF-8 by default. '中' → E4 B8 AD (3 bytes). The separator dropdown switches between 0x prefix, space, comma, or no-separator output styles for easy paste into source code.",
+        "ar": null
+      },
+      {
+        "zh": "HEX 解码遇到非法字符会怎么处理？",
+        "en": "How does HEX decode handle bad chars?",
+        "ar": null
+      },
+      {
+        "zh": "工具会自动跳过空格、0x 前缀、逗号、换行等常见分隔符，只识别 0-9 / a-f / A-F。如果剩余字符长度不是偶数或包含非法字符，会在错误栏给出确切位置；UTF-8 解析失败时会回退为「显示替换符 �」并提示。",
+        "en": "Whitespace, 0x prefix, comma, and newlines are auto-stripped; only 0-9 / a-f / A-F are kept. Odd-length or invalid characters yield a precise error; broken UTF-8 falls back to � with a note.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有换算都在你的浏览器内完成（BigInt + TextEncoder / TextDecoder），输入内容从不离开你的设备，可放心处理含密钥、Token、协议字段的内容。",
+        "en": "No. Everything runs locally (BigInt + TextEncoder / TextDecoder). Input never leaves your device — safe for keys, tokens, protocol fields.",
+        "ar": null
+      }
+    ],
+    "image-compress.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "压缩后画质会明显变差吗？",
+        "en": "Will image quality drop significantly?",
+        "ar": null
+      },
+      {
+        "zh": "质量设置80%时肉眼几乎看不出差异，但文件体积能减少40-60%。如果对画质要求高，可以将质量调到90%以上。",
+        "en": "At 80% quality, differences are barely visible but file size reduces by 40-60%. For high-quality requirements, set quality to 90% or above.",
+        "ar": null
+      },
+      {
+        "zh": "PNG图片压缩效果怎么样？",
+        "en": "How well does PNG compression work?",
+        "ar": null
+      },
+      {
+        "zh": "PNG是无损格式，本工具对PNG的压缩效果有限（主要通过减少颜色深度实现）。如需大幅压缩PNG，建议转换为JPG格式。",
+        "en": "PNG is lossless, so compression gains are limited (mainly through color depth reduction). For significant PNG size reduction, consider converting to JPG first.",
+        "ar": null
+      },
+      {
+        "zh": "支持批量压缩吗？",
+        "en": "Does it support batch compression?",
+        "ar": null
+      },
+      {
+        "zh": "支持。可以同时选择多张图片，工具会逐一压缩并自动下载，每张文件名后面会加 _compressed 标识。",
+        "en": "Yes. Select multiple images at once — the tool compresses and downloads each one automatically with _compressed added to the filename.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有压缩处理在浏览器本地进行，图片文件不离开你的设备。",
+        "en": "No. All compression is done locally in your browser. Images never leave your device.",
+        "ar": null
+      }
+    ],
+    "image-convert.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "PNG 转 JPG 后透明背景会怎样？",
+        "en": "What happens to transparency when PNG → JPG?",
+        "ar": null
+      },
+      {
+        "zh": "JPG 不支持透明通道，转换时透明区域会被自动叠加为白色背景。如果需要保留透明效果，请选择 PNG 或 WebP 作为目标格式。",
+        "en": "JPG has no alpha channel, so transparent pixels get composited onto white. To keep transparency, pick PNG or WebP as the target.",
+        "ar": null
+      },
+      {
+        "zh": "WebP 和 AVIF 哪个更小？",
+        "en": "WebP vs AVIF — which is smaller?",
+        "ar": null
+      },
+      {
+        "zh": "通常 AVIF 比 WebP 再小 20–30%，但兼容性较差（需要 Chrome 85+ / Safari 16.4+）。WebP 是更稳妥的网络分发选择，AVIF 适合现代浏览器优先的场景。",
+        "en": "AVIF is typically 20–30% smaller than WebP, but with narrower support (Chrome 85+ / Safari 16.4+). WebP is the safer choice for general distribution; AVIF shines when you target modern browsers.",
+        "ar": null
+      },
+      {
+        "zh": "支持 HEIC（苹果照片）吗？",
+        "en": "Does it support HEIC?",
+        "ar": null
+      },
+      {
+        "zh": "目前仅支持浏览器原生可解码的格式（JPG / PNG / WebP / AVIF / GIF / BMP）。HEIC 在多数浏览器需要专门解码器，本工具暂不支持，建议先在系统照片应用中导出为 JPG。",
+        "en": "Only formats the browser can natively decode (JPG / PNG / WebP / AVIF / GIF / BMP). HEIC requires a specialized decoder and isn't supported here — export to JPG via your phone's photos app first.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地完成（Canvas API + canvas.toBlob），图片文件不离开你的设备。",
+        "en": "No. Everything runs locally in your browser (Canvas API + canvas.toBlob). Images never leave your device.",
+        "ar": null
+      }
+    ],
+    "image-to-pdf.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "支持哪些图片格式？",
+        "en": "Which image formats are supported?",
+        "ar": null
+      },
+      {
+        "zh": "支持 JPG / JPEG、PNG、WebP 三种格式。JPG 直接嵌入 PDF（零损失），PNG 与 WebP 会被转换为 PNG 嵌入。",
+        "en": "JPG / JPEG, PNG and WebP. JPG is embedded losslessly; PNG and WebP are embedded as PNG.",
+        "ar": null
+      },
+      {
+        "zh": "「适配图片」和「A4」有什么区别？",
+        "en": "Difference between Fit and A4?",
+        "ar": null
+      },
+      {
+        "zh": "「适配图片」让每页 PDF 大小完全等于图片像素尺寸（无空白边），适合纯图片展示；「A4 / Letter」使用标准纸张大小，将图片按比例缩放居中放置，留出可控边距，适合打印和正式文档。",
+        "en": "Fit makes each page exactly match the image pixels (no margin), best for image-only viewing. A4 / Letter use standard paper sizes, fitting images proportionally with margins — ideal for print and formal documents.",
+        "ar": null
+      },
+      {
+        "zh": "可以调整图片顺序吗？",
+        "en": "Can I reorder images?",
+        "ar": null
+      },
+      {
+        "zh": "可以。上传后在图片列表中直接拖动条目即可调整顺序，列表顺序就是 PDF 页面顺序。",
+        "en": "Yes — drag list items to reorder. The list order is the page order in the PDF.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地完成（pdf-lib），图片不离开你的设备。",
+        "en": "No. Everything runs locally in your browser (pdf-lib). Images never leave your device.",
+        "ar": null
+      }
+    ],
+    "json-formatter.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "支持注释或尾随逗号吗？",
+        "en": "Are comments or trailing commas allowed?",
+        "ar": null
+      },
+      {
+        "zh": "标准 JSON 不允许注释（//、/* */）或尾随逗号，因此默认会报错。需要 JSON5 / JSONC 兼容能力的话请告诉我们，将考虑加入「宽松模式」。",
+        "en": "Standard JSON disallows comments (//, /* */) and trailing commas, so they raise errors by default. Tell us if you need JSON5 / JSONC compatibility — we may add a 'lenient' mode.",
+        "ar": null
+      },
+      {
+        "zh": "处理大文件性能如何？",
+        "en": "How does it handle large files?",
+        "ar": null
+      },
+      {
+        "zh": "纯浏览器原生 JSON.parse / JSON.stringify，10MB 以内 JSON 通常毫秒级完成。超大数组（>100MB）建议在服务端分片处理或用流式解析器。",
+        "en": "Native JSON.parse / stringify — typically millisecond-level for files under 10MB. For very large arrays (>100MB), consider server-side chunking or a streaming parser.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Is my data uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理都在你的浏览器内完成，输入内容从不离开你的设备。可以放心粘贴包含敏感字段（密钥、身份证号）的 JSON。",
+        "en": "No. Everything runs locally in your browser — your input never leaves the device. Safe to paste JSON containing secrets, IDs, etc.",
+        "ar": null
+      },
+      {
+        "zh": "「按 key 排序」会改变数据语义吗？",
+        "en": "Does sort-keys change semantics?",
+        "ar": null
+      },
+      {
+        "zh": "JSON 对象的 key 顺序在标准上是无意义的，因此排序不会影响数据语义，但能让输出稳定，方便 diff 比较和缓存。数组顺序绝不会被改动。",
+        "en": "JSON object key order is semantically irrelevant per spec, so sorting doesn't change meaning — but it stabilizes output for diffs and caching. Array order is never modified.",
+        "ar": null
+      }
+    ],
+    "jwt.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "粘贴 JWT 后会被发送到服务器吗？",
+        "en": "Are pasted JWTs sent to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。Token 完全在你的浏览器内解码（atob + JSON.parse），从不离开你的设备。HMAC 签名校验也使用浏览器原生 SubtleCrypto 在本地完成。可以放心粘贴生产环境 Token。",
+        "en": "No. Tokens are decoded entirely in your browser (atob + JSON.parse) and never leave the device. HMAC verification uses the browser's native SubtleCrypto, also locally. Safe to paste production tokens.",
+        "ar": null
+      },
+      {
+        "zh": "支持校验 RS256 / ES256 等非对称算法吗？",
+        "en": "Does it verify RS256 / ES256?",
+        "ar": null
+      },
+      {
+        "zh": "当前内置 HS256 / HS384 / HS512 三种 HMAC 对称算法的本地校验。RS / PS / ES 系列依赖 PEM 或 JWK 格式的公钥，由于公钥分发场景较复杂，暂未开放在线校验入口。Token 本身依然能正常解码并展示算法和过期时间。",
+        "en": "HS256/384/512 are supported for local verification. RS / PS / ES need a PEM or JWK public key — distribution flows are complex enough that online verify isn't exposed here. The token still decodes fully and shows algorithm + expiry.",
+        "ar": null
+      },
+      {
+        "zh": "为什么显示 'iat in future' 或 'expired'？",
+        "en": "Why does it say 'iat in future' / 'expired'?",
+        "ar": null
+      },
+      {
+        "zh": "JWT 的 iat（签发时间）、exp（过期时间）、nbf（生效时间）均为 Unix 秒级时间戳。如果 iat 在未来或 exp 已过去，工具会用红色 / 黄色 / 绿色标签直观提示，帮你快速排查时区或时钟漂移问题。",
+        "en": "iat (issued), exp (expires), nbf (not before) are Unix-seconds timestamps. If iat is in the future or exp already passed, the tool flags it red/yellow/green so you can spot timezone or clock-skew issues fast.",
+        "ar": null
+      },
+      {
+        "zh": "JWT 解码 ≠ 解密，对吗？",
+        "en": "JWT decode is not decrypt — right?",
+        "ar": null
+      },
+      {
+        "zh": "对。常见的 JWT（如 HS256/RS256 签名后的 Token）只是 Base64URL 编码，并未加密，任何人拿到后都可读出 Payload 内容。请勿把密码、银行卡号等敏感信息明文写入 JWT。如需保密内容应使用 JWE（加密的 JWT），或在传输层使用 HTTPS 并将敏感数据放在仅服务端可见的 Session 中。",
+        "en": "Right. Standard signed JWTs are only Base64URL-encoded — anyone with the token can read the payload. Don't put passwords or card numbers in there. Use JWE for confidentiality, or keep secrets server-side behind HTTPS sessions.",
+        "ar": null
+      }
+    ],
+    "pdf-compress.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "压缩后文字还能选中复制吗？",
+        "en": "Can I still select text after compression?",
+        "ar": null
+      },
+      {
+        "zh": "不能。本工具采用图像化压缩，每页转为 JPEG 后重新打包，因此压缩后的 PDF 不再支持文字选择和搜索。如需保留文字层，请使用支持文字型 PDF 减肥的专业工具。",
+        "en": "No. This tool uses image-based compression — each page is rasterized to JPEG and repackaged, so text selection and search are lost. Use a text-preserving tool if you need the text layer.",
+        "ar": null
+      },
+      {
+        "zh": "压缩等级该怎么选？",
+        "en": "Which compression level should I choose?",
+        "ar": null
+      },
+      {
+        "zh": "高质量（200 DPI / 90%）适合需要打印的文档；中等（150 DPI / 75%）适合屏幕阅读和邮件，是大多数场景的最佳平衡；低（100 DPI / 60%）体积最小，适合快速分享。",
+        "en": "High (200 DPI / 90%) suits print. Medium (150 DPI / 75%) is the sweet spot for screen reading and email. Low (100 DPI / 60%) is smallest, ideal for quick sharing.",
+        "ar": null
+      },
+      {
+        "zh": "扫描版 PDF 能压缩吗？",
+        "en": "Does it work on scanned PDFs?",
+        "ar": null
+      },
+      {
+        "zh": "可以，而且效果最好。扫描版 PDF 本身就是图像，本工具能有效降低分辨率与画质从而显著减小体积，通常能减少 60–80%。",
+        "en": "Yes — and best of all. Scanned PDFs are already images; this tool reduces their resolution and quality for dramatic size reduction, typically 60–80% smaller.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地完成（pdf.js 渲染 + pdf-lib 重组），文件不离开你的设备。",
+        "en": "No. Everything runs locally in your browser (pdf.js render + pdf-lib repack). Files never leave your device.",
+        "ar": null
+      }
+    ],
+    "pdf-edit.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "水印会不会破坏 PDF 原内容？",
+        "en": "Does watermark harm content?",
+        "ar": null
+      },
+      {
+        "zh": "不会。水印写在每页内容流末尾，是独立的文本绘制操作。原页面文字、图片、表单字段、链接全部保留。",
+        "en": "No. Watermark is appended to each page's content stream as separate drawing ops. Original text, images, forms, links untouched.",
+        "ar": null
+      },
+      {
+        "zh": "旋转后又恢复了？",
+        "en": "Rotation lost after save?",
+        "ar": null
+      },
+      {
+        "zh": "本工具改 /Rotate 元数据（与 Acrobat 旋转一致），所有现代阅读器都尊重它。",
+        "en": "The tool sets /Rotate page metadata (Acrobat-equivalent); all modern readers respect it.",
+        "ar": null
+      },
+      {
+        "zh": "拖拽重排后能撤销吗？",
+        "en": "Can I undo reorder?",
+        "ar": null
+      },
+      {
+        "zh": "点「重置」恢复原始顺序；切到其他模式再切回也会重新加载。处理后下载的是新文件，原文件不变。",
+        "en": "Click 'Reset' to restore original order; switching tabs reloads the file. Output is a new download, original is untouched.",
+        "ar": null
+      },
+      {
+        "zh": "加密 PDF 能编辑吗？",
+        "en": "Edit encrypted PDF?",
+        "ar": null
+      },
+      {
+        "zh": "先到 PDF 加密 / 解密 工具输入密码移除保护后再来此页编辑。",
+        "en": "Strip the password at PDF Encrypt/Decrypt first.",
+        "ar": null
+      }
+    ],
+    "pdf-encrypt.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "PDF 加密用的是什么算法？强不强？",
+        "en": "What algorithm is used? Is it strong?",
+        "ar": null
+      },
+      {
+        "zh": "默认 AES-256，与 Acrobat Pro 的「Encrypt with Password」同一算法，符合 PDF 2.0 (ISO 32000-2) 标准。也可下拉切换 AES-128 或 RC4-128。AES-256 在合理强密码（≥12 位混合字符）下没有可行的破解手段。",
+        "en": "Default AES-256 — same algorithm as Acrobat Pro's 'Encrypt with Password', conformant with PDF 2.0 (ISO 32000-2). AES-128 and RC4-128 are also available. AES-256 with a strong password (≥12 mixed chars) has no practical break.",
+        "ar": null
+      },
+      {
+        "zh": "用户密码与所有者密码有什么区别？",
+        "en": "User password vs owner password?",
+        "ar": null
+      },
+      {
+        "zh": "用户密码是「打开 PDF 必须输入」的密码；所有者密码是「修改权限设置必须输入」的密码。如果只设置用户密码，所有者密码会自动设为同一个；如果两者不同，用户输入用户密码可看但受权限限制，输入所有者密码则获得完全控制。",
+        "en": "User password = required to open the PDF. Owner password = required to change permissions. If only one is set, both default to it. With distinct values: user password gives restricted view, owner password gives full control.",
+        "ar": null
+      },
+      {
+        "zh": "解密失败说「密码不正确」怎么办？",
+        "en": "What if decrypt says wrong password?",
+        "ar": null
+      },
+      {
+        "zh": "确认密码大小写、首尾空格、中英文标点；如果文件只设了所有者密码（可直接打开但禁止编辑），不必输密码也能解密——把密码栏留空再点处理即可。如果输入正确仍失败，可能是该 PDF 用了非标准加密（DRM 或 Adobe LiveCycle），本工具不支持。",
+        "en": "Check case, leading/trailing spaces, and CN/EN punctuation. If the file only has an owner password (opens freely, edit blocked), leave the password empty. Persistent failure may indicate non-standard encryption (DRM or LiveCycle), which is unsupported.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？密码会被记录吗？",
+        "en": "Are files uploaded? Are passwords logged?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地完成（mupdf.js WebAssembly + @cantoo/pdf-lib），PDF 文件和密码从不离开你的设备。我们看不到、也无法记录你的任何输入。可放心处理含合同、身份证明、医疗记录的敏感 PDF。",
+        "en": "No. Everything runs locally (mupdf.js WebAssembly + @cantoo/pdf-lib). Files and passwords never leave your device. Safe for contracts, IDs, medical records.",
+        "ar": null
+      }
+    ],
+    "pdf-split.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "每页独立下载时会一次触发多个下载吗？",
+        "en": "Will split-per-page trigger multiple downloads?",
+        "ar": null
+      },
+      {
+        "zh": "是的，浏览器会依次弹出每个页面的下载。如果浏览器阻止了多文件下载，请在地址栏允许该网站的多文件下载权限。",
+        "en": "Yes, the browser will initiate downloads one by one. If your browser blocks multiple downloads, allow the site to download multiple files in your browser's address bar settings.",
+        "ar": null
+      },
+      {
+        "zh": "页码范围怎么填写？",
+        "en": "How do I enter the page range?",
+        "ar": null
+      },
+      {
+        "zh": "填写起始页码和结束页码，例如从第2页到第5页，会提取这4页组成一个新PDF。",
+        "en": "Enter the start and end page numbers. For example, from page 2 to page 5 will extract those 4 pages into a new PDF.",
+        "ar": null
+      },
+      {
+        "zh": "支持加密PDF吗？",
+        "en": "Does it support encrypted PDFs?",
+        "ar": null
+      },
+      {
+        "zh": "不支持加密 PDF。请先到 <a href=\"pdf-encrypt.html\">PDF 加密 / 解密</a> 工具输入密码移除保护，再来本页拆分。",
+        "en": "No. Strip the password at our <a href=\"pdf-encrypt.html\">PDF Encrypt / Decrypt</a> tool first, then upload here for splitting.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地进行，文件不离开你的设备。",
+        "en": "No. All processing is done locally in your browser. Files never leave your device.",
+        "ar": null
+      }
+    ],
+    "pdf-to-image.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "支持哪些输出图片格式？",
+        "en": "Which output formats are supported?",
+        "ar": null
+      },
+      {
+        "zh": "支持 JPG（体积最小）、PNG（无损，文字清晰）、WebP（现代格式，比 JPG 再小约 30%）三种格式。",
+        "en": "JPG (smallest), PNG (lossless, sharp text), and WebP (~30% smaller than JPG). Pick based on your need.",
+        "ar": null
+      },
+      {
+        "zh": "DPI 应该选哪一档？",
+        "en": "Which DPI should I pick?",
+        "ar": null
+      },
+      {
+        "zh": "72 DPI 适合屏幕预览（体积最小）；150 DPI 适合屏幕阅读和大多数用途，是推荐值；300 DPI 适合打印输出（体积是 72 DPI 的 17 倍）。",
+        "en": "72 DPI is for screen preview (smallest). 150 DPI is recommended for general use. 300 DPI is for print (~17× the size of 72 DPI).",
+        "ar": null
+      },
+      {
+        "zh": "加密 PDF 能转换吗？",
+        "en": "Can I convert encrypted PDFs?",
+        "ar": null
+      },
+      {
+        "zh": "不支持加密 PDF。请先到 hebing.org 的 <a href=\"pdf-encrypt.html\">PDF 加密 / 解密</a> 工具输入密码移除保护，然后再来本页转换。",
+        "en": "Not directly. Strip the password at our <a href=\"pdf-encrypt.html\">PDF Encrypt / Decrypt</a> tool first, then upload here.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地完成（pdf.js 渲染 + Canvas API 导出），文件不离开你的设备。",
+        "en": "No. Everything runs locally in your browser (pdf.js render + Canvas export). Files never leave your device.",
+        "ar": null
+      }
+    ],
+    "qrcode.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "生成的二维码可以商用吗？",
+        "en": "Are the generated QR codes safe to use commercially?",
+        "ar": null
+      },
+      {
+        "zh": "可以。本工具完全在浏览器本地用 qrcode-generator（MIT）生成图像，hebing.org 不持有也不主张任何对所生成二维码的版权或使用权，可自由用于个人或商业用途。",
+        "en": "Yes. The QR is generated locally in your browser using qrcode-generator (MIT). hebing.org claims no rights over the produced image — use it freely for personal or commercial purposes.",
+        "ar": null
+      },
+      {
+        "zh": "纠错等级 L / M / Q / H 怎么选？",
+        "en": "Which ECC level (L/M/Q/H) should I pick?",
+        "ar": null
+      },
+      {
+        "zh": "L 约 7%、M 约 15%、Q 约 25%、H 约 30% 容错率。日常文本、URL 用 M 即可；要在二维码中放 Logo 或印刷在易污损介质（户外贴纸、餐桌牌）上推荐用 Q 或 H。等级越高占用模块越多，相同内容生成的二维码越密集。",
+        "en": "L ≈ 7%, M ≈ 15%, Q ≈ 25%, H ≈ 30% error correction. M is fine for plain text/URL. Use Q or H if you embed a logo or print on damage-prone media. Higher ECC = more modules = denser code for the same payload.",
+        "ar": null
+      },
+      {
+        "zh": "扫码识别支持哪些图片格式？",
+        "en": "Which image formats are supported for decode?",
+        "ar": null
+      },
+      {
+        "zh": "支持浏览器能解码的所有位图格式：JPG / PNG / WebP / GIF / BMP，以及屏幕截图。识别基于开源库 jsQR，全部在本地运行。建议二维码在图中清晰、占比超过 1/3 时识别率最佳。",
+        "en": "Any bitmap your browser can decode: JPG / PNG / WebP / GIF / BMP — and screenshots. Decoding uses jsQR locally. Best results when the QR is sharp and takes >1/3 of the frame.",
+        "ar": null
+      },
+      {
+        "zh": "扫码内容会上传到服务器吗？",
+        "en": "Are scanned codes uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有生成与识别都在你的浏览器内完成（Canvas + jsQR + qrcode-generator），图片、摄像头画面与解码出的文本从不离开你的设备，可放心扫描含 WiFi 密码、私人 URL、电子名片等敏感二维码。",
+        "en": "No. Generation and decoding both run locally (Canvas + jsQR + qrcode-generator). Images, camera frames, and decoded text never leave your device — safe for WiFi passwords, private URLs, and vCards.",
+        "ar": null
+      }
+    ],
+    "regex.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "本工具支持哪种正则方言？",
+        "en": "Which regex flavor is supported?",
+        "ar": null
+      },
+      {
+        "zh": "ECMAScript（JavaScript 内置 RegExp）方言。这与 V8 / Chrome / Node.js 完全一致，与 Python / PCRE / Java 的方言略有差异。如果你的代码运行在浏览器或 Node.js，本工具的结果就是你代码运行时的真实结果。",
+        "en": "ECMAScript (JavaScript's built-in RegExp). It matches V8 / Chrome / Node.js exactly — slightly different from Python / PCRE / Java. If your code runs in a browser or Node, this tool reproduces the actual runtime behavior.",
+        "ar": null
+      },
+      {
+        "zh": "为什么有些正则会卡住或报「too long」？",
+        "en": "Why does the page hang on some regex?",
+        "ar": null
+      },
+      {
+        "zh": "正则可能因「灾难性回溯」在某些输入上指数级卡顿（如 (a+)+b 匹配 'aaaa...x'）。本工具会限制单次匹配数与运行时间，避免浏览器卡死。如果遇到此提示，请检查正则中是否有嵌套量词，必要时改写为更精确的写法。",
+        "en": "Some regexes hit catastrophic backtracking on certain inputs (e.g. (a+)+b on 'aaaa…x'). The tool caps match count and runtime to keep the page responsive. If you hit this, look for nested quantifiers and rewrite more precisely.",
+        "ar": null
+      },
+      {
+        "zh": "替换支持哪些占位符？",
+        "en": "Which replacement placeholders work?",
+        "ar": null
+      },
+      {
+        "zh": "完整支持 ECMAScript String.prototype.replace 的占位符：$1～$9 引用编号捕获组，$<name> 引用命名捕获组，$& 整个匹配，$` 匹配前的内容，$' 匹配后的内容，$$ 表示一个 $ 字面量。",
+        "en": "All ECMAScript String.prototype.replace placeholders: $1–$9 numeric groups, $<name> named groups, $& full match, $` text before match, $' text after match, $$ literal $.",
+        "ar": null
+      },
+      {
+        "zh": "我的正则会被上传到服务器吗？",
+        "en": "Are regexes sent to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。本工具完全在你的浏览器内运行（new RegExp + matchAll + replaceAll），正则与文本从不离开你的设备，可放心粘贴含敏感数据的样本进行调试。",
+        "en": "No. Everything runs locally (new RegExp + matchAll + replaceAll). Patterns and text never leave your device — safe for sensitive sample data.",
+        "ar": null
+      }
+    ],
+    "timestamp.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "Unix 时间戳的秒、毫秒、微秒、纳秒怎么区分？",
+        "en": "How to tell apart sec / ms / μs / ns?",
+        "ar": null
+      },
+      {
+        "zh": "以 2026-01-01 00:00:00 UTC 为例：秒级是 10 位（1767225600），毫秒 13 位，微秒 16 位，纳秒 19 位。本工具会自动按位数推断单位，也可手动指定。",
+        "en": "At 2026-01-01 00:00 UTC: seconds = 10 digits (1767225600), ms = 13, μs = 16, ns = 19. The tool auto-infers from digit count, or you can override.",
+        "ar": null
+      },
+      {
+        "zh": "为什么我从数据库导出的时间戳显示成 1970 年？",
+        "en": "Why does my DB timestamp show 1970?",
+        "ar": null
+      },
+      {
+        "zh": "把毫秒当秒（或反之）解析了。本工具同时显示 4 种单位的解析结果，一眼能看出哪个是合理日期。",
+        "en": "You parsed ms as sec (or vice versa). The tool shows all four unit parses simultaneously so the right one is obvious.",
+        "ar": null
+      },
+      {
+        "zh": "时区切换是切到我电脑当前时区还是某个固定时区？",
+        "en": "Does TZ switch use my system or a fixed one?",
+        "ar": null
+      },
+      {
+        "zh": "默认是你系统当前时区（Intl 探测）。可手动切到 UTC、Asia/Shanghai、America/New_York 等。Unix 时间戳本身（UTC 起算）不变。",
+        "en": "Defaults to your system tz via Intl. Switch to UTC, Asia/Shanghai, America/New_York etc. Unix value (UTC-anchored) never changes.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有换算都在你的浏览器内完成（原生 Date + Intl API），输入从不离开你的设备。",
+        "en": "No. Everything runs locally (native Date + Intl). Inputs never leave your device.",
+        "ar": null
+      }
+    ],
+    "url-encode.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "encodeURIComponent 与 encodeURI 有什么区别？",
+        "en": "encodeURIComponent vs encodeURI?",
+        "ar": null
+      },
+      {
+        "zh": "encodeURIComponent 会转义所有 URL 保留字符（包括 / : ? # & = +），适合编码单个参数值；encodeURI 假设你给的是一个完整 URL，因此保留 / : ? # & = + ; , @ 等结构字符不转义。如果你不确定，选 encodeURIComponent 更安全。",
+        "en": "encodeURIComponent escapes all URL reserved chars (including / : ? # & = +) — best for single param values. encodeURI assumes a complete URL and preserves structural chars / : ? # & = + ; , @. When in doubt, encodeURIComponent is safer.",
+        "ar": null
+      },
+      {
+        "zh": "URL 中的空格应该编码成 + 还是 %20？",
+        "en": "Space → + or %20?",
+        "ar": null
+      },
+      {
+        "zh": "在 URL 路径与片段（#fragment）中应使用 %20。仅在 application/x-www-form-urlencoded（HTML form 提交、POST body）的 query string 中可以用 +。本工具默认 %20，可勾选「将空格编为 +」切换为表单风格。",
+        "en": "Use %20 in URL path / fragment. + is only valid in application/x-www-form-urlencoded (HTML form, POST body) query strings. Default here is %20; tick the option to switch to form-style.",
+        "ar": null
+      },
+      {
+        "zh": "HTML 实体编码会把所有字符都转义吗？",
+        "en": "Does HTML encode escape every char?",
+        "ar": null
+      },
+      {
+        "zh": "默认仅转义在 HTML 中有特殊含义的 5 个字符：& < > \\",
+        "en": "Default: only the 5 HTML-significant chars (& < > \\",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有编解码都在你的浏览器内完成（encodeURIComponent / decodeURIComponent + DOMParser），输入内容从不离开你的设备，可放心处理含密钥、Token、SQL、个人信息的内容。",
+        "en": "No. Everything runs locally (encodeURIComponent / decodeURIComponent + DOMParser). Input never leaves your device — safe for secrets, tokens, SQL, PII.",
+        "ar": null
+      }
+    ],
+    "uuid.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "UUID v4 与 v7 该用哪个？",
+        "en": "UUID v4 or v7?",
+        "ar": null
+      },
+      {
+        "zh": "v4 是完全随机的 122-bit UUID（RFC 4122）；v7（RFC 9562, 2024）前 48 bit 是 Unix 毫秒时间戳，按时间单调递增，更适合数据库主键。新项目优先选 v7。",
+        "en": "v4 is fully-random 122-bit (RFC 4122). v7 (RFC 9562, 2024) prefixes 48-bit Unix ms timestamp — monotonic, ideal for DB primary keys. Prefer v7 for new projects.",
+        "ar": null
+      },
+      {
+        "zh": "NanoID 比 UUID 短，安全性是否足够？",
+        "en": "Is NanoID short enough but still safe?",
+        "ar": null
+      },
+      {
+        "zh": "21 字符的 NanoID 默认字母表 64，碰撞空间 64^21 ≈ 1.3e38，与 UUID v4 的 5.3e36 同量级，每秒 1 亿次生成 1% 碰撞需 27 万年。",
+        "en": "21-char NanoID with alphabet-64 has 64^21 ≈ 1.3e38 — same order as UUID v4 (5.3e36). 100M/sec for a 1% collision = 270k years.",
+        "ar": null
+      },
+      {
+        "zh": "为什么显示「您的浏览器不支持 crypto.getRandomValues」？",
+        "en": "No crypto.getRandomValues?",
+        "ar": null
+      },
+      {
+        "zh": "现代浏览器（2012 后）都支持。出现这条错误说明你在 IE 或非 HTTPS 的 file:// 旧环境，所有 https:// 站点都有该 API。",
+        "en": "All modern browsers (post-2012) have it. This error means IE or insecure file:// — any https:// site has it.",
+        "ar": null
+      },
+      {
+        "zh": "数据会上传到服务器吗？",
+        "en": "Are inputs uploaded?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有 ID 都在你的浏览器内用 crypto.getRandomValues 生成，从不发到服务器。",
+        "en": "No. All IDs come from your browser's crypto.getRandomValues — nothing leaves your device.",
+        "ar": null
+      }
+    ],
+    "word-to-pdf.html": [
+      {
+        "zh": "常见问题",
+        "en": "Frequently Asked Questions",
+        "ar": null
+      },
+      {
+        "zh": "转换效果准确吗？",
+        "en": "How accurate is the conversion?",
+        "ar": null
+      },
+      {
+        "zh": "本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。",
+        "en": "This tool extracts text content from Word documents to generate a PDF. It works well for text-heavy documents. For precise layout with images, use Word or WPS built-in Save as PDF.",
+        "ar": null
+      },
+      {
+        "zh": "支持哪些Word格式？",
+        "en": "What Word formats are supported?",
+        "ar": null
+      },
+      {
+        "zh": "仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。",
+        "en": "Only .docx format. For legacy .doc files, open in Word or WPS and save as .docx first.",
+        "ar": null
+      },
+      {
+        "zh": "转换后的PDF能编辑吗？",
+        "en": "Can I edit the converted PDF?",
+        "ar": null
+      },
+      {
+        "zh": "标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。",
+        "en": "Standard PDFs are not directly editable. Use Adobe Acrobat or other PDF editors if you need to edit the output.",
+        "ar": null
+      },
+      {
+        "zh": "文件会上传到服务器吗？",
+        "en": "Are files uploaded to a server?",
+        "ar": null
+      },
+      {
+        "zh": "不会。所有处理在浏览器本地进行，文件不离开你的设备。",
+        "en": "No. All processing is done locally in your browser. Files never leave your device.",
+        "ar": null
+      }
+    ]
+  },
+  "tips": {
+    "base64.html": {
+      "zh": [
+        "UTF-8 安全：本工具用 TextEncoder 处理字符串，中文、emoji、阿拉伯文等多字节字符都能正确编解码（普通 btoa 会报错）。",
+        "URL-safe：勾选后会把 + 替换为 -、/ 替换为 _，适合 URL 参数、文件名、JWT。",
+        "Data URI 模式：文件编码时勾选「输出 Data URI」会输出 data:image/png;base64,... 形式，可直接放入 <img src> 或 CSS。",
+        "反向下载：把 Base64 字符串粘到输入区点「解码」，然后点「下载结果」可保存为文件。",
+        "编码后体积约为原始的 4/3（增加 33%），解码后恢复原始大小。"
+      ],
+      "en": [
+        "UTF-8 safe: built on TextEncoder, so Chinese, emoji and Arabic characters encode correctly (plain btoa fails on these).",
+        "URL-safe: replaces + with - and / with _ — perfect for URLs, filenames, and JWTs.",
+        "Data URI mode: in file mode, enable \"Output Data URI\" to get data:image/png;base64,... form, ready to drop into <img src> or CSS.",
+        "Reverse download: paste a Base64 string, click Decode, then \"Download result\" to save as a file.",
+        "Encoded size is ~4/3 of original (+33%); decoding restores the original size."
+      ],
+      "ar": null
+    },
+    "color.html": {
+      "zh": [
+        "HEX 短写支持：`#fff`、`#fffa`（带 alpha）都接受，自动展开。8 位带 alpha 的 HEX（`#RRGGBBAA`）也行。",
+        "HSL 与 RGB 各种语法：`hsl(18 91% 44%)`、`hsl(18, 91%, 44%)`、`hsla(18, 91%, 44%, 0.8)` 都接受。",
+        "OKLCH 输入：`oklch(58% 0.18 35)` 或 `oklch(0.58 0.18 35)`。Lightness 用 0-1 或 0%-100% 都可。Chroma 范围一般 0-0.4。",
+        "点色阶单元格：直接把那一档颜色变成主色，链式微调很方便。",
+        "WCAG 计算：用 sRGB 相对亮度公式（WCAG 2.1 §1.4.3），与 axe / Lighthouse 一致。"
+      ],
+      "en": [
+        "HEX shorthands: `#fff`, `#fffa` (with alpha), `#RRGGBBAA` all accepted.",
+        "HSL / RGB syntax variants: `hsl(18 91% 44%)`, `hsl(18, 91%, 44%)`, `hsla(...)` all parse.",
+        "OKLCH input: `oklch(58% 0.18 35)` or `oklch(0.58 0.18 35)`. Lightness as 0-1 or 0%-100%; chroma usually 0-0.4.",
+        "Click a palette cell: it becomes the new primary — quick chain-tuning.",
+        "WCAG math: sRGB relative luminance per WCAG 2.1 §1.4.3 — matches axe / Lighthouse."
+      ],
+      "ar": null
+    },
+    "diff.html": {
+      "zh": [
+        "三档粒度怎么选：行级最常见（=git diff）；翻译 / 校对用单词级；查不可见字符用字符级。",
+        "左右 vs 统一：左右适合并排阅读 / 截图；统一更紧凑、适合 unified diff 风格的代码 review。",
+        "忽略空白：忽略行尾空白与空行差异，常用于跨平台 CRLF/LF 不一致场景。",
+        "性能：默认对超过 50k 行的两段会自动降级到行级，避免字符级算法 O(n²) 卡死。"
+      ],
+      "en": [
+        "Granularity: line = git-diff style; word = translation / proofread; char = catch invisible chars.",
+        "Side vs unified: side for screenshots / parallel reading; unified for compact code review.",
+        "Ignore whitespace: skip trailing-space and empty-line diffs — useful across CRLF/LF systems.",
+        "Performance: inputs > 50k lines auto-downgrade to line-level to avoid char-level O(n²) hangs."
+      ],
+      "ar": null
+    },
+    "hash.html": {
+      "zh": [
+        "MD5（128 bit）：⚠️ 已破解。适合非安全用途的完整性校验、缓存 key、文件去重。不要用于密码存储或数字签名。",
+        "SHA-1（160 bit）：⚠️ 已发现碰撞。Git 仍在用，但新场景应避免。",
+        "SHA-256（256 bit）：✅ 当前主流安全摘要，适合签名、token、Bitcoin、TLS 证书指纹。",
+        "SHA-384 / SHA-512：✅ 同等安全等级、更长输出，部分协议（如 Apple）默认。在 64 位 CPU 上 SHA-512 通常比 SHA-256 更快。"
+      ],
+      "en": [
+        "MD5 (128-bit): ⚠️ broken. Fine for non-security integrity checks, cache keys, dedup. Never for passwords or signing.",
+        "SHA-1 (160-bit): ⚠️ collision-attacked. Git still uses it, but avoid for new use cases.",
+        "SHA-256 (256-bit): ✅ today's mainstream secure digest — signing, tokens, Bitcoin, TLS fingerprints.",
+        "SHA-384 / SHA-512: ✅ same security level, longer output, default in some protocols (e.g., Apple). On 64-bit CPUs SHA-512 is often faster than SHA-256."
+      ],
+      "ar": null
+    },
+    "hex.html": {
+      "zh": [
+        "负数怎么算：把符号切到「有符号（二补码）」，输入十进制 -1，HEX 立刻显示 FF（8-bit）/ FFFFFFFF（32-bit）；反过来粘 0xFF 进 HEX 框，DEC 显示为 -1。",
+        "0x / 0b / 0o 前缀：HEX 框可粘 0xFF；DEC 框也接受 0x/0b/0o 前缀（自动按 16/2/8 进制读入）。",
+        "分隔符不挑剔：HEX 解码会跳过空格、逗号、换行、0x 前缀；位串解码也会自动跳空格。粘贴日志、Wireshark 输出都能直接喂。",
+        "UTF-8 不损失：中文「中」=「E4 B8 AD」3 字节，日文 emoji 4 字节，全部走原生 TextEncoder，0 编码差异。",
+        "位宽溢出会标红：在 8-bit 框输入 256，输入框会变红提示「超出范围」。"
+      ],
+      "en": [
+        "Negative numbers: switch sign to \"Signed (two's complement)\", type DEC −1 → HEX shows FF (8-bit) or FFFFFFFF (32-bit). Pasting 0xFF in HEX with signed-8 shows DEC = −1.",
+        "0x / 0b / 0o prefixes: HEX accepts 0x prefix; DEC also accepts 0x / 0b / 0o (parsed as 16/2/8).",
+        "Forgiving separators: HEX decode skips spaces, commas, newlines, 0x prefixes. Binary decode also skips whitespace. Paste logs and Wireshark output as-is.",
+        "Lossless UTF-8: Chinese \"中\" = \"E4 B8 AD\" (3 bytes), emoji = 4 bytes — all via native TextEncoder, zero-loss.",
+        "Width overflow turns red: typing 256 in 8-bit highlights the field as out-of-range."
+      ],
+      "ar": null
+    },
+    "image-compress.html": {
+      "zh": [
+        "质量80%是最佳平衡点：体积减少约50%，肉眼几乎看不出差异，适合大多数场景。",
+        "PNG格式本身是无损的，压缩效果有限。如需大幅减小文件体积，建议将PNG转为JPG格式后再压缩。",
+        "压缩后的文件名会自动加上 _compressed 后缀，不会覆盖原文件。"
+      ],
+      "en": [
+        "80% quality is the sweet spot: about 50% smaller with barely visible difference — suitable for most use cases.",
+        "PNG is lossless by nature, so compression gains are limited. Convert to JPG first for significant size reduction.",
+        "Compressed files are automatically named with a _compressed suffix, keeping your originals intact."
+      ],
+      "ar": null
+    },
+    "image-convert.html": {
+      "zh": [
+        "JPG：兼容性最好，文件中等。适合照片、社交媒体、不需要透明的场景。",
+        "PNG：无损 + 支持透明背景。适合截图、Logo、设计稿，但体积较大。",
+        "WebP：比 JPG 小约 30%，支持透明，现代浏览器全部兼容。网站优化首选。",
+        "AVIF：比 WebP 再小 20–30%，但浏览器支持较新（Chrome 85+ / Safari 16.4+）。追求极小体积时使用。"
+      ],
+      "en": [
+        "JPG: best compatibility, medium size. Photos, social media, anything without transparency.",
+        "PNG: lossless with transparency. Screenshots, logos, design assets — but larger file size.",
+        "WebP: ~30% smaller than JPG, supports transparency, universal modern-browser support. Top pick for web.",
+        "AVIF: ~20–30% smaller than WebP, but newer (Chrome 85+ / Safari 16.4+). Use when minimum size matters most."
+      ],
+      "ar": null
+    },
+    "image-to-pdf.html": {
+      "zh": [
+        "「适配图片」选项让每页 PDF 大小完全等于图片，没有空白边，适合屏幕展示。",
+        "「A4 + 自动方向」是打印场景的最佳选择——横向图片自动横向排版。",
+        "JPG 图片会被零损失地嵌入 PDF；PNG 会保留透明度（叠加白色背景）。",
+        "图片数量太多时建议分批转换（每批 30 张以内），避免浏览器内存不足。"
+      ],
+      "en": [
+        "\"Fit to image\" makes each page exactly match the image size with no margin — best for on-screen viewing.",
+        "\"A4 + auto orientation\" is ideal for print — landscape images get landscape pages automatically.",
+        "JPGs are embedded losslessly. PNGs keep transparency (composited on white).",
+        "For very large batches, split into chunks of ≤ 30 images to avoid memory pressure."
+      ],
+      "ar": null
+    },
+    "json-formatter.html": {
+      "zh": [
+        "「转义为字符串」会把 JSON 包成可嵌入到代码字符串中的形式（双引号转义为 \\\"，回车转义为 \\\\n），便于嵌入 Java/Go/Python 代码。",
+        "压缩后体积通常缩小 30–60%，特别适合生产环境配置或网络传输。",
+        "解析失败时错误信息会高亮出问题字符所在的行列，并附上上下文片段。",
+        "本工具调用浏览器原生 JSON.parse / JSON.stringify，与 Node.js、Chrome DevTools 行为完全一致。"
+      ],
+      "en": [
+        "\"Escape as string\" wraps the JSON for embedding in source code (double quotes become \\\", newlines become \\\\n) — handy for Java/Go/Python code.",
+        "Minifying typically saves 30–60% — ideal for production configs or wire transfer.",
+        "On parse failure, errors pinpoint the exact line/column with a context snippet around the bad character.",
+        "Powered by the browser's native JSON.parse / JSON.stringify — behavior matches Node.js and Chrome DevTools exactly."
+      ],
+      "ar": null
+    },
+    "jwt.html": {
+      "zh": [
+        "三段着色：粘贴后输入框中 Header、Payload、Signature 会以红 / 紫 / 蓝三色分段高亮，方便肉眼区分。",
+        "时间声明：iat、exp、nbf 等数字时间戳会自动转为本地时间，红色 = 已过期，黄色 = 时间异常（如 iat 在未来），绿色 = 有效。",
+        "本地签名校验：HS256/384/512 用浏览器原生 SubtleCrypto.verify，密钥不离开本机。RS / ES 算法需公钥，目前未实现在线校验。",
+        "JWT ≠ JWE：本工具只解析 JWS（已签名）的 JWT，对加密的 JWT（5 段，xxx.xxx.xxx.xxx.xxx）不做解密。",
+        "不要把密码放进 Payload：JWT 是明文 Base64URL 编码，任何拿到 Token 的人都可读。Payload 应只放无害的标识字段。"
+      ],
+      "en": [
+        "Three-color view: after paste, header / payload / signature show in red / purple / cyan inside the input — easy to scan visually.",
+        "Time claims: iat, exp, nbf are auto-converted to your local time. Red = expired, yellow = anomaly (e.g. iat in the future), green = valid.",
+        "Local verification: HS256/384/512 use the browser's native SubtleCrypto.verify — the secret never leaves your machine. RS / ES need a public key and are not yet supported here.",
+        "JWT ≠ JWE: this tool parses JWS (signed) JWTs. Encrypted JWTs (5 segments) are not decrypted.",
+        "Don't put passwords in payload: JWTs are plaintext Base64URL — anyone holding the token can read it. Keep payload to harmless identifiers."
+      ],
+      "ar": null
+    },
+    "pdf-compress.html": {
+      "zh": [
+        "对扫描版 PDF（图像内容）压缩效果最显著，通常能减小 60–80%。",
+        "原始文字型 PDF 压缩后会失去文字层，无法再选中或搜索文字——如果需要保留文字层，请慎用。",
+        "页数越多处理时间越长，建议先用 PDF 拆分工具分批处理超大文件。"
+      ],
+      "en": [
+        "Compression is most dramatic for scanned PDFs (image content) — typically 60–80% reduction.",
+        "Text-based PDFs lose their text layer after compression and become non-searchable. Use with caution if text selection matters.",
+        "More pages mean longer processing — split very large PDFs first using our PDF Split tool."
+      ],
+      "ar": null
+    },
+    "pdf-edit.html": {
+      "zh": [
+        "水印中文支持：使用 mupdf 内置 CJK 字体，中文 / 日文 / 韩文均可直接渲染，不需要嵌入字体。",
+        "旋转与「视觉旋转」的区别：本工具改 PDF 的 /Rotate 页面元数据，等价于 Acrobat 的「旋转视图 → 保存」，所有阅读器都尊重它。",
+        "重排支持的操作：拖拽换位、点 ✕ 删除、点 +1 复制一份在原位之后、整体反转、重置回原序。",
+        "加密 PDF：先到 PDF 加密 / 解密 移除密码再来编辑。",
+        "大文件：mupdf 加载约 3.4 MB（首次），之后缓存复用。500 页内的 PDF 在 5s 内完成。"
+      ],
+      "en": [
+        "CJK watermark: mupdf has built-in CJK fonts — Chinese / Japanese / Korean text renders directly, no font embedding.",
+        "Rotation vs visual rotation: this tool sets page /Rotate metadata (same as Acrobat's \"rotate view → save\"); all readers honor it.",
+        "Reorder supports: drag-swap, ✕ to delete, +1 to duplicate after, reverse all, reset to original.",
+        "Encrypted PDFs: strip password at PDF Encrypt/Decrypt first.",
+        "Big files: mupdf loads once (~3.4 MB Brotli), cached after. 500-page PDFs finish under 5s."
+      ],
+      "ar": null
+    },
+    "pdf-encrypt.html": {
+      "zh": [
+        "AES-256 vs AES-128：AES-256 是 PDF 2.0 标准，安全性最强，但 Acrobat 7-9 等老版本可能打不开；如果接收方使用老软件，选 AES-128 更兼容。RC4 已被 NIST 弃用，仅用于支持远古阅读器。",
+        "所有者密码留空：留空时会自动等于用户密码。专业用法是设置一个长所有者密码（你保留），另一个短用户密码（发给对方），方便日后改权限。",
+        "权限只对用户密码生效：用所有者密码打开 PDF 时所有权限限制都被忽略。所以「禁止打印」对持有所有者密码的人无效。",
+        "解密「owner-only」加密：有些 PDF 只设置所有者密码、用户密码为空（可直接打开但禁止编辑）。这种解密时密码栏留空即可。",
+        "本地处理：mupdf-wasm 加密 + @cantoo/pdf-lib 解密，全部在你的浏览器内运行，文件和密码从不上传。"
+      ],
+      "en": [
+        "AES-256 vs AES-128: AES-256 is the PDF 2.0 standard — strongest, but old Acrobat 7-9 can't open it. AES-128 is more compatible. RC4 is NIST-deprecated, only for legacy readers.",
+        "Empty owner password: defaults to user password. Pro tip: set a long owner password (keep yourself) and a short user password (share) so you can change permissions later.",
+        "Permissions only restrict user password: opening with the owner password bypasses all permission limits. \"Disable print\" doesn't apply to owner-password holders.",
+        "Decrypt \"owner-only\" PDFs: some PDFs have only an owner password (open freely, but editing blocked). Leave the decrypt password field empty for these.",
+        "Local processing: mupdf-wasm for encrypt + @cantoo/pdf-lib for decrypt — everything runs in your browser, files and passwords never upload."
+      ],
+      "ar": null
+    },
+    "pdf-split.html": {
+      "zh": [
+        "上传PDF后页面会自动显示总页数，填写范围前请先确认总页数。",
+        "选择「每页独立文件」时，浏览器会连续触发多个下载，请允许该网站的多文件下载权限。",
+        "加密 PDF 无法直接拆分，请先到 PDF 加密 / 解密 工具输入密码移除保护，再来本页拆分。"
+      ],
+      "en": [
+        "After uploading, the total page count is shown automatically. Check it before entering your range.",
+        "When using split-per-page mode, allow multiple downloads for this site in your browser's address bar.",
+        "Encrypted PDFs cannot be split directly. Remove password protection first using another tool."
+      ],
+      "ar": null
+    },
+    "pdf-to-image.html": {
+      "zh": [
+        "JPG 适合大多数场景（含照片型 PDF）；含文字或线条图的页面建议用 PNG，避免 JPEG 压缩造成的字体模糊。",
+        "WebP 体积比 JPG 还要小约 30%，但部分软件不识别——发给他人时建议先确认对方支持。",
+        "多页 PDF 会自动打包为 ZIP 下载（一次弹出），单页则直接下载。",
+        "转换大型 PDF 时（>100 页）建议先用 PDF 拆分工具分批处理，避免浏览器内存压力。"
+      ],
+      "en": [
+        "JPG works for most cases (incl. photo PDFs). For text or line drawings, prefer PNG to avoid JPEG blur.",
+        "WebP is ~30% smaller than JPG but not universally supported — verify the recipient first.",
+        "Multi-page PDFs are auto-packed into a ZIP (one prompt). Single-page files download directly.",
+        "For huge PDFs (>100 pages), split first using our PDF Split tool to reduce memory pressure."
+      ],
+      "ar": null
+    },
+    "qrcode.html": {
+      "zh": [
+        "纠错等级：要在二维码中放 Logo 或印刷在易污损介质（户外贴纸、餐桌牌）上推荐用 Q 或 H，纯电子用 M 即可。",
+        "高对比度：扫码识别依赖前景与背景的明暗对比，建议保持深色前景 + 浅色背景。深色背景上的二维码几乎无法被手机识别。",
+        "留白边距：二维码四周需要留白（quiet zone），默认 4 个模块。如果要嵌入海报里，请预留 ≥ 4 个模块的留白，否则有可能扫不出。",
+        "SVG 矢量：印刷或大幅放大请下载 SVG，矢量可无损放大；网页和聊天软件用 PNG 即可。",
+        "粘贴识别：识别模式下可以直接 Ctrl+V 粘贴剪贴板里的截图（如微信群里别人发的二维码图片）。",
+        "摄像头扫码：需要 HTTPS 域名才能调用摄像头（hebing.org 默认开启）。手机会优先调用后摄像头，扫码距离建议保持 10–30 cm。"
+      ],
+      "en": [
+        "ECC level: pick Q or H if you embed a logo or print on damage-prone media (outdoor stickers, table tents). Plain digital use is fine on M.",
+        "High contrast: decoders rely on dark/light contrast — keep a dark foreground on a light background. Inverted (dark bg) codes often fail on phones.",
+        "Quiet zone: leave ≥ 4 modules of margin around the code. Embedding into a tight poster layout without quiet zone causes scan failures.",
+        "SVG vector: for print or large prints, download SVG — scales without quality loss. Use PNG for web and messaging.",
+        "Paste to decode: in Decode mode you can paste (Ctrl+V) a screenshot directly from clipboard — useful for QR images from chat apps.",
+        "Camera scan: requires an HTTPS origin (hebing.org has it). Phones default to the back camera; aim from 10–30 cm."
+      ],
+      "ar": null
+    },
+    "timestamp.html": {
+      "zh": [
+        "位数自动判断：默认按数字位数自动推断秒（10 位）、毫秒（13 位）、微秒（16 位）、纳秒（19 位）。也可下拉强制指定。",
+        "「现在时间」按钮：一键填入当前精确到毫秒的时间戳。",
+        "本地时间格式宽容：接受 `2026-01-01 08:00`、`2026/1/1`、`2026-01-01T08:00`、Excel 复制的 `2026-01-01 08:00:00.000` 等。",
+        "相对时间：自动渲染 `3 天前 / 2 小时后`，并显示星期 + 是否为闰年 + 当年第几周。",
+        "时区切换不动 Unix 戳：Unix 时间戳是 UTC 起算，永远不变。切时区只重排「ISO 形式」「本地时间」字段以方便人类阅读。"
+      ],
+      "en": [
+        "Auto unit detection: digit count infers seconds (10) / ms (13) / μs (16) / ns (19). Override via dropdown.",
+        "Now button: fills current millisecond-precision timestamp.",
+        "Lenient local input: accepts `2026-01-01 08:00`, `2026/1/1`, `2026-01-01T08:00`, Excel-style `2026-01-01 08:00:00.000`.",
+        "Relative time: auto renders `3 days ago / 2 hours from now`, plus weekday + leap-year + ISO week number.",
+        "Timezone never changes Unix value: Unix is UTC-anchored. Switching timezone only re-renders the ISO and local fields."
+      ],
+      "ar": null
+    },
+    "url-encode.html": {
+      "zh": [
+        "encodeURIComponent vs encodeURI：前者编码所有 URL 保留字（包括 /、?、&），适合编码单个参数值；后者保留 URL 结构字符不动，适合处理已经组合好的整 URL。",
+        "+ 与 %20：URL 路径必须用 %20，仅 form-encoded body / query string 才允许 +。本工具默认 %20，勾选选项可切换为表单风格。",
+        "双向解码：解码 URL 时本工具同时把 + 还原为空格，能正确处理 form-encoded 数据。",
+        "HTML 数字 vs 命名实体：命名实体（&amp;）人类可读但只覆盖 ~250 个常用字符；数字实体（&#9731; 雪人 ☃）能精确表示任意 Unicode 码点。",
+        "HTML 解码鲁棒：解码使用浏览器原生 DOMParser，命名实体、十进制 &#65; 与十六进制 &#x41; 三种形式都自动识别。"
+      ],
+      "en": [
+        "encodeURIComponent vs encodeURI: the former escapes all URL reserved chars (including /, ?, &) — best for single param values; the latter preserves URL structural chars — best for whole-URL touch-up.",
+        "+ vs %20: URL path requires %20; only form-encoded body / query string allows +. Default here is %20, toggle for form-style.",
+        "Two-way decode: decoding URLs also restores + → space, so it round-trips form-encoded data.",
+        "HTML named vs numeric: named entities (&amp;) are human-readable but cover only ~250 chars; numeric entities can express any Unicode code point.",
+        "Robust HTML decode: decoding uses the browser's native DOMParser, recognizing named, decimal &#65; and hex &#x41; entities transparently."
+      ],
+      "ar": null
+    },
+    "uuid.html": {
+      "zh": [
+        "v4 vs v7 选哪个：作数据库主键选 v7（按时间单调递增，B-tree 友好）；只是「需要个随机 ID」选 v4 也行；想给人看的（URL、文件名）用 NanoID。",
+        "NanoID 自定义字母表：直接编辑「字母表」字段。注意：字母表越短、ID 越短，碰撞概率越高。基本规则：log2(字母表) × 长度 ≥ 132 bit ≈ 与 UUID 等价安全。",
+        "无歧义预设：去掉 0/O 1/I/l 后印在卡片上不会被认错；用作邀请码、礼品码场景的标准做法。",
+        "大括号 GUID 风格：`{xxxxxxxx-...}`，常用于 .NET / Windows Registry / Visual Studio 项目文件。",
+        "批量大于 10000？：生成几万个 ID 仍很快（每个约 1µs），但浏览器渲染巨大文本会卡顿。建议分批或直接用脚本。"
+      ],
+      "en": [
+        "v4 vs v7: For DB primary keys pick v7 (monotonic, B-tree friendly). For \"any random ID\" v4 is fine. For human-facing (URL / file) prefer NanoID.",
+        "NanoID custom alphabet: Just edit the alphabet field. Rule of thumb: log2(alphabet) × length ≥ 132 bits ≈ UUID-equivalent safety.",
+        "Unambiguous preset: Drops 0/O 1/I/l so printed codes don't get misread — standard for invites / gift codes.",
+        "Brace GUID style: `{xxxxxxxx-…}` for .NET / Windows Registry / Visual Studio project files.",
+        "Batch > 10000?: Generation is fast (~1µs each) but rendering huge text can lag the browser — split or use a script."
+      ],
+      "ar": null
+    },
+    "word-to-pdf.html": {
+      "zh": [
+        "本工具适合纯文字或简单格式的Word文档。如果文档包含大量图片、复杂表格或精确排版，建议直接在 Word 或 WPS 中使用\"文件→另存为→PDF\"。",
+        "转换前确认Word文档使用标准字体（宋体、微软雅黑、Times New Roman等），特殊字体在PDF中可能显示为默认字体。",
+        "目前支持 .docx 格式，不支持旧版 .doc 格式。"
+      ],
+      "en": [
+        "This tool works best for text-heavy or simply formatted Word documents. For complex layouts with images and tables, use Word or WPS built-in \"Save As PDF\" for best results.",
+        "Use standard fonts (Arial, Times New Roman, etc.) to ensure proper display in the output PDF.",
+        "Only .docx format is supported, not legacy .doc files."
+      ],
+      "ar": null
+    }
+  },
+  "placeholder": {
+    "base64.html": [
+      {
+        "tag": "textarea",
+        "current": "hebing.org 是一个隐私优先的工具箱",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "color.html": [
+      {
+        "tag": "input",
+        "current": "#d4440a",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "rgb(212, 68, 10)",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "hsl(18, 91%, 44%)",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "oklch(58% 0.18 35)",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "diff.html": [
+      {
+        "tag": "textarea",
+        "current": "粘贴 A（左边 / 旧版本）",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "粘贴 B（右边 / 新版本）",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "extract-images.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "hash.html": [
+      {
+        "tag": "textarea",
+        "current": "hebing.org",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "paste expected hash to verify…",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "hex.html": [
+      {
+        "tag": "input",
+        "current": "0 / 1",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "0-7",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "0-9",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "0-9 a-f",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "hebing.org 是一个隐私优先的工具箱",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "68 65 62 69 6E 67 …",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "hebing.org 是一个隐私优先的工具箱",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "01101000 01100101 …",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "image-compress.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "image-convert.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "image-to-pdf.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "json-formatter.html": [
+      {
+        "tag": "textarea",
+        "current": "{\"name\":\"hebing\",\"tools\":16}",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "jwt.html": [
+      {
+        "tag": "textarea",
+        "current": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwibmFtZSI6IkphbmUgRG9lIn0.signature",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your-256-bit-secret",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-audio.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-csv.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-excel.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-image.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-pdf.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-ppt.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-txt.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "merge-word.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "pdf-compress.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "pdf-edit.html": [
+      {
+        "tag": "input",
+        "current": "例如：机密 / DRAFT / 公司内部",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "1-3, 5, 8-10",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "pdf-encrypt.html": [
+      {
+        "tag": "input",
+        "current": "至少 4 位",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "留空则使用用户密码",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "输入打开 PDF 的密码（owner-only 限制可留空）",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "pdf-split.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "pdf-to-image.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "qrcode.html": [
+      {
+        "tag": "textarea",
+        "current": "https://hebing.org",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "regex.html": [
+      {
+        "tag": "input",
+        "current": "\\b\\w+@\\w+\\.\\w+\\b",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "gi",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "$1 [$&]",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "timestamp.html": [
+      {
+        "tag": "input",
+        "current": "1767225600 / 1767225600000 / …",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "2026-01-01T00:00:00.000Z",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "2026-01-01 08:00:00",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "Wed, 01 Jan 2026 00:00:00 GMT",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "url-encode.html": [
+      {
+        "tag": "textarea",
+        "current": "hebing.org 是一个隐私优先的工具箱",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "textarea",
+        "current": "",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "uuid.html": [
+      {
+        "tag": "textarea",
+        "current": "点「生成」按钮",
+        "zh": null,
+        "en": null,
+        "ar": null
+      },
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ],
+    "word-to-pdf.html": [
+      {
+        "tag": "input",
+        "current": "your@email.com",
+        "zh": null,
+        "en": null,
+        "ar": null
+      }
+    ]
+  }
+}

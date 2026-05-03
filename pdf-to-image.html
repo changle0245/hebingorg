@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF转图片在线 - 免费PDF转JPG PNG | hebing.org</title>
+<meta name="description" content="免费在线将PDF文件每页转换为JPG / PNG / WebP图片，可调节分辨率。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="pdf转图片,pdf转jpg,pdf转png,在线pdf转图片,免费pdf转jpg">
+<link rel="canonical" href="https://hebing.org/pdf-to-image.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="PDF转图片在线免费 | hebing.org">
+<meta property="og:url" content="https://hebing.org/pdf-to-image.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/pdf-to-image.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/pdf-to-image.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/pdf-to-image.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:500px;}
+.tool-wrap{padding:36px 0;}
+.drop-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--gray-100);position:relative;margin-bottom:20px;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--black);background:var(--white);}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:40px;margin-bottom:12px;line-height:1;}
+.drop-label{font-size:16px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.drop-sub{font-size:13px;color:var(--gray-400);}
+.file-info-box{padding:14px 16px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.f-icon{width:36px;height:36px;background:#e74c3c;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;font-family:var(--font-mono);flex-shrink:0;}
+.f-info{flex:1;min-width:0;}
+.f-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.f-meta{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);margin-top:2px;}
+.f-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;background:transparent;border:none;font-family:inherit;}
+.f-del:hover{color:#b91c1c;}
+.options-box{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:20px;}
+.options-title{font-size:13px;font-weight:500;color:var(--black);margin-bottom:14px;}
+.opt-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+.opt-row:last-child{margin-bottom:0;}
+.opt-group{flex:1;min-width:160px;}
+.opt-label{font-size:12px;color:var(--gray-600);margin-bottom:6px;display:block;font-family:var(--font-mono);}
+.opt-select{width:100%;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-size:13px;font-family:var(--font-sans);}
+.range-input{width:80px;height:36px;padding:0 10px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;text-align:center;font-family:var(--font-mono);background:var(--white);color:var(--black);}
+.mode-tabs{display:flex;gap:4px;background:var(--gray-200);border-radius:var(--radius);padding:3px;margin-bottom:14px;width:fit-content;}
+.mode-tab{padding:6px 14px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);transition:all 0.15s;font-family:var(--font-sans);}
+.mode-tab.active{background:var(--white);color:var(--black);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.range-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.range-label{font-size:13px;color:var(--gray-600);}
+.range-hint{font-size:12px;color:var(--gray-400);margin-top:8px;}
+.btn-convert{height:48px;padding:0 32px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.15s;font-family:var(--font-sans);width:100%;}
+.btn-convert:hover{opacity:0.82;}
+.btn-convert:disabled{opacity:0.3;cursor:not-allowed;}
+.progress-wrap{margin:20px 0;}
+.progress-bar-bg{height:3px;background:var(--gray-200);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width 0.25s;}
+.progress-text{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.summary-box{padding:16px 20px;background:var(--success-bg);border-radius:var(--radius-lg);border:1px solid #bbf7d0;margin-bottom:20px;}
+.summary-check{font-size:18px;margin-bottom:6px;}
+.summary-title{font-size:14px;font-weight:500;color:var(--success);margin-bottom:8px;}
+.summary-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.summary-stat{display:flex;flex-direction:column;gap:2px;}
+.summary-stat-num{font-family:var(--font-mono);font-size:22px;font-weight:500;color:var(--success);}
+.summary-stat-label{font-size:11px;color:#4ade80;text-transform:uppercase;letter-spacing:0.5px;}
+.status-err{padding:14px 16px;background:#fef2f2;border-radius:var(--radius-lg);border:1px solid #fecaca;font-size:14px;color:#b91c1c;margin-bottom:20px;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:32px 0 40px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .opt-row,[dir="rtl"] .range-row{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:40px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:40px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:36px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .drop-zone{background:var(--gray-100);}
+  .opt-select,.range-input{background:var(--gray-100);}
+  .mode-tab.active{background:var(--gray-200);box-shadow:none;}
+  .scene-card,.faq-item,.options-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .summary-box{border-color:#14532d;}
+  .status-err{background:#2d0a0a;border-color:#7f1d1d;}
+  .subscribe-input{background:var(--gray-100);}
+}
+</style>
+<script src="/vendor/jszip@3.10.1/jszip.min.js"></script>
+<!-- Google AdSense -->
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org PDF 转图片",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/pdf-to-image.html",
+  "description": "免费在线将 PDF 每页转换为 JPG / PNG / WebP 图片，可调节分辨率与页面范围，浏览器本地处理。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["PDF 转 JPG / PNG / WebP", "可选分辨率 (72/150/300 DPI)", "按页码范围或全部转换", "多页自动打包 ZIP"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费将 PDF 转换为 JPG / PNG 图片",
+  "description": "使用 hebing.org 在浏览器本地将 PDF 每页转为 JPG / PNG / WebP 图片，多页自动打包 ZIP。",
+  "totalTime": "PT30S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "上传 PDF", "text": "点击上传或拖拽 PDF 文件。" },
+    { "@type": "HowToStep", "position": 2, "name": "选择输出", "text": "选择输出格式（JPG / PNG / WebP）和分辨率（72 / 150 / 300 DPI）。" },
+    { "@type": "HowToStep", "position": 3, "name": "选择页面范围", "text": "可全部页面或指定页码范围。" },
+    { "@type": "HowToStep", "position": 4, "name": "下载图片", "text": "单页直接下载，多页自动打包为 ZIP。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "PDF 转图片", "item": "https://hebing.org/pdf-to-image.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "支持哪些输出图片格式？",
+      "acceptedAnswer": { "@type": "Answer", "text": "支持 JPG（体积最小，适合大多数场景）、PNG（无损，文字清晰）、WebP（现代格式，体积比 JPG 还小）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "DPI 应该选哪一档？",
+      "acceptedAnswer": { "@type": "Answer", "text": "72 DPI 适合屏幕预览（体积最小）；150 DPI 适合屏幕阅读和大多数用途；300 DPI 适合打印输出（体积较大）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "加密 PDF 能转换吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不支持加密 PDF。请先到 hebing.org 的 PDF 加密 / 解密 工具（/pdf-encrypt.html）输入密码移除保护后再来本页转换。" }
+    },
+    {
+      "@type": "Question",
+      "name": "文件会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有处理在浏览器本地完成（pdf.js + Canvas API），文件不离开你的设备。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">PDF 转图片</span></div>
+  <h1 class="page-title" data-i18n="page.h1">PDF 转图片<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">将 PDF 每页转为 JPG / PNG / WebP 图片，可选分辨率与页面范围。文件在浏览器本地处理。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="drop-zone" id="dropZone">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel" accept=".pdf">
+    <div class="drop-icon">📄</div>
+    <div class="drop-label" id="dropLabel" data-i18n="drop.label">点击选择 PDF 文件，或拖拽到此处</div>
+    <div class="drop-sub"><strong>.pdf</strong> · <span data-i18n="drop.limit">单个文件，无大小限制</span></div>
+  </div>
+
+  <div class="file-info-box hidden" id="fileInfoBox">
+    <div class="f-icon">PDF</div>
+    <div class="f-info">
+      <div class="f-name" id="fName"></div>
+      <div class="f-meta" id="fMeta"></div>
+    </div>
+    <button class="f-del" type="button" onclick="clearFile()" aria-label="移除文件 / Remove file">✕</button>
+  </div>
+
+  <div class="options-box hidden" id="optionsBox">
+    <div class="options-title" data-i18n="opt.title">输出设置</div>
+    <div class="opt-row">
+      <div class="opt-group">
+        <label class="opt-label" data-i18n="opt.format">输出格式</label>
+        <select class="opt-select" id="outFormat">
+          <option value="jpeg" selected data-i18n="fmt.jpg">JPG（体积最小）</option>
+          <option value="png" data-i18n="fmt.png">PNG（无损）</option>
+          <option value="webp" data-i18n="fmt.webp">WebP（现代格式）</option>
+        </select>
+      </div>
+      <div class="opt-group">
+        <label class="opt-label" data-i18n="opt.dpi">分辨率</label>
+        <select class="opt-select" id="outDpi">
+          <option value="72" data-i18n="dpi.72">72 DPI · 屏幕预览</option>
+          <option value="150" selected data-i18n="dpi.150">150 DPI · 推荐</option>
+          <option value="300" data-i18n="dpi.300">300 DPI · 打印</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="tabAll" onclick="setMode('all')" data-i18n="mode.all">全部页面</button>
+      <button class="mode-tab" id="tabRange" onclick="setMode('range')" data-i18n="mode.range">指定范围</button>
+    </div>
+    <div id="rangePanel" class="hidden">
+      <div class="range-row">
+        <span class="range-label" data-i18n="range.from">从第</span>
+        <input type="number" class="range-input" id="pageFrom" min="1" value="1">
+        <span class="range-label" data-i18n="range.to">页到第</span>
+        <input type="number" class="range-input" id="pageTo" min="1" value="1">
+        <span class="range-label" data-i18n="range.end">页</span>
+      </div>
+      <div class="range-hint" id="rangeHint"></div>
+    </div>
+  </div>
+
+  <button class="btn-convert hidden" id="btnConvert" data-i18n="btn.convert">开始转换</button>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+
+  <div class="summary-box hidden" id="statusOk" style="margin-top:20px;">
+    <div class="summary-check">✓</div>
+    <div class="summary-title" id="summaryTitle">转换完成！文件已下载。</div>
+    <div class="summary-stats" id="summaryStats"></div>
+  </div>
+  <div class="status-err hidden" id="statusErr" style="margin-top:20px;"></div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="PDF转图片的常见使用场景" data-en="Common Use Cases">PDF转图片的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📱</div><div class="scene-title" data-scene-zh="社交媒体发布" data-scene-en="Social Media">社交媒体发布</div><div class="scene-desc" data-scene-zh="把 PDF 中的某一页转为图片，发到微信、小红书、Twitter，分享更方便。" data-scene-en="Convert a PDF page to image for posting on WeChat, Twitter, or other social platforms.">把 PDF 中的某一页转为图片，发到微信、小红书、Twitter，分享更方便。</div></div>
+      <div class="scene-card"><div class="scene-icon">🖼️</div><div class="scene-title" data-scene-zh="提取页面截图" data-scene-en="Page Screenshots">提取页面截图</div><div class="scene-desc" data-scene-zh="将 PDF 报告/合同的关键页截为图片，用于 PPT 或文档插图。" data-scene-en="Extract key pages of reports or contracts as images for slides or documents.">将 PDF 报告/合同的关键页截为图片，用于 PPT 或文档插图。</div></div>
+      <div class="scene-card"><div class="scene-icon">🎨</div><div class="scene-title" data-scene-zh="设计稿提取" data-scene-en="Design Asset Extract">设计稿提取</div><div class="scene-desc" data-scene-zh="把设计稿 PDF 转为高分辨率 PNG，导入 Figma / Sketch 中作为参考底图。" data-scene-en="Convert design PDFs to high-DPI PNG to import as reference layers in Figma / Sketch.">把设计稿 PDF 转为高分辨率 PNG，导入 Figma / Sketch 中作为参考底图。</div></div>
+      <div class="scene-card"><div class="scene-icon">🖨️</div><div class="scene-title" data-scene-zh="打印店送印" data-scene-en="Print Shops">打印店送印</div><div class="scene-desc" data-scene-zh="部分打印店只接受图片格式（JPG / PNG），将 PDF 转为高 DPI 图片即可顺利送印。" data-scene-en="Some print shops only accept JPG / PNG. Convert PDF to high-DPI image for hassle-free printing.">部分打印店只接受图片格式（JPG / PNG），将 PDF 转为高 DPI 图片即可顺利送印。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li>JPG 适合大多数场景（含照片型 PDF）；含文字或线条图的页面建议用 PNG，避免 JPEG 压缩造成的字体模糊。</li>
+      <li>WebP 体积比 JPG 还要小约 30%，但部分软件不识别——发给他人时建议先确认对方支持。</li>
+      <li>多页 PDF 会自动打包为 ZIP 下载（一次弹出），单页则直接下载。</li>
+      <li>转换大型 PDF 时（>100 页）建议先用 PDF 拆分工具分批处理，避免浏览器内存压力。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li>JPG works for most cases (incl. photo PDFs). For text or line drawings, prefer PNG to avoid JPEG blur.</li>
+      <li>WebP is ~30% smaller than JPG but not universally supported — verify the recipient first.</li>
+      <li>Multi-page PDFs are auto-packed into a ZIP (one prompt). Single-page files download directly.</li>
+      <li>For huge PDFs (>100 pages), split first using our PDF Split tool to reduce memory pressure.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>JPG يعمل لمعظم الحالات (بما في ذلك PDFs الصور). للنصوص أو الرسومات الخطية، فضّل PNG لتجنب ضبابية JPEG.</li><li>WebP ~30٪ أصغر من JPG لكنه ليس مدعوماً عالمياً — تحقق من المستلم أولاً.</li><li>PDFs متعددة الصفحات تُحزم تلقائياً في ZIP (موجه واحد). الملفات أحادية الصفحة تنزّل مباشرة.</li><li>لـ PDFs الضخمة (&gt;100 صفحة)، قسّم أولاً باستخدام أداة PDF Split لتقليل ضغط الذاكرة.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持哪些输出图片格式？" data-faq-en="Which output formats are supported?" data-faq-ar="ما صيغ الإخراج المدعومة؟">支持哪些输出图片格式？</div>
+        <div class="faq-a" data-faq-zh="支持 JPG（体积最小）、PNG（无损，文字清晰）、WebP（现代格式，比 JPG 再小约 30%）三种格式。" data-faq-en="JPG (smallest), PNG (lossless, sharp text), and WebP (~30% smaller than JPG). Pick based on your need." data-faq-ar="JPG (الأصغر)، PNG (بدون فقد، نص حاد)، و WebP (~30٪ أصغر من JPG). اختر بناءً على حاجتك.">支持 JPG（体积最小）、PNG（无损，文字清晰）、WebP（现代格式，比 JPG 再小约 30%）三种格式。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="DPI 应该选哪一档？" data-faq-en="Which DPI should I pick?" data-faq-ar="أي DPI أختار؟">DPI 应该选哪一档？</div>
+        <div class="faq-a" data-faq-zh="72 DPI 适合屏幕预览（体积最小）；150 DPI 适合屏幕阅读和大多数用途，是推荐值；300 DPI 适合打印输出（体积是 72 DPI 的 17 倍）。" data-faq-en="72 DPI is for screen preview (smallest). 150 DPI is recommended for general use. 300 DPI is for print (~17× the size of 72 DPI)." data-faq-ar="72 DPI لمعاينة الشاشة (الأصغر). 150 DPI موصى به للاستخدام العام. 300 DPI للطباعة (~17× حجم 72 DPI).">72 DPI 适合屏幕预览（体积最小）；150 DPI 适合屏幕阅读和大多数用途，是推荐值；300 DPI 适合打印输出（体积是 72 DPI 的 17 倍）。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="加密 PDF 能转换吗？" data-faq-en="Can I convert encrypted PDFs?" data-faq-ar="هل يمكنني تحويل PDF المشفَّرة؟">加密 PDF 能转换吗？</div>
+        <div class="faq-a" data-faq-zh="不支持加密 PDF。请先到 hebing.org 的 <a href=&quot;pdf-encrypt.html&quot;>PDF 加密 / 解密</a> 工具输入密码移除保护，然后再来本页转换。" data-faq-en="Not directly. Strip the password at our <a href=&quot;pdf-encrypt.html&quot;>PDF Encrypt / Decrypt</a> tool first, then upload here." data-faq-ar="ليس مباشرة. جرّد كلمة المرور أولاً في أداة &lt;a href=&quot;pdf-encrypt.html&quot;&gt;PDF Encrypt / Decrypt&lt;/a&gt;، ثم ارفع هنا.">不支持加密 PDF。请先到 hebing.org 的 <a href="pdf-encrypt.html">PDF 加密 / 解密</a> 工具输入密码移除保护，然后再来本页转换。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?" data-faq-ar="هل يتم رفع الملفات إلى خادم؟">文件会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地完成（pdf.js 渲染 + Canvas API 导出），文件不离开你的设备。" data-faq-en="No. Everything runs locally in your browser (pdf.js render + Canvas export). Files never leave your device." data-faq-ar="لا. كل شيء يعمل محلياً في متصفحك (تصيير pdf.js + تصدير Canvas). لا تغادر الملفات جهازك أبداً.">不会。所有处理在浏览器本地完成（pdf.js 渲染 + Canvas API 导出），文件不离开你的设备。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="image-to-pdf.html" class="related-card"><span>📷</span><span data-i18n-related="图片转PDF|Image to PDF|صورة إلى PDF">图片转PDF</span></a>
+    <a href="pdf-compress.html" class="related-card"><span>🗜️</span><span data-i18n-related="PDF压缩|PDF Compress|ضغط PDF">PDF压缩</span></a>
+    <a href="pdf-split.html" class="related-card"><span>✂️</span><span data-i18n-related="PDF拆分|PDF Split|تقسيم PDF">PDF拆分</span></a>
+    <a href="image-compress.html" class="related-card"><span>🖼️</span><span data-i18n-related="图片压缩|Image Compress|ضغط الصور">图片压缩</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'PDF 转图片','page.h1':'PDF 转图片<br><em>在线免费</em>','page.sub':'将 PDF 每页转为 JPG / PNG / WebP 图片，可选分辨率与页面范围。文件在浏览器本地处理。','drop.label':'点击选择 PDF 文件，或拖拽到此处','drop.limit':'单个文件，无大小限制','opt.title':'输出设置','opt.format':'输出格式','fmt.jpg':'JPG（体积最小）','fmt.png':'PNG（无损）','fmt.webp':'WebP（现代格式）','opt.dpi':'分辨率','dpi.72':'72 DPI · 屏幕预览','dpi.150':'150 DPI · 推荐','dpi.300':'300 DPI · 打印','mode.all':'全部页面','mode.range':'指定范围','range.from':'从第','range.to':'页到第','range.end':'页','btn.convert':'开始转换','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'PDF to Image','page.h1':'PDF to Image<br><em>Free Online</em>','page.sub':'Convert each PDF page to JPG / PNG / WebP images with adjustable DPI. Processed locally in your browser.','drop.label':'Click to select a PDF, or drag & drop here','drop.limit':'Single file, no size limit','opt.title':'Output Settings','opt.format':'Format','fmt.jpg':'JPG (smallest)','fmt.png':'PNG (lossless)','fmt.webp':'WebP (modern)','opt.dpi':'Resolution','dpi.72':'72 DPI · Screen','dpi.150':'150 DPI · Recommended','dpi.300':'300 DPI · Print','mode.all':'All pages','mode.range':'Page range','range.from':'From page','range.to':'to page','range.end':'','btn.convert':'Start Converting','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'PDF إلى صورة','page.h1':'PDF إلى صورة<br><em>مجاناً عبر الإنترنت</em>','page.sub':'حوّل كل صفحة PDF إلى صورة JPG / PNG / WebP مع دقة قابلة للتعديل.','drop.label':'انقر لاختيار ملف PDF، أو اسحبه هنا','drop.limit':'ملف واحد، بدون حد للحجم','opt.title':'إعدادات الإخراج','opt.format':'الصيغة','fmt.jpg':'JPG (أصغر)','fmt.png':'PNG (بدون فقدان)','fmt.webp':'WebP (حديثة)','opt.dpi':'الدقة','dpi.72':'72 DPI · الشاشة','dpi.150':'150 DPI · مستحسن','dpi.300':'300 DPI · للطباعة','mode.all':'جميع الصفحات','mode.range':'نطاق الصفحات','range.from':'من صفحة','range.to':'إلى صفحة','range.end':'','btn.convert':'بدء التحويل','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.innerHTML=lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+  if(totalPages>0)updateRangeHint();
+}
+
+let selectedFile=null,totalPages=0,mode='all';
+
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(2)+' MB';}
+
+function clearFile(){
+  selectedFile=null;totalPages=0;
+  document.getElementById('fileInfoBox').classList.add('hidden');
+  document.getElementById('optionsBox').classList.add('hidden');
+  document.getElementById('btnConvert').classList.add('hidden');
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  document.getElementById('subscribeBox').classList.add('hidden');
+  document.getElementById('dropZone').style.display='';
+}
+
+function setMode(m){
+  mode=m;
+  document.getElementById('tabAll').classList.toggle('active',m==='all');
+  document.getElementById('tabRange').classList.toggle('active',m==='range');
+  document.getElementById('rangePanel').classList.toggle('hidden',m!=='range');
+}
+
+function updateRangeHint(){
+  const lang=document.documentElement.lang;
+  const hint=lang==='en'?`This PDF has ${totalPages} pages`:lang==='ar'?`هذا PDF يحتوي على ${totalPages} صفحة`:`该 PDF 共 ${totalPages} 页`;
+  document.getElementById('rangeHint').textContent=hint;
+  document.getElementById('pageFrom').max=totalPages;
+  document.getElementById('pageTo').max=totalPages;
+  document.getElementById('pageTo').value=totalPages;
+}
+
+async function ensurePdfJs(){
+  if(!window.pdfjsLib){
+    await new Promise((res,rej)=>{const s=document.createElement('script');s.src='/vendor/pdf.js@3.11.174/pdf.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    pdfjsLib.GlobalWorkerOptions.workerSrc='/vendor/pdf.js@3.11.174/pdf.worker.min.js';
+  }
+}
+
+const fi=document.getElementById('fileInput'),dz=document.getElementById('dropZone');
+async function handleFile(f){
+  if(!f||!f.name.toLowerCase().endsWith('.pdf'))return;
+  selectedFile=f;
+  document.getElementById('dropZone').style.display='none';
+  const lang=document.documentElement.lang;
+  document.getElementById('fName').textContent=f.name;
+  document.getElementById('fMeta').textContent=fmtSize(f.size)+' · '+(lang==='en'?'loading...':lang==='ar'?'تحميل...':'加载中...');
+  document.getElementById('fileInfoBox').classList.remove('hidden');
+  try{
+    await ensurePdfJs();
+    const buf=await f.arrayBuffer();
+    const doc=await pdfjsLib.getDocument({data:buf.slice(0)}).promise;
+    totalPages=doc.numPages;
+    document.getElementById('fMeta').textContent=fmtSize(f.size)+' · '+(lang==='en'?totalPages+' pages':lang==='ar'?totalPages+' صفحة':totalPages+' 页');
+    document.getElementById('optionsBox').classList.remove('hidden');
+    document.getElementById('btnConvert').classList.remove('hidden');
+    updateRangeHint();
+  }catch(e){
+    document.getElementById('statusErr').textContent=(lang==='en'?'Error: ':'错误：')+e.message;
+    document.getElementById('statusErr').classList.remove('hidden');
+  }
+}
+fi.addEventListener('change',e=>{handleFile(e.target.files[0]);fi.value='';});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+
+document.getElementById('btnConvert').onclick=async()=>{
+  const btn=document.getElementById('btnConvert');btn.disabled=true;
+  document.getElementById('progressWrap').classList.remove('hidden');
+  document.getElementById('statusOk').classList.add('hidden');
+  document.getElementById('statusErr').classList.add('hidden');
+  const fill=document.getElementById('progressFill'),pt=document.getElementById('progressText');
+  const lang=document.documentElement.lang;
+  const fmt=document.getElementById('outFormat').value;
+  const dpi=parseInt(document.getElementById('outDpi').value);
+  const scale=dpi/72;
+  const ext=fmt==='jpeg'?'jpg':fmt;
+  const mime='image/'+fmt;
+
+  let from=1,to=totalPages;
+  if(mode==='range'){
+    from=Math.max(1,parseInt(document.getElementById('pageFrom').value)||1);
+    to=Math.min(totalPages,parseInt(document.getElementById('pageTo').value)||totalPages);
+    if(from>to){
+      document.getElementById('statusErr').textContent=lang==='en'?'Start page must be less than end page':'起始页码不能大于结束页码';
+      document.getElementById('statusErr').classList.remove('hidden');
+      document.getElementById('progressWrap').classList.add('hidden');
+      btn.disabled=false;return;
+    }
+  }
+  const totalToProcess=to-from+1;
+
+  try{
+    fill.style.width='5%';pt.textContent=lang==='en'?'Loading PDF...':lang==='ar'?'تحميل PDF...':'加载 PDF...';
+    const buf=await selectedFile.arrayBuffer();
+    const doc=await pdfjsLib.getDocument({data:buf.slice(0)}).promise;
+    const baseName=selectedFile.name.replace(/\.pdf$/i,'');
+    const padW=String(to).length;
+    const blobs=[];
+    let totalBytes=0;
+    for(let i=from;i<=to;i++){
+      fill.style.width=Math.round(5+(i-from)/totalToProcess*85)+'%';
+      pt.textContent=(lang==='en'?`Rendering page ${i}/${to}`:lang==='ar'?`عرض صفحة ${i}/${to}`:`渲染第 ${i}/${to} 页`);
+      const page=await doc.getPage(i);
+      const viewport=page.getViewport({scale});
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);
+      const ctx=canvas.getContext('2d');
+      if(fmt!=='png'){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);}
+      await page.render({canvasContext:ctx,viewport}).promise;
+      const blob=await new Promise(r=>canvas.toBlob(r,mime,fmt==='png'?undefined:0.92));
+      if(!blob) throw new Error(lang==='en'?`Encoding failed on page ${i}`:'编码失败');
+      const pageNum=String(i).padStart(padW,'0');
+      blobs.push({name:`${baseName}_page${pageNum}.${ext}`,blob});
+      totalBytes+=blob.size;
+      canvas.width=0;canvas.height=0;
+      await new Promise(r=>setTimeout(r,0));
+    }
+
+    if(blobs.length===1){
+      const a=document.createElement('a');a.href=URL.createObjectURL(blobs[0].blob);a.download=blobs[0].name;a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    }else{
+      if(typeof JSZip==='undefined') throw new Error(lang==='en'?'ZIP library failed to load. Reload and retry.':'ZIP 打包库加载失败，请刷新重试。');
+      pt.textContent=lang==='en'?'Packing ZIP…':lang==='ar'?'ضغط ZIP…':'打包 ZIP...';
+      fill.style.width='92%';
+      const zip=new JSZip();
+      blobs.forEach(o=>zip.file(o.name,o.blob));
+      const zipBlob=await zip.generateAsync({type:'blob',compression:'STORE'},meta=>{
+        fill.style.width=(92+Math.round(meta.percent*0.07))+'%';
+      });
+      const a=document.createElement('a');a.href=URL.createObjectURL(zipBlob);
+      a.download=`${baseName}_images.zip`;a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    }
+    fill.style.width='100%';
+    setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
+
+    document.getElementById('summaryTitle').textContent=lang==='en'?'Converted! File downloaded.':lang==='ar'?'تم التحويل! تم التنزيل.':'转换完成！文件已下载。';
+    document.getElementById('summaryStats').innerHTML=
+      `<div class="summary-stat"><div class="summary-stat-num">${blobs.length}</div><div class="summary-stat-label">${lang==='en'?'Images':lang==='ar'?'صور':'图片数'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${ext.toUpperCase()}</div><div class="summary-stat-label">${lang==='en'?'Format':lang==='ar'?'الصيغة':'格式'}</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${dpi}</div><div class="summary-stat-label">DPI</div></div>`+
+      `<div class="summary-stat"><div class="summary-stat-num">${fmtSize(totalBytes)}</div><div class="summary-stat-label">${lang==='en'?'Total':lang==='ar'?'الإجمالي':'总大小'}</div></div>`;
+    document.getElementById('statusOk').classList.remove('hidden');
+    document.getElementById('subscribeBox').classList.remove('hidden');
+  }catch(e){
+    document.getElementById('statusErr').textContent=(lang==='en'?'Error: ':lang==='ar'?'خطأ: ':'错误：')+e.message;
+    document.getElementById('statusErr').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+  }
+  btn.disabled=false;
+};
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

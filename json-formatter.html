@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON格式化在线 - 免费JSON美化/压缩/验证工具 | hebing.org</title>
+<meta name="description" content="免费在线 JSON 格式化、压缩、验证、转义工具，支持 2/4 空格或 Tab 缩进，错误定位到行列。文件在浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="json格式化,json美化,json压缩,json校验,json验证,在线json工具,json formatter">
+<link rel="canonical" href="https://hebing.org/json-formatter.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="JSON格式化在线免费 | hebing.org">
+<meta property="og:url" content="https://hebing.org/json-formatter.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/json-formatter.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/json-formatter.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/json-formatter.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:560px;}
+.tool-wrap{padding:28px 0;}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:38px;padding:0 16px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.t-sep{flex:1;}
+.t-select{height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-size:12px;font-family:var(--font-mono);cursor:pointer;}
+.t-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);user-select:none;cursor:pointer;}
+.t-check input{cursor:pointer;}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:760px){.editor-grid{grid-template-columns:1fr;}}
+.editor-pane{display:flex;flex-direction:column;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);}
+.editor-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.editor-head .e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.editor-area{width:100%;min-height:420px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;tab-size:2;}
+.editor-area.output{background:var(--gray-100);}
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.error-pos{font-weight:600;}
+.error-snippet{margin-top:8px;padding:10px 12px;background:#fff;border:1px solid #fecaca;border-radius:var(--radius);font-size:12px;color:var(--black);overflow-x:auto;white-space:pre;}
+.error-pointer{color:#b91c1c;}
+.success-box{padding:12px 16px;background:var(--success-bg);border:1px solid #bbf7d0;border-radius:var(--radius-lg);font-size:13px;color:var(--success);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.success-box.hidden{display:none!important;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .editor-area{background:var(--white);color:var(--black);}
+  .editor-area.output{background:var(--gray-100);}
+  .t-select,.subscribe-input{background:var(--gray-100);}
+  .scene-card,.faq-item{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .error-snippet{background:var(--gray-100);border-color:#7f1d1d;}
+  .success-box{border-color:#14532d;}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org JSON 格式化",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/json-formatter.html",
+  "description": "免费在线 JSON 美化、压缩、验证、转义工具，支持 2/4 空格或 Tab 缩进、按键排序，错误精确定位到行列。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["JSON 美化（2/4 空格 / Tab）", "JSON 压缩为单行", "语法验证 + 错误行列定位", "按 key 排序", "复制 / 下载 .json", "处理在浏览器本地完成"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费格式化、压缩、验证 JSON",
+  "description": "使用 hebing.org 在浏览器本地美化、压缩、验证 JSON 文本，错误精确定位到行列。",
+  "totalTime": "PT10S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "粘贴 JSON", "text": "将 JSON 文本粘贴到左侧输入框，或点击「示例」加载演示。" },
+    { "@type": "HowToStep", "position": 2, "name": "点击操作", "text": "点击「美化」「压缩」「验证」中的一个按钮，结果显示在右侧。" },
+    { "@type": "HowToStep", "position": 3, "name": "调整选项", "text": "可设置缩进（2/4 空格或 Tab），勾选按 key 排序。" },
+    { "@type": "HowToStep", "position": 4, "name": "复制或下载", "text": "点击复制按钮一键复制到剪贴板，或下载为 .json 文件。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "JSON 格式化", "item": "https://hebing.org/json-formatter.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "支持注释或尾随逗号吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "标准 JSON 不允许注释或尾随逗号，因此默认会报错。如果你需要 JSON5 / JSONC 解析能力，可以勾选「宽松模式」（即将上线）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "处理大文件性能如何？",
+      "acceptedAnswer": { "@type": "Answer", "text": "纯浏览器原生 JSON.parse / JSON.stringify，10MB 以内 JSON 通常毫秒级完成。超大数组建议分片处理。" }
+    },
+    {
+      "@type": "Question",
+      "name": "数据会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有处理都在你的浏览器内完成，输入内容从不离开你的设备。" }
+    },
+    {
+      "@type": "Question",
+      "name": "「按 key 排序」会改变数据语义吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "JSON 对象的 key 顺序在标准上是无意义的，因此排序不会影响数据语义，但有助于 diff 比较和稳定输出。数组顺序绝不会被改动。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">JSON 格式化</span></div>
+  <h1 class="page-title" data-i18n="page.h1">JSON 格式化 / 压缩 / 验证<br><em>在线免费</em></h1>
+  <p class="page-sub" data-i18n="page.sub">粘贴 JSON 即可一键美化、压缩或验证，错误自动定位到行列。所有处理在浏览器本地完成，数据不上传服务器。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="toolbar">
+    <button class="t-btn" id="btnFormat" data-i18n="btn.format">美化</button>
+    <button class="t-btn" id="btnMinify" data-i18n="btn.minify">压缩</button>
+    <button class="t-btn secondary" id="btnValidate" data-i18n="btn.validate">仅验证</button>
+    <button class="t-btn secondary" id="btnEscape" data-i18n="btn.escape">转义为字符串</button>
+    <button class="t-btn secondary" id="btnUnescape" data-i18n="btn.unescape">取消转义</button>
+    <span class="t-sep"></span>
+    <select class="t-select" id="indent">
+      <option value="2" selected>2 spaces</option>
+      <option value="4">4 spaces</option>
+      <option value="\t">Tab</option>
+    </select>
+    <label class="t-check"><input type="checkbox" id="sortKeys"><span data-i18n="opt.sort">按 key 排序</span></label>
+  </div>
+
+  <div class="editor-grid">
+    <div class="editor-pane">
+      <div class="editor-head">
+        <span data-i18n="pane.input">输入</span>
+        <span class="e-meta" id="inMeta"></span>
+      </div>
+      <textarea class="editor-area" id="inputArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder='{"name":"hebing","tools":16}'></textarea>
+    </div>
+    <div class="editor-pane">
+      <div class="editor-head">
+        <span data-i18n="pane.output">输出</span>
+        <span class="e-meta" id="outMeta"></span>
+      </div>
+      <textarea class="editor-area output" id="outputArea" spellcheck="false" readonly placeholder=""></textarea>
+    </div>
+  </div>
+
+  <div class="success-box hidden" id="okBox">
+    <span>✓</span>
+    <span id="okText"></span>
+  </div>
+  <div class="error-box hidden" id="errBox">
+    <div><span class="error-pos" id="errPos"></span> <span id="errMsg"></span></div>
+    <div class="error-snippet" id="errSnippet"></div>
+  </div>
+
+  <div class="toolbar">
+    <button class="t-btn secondary" id="btnSample" data-i18n="btn.sample">加载示例</button>
+    <button class="t-btn secondary" id="btnSwap" data-i18n="btn.swap">⇅ 交换输入输出</button>
+    <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+    <span class="t-sep"></span>
+    <button class="t-btn secondary" id="btnCopy" data-i18n="btn.copy">复制结果</button>
+    <button class="t-btn secondary" id="btnDownload" data-i18n="btn.download">下载 .json</button>
+  </div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="JSON 格式化的常见使用场景" data-en="Common Use Cases">JSON 格式化的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">🐛</div><div class="scene-title" data-scene-zh="API 调试" data-scene-en="API Debugging">API 调试</div><div class="scene-desc" data-scene-zh="把后端接口返回的压缩 JSON 美化成易读格式，快速定位字段和层级关系。" data-scene-en="Beautify minified API responses to quickly inspect fields and nesting.">把后端接口返回的压缩 JSON 美化成易读格式，快速定位字段和层级关系。</div></div>
+      <div class="scene-card"><div class="scene-icon">📤</div><div class="scene-title" data-scene-zh="部署配置压缩" data-scene-en="Config Minify">部署配置压缩</div><div class="scene-desc" data-scene-zh="将开发期带缩进的 package.json / config.json 压缩为单行，减少传输体积。" data-scene-en="Minify your indented package.json / config.json into a single line for smaller bundles.">将开发期带缩进的 package.json / config.json 压缩为单行，减少传输体积。</div></div>
+      <div class="scene-card"><div class="scene-icon">✅</div><div class="scene-title" data-scene-zh="语法快速校验" data-scene-en="Syntax Validation">语法快速校验</div><div class="scene-desc" data-scene-zh="贴入手写的 JSON 配置，立即知道哪一行少了逗号或多了引号，错误带行列定位。" data-scene-en="Paste hand-written JSON to instantly find missing commas or stray quotes — errors pinpoint the exact line and column.">贴入手写的 JSON 配置，立即知道哪一行少了逗号或多了引号，错误带行列定位。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔄</div><div class="scene-title" data-scene-zh="diff 友好排序" data-scene-en="Diff-friendly Sort">diff 友好排序</div><div class="scene-desc" data-scene-zh="勾选「按 key 排序」后输出顺序稳定，方便用 git diff 对比两个 JSON 文件的差异。" data-scene-en="Enable key sort for stable output — perfect for diffing two JSON files in git.">勾选「按 key 排序」后输出顺序稳定，方便用 git diff 对比两个 JSON 文件的差异。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="使用技巧" data-en="Tips">使用技巧</h2>
+    <ul class="tips-list zh-tips">
+      <li>「转义为字符串」会把 JSON 包成可嵌入到代码字符串中的形式（双引号转义为 \"，回车转义为 \\n），便于嵌入 Java/Go/Python 代码。</li>
+      <li>压缩后体积通常缩小 30–60%，特别适合生产环境配置或网络传输。</li>
+      <li>解析失败时错误信息会高亮出问题字符所在的行列，并附上上下文片段。</li>
+      <li>本工具调用浏览器原生 <code>JSON.parse</code> / <code>JSON.stringify</code>，与 Node.js、Chrome DevTools 行为完全一致。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li>"Escape as string" wraps the JSON for embedding in source code (double quotes become \", newlines become \\n) — handy for Java/Go/Python code.</li>
+      <li>Minifying typically saves 30–60% — ideal for production configs or wire transfer.</li>
+      <li>On parse failure, errors pinpoint the exact line/column with a context snippet around the bad character.</li>
+      <li>Powered by the browser's native <code>JSON.parse</code> / <code>JSON.stringify</code> — behavior matches Node.js and Chrome DevTools exactly.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>"تحويل إلى نص" يلف JSON للتضمين في كود المصدر (تصبح علامات الاقتباس المزدوجة \"، الأسطر الجديدة \\n) — مفيد لكود Java/Go/Python.</li><li>الضغط يوفر عادةً 30-60٪ — مثالي لتكوينات الإنتاج أو نقل الشبكة.</li><li>عند فشل التحليل، يحدد الأخطاء السطر/العمود بالضبط مع مقتطف سياقي حول الحرف السيء.</li><li>يعمل بـ JSON.parse / JSON.stringify الأصلي للمتصفح — السلوك يطابق Node.js و Chrome DevTools بالضبط.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持注释或尾随逗号吗？" data-faq-en="Are comments or trailing commas allowed?" data-faq-ar="هل يُسمح بالتعليقات أو الفواصل اللاحقة؟">支持注释或尾随逗号吗？</div>
+        <div class="faq-a" data-faq-zh="标准 JSON 不允许注释（//、/* */）或尾随逗号，因此默认会报错。需要 JSON5 / JSONC 兼容能力的话请告诉我们，将考虑加入「宽松模式」。" data-faq-en="Standard JSON disallows comments (//, /* */) and trailing commas, so they raise errors by default. Tell us if you need JSON5 / JSONC compatibility — we may add a 'lenient' mode." data-faq-ar="يحظر JSON القياسي التعليقات (//، /* */) والفواصل اللاحقة، لذا تثير أخطاءً افتراضياً. أخبرنا إذا كنت تحتاج توافق JSON5 / JSONC — قد نضيف وضعاً &quot;متساهلاً&quot;.">标准 JSON 不允许注释（//、/* */）或尾随逗号，因此默认会报错。需要 JSON5 / JSONC 兼容能力的话请告诉我们，将考虑加入「宽松模式」。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="处理大文件性能如何？" data-faq-en="How does it handle large files?" data-faq-ar="كيف يتعامل مع الملفات الكبيرة؟">处理大文件性能如何？</div>
+        <div class="faq-a" data-faq-zh="纯浏览器原生 JSON.parse / JSON.stringify，10MB 以内 JSON 通常毫秒级完成。超大数组（>100MB）建议在服务端分片处理或用流式解析器。" data-faq-en="Native JSON.parse / stringify — typically millisecond-level for files under 10MB. For very large arrays (>100MB), consider server-side chunking or a streaming parser." data-faq-ar="JSON.parse / stringify الأصلي — عادةً مستوى الميلي ثانية للملفات أقل من 10 ميجابايت. للمصفوفات الكبيرة جداً (&gt;100 ميجابايت)، فكّر في التقسيم على الخادم أو محلل دفقي.">纯浏览器原生 JSON.parse / JSON.stringify，10MB 以内 JSON 通常毫秒级完成。超大数组（>100MB）建议在服务端分片处理或用流式解析器。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Is my data uploaded?" data-faq-ar="هل يتم رفع البيانات؟">数据会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理都在你的浏览器内完成，输入内容从不离开你的设备。可以放心粘贴包含敏感字段（密钥、身份证号）的 JSON。" data-faq-en="No. Everything runs locally in your browser — your input never leaves the device. Safe to paste JSON containing secrets, IDs, etc." data-faq-ar="لا. كل شيء يعمل محلياً في متصفحك — لا تغادر مدخلاتك الجهاز أبداً. آمن للصق JSON يحتوي على أسرار أو معرفات إلخ.">不会。所有处理都在你的浏览器内完成，输入内容从不离开你的设备。可以放心粘贴包含敏感字段（密钥、身份证号）的 JSON。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="「按 key 排序」会改变数据语义吗？" data-faq-en="Does sort-keys change semantics?" data-faq-ar="هل تغيّر &quot;ترتيب المفاتيح&quot; دلالات البيانات؟">「按 key 排序」会改变数据语义吗？</div>
+        <div class="faq-a" data-faq-zh="JSON 对象的 key 顺序在标准上是无意义的，因此排序不会影响数据语义，但能让输出稳定，方便 diff 比较和缓存。数组顺序绝不会被改动。" data-faq-en="JSON object key order is semantically irrelevant per spec, so sorting doesn't change meaning — but it stabilizes output for diffs and caching. Array order is never modified." data-faq-ar="ترتيب مفاتيح كائن JSON غير ذي مغزى دلالياً وفقاً للمواصفات، لذا الترتيب لا يغير المعنى — لكنه يثبّت المخرج للمقارنات والتخزين المؤقت. لا يُعدَّل ترتيب المصفوفة أبداً.">JSON 对象的 key 顺序在标准上是无意义的，因此排序不会影响数据语义，但能让输出稳定，方便 diff 比较和缓存。数组顺序绝不会被改动。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="merge-csv.html" class="related-card"><span>🗂️</span><span data-i18n-related="CSV合并|CSV Merge|دمج CSV">CSV合并</span></a>
+    <a href="merge-txt.html" class="related-card"><span>📃</span><span data-i18n-related="TXT合并|TXT Merge|دمج TXT">TXT合并</span></a>
+    <a href="image-compress.html" class="related-card"><span>🗜️</span><span data-i18n-related="图片压缩|Image Compress|ضغط الصور">图片压缩</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'JSON 格式化','page.h1':'JSON 格式化 / 压缩 / 验证<br><em>在线免费</em>','page.sub':'粘贴 JSON 即可一键美化、压缩或验证，错误自动定位到行列。所有处理在浏览器本地完成，数据不上传服务器。','btn.format':'美化','btn.minify':'压缩','btn.validate':'仅验证','btn.escape':'转义为字符串','btn.unescape':'取消转义','btn.sample':'加载示例','btn.swap':'⇅ 交换输入输出','btn.clear':'清空','btn.copy':'复制结果','btn.download':'下载 .json','opt.sort':'按 key 排序','pane.input':'输入','pane.output':'输出','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'JSON Formatter','page.h1':'JSON Format / Minify / Validate<br><em>Free Online</em>','page.sub':'Paste JSON to beautify, minify or validate in one click. Errors pinpoint the exact line and column. Processed locally in your browser.','btn.format':'Format','btn.minify':'Minify','btn.validate':'Validate','btn.escape':'Escape as string','btn.unescape':'Unescape','btn.sample':'Load sample','btn.swap':'⇅ Swap I/O','btn.clear':'Clear','btn.copy':'Copy result','btn.download':'Download .json','opt.sort':'Sort keys','pane.input':'Input','pane.output':'Output','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'منسق JSON','page.h1':'تنسيق / ضغط / تحقق JSON<br><em>مجاناً عبر الإنترنت</em>','page.sub':'الصق JSON للتجميل أو الضغط أو التحقق بنقرة واحدة. الأخطاء تحدد السطر والعمود بدقة.','btn.format':'تنسيق','btn.minify':'ضغط','btn.validate':'تحقق','btn.escape':'تحويل إلى نص','btn.unescape':'فك التحويل','btn.sample':'تحميل عينة','btn.swap':'⇅ تبديل','btn.clear':'مسح','btn.copy':'نسخ النتيجة','btn.download':'تنزيل .json','opt.sort':'ترتيب المفاتيح','pane.input':'إدخال','pane.output':'إخراج','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const inEl = $('inputArea'), outEl = $('outputArea');
+const okBox = $('okBox'), errBox = $('errBox');
+
+function fmtBytes(n){if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(2)+' MB';}
+
+function updateMeta(){
+  const inLen = inEl.value.length, outLen = outEl.value.length;
+  $('inMeta').textContent = inEl.value ? `${inLen.toLocaleString()} chars · ${fmtBytes(new Blob([inEl.value]).size)}` : '';
+  $('outMeta').textContent = outEl.value ? `${outLen.toLocaleString()} chars · ${fmtBytes(new Blob([outEl.value]).size)}` : '';
+}
+inEl.addEventListener('input', () => { hideStatus(); updateMeta(); });
+
+function hideStatus(){okBox.classList.add('hidden');errBox.classList.add('hidden');}
+function showOk(text){
+  errBox.classList.add('hidden');
+  $('okText').textContent = text;
+  okBox.classList.remove('hidden');
+}
+function showErr(err, src){
+  okBox.classList.add('hidden');
+  // Extract position from native parse error: "Unexpected token X in JSON at position Y"
+  // Or modern: "Unexpected token X ..., \"...\" is not valid JSON" (V8 includes position via .stack rarely)
+  const msg = err.message || String(err);
+  let pos = -1;
+  const mPos = msg.match(/position\s+(\d+)/i);
+  if(mPos) pos = parseInt(mPos[1]);
+  const lang = document.documentElement.lang || 'zh';
+  let line=0,col=0,snippet='';
+  if(pos >= 0 && src){
+    let p=0; line=1; col=1;
+    for(let i=0;i<Math.min(pos,src.length);i++){
+      if(src[i]==='\n'){ line++; col=1; } else { col++; }
+    }
+    // Build snippet: show the line containing the error
+    const lines = src.split('\n');
+    const errLine = lines[line-1] || '';
+    const trim = errLine.length > 80 ? errLine.slice(Math.max(0,col-40), col+40) : errLine;
+    const offset = errLine.length > 80 ? Math.min(40, col-1) : (col-1);
+    snippet = trim + '\n' + ' '.repeat(Math.max(0, offset)) + '^';
+  }
+  const posTxt = (line>0)
+    ? (lang==='en' ? `Line ${line}, column ${col}:` : lang==='ar' ? `السطر ${line}، العمود ${col}:` : `第 ${line} 行 第 ${col} 列：`)
+    : (lang==='en' ? 'Parse error:' : lang==='ar' ? 'خطأ تحليل:' : '解析错误：');
+  $('errPos').textContent = posTxt;
+  $('errMsg').textContent = msg;
+  $('errSnippet').textContent = snippet;
+  $('errSnippet').style.display = snippet ? '' : 'none';
+  errBox.classList.remove('hidden');
+}
+
+function getIndent(){
+  const v = $('indent').value;
+  return v === '\\t' || v === '\t' ? '\t' : parseInt(v) || 2;
+}
+
+function sortRec(v){
+  if(Array.isArray(v)) return v.map(sortRec);
+  if(v && typeof v==='object'){
+    const out={};
+    Object.keys(v).sort().forEach(k=>{out[k]=sortRec(v[k]);});
+    return out;
+  }
+  return v;
+}
+
+function parseInput(){
+  const src = inEl.value;
+  if(!src.trim()) throw new Error(document.documentElement.lang==='en'?'Input is empty':document.documentElement.lang==='ar'?'الإدخال فارغ':'输入为空');
+  return JSON.parse(src);
+}
+
+function postOutput(text){
+  outEl.value = text;
+  updateMeta();
+}
+
+$('btnFormat').onclick = () => {
+  hideStatus();
+  try{
+    let v = parseInput();
+    if($('sortKeys').checked) v = sortRec(v);
+    const indent = getIndent();
+    postOutput(JSON.stringify(v, null, indent));
+    const lang = document.documentElement.lang;
+    showOk(lang==='en'?'Formatted ✓':lang==='ar'?'تم التنسيق ✓':'已美化 ✓');
+  }catch(e){ showErr(e, inEl.value); }
+};
+$('btnMinify').onclick = () => {
+  hideStatus();
+  try{
+    let v = parseInput();
+    if($('sortKeys').checked) v = sortRec(v);
+    const out = JSON.stringify(v);
+    postOutput(out);
+    const lang = document.documentElement.lang;
+    const saved = inEl.value.length ? Math.max(0, Math.round((1 - out.length/inEl.value.length)*100)) : 0;
+    showOk(lang==='en'?`Minified ✓ (${saved}% smaller)`:lang==='ar'?`تم الضغط ✓ (-${saved}%)`:`已压缩 ✓（节省 ${saved}%）`);
+  }catch(e){ showErr(e, inEl.value); }
+};
+$('btnValidate').onclick = () => {
+  hideStatus();
+  try{
+    const v = parseInput();
+    const t = Array.isArray(v) ? 'array' : v===null ? 'null' : typeof v;
+    const lang = document.documentElement.lang;
+    const sz = inEl.value.length;
+    showOk(lang==='en'?`Valid JSON ✓ (root: ${t}, ${sz.toLocaleString()} chars)`:lang==='ar'?`JSON صالح ✓ (الجذر: ${t})`:`JSON 有效 ✓（根类型：${t}，${sz.toLocaleString()} 字符）`);
+  }catch(e){ showErr(e, inEl.value); }
+};
+$('btnEscape').onclick = () => {
+  hideStatus();
+  try{
+    // Validate first so we escape canonical JSON, not arbitrary text
+    parseInput();
+    postOutput(JSON.stringify(inEl.value));
+    const lang = document.documentElement.lang;
+    showOk(lang==='en'?'Escaped as string literal ✓':lang==='ar'?'تم التحويل إلى نص ✓':'已转义为字符串字面量 ✓');
+  }catch(e){
+    // If input is already a string with escapes, still allow escaping it as text
+    postOutput(JSON.stringify(inEl.value));
+    const lang = document.documentElement.lang;
+    showOk(lang==='en'?'Escaped raw text as string ✓':lang==='ar'?'تم تحويل النص الخام ✓':'已将原文转义为字符串 ✓');
+  }
+};
+$('btnUnescape').onclick = () => {
+  hideStatus();
+  try{
+    const src = inEl.value.trim();
+    if(!src) throw new Error(document.documentElement.lang==='en'?'Input is empty':'输入为空');
+    // Input must be a JSON string literal (starts/ends with quotes)
+    const v = JSON.parse(src);
+    if(typeof v !== 'string'){
+      throw new Error(document.documentElement.lang==='en'?'Input is not a JSON string literal (must be quoted)':'输入不是 JSON 字符串字面量（必须带引号）');
+    }
+    postOutput(v);
+    const lang = document.documentElement.lang;
+    showOk(lang==='en'?'Unescaped ✓':lang==='ar'?'تم الفك ✓':'已取消转义 ✓');
+  }catch(e){ showErr(e, inEl.value); }
+};
+
+$('btnSample').onclick = () => {
+  inEl.value = JSON.stringify({
+    name: "hebing.org",
+    tools: 17,
+    categories: { merge: 8, convert: 7, extract: 1, developer: 1 },
+    privacy: { uploads: false, accountRequired: false },
+    languages: ["zh", "en", "ar"],
+    updated: "2026-04-27"
+  });
+  outEl.value = '';
+  updateMeta();
+  hideStatus();
+};
+$('btnSwap').onclick = () => {
+  const a = inEl.value, b = outEl.value;
+  inEl.value = b; outEl.value = a;
+  updateMeta(); hideStatus();
+};
+$('btnClear').onclick = () => {
+  inEl.value = ''; outEl.value = '';
+  updateMeta(); hideStatus();
+  inEl.focus();
+};
+$('btnCopy').onclick = async () => {
+  const lang = document.documentElement.lang;
+  if(!outEl.value){
+    showErr({message: lang==='en'?'Nothing to copy':lang==='ar'?'لا شيء للنسخ':'没有可复制的内容'}, '');
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(outEl.value);
+    showOk(lang==='en'?'Copied to clipboard ✓':lang==='ar'?'تم النسخ ✓':'已复制到剪贴板 ✓');
+  }catch(_){
+    // Fallback
+    outEl.select(); document.execCommand('copy');
+    showOk(lang==='en'?'Copied to clipboard ✓':'已复制到剪贴板 ✓');
+  }
+};
+$('btnDownload').onclick = () => {
+  const lang = document.documentElement.lang;
+  if(!outEl.value){
+    showErr({message: lang==='en'?'Nothing to download':lang==='ar'?'لا شيء للتنزيل':'没有可下载的内容'}, '');
+    return;
+  }
+  const blob = new Blob([outEl.value], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (lang==='en'?'output':lang==='ar'?'الإخراج':'输出') + '.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 30000);
+};
+
+// Keyboard shortcut: Ctrl/Cmd+Enter triggers Format
+inEl.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+    e.preventDefault();
+    $('btnFormat').click();
+  }
+});
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+updateMeta();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

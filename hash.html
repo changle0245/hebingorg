@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash 在线计算 - 免费 MD5 / SHA-1 / SHA-256 / SHA-512 | hebing.org</title>
+<meta name="description" content="免费在线 Hash 计算工具，一次输出 MD5、SHA-1、SHA-256、SHA-384、SHA-512 五种摘要，支持文本与任意文件，浏览器本地处理，不上传服务器。">
+<meta name="keywords" content="md5在线,sha256在线,sha1在线,文件hash,文件校验,哈希计算,checksum,在线md5,sha512">
+<link rel="canonical" href="https://hebing.org/hash.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
+<meta property="og:title" content="Hash 在线计算 - 免费 MD5 / SHA-1 / SHA-256 | hebing.org">
+<meta property="og:url" content="https://hebing.org/hash.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<link rel="alternate" hreflang="zh" href="https://hebing.org/hash.html">
+<link rel="alternate" hreflang="en" href="https://hebing.org/hash.html">
+<link rel="alternate" hreflang="ar" href="https://hebing.org/hash.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--white:#fafaf8;--gray-100:#f0efed;--gray-200:#e0dedd;--gray-400:#a09e9b;--gray-600:#6b6966;--accent:#d4440a;--accent-light:#fff0eb;--success:#166534;--success-bg:#f0fdf4;--font-mono:'DM Mono',monospace;--font-sans:'Noto Sans SC',sans-serif;--font-ar:'Noto Sans Arabic',sans-serif;--radius:4px;--radius-lg:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);z-index:100;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:500;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);}
+.nav-back:hover{color:var(--black);}
+.lang-switcher{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;}
+.lang-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 10px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-radius:var(--radius);transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--black);color:var(--white);}
+.page-header{padding:40px 0 24px;border-bottom:1px solid var(--gray-200);animation:fadeUp 0.3s ease both;}
+.breadcrumb{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.page-title em{font-style:normal;color:var(--accent);}
+.page-sub{font-size:14px;color:var(--gray-600);max-width:580px;}
+.tool-wrap{padding:28px 0;}
+.mode-tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:var(--radius);padding:3px;width:fit-content;margin-bottom:14px;}
+.mode-tab{padding:8px 18px;font-size:13px;border:none;background:transparent;cursor:pointer;border-radius:var(--radius);color:var(--gray-600);font-family:var(--font-sans);font-weight:500;}
+.mode-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.input-pane{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:var(--white);margin-bottom:14px;}
+.input-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--gray-100);border-bottom:1px solid var(--gray-200);font-family:var(--font-mono);font-size:11px;color:var(--gray-600);text-transform:uppercase;letter-spacing:1px;}
+.e-meta{font-size:11px;color:var(--gray-400);text-transform:none;letter-spacing:0;}
+.input-area{width:100%;min-height:140px;border:none;outline:none;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.65;background:var(--white);color:var(--black);resize:vertical;word-break:break-all;}
+.file-zone{border:1.5px dashed #ccc;border-radius:var(--radius-lg);padding:32px 20px;text-align:center;cursor:pointer;background:var(--gray-100);position:relative;margin-bottom:14px;}
+.file-zone:hover,.file-zone.drag-over{border-color:var(--black);background:var(--white);}
+.file-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.file-zone.hidden{display:none!important;}
+.fz-icon{font-size:28px;margin-bottom:8px;line-height:1;}
+.fz-label{font-size:14px;color:var(--black);font-weight:500;}
+.fz-sub{font-size:12px;color:var(--gray-400);margin-top:4px;}
+.file-info{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius-lg);margin-bottom:14px;}
+.file-info.hidden{display:none!important;}
+.fi-name{flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.fi-size{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+.fi-del{cursor:pointer;color:var(--gray-400);font-size:14px;padding:4px 8px;}
+.fi-del:hover{color:#b91c1c;}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.t-btn{height:40px;padding:0 20px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-lg);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.82;}
+.t-btn.secondary{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);}
+.t-btn.secondary:hover{border-color:var(--black);color:var(--black);background:var(--gray-100);}
+.t-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.t-sep{flex:1;}
+.t-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-600);font-family:var(--font-mono);user-select:none;cursor:pointer;}
+.t-check input{cursor:pointer;}
+.t-select{height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);color:var(--black);font-size:12px;font-family:var(--font-mono);cursor:pointer;}
+
+.results{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.result-row{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;padding:12px 16px;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);}
+.result-row.computing .r-value{color:var(--gray-400);font-style:italic;}
+.r-name{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--black);text-transform:uppercase;letter-spacing:1px;}
+.r-name.deprecated{color:var(--gray-400);}
+.r-value{font-family:var(--font-mono);font-size:13px;color:var(--black);word-break:break-all;line-height:1.5;}
+.r-copy{height:30px;padding:0 12px;background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);border-radius:var(--radius);font-size:11px;cursor:pointer;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.5px;}
+.r-copy:hover{border-color:var(--black);color:var(--black);background:var(--white);}
+.r-copy.copied{border-color:var(--success);color:var(--success);}
+@media(max-width:600px){.result-row{grid-template-columns:80px 1fr;gap:8px;}.r-copy{grid-column:1/-1;justify-self:end;}}
+
+.compare-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 16px;background:var(--accent-light);border:1px solid var(--accent);border-radius:var(--radius-lg);margin-bottom:14px;}
+.compare-row.hidden{display:none!important;}
+.compare-label{font-size:12px;color:var(--accent);font-family:var(--font-mono);font-weight:600;flex-shrink:0;}
+.compare-input{flex:1;min-width:200px;height:36px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-family:var(--font-mono);font-size:12px;background:var(--white);color:var(--black);outline:none;}
+.compare-result{font-family:var(--font-mono);font-size:12px;font-weight:600;flex-shrink:0;}
+.compare-result.match{color:var(--success);}
+.compare-result.mismatch{color:#b91c1c;}
+
+.error-box{padding:14px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-lg);font-size:13px;color:#b91c1c;margin-bottom:16px;font-family:var(--font-mono);line-height:1.6;}
+.error-box.hidden{display:none!important;}
+.subscribe-box{margin:24px 0;padding:20px 24px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.subscribe-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.subscribe-sub{font-size:12px;color:var(--gray-400);margin-bottom:14px;}
+.subscribe-form{display:flex;gap:8px;flex-wrap:wrap;}
+.subscribe-input{flex:1;min-width:200px;height:38px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:13px;background:var(--white);color:var(--black);outline:none;}
+.subscribe-input:focus{border-color:var(--black);}
+.subscribe-btn{height:38px;padding:0 18px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);}
+.subscribe-ok{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.support-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:10px;}
+.support-text{font-size:12px;color:var(--gray-400);}
+.support-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--radius);font-size:12px;color:var(--gray-600);text-decoration:none;background:var(--white);}
+.support-btn:hover{border-color:var(--black);color:var(--black);}
+.related-section{padding:28px 0 32px;border-top:1px solid var(--gray-200);}
+.related-title{font-size:12px;font-weight:500;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--gray-400);margin-bottom:16px;}
+.related-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.related-card{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--gray-100);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;border:1px solid var(--gray-200);}
+.related-card:hover{background:var(--black);color:var(--white);}
+footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:32px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-mono);font-size:15px;color:var(--black);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-copy{font-size:12px;color:var(--gray-400);font-family:var(--font-mono);}
+.hidden{display:none!important;}
+[dir="rtl"] .nav-inner,[dir="rtl"] .footer-inner,[dir="rtl"] .support-row,[dir="rtl"] .toolbar,[dir="rtl"] .compare-row{flex-direction:row-reverse;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.faq-section{padding:32px 0;border-top:1px solid var(--gray-200);}
+.faq-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:20px;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--gray-600);line-height:1.65;}
+@media(max-width:600px){.faq-grid{grid-template-columns:1fr;}}
+.seo-extra{padding:32px 0;border-top:1px solid var(--gray-200);}
+.seo-extra-section{margin-bottom:32px;}
+.seo-extra-title{font-size:17px;font-weight:600;color:var(--black);margin-bottom:18px;letter-spacing:-0.3px;}
+.scene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.scene-card{padding:20px;background:var(--gray-100);border-radius:var(--radius-lg);border:1px solid var(--gray-200);}
+.scene-icon{font-size:24px;margin-bottom:10px;line-height:1;}
+.scene-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.scene-desc{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.tips-list{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.tips-list li{font-size:14px;color:var(--gray-600);line-height:1.7;}
+.tips-list.hidden{display:none!important;}
+[dir="rtl"] .tips-list{padding-left:0;padding-right:20px;}
+@media (prefers-color-scheme: dark) {
+  :root{--black:#f0efed;--white:#111110;--gray-100:#1e1e1c;--gray-200:#2a2a28;--gray-400:#8a8884;--gray-600:#a09e9b;--accent:#e85d2a;--accent-light:#2a1a10;--success:#4ade80;--success-bg:#052e16;}
+  nav{background:rgba(17,17,16,0.95);}
+  .file-zone{background:var(--gray-100);}
+  .input-area{background:var(--white);color:var(--black);}
+  .mode-tab.active{background:var(--gray-200);box-shadow:none;}
+  .subscribe-input,.compare-input,.t-select{background:var(--gray-100);}
+  .scene-card,.faq-item,.result-row{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card{background:var(--gray-100);border-color:var(--gray-200);}
+  .related-card:hover{background:var(--gray-200);color:var(--black);}
+  .error-box{background:#2d0a0a;border-color:#7f1d1d;color:#fca5a5;}
+  .compare-row{background:var(--accent-light);border-color:var(--accent);}
+}
+</style>
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4KL258YW1Y');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hebing.org Hash 计算",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser-based)",
+  "url": "https://hebing.org/hash.html",
+  "description": "免费在线 Hash / Checksum 计算工具，一次输出 MD5、SHA-1、SHA-256、SHA-384、SHA-512，支持文本与文件，可与已知值比对。所有处理在浏览器本地完成。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512", "文本与文件双模式", "Hex 与 Base64 输出", "已知 hash 比对（恒定时间）", "原生 SubtleCrypto API", "UTF-8 安全"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何在线免费计算 MD5 / SHA-1 / SHA-256 / SHA-512 哈希",
+  "description": "使用 hebing.org 在浏览器本地计算文本或文件的多种 Hash 摘要，支持已知值比对。",
+  "totalTime": "PT5S",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "选择模式", "text": "切换「文本」或「文件」模式。" },
+    { "@type": "HowToStep", "position": 2, "name": "输入内容", "text": "粘贴文本或拖入文件。" },
+    { "@type": "HowToStep", "position": 3, "name": "查看结果", "text": "5 种 Hash 自动并发计算，逐个显示。" },
+    { "@type": "HowToStep", "position": 4, "name": "比对（可选）", "text": "粘入预期 Hash 值，本工具会自动比对并提示是否匹配。" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "hebing.org", "item": "https://hebing.org/" },
+    { "@type": "ListItem", "position": 2, "name": "Hash 计算", "item": "https://hebing.org/hash.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "MD5 还安全吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不安全。MD5 已发现实际碰撞攻击，禁用于密码存储和数字签名场景。仅适合非安全用途的完整性校验（如下载文件比对）。安全场景请使用 SHA-256 及以上。" }
+    },
+    {
+      "@type": "Question",
+      "name": "支持大文件吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "支持。受限于浏览器可用内存，单文件建议不超过 1GB。SubtleCrypto 一次性吞入整个文件，性能在大多数现代设备上每秒可处理数百 MB。" }
+    },
+    {
+      "@type": "Question",
+      "name": "数据会上传到服务器吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不会。所有 Hash 计算在浏览器内通过原生 SubtleCrypto API 完成，文件不上传至服务器。MD5 通过懒加载的小型纯 JS 库（js-md5）在本地计算。" }
+    },
+    {
+      "@type": "Question",
+      "name": "为什么不同工具的 Hash 结果有时不同？",
+      "acceptedAnswer": { "@type": "Answer", "text": "通常是因为输入字节不一致：行尾差异（CRLF vs LF）、文本编码（UTF-8 vs UTF-8 BOM vs GBK）、隐藏空白字符等。本工具默认按 UTF-8 编码字符串，与 Java、Python、Go、Linux md5sum 一致。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="index.html" class="nav-logo">he<span>bing</span>.org</a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← 所有工具</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('zh')" data-lang="zh">中文</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عربي</button>
+  </div>
+</div></nav>
+
+<div class="container">
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">hebing.org</a> / <span data-i18n="page.name">Hash 计算</span></div>
+  <h1 class="page-title" data-i18n="page.h1">Hash / Checksum 在线计算<br><em>MD5 · SHA-1 · SHA-256 · SHA-512</em></h1>
+  <p class="page-sub" data-i18n="page.sub">一次输出 5 种 Hash 摘要，支持文本与任意文件，可粘入已知值自动比对。所有处理在浏览器本地完成（原生 SubtleCrypto），文件不上传服务器。</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabText" onclick="setMode('text')" data-i18n="mode.text">📝 文本</button>
+    <button class="mode-tab" id="tabFile" onclick="setMode('file')" data-i18n="mode.file">📎 文件</button>
+  </div>
+
+  <div class="input-pane" id="textPane">
+    <div class="input-head">
+      <span data-i18n="pane.input">输入</span>
+      <span class="e-meta" id="inMeta"></span>
+    </div>
+    <textarea class="input-area" id="inputArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="hebing.org"></textarea>
+  </div>
+
+  <div class="file-zone hidden" id="fileZone">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel">
+    <div class="fz-icon">📎</div>
+    <div class="fz-label" id="dropLabel" data-i18n="file.label">点击选择文件，或拖拽到此处</div>
+    <div class="fz-sub" data-i18n="file.sub">任意类型 · 文件不上传服务器</div>
+  </div>
+  <div class="file-info hidden" id="fileInfo">
+    <span style="font-size:18px">📄</span>
+    <div style="flex:1;min-width:0">
+      <div class="fi-name" id="fName"></div>
+      <div class="fi-size" id="fMeta"></div>
+    </div>
+    <span class="fi-del" onclick="clearFile()">✕</span>
+  </div>
+
+  <div class="toolbar">
+    <button class="t-btn" id="btnCompute" data-i18n="btn.compute">计算 Hash</button>
+    <button class="t-btn secondary" id="btnClear" data-i18n="btn.clear">清空</button>
+    <span class="t-sep"></span>
+    <label class="t-check"><span data-i18n="opt.encoding">输出编码</span>
+      <select class="t-select" id="encoding">
+        <option value="hex" selected>Hex</option>
+        <option value="HEX">HEX</option>
+        <option value="base64">Base64</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="error-box hidden" id="errBox"></div>
+
+  <div class="compare-row hidden" id="compareRow">
+    <span class="compare-label" data-i18n="compare.label">比对预期值：</span>
+    <input class="compare-input" id="compareInput" placeholder="paste expected hash to verify…">
+    <span class="compare-result" id="compareResult"></span>
+  </div>
+
+  <div class="results">
+    <div class="result-row" data-algo="MD5">
+      <span class="r-name deprecated">MD5</span>
+      <span class="r-value" id="r-MD5" data-i18n="empty">—</span>
+      <button class="r-copy" data-target="r-MD5" data-i18n="btn.copy">Copy</button>
+    </div>
+    <div class="result-row" data-algo="SHA-1">
+      <span class="r-name deprecated">SHA-1</span>
+      <span class="r-value" id="r-SHA-1" data-i18n="empty">—</span>
+      <button class="r-copy" data-target="r-SHA-1" data-i18n="btn.copy">Copy</button>
+    </div>
+    <div class="result-row" data-algo="SHA-256">
+      <span class="r-name">SHA-256</span>
+      <span class="r-value" id="r-SHA-256" data-i18n="empty">—</span>
+      <button class="r-copy" data-target="r-SHA-256" data-i18n="btn.copy">Copy</button>
+    </div>
+    <div class="result-row" data-algo="SHA-384">
+      <span class="r-name">SHA-384</span>
+      <span class="r-value" id="r-SHA-384" data-i18n="empty">—</span>
+      <button class="r-copy" data-target="r-SHA-384" data-i18n="btn.copy">Copy</button>
+    </div>
+    <div class="result-row" data-algo="SHA-512">
+      <span class="r-name">SHA-512</span>
+      <span class="r-value" id="r-SHA-512" data-i18n="empty">—</span>
+      <button class="r-copy" data-target="r-SHA-512" data-i18n="btn.copy">Copy</button>
+    </div>
+  </div>
+
+  <div class="subscribe-box hidden" id="subscribeBox">
+    <div class="subscribe-title" data-i18n="sub.title">🔔 新工具上线时通知我</div>
+    <div class="subscribe-sub" data-i18n="sub.sub">订阅后，每次有新工具上线我们会第一时间通知你</div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="subEmail" placeholder="your@email.com">
+      <button class="subscribe-btn" onclick="doSubscribe()" data-i18n="sub.btn">订阅</button>
+    </div>
+    <div class="subscribe-ok" id="subOk" data-i18n="sub.ok">✓ 订阅成功！</div>
+    <div class="support-row">
+      <span class="support-text" data-i18n="sub.support">工具完全免费，如果帮到你了 ☕</span>
+      <a href="https://www.buymeacoffee.com/hebingorg" target="_blank" rel="noopener" class="support-btn">☕ Buy me a coffee</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container"><div class="seo-extra">
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="Hash 计算的常见使用场景" data-en="Common Use Cases">Hash 计算的常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card"><div class="scene-icon">📥</div><div class="scene-title" data-scene-zh="校验下载文件" data-scene-en="Verify Downloads">校验下载文件</div><div class="scene-desc" data-scene-zh="把发布方公布的 SHA-256 粘到「比对」框，工具自动告诉你下载的镜像是否完整未被篡改。" data-scene-en="Paste the publisher's SHA-256 into the compare box — the tool tells you instantly whether the download is intact.">把发布方公布的 SHA-256 粘到「比对」框，工具自动告诉你下载的镜像是否完整未被篡改。</div></div>
+      <div class="scene-card"><div class="scene-icon">🔐</div><div class="scene-title" data-scene-zh="API 签名调试" data-scene-en="API Signature">API 签名调试</div><div class="scene-desc" data-scene-zh="多数开放平台需要对请求体计算 SHA-256/MD5 作签名，本工具提供与服务端一致的结果。" data-scene-en="Most API platforms require an SHA-256/MD5 signature over the body — get an identical result here for debugging.">多数开放平台需要对请求体计算 SHA-256/MD5 作签名，本工具提供与服务端一致的结果。</div></div>
+      <div class="scene-card"><div class="scene-icon">🗃️</div><div class="scene-title" data-scene-zh="去重 / 内容寻址" data-scene-en="Dedup / CAS">去重 / 内容寻址</div><div class="scene-desc" data-scene-zh="用 Hash 作为内容指纹，可以快速去重图片、文档、备份，也是 Git 等系统的核心思想。" data-scene-en="Use a hash as content fingerprint to dedup images, docs, backups — also the core idea behind Git.">用 Hash 作为内容指纹，可以快速去重图片、文档、备份，也是 Git 等系统的核心思想。</div></div>
+      <div class="scene-card"><div class="scene-icon">🛡️</div><div class="scene-title" data-scene-zh="文件完整性归档" data-scene-en="Integrity Archive">文件完整性归档</div><div class="scene-desc" data-scene-zh="把重要文件的 SHA-256 与日期一起记录下来，多年后仍能验证文件未被改动。" data-scene-en="Record SHA-256 + date for important files — verify integrity years later with certainty.">把重要文件的 SHA-256 与日期一起记录下来，多年后仍能验证文件未被改动。</div></div>
+    </div>
+  </div>
+  <div class="seo-extra-section">
+    <h2 class="seo-extra-title" data-zh="哪种 Hash 该选哪个？" data-en="Which Hash Should I Use?">哪种 Hash 该选哪个？</h2>
+    <ul class="tips-list zh-tips">
+      <li><strong>MD5（128 bit）</strong>：⚠️ 已破解。适合非安全用途的完整性校验、缓存 key、文件去重。<u>不要</u>用于密码存储或数字签名。</li>
+      <li><strong>SHA-1（160 bit）</strong>：⚠️ 已发现碰撞。Git 仍在用，但新场景应避免。</li>
+      <li><strong>SHA-256（256 bit）</strong>：✅ 当前主流安全摘要，适合签名、token、Bitcoin、TLS 证书指纹。</li>
+      <li><strong>SHA-384 / SHA-512</strong>：✅ 同等安全等级、更长输出，部分协议（如 Apple）默认。在 64 位 CPU 上 SHA-512 通常比 SHA-256 更快。</li>
+    </ul>
+    <ul class="tips-list en-tips hidden">
+      <li><strong>MD5 (128-bit)</strong>: ⚠️ broken. Fine for non-security integrity checks, cache keys, dedup. <u>Never</u> for passwords or signing.</li>
+      <li><strong>SHA-1 (160-bit)</strong>: ⚠️ collision-attacked. Git still uses it, but avoid for new use cases.</li>
+      <li><strong>SHA-256 (256-bit)</strong>: ✅ today's mainstream secure digest — signing, tokens, Bitcoin, TLS fingerprints.</li>
+      <li><strong>SHA-384 / SHA-512</strong>: ✅ same security level, longer output, default in some protocols (e.g., Apple). On 64-bit CPUs SHA-512 is often faster than SHA-256.</li>
+    </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>MD5 (128-bit): ⚠️ مكسور. مناسب لفحوصات السلامة غير الأمنية ومفاتيح الذاكرة المؤقتة وإزالة التكرار. لا يصلح لكلمات المرور أو التوقيع.</li><li>SHA-1 (160-bit): ⚠️ هاجمته التصادمات. لا يزال Git يستخدمه، لكن تجنبه في الحالات الجديدة.</li><li>SHA-256 (256-bit): ✅ ملخص آمن سائد اليوم — توقيع، رموز، Bitcoin، بصمات TLS.</li><li>SHA-384 / SHA-512: ✅ نفس مستوى الأمان، إخراج أطول، افتراضي في بعض البروتوكولات (مثل Apple). على وحدات المعالجة 64-bit، SHA-512 غالباً أسرع من SHA-256.</li></ul>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="faq-section">
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="MD5 还安全吗？" data-faq-en="Is MD5 still safe?" data-faq-ar="هل MD5 لا يزال آمناً؟">MD5 还安全吗？</div>
+        <div class="faq-a" data-faq-zh="不安全。MD5 自 2004 年起已发现实际碰撞攻击（可以构造两个不同输入产生同样 hash），不再适合密码存储、数字签名等安全场景。但作为非安全用途的完整性校验（如下载文件比对、缓存 key、去重）依然广泛使用。安全场景请使用 SHA-256 及以上。" data-faq-en="No. MD5 has had practical collision attacks since 2004 — it's unsafe for password storage or digital signatures. It's still widely used for non-security integrity checks (download verification, cache keys, dedup). Use SHA-256 or above for security-sensitive contexts." data-faq-ar="لا. عُرفت هجمات تصادم عملية على MD5 منذ 2004 — لم يعد آمناً لتخزين كلمات المرور أو التوقيعات الرقمية. لا يزال يُستخدم على نطاق واسع لفحوصات السلامة غير الأمنية (التحقق من التنزيل، مفاتيح الذاكرة المؤقتة، إزالة التكرار). استخدم SHA-256 أو أعلى للسياقات الأمنية.">不安全。MD5 自 2004 年起已发现实际碰撞攻击（可以构造两个不同输入产生同样 hash），不再适合密码存储、数字签名等安全场景。但作为非安全用途的完整性校验（如下载文件比对、缓存 key、去重）依然广泛使用。安全场景请使用 SHA-256 及以上。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="支持大文件吗？" data-faq-en="Can it handle large files?" data-faq-ar="هل يدعم الملفات الكبيرة؟">支持大文件吗？</div>
+        <div class="faq-a" data-faq-zh="支持。SubtleCrypto.digest 一次性吞入整个文件，受限于浏览器可用内存，单文件建议不超过 1GB。在大多数现代设备上每秒可处理数百 MB（SHA-256/512），MD5 略慢一些。" data-faq-en="Yes. SubtleCrypto.digest takes the whole file at once — limited by available browser memory, so we suggest <1GB per file. Modern devices process hundreds of MB/s for SHA-256/512; MD5 is slightly slower." data-faq-ar="نعم. تستوعب SubtleCrypto.digest الملف بأكمله مرة واحدة — محدودة بذاكرة المتصفح المتاحة، لذا نقترح أقل من 1 جيجابايت لكل ملف. تعالج الأجهزة الحديثة مئات الميجابايت في الثانية لـ SHA-256/512؛ MD5 أبطأ قليلاً.">支持。SubtleCrypto.digest 一次性吞入整个文件，受限于浏览器可用内存，单文件建议不超过 1GB。在大多数现代设备上每秒可处理数百 MB（SHA-256/512），MD5 略慢一些。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="数据会上传到服务器吗？" data-faq-en="Are files uploaded to a server?" data-faq-ar="هل يتم رفع الملفات إلى خادم؟">数据会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。SHA-1/256/384/512 通过原生 SubtleCrypto API 在浏览器内完成；MD5 在你点击「计算」时按需懒加载小型纯 JS 库（js-md5）在本地计算。文件从不上传服务器。" data-faq-en="No. SHA-1/256/384/512 use the browser's native SubtleCrypto API. MD5 lazy-loads a small pure-JS library (js-md5) on click and runs locally. Files never leave your device." data-faq-ar="لا. تستخدم SHA-1/256/384/512 واجهة SubtleCrypto الأصلية في المتصفح. يحمّل MD5 مكتبة JavaScript صغيرة (js-md5) عند النقر ويعمل محلياً. لا تغادر الملفات جهازك أبداً.">不会。SHA-1/256/384/512 通过原生 SubtleCrypto API 在浏览器内完成；MD5 在你点击「计算」时按需懒加载小型纯 JS 库（js-md5）在本地计算。文件从不上传服务器。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-faq-zh="为什么不同工具的 Hash 结果有时不同？" data-faq-en="Why do other tools sometimes give different hashes?" data-faq-ar="لماذا تعطي أدوات أخرى أحياناً نتائج مختلفة؟">为什么不同工具的 Hash 结果有时不同？</div>
+        <div class="faq-a" data-faq-zh="因为输入字节不一致：行尾差异（CRLF vs LF）、文本编码（UTF-8 vs UTF-8 BOM vs GBK）、隐藏空白字符、文件末尾是否有换行等。本工具默认按 UTF-8（无 BOM）编码字符串，与 Java、Python、Go、Linux md5sum 完全一致。" data-faq-en="Because input bytes differ: line endings (CRLF vs LF), encoding (UTF-8 vs UTF-8-BOM vs GBK), hidden whitespace, trailing newline. This tool encodes strings as UTF-8 without BOM, matching Java, Python, Go, and Linux md5sum." data-faq-ar="لأن البايتات المدخلة تختلف: نهايات الأسطر (CRLF مقابل LF)، الترميز (UTF-8 مقابل UTF-8-BOM مقابل GBK)، المسافات الخفية، السطر الجديد في النهاية. تشفّر هذه الأداة النصوص كـ UTF-8 بدون BOM، مطابقة لـ Java و Python و Go و Linux md5sum.">因为输入字节不一致：行尾差异（CRLF vs LF）、文本编码（UTF-8 vs UTF-8 BOM vs GBK）、隐藏空白字符、文件末尾是否有换行等。本工具默认按 UTF-8（无 BOM）编码字符串，与 Java、Python、Go、Linux md5sum 完全一致。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="related-section">
+  <div class="related-title" data-i18n="related.title">你可能还需要</div>
+  <div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span>{ }</span><span data-i18n-related="JSON格式化|JSON Formatter|منسق JSON">JSON格式化</span></a>
+    <a href="base64.html" class="related-card"><span>⇄</span><span data-i18n-related="Base64编解码|Base64|Base64">Base64编解码</span></a>
+    <a href="extract-images.html" class="related-card"><span>🖼️</span><span data-i18n-related="文件图片提取|Extract Images|استخراج الصور">文件图片提取</span></a>
+  </div>
+</div>
+</div>
+
+<footer><div class="container footer-inner">
+  <a href="index.html" class="footer-logo">he<span>bing</span>.org</a>
+  <span class="footer-copy">© 2026 hebing.org</span>
+</div></footer>
+
+<script>
+const I18N={
+  zh:{'nav.back':'← 所有工具','related.title':'你可能还需要','page.name':'Hash 计算','page.h1':'Hash / Checksum 在线计算<br><em>MD5 · SHA-1 · SHA-256 · SHA-512</em>','page.sub':'一次输出 5 种 Hash 摘要，支持文本与任意文件，可粘入已知值自动比对。所有处理在浏览器本地完成（原生 SubtleCrypto），文件不上传服务器。','mode.text':'📝 文本','mode.file':'📎 文件','pane.input':'输入','file.label':'点击选择文件，或拖拽到此处','file.sub':'任意类型 · 文件不上传服务器','btn.compute':'计算 Hash','btn.clear':'清空','btn.copy':'Copy','opt.encoding':'输出编码','compare.label':'比对预期值：','empty':'—','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
+  en:{'nav.back':'← All Tools','related.title':'You may also need','page.name':'Hash Calculator','page.h1':'Online Hash / Checksum<br><em>MD5 · SHA-1 · SHA-256 · SHA-512</em>','page.sub':'Compute 5 hash digests in one shot for text or any file, with optional verify against an expected value. Everything runs locally in your browser (native SubtleCrypto). Files never uploaded.','mode.text':'📝 Text','mode.file':'📎 File','pane.input':'Input','file.label':'Click to select a file, or drag & drop','file.sub':'Any file type · stays on your device','btn.compute':'Compute Hash','btn.clear':'Clear','btn.copy':'Copy','opt.encoding':'Output','compare.label':'Verify against:','empty':'—','sub.title':'🔔 Get notified when new tools launch','sub.sub':'Subscribe and we\'ll notify you first','sub.btn':'Subscribe','sub.ok':'✓ Subscribed!','sub.support':'Tools are free. If this helped you ☕'},
+  ar:{'nav.back':'→ جميع الأدوات','related.title':'قد تحتاج أيضاً','page.name':'حاسب Hash','page.h1':'حساب Hash / Checksum<br><em>MD5 · SHA-1 · SHA-256 · SHA-512</em>','page.sub':'احسب 5 ملخصات Hash دفعة واحدة للنصوص والملفات. كل المعالجة محلية في متصفحك.','mode.text':'📝 نص','mode.file':'📎 ملف','pane.input':'إدخال','file.label':'انقر لاختيار ملف، أو اسحبه هنا','file.sub':'أي نوع · يبقى على جهازك','btn.compute':'احسب Hash','btn.clear':'مسح','btn.copy':'نسخ','opt.encoding':'الإخراج','compare.label':'قارن مع:','empty':'—','sub.title':'🔔 أخبرني عند إطلاق أدوات جديدة','sub.sub':'اشترك وسنخبرك أولاً','sub.btn':'اشتراك','sub.ok':'✓ تم الاشتراك!','sub.support':'الأدوات مجانية. إذا أفادتك ☕'}
+};
+function setLang(lang){
+  const d=I18N[lang];if(!d)return;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
+  localStorage.setItem('hebing_lang',lang);
+  document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
+  document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
+}
+
+const $ = id => document.getElementById(id);
+const inEl = $('inputArea');
+const ALGOS = ['MD5','SHA-1','SHA-256','SHA-384','SHA-512'];
+
+let mode = 'text';
+let pickedFile = null;
+let pickedBytes = null;
+let lastResults = {}; // { 'MD5': hex, 'SHA-256': hex, ... }
+
+function fmtBytes(n){if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(2)+' MB';}
+
+function updateMeta(){
+  if(mode === 'text'){
+    const len = inEl.value.length;
+    const bytes = new Blob([inEl.value]).size;
+    $('inMeta').textContent = inEl.value ? `${len.toLocaleString()} chars · ${fmtBytes(bytes)}` : '';
+  }
+}
+inEl.addEventListener('input', () => { hideErr(); resetResults(); updateMeta(); });
+
+function hideErr(){$('errBox').classList.add('hidden');}
+function showErr(msg){$('errBox').textContent=msg;$('errBox').classList.remove('hidden');}
+
+function setMode(m){
+  mode = m;
+  $('tabText').classList.toggle('active', m==='text');
+  $('tabFile').classList.toggle('active', m==='file');
+  $('textPane').classList.toggle('hidden', m!=='text');
+  $('fileZone').classList.toggle('hidden', m!=='file' || pickedFile);
+  $('fileInfo').classList.toggle('hidden', m!=='file' || !pickedFile);
+  hideErr();
+  resetResults();
+}
+
+function clearFile(){
+  pickedFile = null; pickedBytes = null;
+  $('fileZone').classList.remove('hidden');
+  $('fileInfo').classList.add('hidden');
+  hideErr(); resetResults();
+}
+
+const fileInput = $('fileInput'), fileZone = $('fileZone');
+async function handleFile(f){
+  if(!f) return;
+  pickedFile = f;
+  pickedBytes = new Uint8Array(await f.arrayBuffer());
+  $('fName').textContent = f.name;
+  $('fMeta').textContent = `${fmtBytes(f.size)} · ${f.type || 'binary'}`;
+  $('fileZone').classList.add('hidden');
+  $('fileInfo').classList.remove('hidden');
+  hideErr(); resetResults();
+}
+fileInput.addEventListener('change', e => { handleFile(e.target.files[0]); fileInput.value=''; });
+fileZone.addEventListener('dragover', e => { e.preventDefault(); fileZone.classList.add('drag-over'); });
+fileZone.addEventListener('dragleave', () => fileZone.classList.remove('drag-over'));
+fileZone.addEventListener('drop', e => { e.preventDefault(); fileZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+
+function resetResults(){
+  lastResults = {};
+  ALGOS.forEach(a=>{
+    const v = $('r-'+a);
+    if(v) v.textContent = '—';
+    document.querySelector(`.result-row[data-algo="${a}"]`)?.classList.remove('computing');
+  });
+  $('compareRow').classList.add('hidden');
+  $('compareInput').value = '';
+  $('compareResult').textContent = '';
+}
+
+// ── Hash helpers ──────────────────────────────────────────────
+function bytesToHex(bytes, upper){
+  const hex = Array.from(bytes).map(b=>b.toString(16).padStart(2,'0')).join('');
+  return upper ? hex.toUpperCase() : hex;
+}
+function bytesToBase64(bytes){
+  let bin=''; const CHUNK=0x8000;
+  for(let i=0;i<bytes.length;i+=CHUNK) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CHUNK));
+  return btoa(bin);
+}
+function encodeOut(bytes){
+  const enc = $('encoding').value;
+  if(enc==='base64') return bytesToBase64(bytes);
+  return bytesToHex(bytes, enc==='HEX');
+}
+
+async function loadJsMd5(){
+  if(window.md5) return window.md5;
+  await new Promise((res,rej)=>{
+    const s = document.createElement('script');
+    s.src='/vendor/js-md5@0.7.3/md5.min.js';s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+  return window.md5;
+}
+
+async function computeAll(bytes){
+  // MD5 lazy-load
+  const md5Promise = (async () => {
+    const md5 = await loadJsMd5();
+    // js-md5 supports Uint8Array directly via .arrayBuffer or just bytes
+    const hex = md5.arrayBuffer
+      ? bytesToHex(new Uint8Array(md5.arrayBuffer(bytes)), false)
+      : md5(bytes);
+    return hex;
+  })();
+
+  // SubtleCrypto for the rest
+  const subtle = window.crypto?.subtle;
+  if(!subtle) throw new Error('SubtleCrypto not available (need HTTPS or localhost)');
+  const subtleAlgos = {'SHA-1':'SHA-1','SHA-256':'SHA-256','SHA-384':'SHA-384','SHA-512':'SHA-512'};
+  const promises = {};
+  for(const [name, algo] of Object.entries(subtleAlgos)){
+    promises[name] = subtle.digest(algo, bytes).then(buf => new Uint8Array(buf));
+  }
+
+  // Mark all as computing
+  ALGOS.forEach(a => document.querySelector(`.result-row[data-algo="${a}"]`)?.classList.add('computing'));
+  ALGOS.forEach(a => $('r-'+a).textContent = '...');
+
+  // Resolve in parallel; show as soon as each finishes
+  const md5Done = md5Promise.then(hex => {
+    lastResults['MD5'] = hex;
+    const enc = $('encoding').value;
+    let out = hex;
+    if(enc === 'HEX') out = hex.toUpperCase();
+    else if(enc === 'base64'){
+      // Convert hex back to bytes for base64
+      const bs = new Uint8Array(hex.length/2);
+      for(let i=0;i<bs.length;i++) bs[i] = parseInt(hex.substr(i*2,2),16);
+      out = bytesToBase64(bs);
+    }
+    $('r-MD5').textContent = out;
+    document.querySelector(`.result-row[data-algo="MD5"]`)?.classList.remove('computing');
+    return out;
+  }).catch(e => {
+    $('r-MD5').textContent = '⚠️ ' + (e.message || 'MD5 lib failed to load');
+    document.querySelector(`.result-row[data-algo="MD5"]`)?.classList.remove('computing');
+  });
+
+  const subtleDone = Object.entries(promises).map(([name, p]) => p.then(bytesOut => {
+    const hex = bytesToHex(bytesOut, false);
+    lastResults[name] = hex;
+    $('r-'+name).textContent = encodeOut(bytesOut);
+    document.querySelector(`.result-row[data-algo="${name}"]`)?.classList.remove('computing');
+  }));
+
+  await Promise.all([md5Done, ...subtleDone]);
+  $('compareRow').classList.remove('hidden');
+}
+
+$('btnCompute').onclick = async () => {
+  hideErr();
+  $('btnCompute').disabled = true;
+  try{
+    let bytes;
+    const lang = document.documentElement.lang;
+    if(mode === 'file'){
+      if(!pickedFile) throw new Error(lang==='en'?'Please pick a file first':'请先选择文件');
+      bytes = pickedBytes;
+    }else{
+      const src = inEl.value;
+      if(!src) throw new Error(lang==='en'?'Input is empty':'输入为空');
+      bytes = new TextEncoder().encode(src);
+    }
+    await computeAll(bytes);
+  }catch(e){
+    showErr((document.documentElement.lang==='en'?'Error: ':'错误：') + e.message);
+  }
+  $('btnCompute').disabled = false;
+};
+
+$('btnClear').onclick = () => {
+  if(mode==='file') clearFile();
+  else { inEl.value=''; updateMeta(); }
+  hideErr(); resetResults(); inEl.focus();
+};
+
+// Re-encode all results when encoding changes (without recomputing)
+$('encoding').addEventListener('change', () => {
+  if(!Object.keys(lastResults).length) return;
+  const enc = $('encoding').value;
+  ALGOS.forEach(a => {
+    const hex = lastResults[a];
+    if(!hex) return;
+    if(enc==='hex') $('r-'+a).textContent = hex;
+    else if(enc==='HEX') $('r-'+a).textContent = hex.toUpperCase();
+    else { // base64
+      const bs = new Uint8Array(hex.length/2);
+      for(let i=0;i<bs.length;i++) bs[i] = parseInt(hex.substr(i*2,2),16);
+      $('r-'+a).textContent = bytesToBase64(bs);
+    }
+  });
+  updateCompare();
+});
+
+// ── Copy buttons ──
+document.querySelectorAll('.r-copy').forEach(btn => {
+  btn.onclick = async () => {
+    const v = $(btn.dataset.target)?.textContent;
+    if(!v || v==='—' || v==='...') return;
+    try{
+      await navigator.clipboard.writeText(v);
+    }catch(_){
+      const r = document.createRange();
+      r.selectNode($(btn.dataset.target));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(r);
+      document.execCommand('copy');
+    }
+    btn.classList.add('copied');
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(()=>{btn.classList.remove('copied');btn.textContent = orig;}, 1200);
+  };
+});
+
+// ── Compare (constant-time) ──
+function ctEq(a, b){
+  if(a.length !== b.length) return false;
+  let r = 0;
+  for(let i=0;i<a.length;i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
+function updateCompare(){
+  const expected = $('compareInput').value.trim();
+  const out = $('compareResult');
+  if(!expected){ out.textContent=''; out.className='compare-result'; return; }
+  // Normalize: hex case-insensitive; base64 keep as is
+  const norm = expected.replace(/\s+/g,'');
+  let matchedAlgo = null;
+  for(const a of ALGOS){
+    const cand = lastResults[a];
+    if(!cand) continue;
+    // Try matching against hex (case-insensitive)
+    if(ctEq(norm.toLowerCase(), cand.toLowerCase())){ matchedAlgo = a; break; }
+    // Try base64
+    try{
+      const bs = new Uint8Array(cand.length/2);
+      for(let i=0;i<bs.length;i++) bs[i] = parseInt(cand.substr(i*2,2),16);
+      const b64 = bytesToBase64(bs);
+      const b64nopad = b64.replace(/=+$/,'');
+      if(ctEq(norm, b64) || ctEq(norm, b64nopad)){ matchedAlgo = a; break; }
+    }catch(_){}
+  }
+  const lang = document.documentElement.lang;
+  if(matchedAlgo){
+    out.textContent = (lang==='en'?'✓ Match — ':'✓ 匹配 — ') + matchedAlgo;
+    out.className = 'compare-result match';
+  }else{
+    out.textContent = lang==='en'?'✗ No match in any algorithm':'✗ 与所有算法均不匹配';
+    out.className = 'compare-result mismatch';
+  }
+}
+$('compareInput').addEventListener('input', updateCompare);
+
+// Cmd/Ctrl+Enter shortcut: compute
+inEl.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+    e.preventDefault();
+    $('btnCompute').click();
+  }
+});
+
+function doSubscribe(){
+  const email=document.getElementById('subEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('subEmail').focus();return;}
+  try{const subs=JSON.parse(localStorage.getItem('hebing_subs')||'[]');subs.push({email,page:window.location.pathname,t:Date.now()});localStorage.setItem('hebing_subs',JSON.stringify(subs));}catch(e){}
+  document.getElementById('subOk').style.display='block';
+  document.getElementById('subEmail').disabled=true;
+  document.querySelector('.subscribe-btn').disabled=true;
+}
+
+const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
+setLang(sl);
+updateMeta();
+</script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
+</body>
+</html>

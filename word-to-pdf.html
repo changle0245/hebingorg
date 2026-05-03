@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" dir="ltr">
+<html lang="zh-CN" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
 <meta property="og:title" content="Word转PDF在线免费 | hebing.org">
 <meta property="og:description" content="免费在线将Word文档转换为PDF，浏览器本地处理，文件不上传服务器">
 <meta property="og:url" content="https://hebing.org/word-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
 <link rel="alternate" hreflang="zh" href="https://hebing.org/word-to-pdf.html">
 <link rel="alternate" hreflang="en" href="https://hebing.org/word-to-pdf.html">
 <link rel="alternate" hreflang="ar" href="https://hebing.org/word-to-pdf.html">
@@ -129,7 +140,7 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
     --white: #111110;
     --gray-100: #1e1e1c;
     --gray-200: #2a2a28;
-    --gray-400: #6b6966;
+    --gray-400: #8a8884;
     --gray-600: #a09e9b;
     --accent: #e85d2a;
     --accent-light: #2a1a10;
@@ -157,6 +168,8 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
 }
 </style>
 <!-- Google AdSense -->
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
@@ -258,9 +271,9 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
   <div class="notice-box" data-i18n="notice">⚡ 转换说明：本工具提取Word文档的文字内容并生成PDF。复杂图文混排请使用Microsoft Word或WPS自带的"另存为PDF"功能，效果更精确。</div>
 
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".docx">
+    <input type="file" id="fileInput" aria-labelledby="dropLabel" accept=".docx">
     <div class="drop-icon">📝</div>
-    <div class="drop-label" data-i18n="drop.label">点击选择 Word 文件，或拖拽到此处</div>
+    <div class="drop-label" id="dropLabel" data-i18n="drop.label">点击选择 Word 文件，或拖拽到此处</div>
     <div class="drop-sub"><strong>.docx</strong> · <span data-i18n="drop.limit">单个文件，无大小限制</span></div>
   </div>
 
@@ -327,29 +340,31 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
     <li>Use standard fonts (Arial, Times New Roman, etc.) to ensure proper display in the output PDF.</li>
     <li>Only .docx format is supported, not legacy .doc files.</li>
   </ul>
+<!-- ar:auto-translated, review needed -->
+<ul class="tips-list ar-tips" hidden><li>تعمل هذه الأداة بشكل أفضل لمستندات Word الغنية بالنصوص أو ذات التنسيق البسيط. للتخطيطات المعقدة بالصور والجداول، استخدم "حفظ كـ PDF" المضمن في Word أو WPS لأفضل النتائج.</li><li>استخدم خطوطاً قياسية (Arial، Times New Roman، إلخ) لضمان العرض الصحيح في PDF الإخراج.</li><li>صيغة .docx فقط مدعومة، وليس ملفات .doc القديمة.</li></ul>
 </div>
 </div>
 
 
 <div class="container">
   <div class="faq-section">
-    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions">常见问题</div>
+    <div class="faq-title" data-faq-zh="常见问题" data-faq-en="Frequently Asked Questions" data-faq-ar="الأسئلة الشائعة">常见问题</div>
     <div class="faq-grid">
       <div class="faq-item">
-        <div class="faq-q" data-faq-zh="转换效果准确吗？" data-faq-en="How accurate is the conversion?">转换效果准确吗？</div>
-        <div class="faq-a" data-faq-zh="本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。" data-faq-en="This tool extracts text content from Word documents to generate a PDF. It works well for text-heavy documents. For precise layout with images, use Word or WPS built-in Save as PDF.">本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。</div>
+        <div class="faq-q" data-faq-zh="转换效果准确吗？" data-faq-en="How accurate is the conversion?" data-faq-ar="ما مدى دقة التحويل؟">转换效果准确吗？</div>
+        <div class="faq-a" data-faq-zh="本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。" data-faq-en="This tool extracts text content from Word documents to generate a PDF. It works well for text-heavy documents. For precise layout with images, use Word or WPS built-in Save as PDF." data-faq-ar="تستخرج هذه الأداة محتوى النص من مستندات Word لتوليد PDF. تعمل بشكل جيد للوثائق التي تتركز على النصوص. للتخطيط الدقيق مع الصور، استخدم وظيفة &quot;حفظ كـ PDF&quot; المضمنة في Word أو WPS.">本工具提取Word文档的文字内容生成PDF，适合纯文字文档。如需保留精确图文混排，请直接在Word或WPS中使用「另存为PDF」功能。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" data-faq-zh="支持哪些Word格式？" data-faq-en="What Word formats are supported?">支持哪些Word格式？</div>
-        <div class="faq-a" data-faq-zh="仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。" data-faq-en="Only .docx format. For legacy .doc files, open in Word or WPS and save as .docx first.">仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。</div>
+        <div class="faq-q" data-faq-zh="支持哪些Word格式？" data-faq-en="What Word formats are supported?" data-faq-ar="ما صيغ Word المدعومة؟">支持哪些Word格式？</div>
+        <div class="faq-a" data-faq-zh="仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。" data-faq-en="Only .docx format. For legacy .doc files, open in Word or WPS and save as .docx first." data-faq-ar="صيغة .docx فقط. بالنسبة لملفات .doc القديمة، افتحها في Word أو WPS واحفظها كـ .docx أولاً.">仅支持 .docx 格式。如果是旧版 .doc 文件，请先用Word或WPS另存为 .docx 再上传。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" data-faq-zh="转换后的PDF能编辑吗？" data-faq-en="Can I edit the converted PDF?">转换后的PDF能编辑吗？</div>
-        <div class="faq-a" data-faq-zh="标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。" data-faq-en="Standard PDFs are not directly editable. Use Adobe Acrobat or other PDF editors if you need to edit the output.">标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。</div>
+        <div class="faq-q" data-faq-zh="转换后的PDF能编辑吗？" data-faq-en="Can I edit the converted PDF?" data-faq-ar="هل يمكنني تحرير PDF المحوَّل؟">转换后的PDF能编辑吗？</div>
+        <div class="faq-a" data-faq-zh="标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。" data-faq-en="Standard PDFs are not directly editable. Use Adobe Acrobat or other PDF editors if you need to edit the output." data-faq-ar="PDFs القياسية غير قابلة للتحرير مباشرة. استخدم Adobe Acrobat أو محررات PDF أخرى إذا كنت تحتاج إلى تحرير المخرج.">标准PDF默认不可直接编辑。如需编辑PDF，可使用Adobe Acrobat或其他PDF编辑工具。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?">文件会上传到服务器吗？</div>
-        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地进行，文件不离开你的设备。" data-faq-en="No. All processing is done locally in your browser. Files never leave your device.">不会。所有处理在浏览器本地进行，文件不离开你的设备。</div>
+        <div class="faq-q" data-faq-zh="文件会上传到服务器吗？" data-faq-en="Are files uploaded to a server?" data-faq-ar="هل يتم رفع الملفات إلى خادم؟">文件会上传到服务器吗？</div>
+        <div class="faq-a" data-faq-zh="不会。所有处理在浏览器本地进行，文件不离开你的设备。" data-faq-en="No. All processing is done locally in your browser. Files never leave your device." data-faq-ar="لا. كل المعالجة محلية في متصفحك. لا تغادر الملفات جهازك أبداً.">不会。所有处理在浏览器本地进行，文件不离开你的设备。</div>
       </div>
     </div>
   </div>
@@ -370,7 +385,7 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;margin-top:40px;}
   <span class="footer-copy">© 2026 hebing.org</span>
 </div></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="/vendor/jszip@3.10.1/jszip.min.js"></script>
 <script>
 const I18N = {
   zh: {'nav.back':'← 所有工具','related.title':'你可能还需要','page.h1':'Word 转 PDF<br><em>在线免费</em>','page.sub':'将 .docx 文件转换为 PDF 格式，保留排版和格式。文件在浏览器本地处理，不上传服务器。','notice':'⚡ 转换说明：本工具提取Word文档的文字内容并生成PDF。复杂图文混排请使用Microsoft Word或WPS自带的"另存为PDF"功能，效果更精确。','drop.label':'点击选择 Word 文件，或拖拽到此处','drop.limit':'单个文件，无大小限制','btn.convert':'转换为 PDF','btn.clear':'清空','sub.title':'🔔 新工具上线时通知我','sub.sub':'订阅后，每次有新工具上线我们会第一时间通知你','sub.btn':'订阅','sub.ok':'✓ 订阅成功！','sub.support':'工具完全免费，如果帮到你了 ☕'},
@@ -380,19 +395,18 @@ const I18N = {
 
 function setLang(lang) {
   const d=I18N[lang];if(!d)return;
-  document.documentElement.lang=lang;
+  document.documentElement.lang=({zh:'zh-CN',en:'en',ar:'ar'})[lang]||lang;
   document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-i18n]').forEach(el=>{if(d[el.dataset.i18n]!==undefined)el.innerHTML=d[el.dataset.i18n];});
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
   document.querySelectorAll('[data-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.en||el.dataset.zh):el.dataset.zh;});
   document.querySelectorAll('[data-scene-zh]').forEach(el=>{el.textContent=lang==='en'?(el.dataset.sceneEn||el.dataset.sceneZh):el.dataset.sceneZh;});
   document.querySelectorAll('[data-i18n-related]').forEach(el=>{const p=el.dataset.i18nRelated.split('|');el.textContent=lang==='en'?p[1]:lang==='ar'?p[2]:p[0];});
-  document.querySelectorAll('.zh-tips').forEach(el=>el.classList.toggle('hidden',lang==='en'));
-  document.querySelectorAll('.en-tips').forEach(el=>el.classList.toggle('hidden',lang!=='en'));
+  document.querySelectorAll('.zh-tips').forEach(el=>el.hidden=lang!=='zh');
+  document.querySelectorAll('.en-tips').forEach(el=>el.hidden=lang!=='en');
+  document.querySelectorAll('.ar-tips').forEach(el=>el.hidden=lang!=='ar');
   localStorage.setItem('hebing_lang',lang);
-  document.querySelectorAll('[data-faq-zh]').forEach(el=>{
-    el.textContent=lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;
-  });
+  document.querySelectorAll('[data-faq-zh]').forEach(el=>{el.textContent=lang==='ar'?(el.dataset.faqAr||el.dataset.faqEn||el.dataset.faqZh):lang==='en'?(el.dataset.faqEn||el.dataset.faqZh):el.dataset.faqZh;});
 
 }
 
@@ -463,7 +477,7 @@ document.getElementById('btnConvert').onclick=async()=>{
 
     // 加载 pdf-lib
     if(!window.PDFLib){
-      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+      await new Promise((res,rej)=>{const s=document.createElement('script');s.src='/vendor/pdf-lib@1.17.1/pdf-lib.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
     }
     const {PDFDocument,rgb,StandardFonts}=PDFLib;
     const pdfDoc=await PDFDocument.create();
@@ -499,7 +513,7 @@ document.getElementById('btnConvert').onclick=async()=>{
     const bytes=await pdfDoc.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
     const fname=selectedFile.name.replace(/\.docx$/i,'')+'.pdf';
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fname;a.click();
+    const a=document.createElement('a');const __dlUrl=URL.createObjectURL(blob);a.href=__dlUrl;a.download=fname;a.click();setTimeout(()=>URL.revokeObjectURL(__dlUrl),60000);
     fill.style.width='100%';
     setTimeout(()=>document.getElementById('progressWrap').classList.add('hidden'),800);
 
@@ -530,5 +544,148 @@ function doSubscribe(){
 const sl=localStorage.getItem('hebing_lang')||(navigator.language.startsWith('ar')?'ar':navigator.language.startsWith('zh')?'zh':'en');
 setLang(sl);
 </script>
+<!-- NEXT-STEPS-SNIPPET v1 -->
+<style id="ns-css">
+.ns-wrap{max-width:880px;margin:24px auto 32px;padding:0 24px;}
+.ns-box{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:18px 20px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;}
+.ns-box.ns-show{opacity:1;transform:translateY(0);}
+.ns-title{font-size:13px;font-weight:500;color:var(--gray-600);margin-bottom:12px;font-family:var(--font-mono);letter-spacing:.5px;}
+.ns-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.ns-card{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--black);font-size:14px;transition:all .15s;}
+.ns-card:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-1px);}
+.ns-icon{font-size:16px;line-height:1;}
+.ns-name{font-weight:500;}
+.ns-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:18px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:4px;}
+.ns-close:hover{color:var(--black);background:var(--gray-200);}
+[dir="rtl"] .ns-close{right:auto;left:12px;}
+[dir="rtl"] .ns-card{flex-direction:row-reverse;}
+[dir="rtl"] .ns-grid{flex-direction:row-reverse;}
+@media (prefers-color-scheme:dark){
+  .ns-box{background:var(--gray-100);border-color:var(--gray-200);}
+  .ns-card{background:var(--white);}
+  .ns-card:hover{background:var(--gray-200);color:var(--black);border-color:var(--gray-200);}
+}
+@media (max-width:560px){
+  .ns-card{font-size:13px;padding:8px 12px;}
+}
+</style>
+<div class="ns-wrap"><div class="ns-box" id="nsBox" hidden>
+  <button class="ns-close" id="nsClose" aria-label="close">×</button>
+  <div class="ns-title" id="nsTitle">完成。你接下来可能想：</div>
+  <div class="ns-grid" id="nsGrid"></div>
+</div></div>
+<script id="ns-js">
+(function(){
+  var CAT={
+    'merge-word':{i:'📝',zh:'Word 合并',en:'Merge Word',ar:'دمج Word'},
+    'merge-pdf':{i:'📄',zh:'PDF 合并',en:'Merge PDF',ar:'دمج PDF'},
+    'merge-excel':{i:'📊',zh:'Excel 合并',en:'Merge Excel',ar:'دمج Excel'},
+    'merge-image':{i:'🖼️',zh:'图片合并',en:'Merge Images',ar:'دمج الصور'},
+    'merge-txt':{i:'📃',zh:'TXT 合并',en:'Merge TXT',ar:'دمج TXT'},
+    'merge-csv':{i:'🗂️',zh:'CSV 合并',en:'Merge CSV',ar:'دمج CSV'},
+    'merge-ppt':{i:'📋',zh:'PPT 合并',en:'Merge PPT',ar:'دمج PPT'},
+    'merge-audio':{i:'🎵',zh:'音频合并',en:'Merge Audio',ar:'دمج الصوت'},
+    'word-to-pdf':{i:'🔄',zh:'Word 转 PDF',en:'Word→PDF',ar:'Word→PDF'},
+    'pdf-split':{i:'✂️',zh:'PDF 拆分',en:'Split PDF',ar:'تقسيم PDF'},
+    'pdf-compress':{i:'🗜️',zh:'PDF 压缩',en:'Compress PDF',ar:'ضغط PDF'},
+    'pdf-encrypt':{i:'🔒',zh:'PDF 加密',en:'Encrypt PDF',ar:'تشفير PDF'},
+    'pdf-edit':{i:'✏️',zh:'PDF 编辑',en:'Edit PDF',ar:'تحرير PDF'},
+    'pdf-to-image':{i:'🖼️',zh:'PDF 转图片',en:'PDF→Image',ar:'PDF→صورة'},
+    'image-to-pdf':{i:'📷',zh:'图片转 PDF',en:'Image→PDF',ar:'صورة→PDF'},
+    'image-compress':{i:'🗜️',zh:'图片压缩',en:'Compress Image',ar:'ضغط الصور'},
+    'image-convert':{i:'🔄',zh:'图片格式转换',en:'Convert Image',ar:'تحويل الصور'},
+    'extract-images':{i:'🖼️',zh:'提取图片',en:'Extract Images',ar:'استخراج الصور'},
+    'json-formatter':{i:'{ }',zh:'JSON 格式化',en:'JSON Format',ar:'JSON'},
+    'base64':{i:'⇄',zh:'Base64',en:'Base64',ar:'Base64'},
+    'hash':{i:'#',zh:'Hash',en:'Hash',ar:'Hash'},
+    'qrcode':{i:'🔲',zh:'二维码',en:'QR Code',ar:'رمز QR'},
+    'jwt':{i:'🔑',zh:'JWT',en:'JWT',ar:'JWT'},
+    'regex':{i:'.*',zh:'正则',en:'Regex',ar:'Regex'},
+    'url-encode':{i:'%',zh:'URL 编码',en:'URL Encode',ar:'URL'},
+    'hex':{i:'0x',zh:'HEX',en:'HEX',ar:'HEX'},
+    'timestamp':{i:'⏱',zh:'时间戳',en:'Timestamp',ar:'الطابع الزمني'},
+    'uuid':{i:'🆔',zh:'UUID',en:'UUID',ar:'UUID'},
+    'color':{i:'🎨',zh:'颜色',en:'Color',ar:'لون'},
+    'diff':{i:'±',zh:'Diff',en:'Diff',ar:'Diff'}
+  };
+  var NEXT={
+    'merge-word':['word-to-pdf','merge-pdf','extract-images'],
+    'merge-pdf':['pdf-compress','pdf-encrypt','pdf-split'],
+    'merge-excel':['merge-csv','extract-images','json-formatter'],
+    'merge-image':['image-compress','image-to-pdf','image-convert'],
+    'merge-txt':['diff','merge-csv','hash'],
+    'merge-csv':['merge-excel','diff','json-formatter'],
+    'merge-ppt':['extract-images','pdf-compress','merge-pdf'],
+    'merge-audio':['hash','qrcode'],
+    'word-to-pdf':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-split':['merge-pdf','pdf-compress','pdf-encrypt'],
+    'pdf-compress':['pdf-encrypt','pdf-edit','merge-pdf'],
+    'pdf-encrypt':['pdf-compress','hash','merge-pdf'],
+    'pdf-edit':['pdf-compress','pdf-encrypt','pdf-split'],
+    'pdf-to-image':['image-compress','image-convert','extract-images'],
+    'image-to-pdf':['pdf-compress','merge-pdf','pdf-encrypt'],
+    'image-compress':['image-convert','image-to-pdf','merge-image'],
+    'image-convert':['image-compress','image-to-pdf','qrcode'],
+    'extract-images':['image-compress','image-convert','merge-image'],
+    'json-formatter':['base64','hash','regex'],
+    'base64':['hash','url-encode','hex'],
+    'hash':['base64','jwt','uuid'],
+    'qrcode':['base64','url-encode','color'],
+    'jwt':['base64','hash','json-formatter'],
+    'regex':['diff','json-formatter','hex'],
+    'url-encode':['base64','qrcode','regex'],
+    'hex':['base64','hash','color'],
+    'timestamp':['uuid','hash','json-formatter'],
+    'uuid':['hash','base64','timestamp'],
+    'color':['hex','qrcode','image-convert'],
+    'diff':['regex','merge-txt','hash']
+  };
+  var TITLE={zh:'完成。你接下来可能想：',en:'Done. You might also want:',ar:'تم. ربما تريد أيضاً:'};
+  var cur=(location.pathname.split('/').pop()||'').replace('.html','');
+  if(!NEXT[cur])return;
+  function pickLang(){var l=(document.documentElement.lang||'zh').toLowerCase();if(l.indexOf('zh')===0)return 'zh';if(l.indexOf('ar')===0)return 'ar';return 'en';}
+  function render(){
+    var lang=pickLang();
+    var box=document.getElementById('nsBox');if(!box)return;
+    document.getElementById('nsTitle').textContent=TITLE[lang];
+    var grid=document.getElementById('nsGrid');grid.innerHTML='';
+    NEXT[cur].forEach(function(k){var t=CAT[k];if(!t)return;
+      var a=document.createElement('a');a.href=k+'.html';a.className='ns-card';
+      a.innerHTML='<span class="ns-icon"></span><span class="ns-name"></span>';
+      a.querySelector('.ns-icon').textContent=t.i;
+      a.querySelector('.ns-name').textContent=t[lang];
+      grid.appendChild(a);
+    });
+  }
+  var shown=false,dismissed=false;
+  function show(){
+    if(shown||dismissed)return;
+    shown=true;render();
+    var box=document.getElementById('nsBox');if(!box)return;
+    box.hidden=false;
+    setTimeout(function(){box.classList.add('ns-show');},20);
+    setTimeout(function(){try{box.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},250);
+  }
+  function init(){
+    var c=document.getElementById('nsClose');
+    if(c)c.addEventListener('click',function(){dismissed=true;document.getElementById('nsBox').hidden=true;});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[download]');
+      if(a)setTimeout(show,500);
+    },true);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      var orig=navigator.clipboard.writeText.bind(navigator.clipboard);
+      navigator.clipboard.writeText=function(){var p=orig.apply(null,arguments);
+        if(p&&p.then)p.then(function(){setTimeout(show,400);}).catch(function(){});
+        return p;
+      };
+    }
+    try{new MutationObserver(function(){if(shown)render();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- /NEXT-STEPS-SNIPPET -->
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" dir="ltr">
+<html lang="zh-CN" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});}</script>
 <meta property="og:title" content="隐私政策 ｜ hebing.org">
 <meta property="og:description" content="所有文件在浏览器本地处理，我们不会收集、存储或上传任何用户文件。">
 <meta property="og:url" content="https://hebing.org/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://hebing.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
+<meta name="twitter:image" content="https://hebing.org/og-image.png">
+<meta name="twitter:image:alt" content="hebing.org — 30 款免费在线文件工具集合 Logo / 30 free file tools logo">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,6 +53,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Google AdSense -->
+<link rel="stylesheet" href="/common.css">
+<script src="/common.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997500550380142" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4KL258YW1Y"></script>
@@ -92,7 +105,7 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
     --white: #111110;
     --gray-100: #1e1e1c;
     --gray-200: #2a2a28;
-    --gray-400: #6b6966;
+    --gray-400: #8a8884;
     --gray-600: #a09e9b;
     --accent: #e85d2a;
     --accent-light: #2a1a10;
@@ -135,13 +148,13 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
 <div class="container page-wrap">
   <div class="page-tag">Legal</div>
+  <h1 class="page-title" id="pageTitleH1" data-title-zh="隐私政策" data-title-en="Privacy Policy" data-title-ar="سياسة الخصوصية">隐私政策</h1>
 
   <!-- 中文内容 -->
   <div class="zh-content active">
-    <h1 class="page-title">隐私政策</h1>
-    <div class="page-date">最后更新：2026年4月</div>
+    <div class="page-date">最后更新：2026年4月29日</div>
     <div class="content">
-      <div class="highlight-box"><p>🔒 核心承诺：你上传的所有文件均在浏览器本地处理，不会上传到我们的服务器，我们无法访问你的文件内容。</p></div>
+      <div class="highlight-box"><p>🔒 核心承诺：你处理的所有文件均在浏览器本地完成，<strong>文件本身从不上传到我们的服务器</strong>。但本站确实使用 Google Analytics 做匿名访问统计，并通过 Google AdSense 展示广告维持网站运行——这两项服务可能使用 Cookie 收集访问行为数据。下方第 3、4 节有详细说明，你也可以通过页面底部弹出的 Cookie 偏好弹窗或 <a href="javascript:window.openCookiePrefs&&window.openCookiePrefs()" style="color:var(--accent)">点此重新选择偏好</a>。</p></div>
       <h2>1. 我们收集什么信息</h2>
       <p>hebing.org 是一个浏览器端文件处理工具，我们收集的信息极为有限：</p>
       <ul>
@@ -155,8 +168,15 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
         <li>订阅邮件仅用于发送新工具上线通知，不会用于商业推广或出售给第三方</li>
         <li>我们不做任何形式的用户画像或行为追踪</li>
       </ul>
-      <h2>3. Cookie 和追踪</h2>
-      <p>我们使用 Google Analytics 的 Cookie 进行匿名统计分析。这些 Cookie 不包含个人身份信息。你可以通过浏览器设置拒绝 Cookie，不影响工具的正常使用。</p>
+      <h2>3. Cookie 和同意管理</h2>
+      <p>我们使用 Google Analytics 的 Cookie 进行匿名统计分析。这些 Cookie 不包含个人身份信息。</p>
+      <p><strong>同意管理（Consent Mode v2）</strong>：本站默认拒绝所有 Cookie 类追踪。你首次访问时会看到一个 Cookie 偏好弹窗，可选：</p>
+      <ul>
+        <li><strong>全部接受</strong>：允许 GA 统计 Cookie 与 AdSense 个性化广告 Cookie</li>
+        <li><strong>仅接受统计</strong>：仅允许 GA 匿名统计；AdSense 仍展示广告，但只投放非个性化广告，不写入跨站跟踪 Cookie</li>
+        <li><strong>全部拒绝</strong>：GA 仍可记录无 Cookie 的访问计数，AdSense 仅投放非个性化广告</li>
+      </ul>
+      <p>无论选择哪一项，工具功能完全不受影响。你也可以随时在隐私页 <a href="javascript:window.openCookiePrefs&&window.openCookiePrefs()" style="color:var(--accent)">点击此处重新打开偏好弹窗</a>，或通过浏览器设置直接清除 Cookie。</p>
       <h2>4. 广告（Google AdSense）</h2>
       <p>本网站展示 Google AdSense 提供的广告。Google 作为第三方供应商使用 Cookie（包括 DART Cookie）根据你在本网站及其他网站的访问情况投放广告。这些 Cookie 可能包含你的 IP 地址、浏览器类型、访问时间、访问页面等信息，但不含个人身份信息。</p>
       <p>你可以选择退出个性化广告：</p>
@@ -184,10 +204,9 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
   <!-- English Content -->
   <div class="en-content">
-    <h1 class="page-title">Privacy Policy</h1>
-    <div class="page-date">Last updated: April 2026</div>
+    <div class="page-date">Last updated: April 29, 2026</div>
     <div class="content">
-      <div class="highlight-box"><p>🔒 Core commitment: All files you upload are processed locally in your browser and are never sent to our servers. We cannot access your file content.</p></div>
+      <div class="highlight-box"><p>🔒 Core commitment: <strong>The files you process never leave your browser.</strong> However, this site does use Google Analytics for anonymous traffic statistics and Google AdSense to display ads (which keep the site free) — both may set cookies to collect visit-level metadata. Sections 3 and 4 below explain in detail. You can also <a href="javascript:window.openCookiePrefs&&window.openCookiePrefs()" style="color:var(--accent)">re-open the cookie preferences dialog</a> at any time.</p></div>
       <h2>1. Information We Collect</h2>
       <p>hebing.org is a browser-based file processing tool. The information we collect is minimal:</p>
       <ul>
@@ -201,8 +220,15 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
         <li>Subscription emails are used only to notify you of new tool launches, never for marketing or sold to third parties</li>
         <li>We do not create user profiles or conduct behavioral tracking</li>
       </ul>
-      <h2>3. Cookies and Tracking</h2>
-      <p>We use Google Analytics cookies for anonymous statistical analysis. These cookies contain no personally identifiable information. You can disable cookies in your browser settings without affecting tool functionality.</p>
+      <h2>3. Cookies and Consent Management</h2>
+      <p>We use Google Analytics cookies for anonymous statistical analysis. These cookies contain no personally identifiable information.</p>
+      <p><strong>Consent Mode v2</strong>: this site defaults to denying all tracking cookies. On your first visit you will see a cookie preferences dialog with three options:</p>
+      <ul>
+        <li><strong>Accept all</strong>: allow GA analytics cookies and AdSense personalized-advertising cookies</li>
+        <li><strong>Analytics only</strong>: allow only anonymous GA cookies; AdSense will still display ads, but only non-personalized ones (no cross-site tracking cookies)</li>
+        <li><strong>Reject all</strong>: GA may still record cookie-less visit counts; AdSense will only display non-personalized ads</li>
+      </ul>
+      <p>None of these choices affect tool functionality. You can <a href="javascript:window.openCookiePrefs&&window.openCookiePrefs()" style="color:var(--accent)">re-open the preferences dialog here</a> at any time, or simply clear cookies in your browser settings.</p>
       <h2>4. Advertising (Google AdSense)</h2>
       <p>This website displays advertisements served by Google AdSense. Google, as a third-party vendor, uses cookies (including the DART cookie) to serve ads based on your visits to this and other websites. These cookies may contain your IP address, browser type, visit time and pages viewed, but no personally identifiable information.</p>
       <p>You can opt out of personalized advertising:</p>
@@ -230,10 +256,9 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
   <!-- Arabic Content -->
   <div class="ar-content">
-    <h1 class="page-title">سياسة الخصوصية</h1>
-    <div class="page-date">آخر تحديث: أبريل 2026</div>
+    <div class="page-date">آخر تحديث: ٢٩ أبريل ٢٠٢٦</div>
     <div class="content">
-      <div class="highlight-box"><p>🔒 التزامنا الأساسي: جميع الملفات التي تحملها تُعالج محلياً في متصفحك ولا تُرسل إلى خوادمنا أبداً. لا يمكننا الوصول إلى محتوى ملفاتك.</p></div>
+      <div class="highlight-box"><p>🔒 التزامنا الأساسي: <strong>الملفات التي تعالجها لا تغادر متصفحك.</strong> ومع ذلك، يستخدم هذا الموقع Google Analytics للإحصاءات المجهولة و Google AdSense لعرض الإعلانات لإبقاء الموقع مجانيًا، وقد يستخدم كلاهما ملفات تعريف الارتباط. يمكنك <a href="javascript:window.openCookiePrefs&&window.openCookiePrefs()" style="color:var(--accent)">إعادة فتح مربع حوار التفضيلات</a> في أي وقت.</p></div>
       <h2>١. المعلومات التي نجمعها</h2>
       <p>hebing.org هي أداة معالجة ملفات تعمل في المتصفح. المعلومات التي نجمعها محدودة للغاية:</p>
       <ul>
@@ -267,11 +292,13 @@ footer{border-top:1px solid var(--gray-200);padding:28px 0;}
 
 <script>
 function setLang(lang) {
-  document.documentElement.lang = lang;
+  document.documentElement.lang = ({zh:'zh-CN',en:'en',ar:'ar'})[lang] || lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   document.querySelectorAll('.zh-content,.en-content,.ar-content').forEach(el => el.classList.remove('active'));
   document.querySelector('.' + lang + '-content').classList.add('active');
+  const h1 = document.getElementById('pageTitleH1');
+  if(h1) h1.textContent = h1.dataset['title' + lang.charAt(0).toUpperCase() + lang.slice(1)] || h1.textContent;
   const backs = {zh:'← 返回首页', en:'← Back to Home', ar:'→ العودة للرئيسية'};
   document.getElementById('navBack').textContent = backs[lang];
   localStorage.setItem('hebing_lang', lang);
