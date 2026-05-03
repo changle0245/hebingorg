@@ -1,3 +1,4 @@
-# Netlify-style redirects (also read by Cloudflare Pages)
-# 404 fallback for any unknown path
-/*  /404.html  404
+# Netlify-style redirects (also read by Cloudflare Pages).
+# Note: Cloudflare Workers Static Assets does NOT accept status code 404 here
+# (only 200/301/302/303/307/308). The 404 fallback is configured via
+# wrangler.jsonc -> assets.not_found_handling = "404-page".

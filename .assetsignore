@@ -1,0 +1,28 @@
+# Files NOT uploaded as static assets to Cloudflare Workers.
+# Critical: prevents .git/ metadata leak — without this, the previous build
+# uploaded /.git/index and /.git/logs/HEAD as public assets.
+
+.git
+.git/**
+.wrangler
+.wrangler/**
+.claude
+.claude/**
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.zip
+node_modules
+node_modules/**
+
+netlify.toml
+vercel.json
+wrangler.jsonc
+.gitignore
+.assetsignore
+
+_next-steps-snippet.html
+extract-images-plan.md
